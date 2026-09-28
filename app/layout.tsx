@@ -22,7 +22,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://frontenddesignbasics.vercel.app'),
+  metadataBase: new URL(process.env.SITE_URL ?? 'http://localhost:3000'),
   title: { default: `${appName}: ${appTagline}`, template: `%s · ${appName}` },
   description:
     'Principles, motion, 3D, shaders, components, a showcase of standout sites and an installable toolkit. The guide to complete, beautiful web design.',

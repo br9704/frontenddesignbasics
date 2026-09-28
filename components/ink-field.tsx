@@ -115,6 +115,9 @@ export function InkField({
   stillTime = 38,
 }: InkFieldProps) {
   const ref = useRef<HTMLDivElement>(null);
+  // Live handle to the program so colour/density props update uniforms without rebuilding the context.
+  const live = useRef<{ program: Program; draw: () => void } | null>(null);
+  const initial = useRef({ paper, inkA, inkB, density, clear });
 
   useEffect(() => {
     const host = ref.current;
@@ -132,11 +135,11 @@ export function InkField({
         uTime: { value: stillTime },
         uRes: { value: [1, 1] },
         uPointer: { value: [0.62, 0.45] },
-        uPaper: { value: hexToVec3(paper) },
-        uInkA: { value: hexToVec3(inkA) },
-        uInkB: { value: hexToVec3(inkB) },
-        uDensity: { value: density },
-        uClear: { value: clear },
+        uPaper: { value: hexToVec3(initial.current.paper) },
+        uInkA: { value: hexToVec3(initial.current.inkA) },
+        uInkB: { value: hexToVec3(initial.current.inkB) },
+        uDensity: { value: initial.current.density },
+        uClear: { value: initial.current.clear },
       },
     });
     const mesh = new Mesh(gl, { geometry: new Triangle(gl), program });
@@ -192,9 +195,11 @@ export function InkField({
     document.addEventListener('visibilitychange', onVisibility);
     if (!reduced) window.addEventListener('pointermove', onMove, { passive: true });
     host.dataset.motion = reduced ? 'still' : 'live';
+    live.current = { program, draw: () => renderer.render({ scene: mesh }) };
     play();
 
     return () => {
+      live.current = null;
       pause();
       io.disconnect();
       ro.disconnect();
@@ -203,7 +208,19 @@ export function InkField({
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       gl.canvas.remove();
     };
-  }, [paper, inkA, inkB, density, clear, stillTime]);
+  }, [stillTime]);
+
+  useEffect(() => {
+    initial.current = { paper, inkA, inkB, density, clear };
+    const l = live.current;
+    if (!l) return;
+    l.program.uniforms.uPaper.value = hexToVec3(paper);
+    l.program.uniforms.uInkA.value = hexToVec3(inkA);
+    l.program.uniforms.uInkB.value = hexToVec3(inkB);
+    l.program.uniforms.uDensity.value = density;
+    l.program.uniforms.uClear.value = clear;
+    l.draw(); // repaint now, so still frames (reduced motion) update too
+  }, [paper, inkA, inkB, density, clear]);
 
   return <div ref={ref} aria-hidden className={className} style={{ position: 'absolute', inset: 0 }} />;
 }

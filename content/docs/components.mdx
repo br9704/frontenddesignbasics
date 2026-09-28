@@ -1,0 +1,69 @@
+---
+title: Components
+description: Own your components. How the registry model works, and which library to reach for.
+---
+
+<Banner name="components" alt="Chapter 05: Components" />
+
+## Own the code
+
+The modern component libraries don't ship a package you import. They ship **source you copy into your
+repo** through a registry. You own it, you restyle it, and nothing breaks when a package updates.
+
+```bash
+# one-time: tell shadcn where each library lives (components.json)
+"registries": {
+  "@react-bits": "https://reactbits.dev/r/{name}.json",
+  "@magicui":    "https://magicui.design/r/{name}.json",
+  "@cult-ui":    "https://cult-ui.com/r/{name}.json",
+  "@bklit":      "https://ui.bklit.com/r/{name}.json"
+}
+
+# then install from any of them
+npx shadcn@latest add @magicui/marquee
+npx shadcn@latest add @react-bits/SplitText-TS-TW
+npx shadcn@latest add @bklit/line-chart
+```
+
+This repo ships exactly that [`components.json`](https://github.com/br9704/frontenddesignbasics/blob/main/components.json),
+plus a `.mcp.json` for the **shadcn MCP**, so an agent can search and install from all four registries.
+
+## Or build the simple ones yourself
+
+The marquee is the most-copied landing-page component. It's one keyframe:
+
+<MarqueeDemo />
+
+```tsx
+<div className="group flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+  {[0, 1].map((k) => (
+    <ul key={k} aria-hidden={k === 1}
+        className="flex shrink-0 gap-10 pr-10 motion-safe:animate-[marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
+      {items.map((i) => <li key={i}>{i}</li>)}
+    </ul>
+  ))}
+</div>
+/* @keyframes marquee { to { transform: translateX(-100%) } } */
+```
+
+## Which library, when
+
+| Library | Best for | Watch out for |
+|---|---|---|
+| **shadcn/ui** | The base layer: buttons, dialogs, forms | It's a neutral starting point. Restyle it |
+| **React Bits** | Text effects, animated backgrounds, cursor toys | Use one or two per page, not ten |
+| **Magic UI** | Marketing sections: marquee, bento, number ticker, beams | The defaults are recognisable. Change colour and type |
+| **Cult UI** | Characterful interactive pieces | Check accessibility of custom controls |
+| **21st.dev** | Searching many authors' patterns; AI drafts | Quality varies by author |
+| **Bklit UI** | Charts and dashboards | Keep chart colours to your palette |
+
+## Rules
+
+- **MUST** restyle anything you install until it matches your type, colour and radius scale.
+- **MUST** check keyboard and screen-reader behaviour of animated or custom controls.
+- **SHOULD** use at most one "wow" component per view. The rest should be quiet.
+
+## Why it works
+
+Owning the source is what lets a site look like *itself*. Libraries are starting points; the design is in
+what you change.

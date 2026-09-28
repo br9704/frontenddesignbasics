@@ -28,10 +28,10 @@ Every page follows one template: **a live demo → the code → how to install i
 |---|---|---|
 | 01 | [Principles](content/docs/principles) | Type scale, colour, space and layout, and the MUST/SHOULD rules |
 | 02 | [Motion](content/docs/motion.mdx) | Easing playground, durations, GSAP, Lenis, reduced motion, proving motion with frames |
-| 03 | 3D | *in progress*: three.js, R3F, Threlte, Spline |
-| 04 | Shaders | *in progress*: the ink shader behind this README, ShaderGradient, OGL |
-| 05 | Components | *in progress*: React Bits, Magic UI, Cult UI, 21st.dev through one registry |
-| 06 | Recipes | *in progress*: heroes, scroll stories, bento grids |
+| 03 | [3D](content/docs/3d.mdx) | CSS depth first, then three.js/R3F, Threlte, Spline, PlayCanvas, with performance rules |
+| 04 | [Shaders](content/docs/shaders.mdx) | The ink shader behind this README, live on sliders; noise, warping, grain |
+| 05 | [Components](content/docs/components.mdx) | The registry model: React Bits, Magic UI, Cult UI, Bklit, 21st.dev |
+| 06 | [Recipes](content/docs/recipes.mdx) | Hero anatomy, bento grid, pinned scroll story, footer |
 | 07 | [Case studies](content/docs/case-studies) | BR95, a Windows 95 portfolio that keeps its SEO |
 | 08 | [Showcase](content/docs/showcase.mdx) | Linear, Stripe, Lusion, Igloo, Rauno, Emil Kowalski, darkroom, Bruno Simon |
 | 09 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
