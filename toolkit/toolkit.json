@@ -28,7 +28,10 @@
       "what": "The animation engine. Timelines, ScrollTrigger, SplitText, MorphSVG, Flip, all plugins now free.",
       "when": "Any choreographed motion: scroll stories, pinned sections, text reveals, sequenced intros.",
       "install": "pnpm add gsap @gsap/react",
-      "mcp": { "status": "live", "via": "greensock/gsap-skills plugin (official skills, no MCP exists)" },
+      "mcp": {
+        "status": "live",
+        "via": "greensock/gsap-skills plugin (official skills, no MCP exists)"
+      },
       "cost": "free"
     },
     {
@@ -40,7 +43,10 @@
       "what": "Smooth scroll that keeps native scroll semantics. Pairs with GSAP ScrollTrigger.",
       "when": "Long-form scroll pages where inertia sells the feel. Skip on dashboards and docs.",
       "install": "pnpm add lenis",
-      "mcp": { "status": "library", "via": "Context7 for docs" },
+      "mcp": {
+        "status": "library",
+        "via": "Context7 for docs"
+      },
       "cost": "free"
     },
     {
@@ -52,7 +58,10 @@
       "what": "React/JS animation with springs, layout animation and gestures. Formerly Framer Motion.",
       "when": "UI state transitions, layout shifts, enter/exit, gesture-driven components.",
       "install": "pnpm add motion",
-      "mcp": { "status": "live", "via": "motion MCP (https://mcp.motion.dev) + motion skill; Motion+ sign-in unlocks audits" },
+      "mcp": {
+        "status": "live",
+        "via": "motion MCP (https://mcp.motion.dev) + motion skill; Motion+ sign-in unlocks audits"
+      },
       "cost": "free (Motion+ paid)"
     },
     {
@@ -64,7 +73,10 @@
       "what": "Agent skill that turns a brand into a scrollable 3D-world landing page.",
       "when": "A launch or brand page where the scroll itself is the product tour.",
       "install": "/plugin install scroll-world@scroll-world",
-      "mcp": { "status": "live", "via": "Claude plugin (skill)" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude plugin (skill)"
+      },
       "cost": "free"
     },
     {
@@ -76,7 +88,10 @@
       "what": "Skill for premium scroll-driven landing pages: scrubbed video, pinned sections, one signature move.",
       "when": "Photographic, cinematic landing pages. Starts with an 8-question interview.",
       "install": "/plugin install nateherk-design@nateherk",
-      "mcp": { "status": "live", "via": "Claude plugin (skill)" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude plugin (skill)"
+      },
       "cost": "free"
     },
     {
@@ -88,7 +103,10 @@
       "what": "The 3D library of the web. R3F wraps it for React.",
       "when": "Any real-time 3D: product viewers, hero scenes, data in space.",
       "install": "pnpm add three @react-three/fiber @react-three/drei",
-      "mcp": { "status": "live", "via": "threejs-* skills (10) + webgpu-threejs-tsl skill; Context7 for docs" },
+      "mcp": {
+        "status": "live",
+        "via": "threejs-* skills (10) + webgpu-threejs-tsl skill; Context7 for docs"
+      },
       "cost": "free"
     },
     {
@@ -100,7 +118,10 @@
       "what": "Skill that rebuilds an object from a reference image as a procedural, animation-ready three.js model.",
       "when": "You have a photo of an object and want it as code, not a downloaded GLB.",
       "install": "git clone into ~/Tools, symlinked to ~/.claude/skills/img2threejs",
-      "mcp": { "status": "live", "via": "Claude skill" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude skill"
+      },
       "cost": "free"
     },
     {
@@ -112,7 +133,10 @@
       "what": "three.js for Svelte, declarative and typed.",
       "when": "The project is SvelteKit.",
       "install": "npm create threlte",
-      "mcp": { "status": "library", "via": "threlte.xyz/llms.txt and Context7" },
+      "mcp": {
+        "status": "library",
+        "via": "threlte.xyz/llms.txt and Context7"
+      },
       "cost": "free"
     },
     {
@@ -124,7 +148,10 @@
       "what": "Catalogue of three.js UI components by Design+Code. Community edition is open source.",
       "when": "You need a ready 3D UI element (orbs, cards, globes) rather than a scene from scratch.",
       "install": "npx @designcodeio/threeui-cli add <component>",
-      "mcp": { "status": "library", "via": "CLI only" },
+      "mcp": {
+        "status": "library",
+        "via": "CLI only"
+      },
       "cost": "free (Pro paid)"
     },
     {
@@ -134,8 +161,11 @@
       "url": "https://spline.design",
       "what": "Browser/desktop 3D design tool with exportable interactive scenes.",
       "when": "A designed 3D moment that is faster to model by hand than in code.",
-      "install": "Spline desktop app (installed). Open it once: it registers its MCP in ~/.claude.json.",
-      "mcp": { "status": "needs-key", "via": "Spline desktop app MCP (local). Open the app once to register it." },
+      "install": "Spline desktop app (installed). MCP bundled at Spline.app/Contents/Resources/spline-mcp.cjs",
+      "mcp": {
+        "status": "live",
+        "via": "Spline MCP (local, bundled with the app): 3d_* tools drive the 3D editor, 2d_* drive Hana. Keep the app open."
+      },
       "cost": "free tier"
     },
     {
@@ -147,7 +177,10 @@
       "what": "WebGL/WebGPU game engine with a collaborative editor.",
       "when": "Game-like interactive 3D, or when the scene should be edited visually by a team.",
       "install": "pnpm add playcanvas",
-      "mcp": { "status": "on-demand", "via": "~/Tools/editor-mcp-server (npx @playcanvas/editor-mcp-server); connect the Editor" },
+      "mcp": {
+        "status": "on-demand",
+        "via": "~/Tools/editor-mcp-server (npx @playcanvas/editor-mcp-server); connect the Editor"
+      },
       "cost": "free"
     },
     {
@@ -158,7 +191,10 @@
       "what": "No-code 3D and AR design in the browser. (Logged from 'Vectory.com': vectory.com is a sensor company.)",
       "when": "Quick product mockups and AR embeds without code.",
       "install": "Web app",
-      "mcp": { "status": "tool", "via": "none exists" },
+      "mcp": {
+        "status": "tool",
+        "via": "none exists"
+      },
       "cost": "free tier"
     },
     {
@@ -170,7 +206,10 @@
       "what": "Tiny WebGL library. This site's hero shader runs on it.",
       "when": "A full-screen shader or a light 2D/3D effect where three.js is overkill.",
       "install": "pnpm add ogl",
-      "mcp": { "status": "library", "via": "threejs-shaders skill covers GLSL" },
+      "mcp": {
+        "status": "library",
+        "via": "threejs-shaders skill covers GLSL"
+      },
       "cost": "free"
     },
     {
@@ -182,7 +221,10 @@
       "what": "Moving 3D gradients for React, Framer and Figma, tuned in a visual editor.",
       "when": "A living gradient background without writing GLSL.",
       "install": "pnpm add @shadergradient/react @react-three/fiber three three-stdlib camera-controls",
-      "mcp": { "status": "library", "via": "none official" },
+      "mcp": {
+        "status": "library",
+        "via": "none official"
+      },
       "cost": "free"
     },
     {
@@ -193,7 +235,10 @@
       "what": "Library of prompts plus source for templates, 3D/WebGL scenes, motion sections and animated backgrounds.",
       "when": "Design-led landing pages that need a premium background, scene or motion section fast.",
       "install": "/plugin install getlayers@getlayers (installed)",
-      "mcp": { "status": "dormant", "via": "https://mcp.getlayers.ai/mcp, OAuth on first use; MCP only on the $199 Full Stack plan" },
+      "mcp": {
+        "status": "dormant",
+        "via": "https://mcp.getlayers.ai/mcp, OAuth on first use; MCP only on the $199 Full Stack plan"
+      },
       "cost": "$199 lifetime (Full Stack)"
     },
     {
@@ -205,7 +250,10 @@
       "what": "Animated React components with live prop controls, in JS/TS × CSS/Tailwind variants.",
       "when": "Text effects, backgrounds and animated UI pieces you want to own the code of.",
       "install": "npx shadcn@latest add @react-bits/<name>",
-      "mcp": { "status": "live", "via": "shadcn MCP with the @react-bits registry (per project)" },
+      "mcp": {
+        "status": "live",
+        "via": "shadcn MCP with the @react-bits registry (per project)"
+      },
       "cost": "free (Pro paid)"
     },
     {
@@ -217,7 +265,10 @@
       "what": "Motion-first shadcn-style components for landing pages.",
       "when": "Marketing sections: marquees, bento grids, animated beams, number tickers.",
       "install": "npx shadcn@latest add @magicui/<name>",
-      "mcp": { "status": "live", "via": "magicui MCP (user scope)" },
+      "mcp": {
+        "status": "live",
+        "via": "magicui MCP (user scope)"
+      },
       "cost": "free"
     },
     {
@@ -229,7 +280,10 @@
       "what": "shadcn-compatible animated components with character.",
       "when": "Distinctive interactive pieces (dynamic island, texture buttons, shift cards).",
       "install": "npx shadcn@latest add @cult-ui/<name>",
-      "mcp": { "status": "live", "via": "shadcn MCP with the @cult-ui registry (per project)" },
+      "mcp": {
+        "status": "live",
+        "via": "shadcn MCP with the @cult-ui registry (per project)"
+      },
       "cost": "free"
     },
     {
@@ -241,7 +295,10 @@
       "what": "Community component catalogue plus AI UI generation.",
       "when": "Searching for a component pattern across many authors, or generating a first draft of one.",
       "install": "npx @21st-dev/cli@latest init --client claude",
-      "mcp": { "status": "needs-key", "via": "21st MCP; search is free, get_component/generate are paid" },
+      "mcp": {
+        "status": "needs-key",
+        "via": "21st MCP; search is free, get_component/generate are paid"
+      },
       "cost": "free search, paid generate"
     },
     {
@@ -253,7 +310,10 @@
       "what": "UI and chart components shipped as a shadcn registry.",
       "when": "Dashboards and analytics views that need good-looking charts fast.",
       "install": "npx shadcn@latest add @bklit/<name>",
-      "mcp": { "status": "live", "via": "shadcn MCP with the @bklit registry (per project)" },
+      "mcp": {
+        "status": "live",
+        "via": "shadcn MCP with the @bklit registry (per project)"
+      },
       "cost": "free"
     },
     {
@@ -265,7 +325,10 @@
       "what": "Copy-in component system and the registry protocol most libraries above ship through.",
       "when": "The base layer of any React app. Also the way to install from every @registry.",
       "install": "npx shadcn@latest init && npx shadcn@latest mcp init --client claude",
-      "mcp": { "status": "live", "via": "shadcn MCP, configured per project (needs components.json)" },
+      "mcp": {
+        "status": "live",
+        "via": "shadcn MCP, configured per project (needs components.json)"
+      },
       "cost": "free"
     },
     {
@@ -277,7 +340,10 @@
       "what": "Searchable library of real app and web screens, flows and styles.",
       "when": "Before designing a flow: see how the best products solved the same screen.",
       "install": "/plugin install refero@refero (installed)",
-      "mcp": { "status": "needs-key", "via": "https://api.refero.design/mcp, sign in with a paid plan" },
+      "mcp": {
+        "status": "needs-key",
+        "via": "https://api.refero.design/mcp, sign in with a paid plan"
+      },
       "cost": "paid"
     },
     {
@@ -288,7 +354,10 @@
       "what": "Web motion-design tool for animating UI and exporting video/Lottie.",
       "when": "Prototyping a motion idea before coding it, or making a launch video of the UI.",
       "install": "Web app",
-      "mcp": { "status": "tool", "via": "none exists" },
+      "mcp": {
+        "status": "tool",
+        "via": "none exists"
+      },
       "cost": "free tier"
     },
     {
@@ -299,7 +368,10 @@
       "what": "Design canvas with a local MCP. Bruno uses it to scope ideas.",
       "when": "Scoping a layout visually before building.",
       "install": "Paper app (installed); MCP at http://127.0.0.1:29979/mcp when the app is open",
-      "mcp": { "status": "on-demand", "via": "open the Paper app" },
+      "mcp": {
+        "status": "on-demand",
+        "via": "open the Paper app"
+      },
       "cost": "free tier"
     },
     {
@@ -310,7 +382,10 @@
       "what": "Anthropic's skill for distinctive, non-templated visual direction.",
       "when": "The first pass on any new UI.",
       "install": "/plugin install frontend-design@claude-plugins-official",
-      "mcp": { "status": "live", "via": "Claude plugin" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude plugin"
+      },
       "cost": "free"
     },
     {
@@ -322,7 +397,10 @@
       "what": "Design language and audit skill: critique, polish, harden, animate, colourise.",
       "when": "Auditing and polishing a UI that already exists.",
       "install": "npx skills add pbakaus/impeccable -g",
-      "mcp": { "status": "live", "via": "Claude skill" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude skill"
+      },
       "cost": "free"
     },
     {
@@ -334,7 +412,10 @@
       "what": "design-taste-frontend, high-end-visual-design and redesign-existing-projects: anti-generic rules.",
       "when": "Landing pages and portfolios that must not look AI-made.",
       "install": "npx skills add Leonxlnx/taste-skill -g",
-      "mcp": { "status": "live", "via": "Claude skills" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude skills"
+      },
       "cost": "free"
     },
     {
@@ -346,7 +427,10 @@
       "what": "Searchable database of 79 styles, 192 palettes and 74 font pairings.",
       "when": "Exploring directions early. Treat its output as a starting point, not a finish.",
       "install": "/plugin install ui-ux-pro-max@ui-ux-pro-max-skill",
-      "mcp": { "status": "live", "via": "Claude plugin" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude plugin"
+      },
       "cost": "free"
     },
     {
@@ -358,7 +442,10 @@
       "what": "Rauno/Vercel's MUST/SHOULD interface rules as a review skill, plus React best practices, composition patterns and view transitions.",
       "when": "Reviewing any UI before it ships.",
       "install": "npx skills add vercel-labs/agent-skills -g",
-      "mcp": { "status": "live", "via": "Claude skills" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude skills"
+      },
       "cost": "free"
     },
     {
@@ -370,7 +457,10 @@
       "what": "canvas-design, theme-factory, algorithmic-art, web-artifacts-builder, brand-guidelines, webapp-testing.",
       "when": "Posters and static visuals, themes, generative art, quick artifacts.",
       "install": "/plugin install example-skills@anthropic-agent-skills",
-      "mcp": { "status": "live", "via": "Claude plugin" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude plugin"
+      },
       "cost": "free"
     },
     {
@@ -381,7 +471,10 @@
       "what": "Reads this toolkit and the Principles chapter, then asks which tools and principles fit the brief.",
       "when": "Automatically, at the start of every new project or design task.",
       "install": "~/.claude/skills/frontend-design-basics",
-      "mcp": { "status": "live", "via": "Claude skill" },
+      "mcp": {
+        "status": "live",
+        "via": "Claude skill"
+      },
       "cost": "free"
     },
     {
@@ -393,7 +486,10 @@
       "what": "Current, versioned library docs on demand (GSAP, three.js, Lenis, Next.js…).",
       "when": "Any time an API might have changed since the model's training.",
       "install": "claude mcp add -s user --transport http context7 https://mcp.context7.com/mcp",
-      "mcp": { "status": "live", "via": "user-scope MCP" },
+      "mcp": {
+        "status": "live",
+        "via": "user-scope MCP"
+      },
       "cost": "free"
     },
     {
@@ -405,7 +501,10 @@
       "what": "Drive a real browser: screenshots, frames, interaction.",
       "when": "Proving motion with frames ~1.5 s apart, checking mobile widths, capturing showcase shots.",
       "install": "claude mcp add -s user playwright -- npx -y @playwright/mcp@latest",
-      "mcp": { "status": "live", "via": "user-scope MCP" },
+      "mcp": {
+        "status": "live",
+        "via": "user-scope MCP"
+      },
       "cost": "free"
     },
     {
@@ -417,7 +516,10 @@
       "what": "Performance traces, console, network from a live Chrome.",
       "when": "Animation jank, layout thrash, slow loads.",
       "install": "claude mcp add -s user chrome-devtools -- npx -y chrome-devtools-mcp@latest",
-      "mcp": { "status": "live", "via": "user-scope MCP" },
+      "mcp": {
+        "status": "live",
+        "via": "user-scope MCP"
+      },
       "cost": "free"
     },
     {
@@ -429,7 +531,10 @@
       "what": "Local, open-source voice cloning, TTS, dubbing and transcription.",
       "when": "Narration for a launch film or an interactive voice on a site. Runs locally, no key.",
       "install": "~/Tools/VoiceStudio (cloned); skill installed",
-      "mcp": { "status": "on-demand", "via": "http://127.0.0.1:3900/mcp/ when the backend runs" },
+      "mcp": {
+        "status": "on-demand",
+        "via": "http://127.0.0.1:3900/mcp/ when the backend runs"
+      },
       "cost": "free (AGPL-3.0)"
     },
     {
@@ -441,7 +546,10 @@
       "what": "Self-hosted WhatsApp API gateway with a built-in MCP.",
       "when": "Reading WhatsApp data into a tool. Kept read-only: nothing is ever sent from it.",
       "install": "~/Tools/OpenWA (cloned); MCP_ENABLED=true MCP_READONLY=true",
-      "mcp": { "status": "on-demand", "via": "http://localhost:2785/mcp, read-only tools only" },
+      "mcp": {
+        "status": "on-demand",
+        "via": "http://localhost:2785/mcp, read-only tools only"
+      },
       "cost": "free"
     }
   ]

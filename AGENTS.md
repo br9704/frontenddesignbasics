@@ -46,7 +46,7 @@ Non-negotiables from this guide:
 | [img2threejs](https://github.com/img2threejs/img2threejs) | Skill that rebuilds an object from a reference image as a procedural, animation-ready three.js model. | `live` |
 | [Threlte](https://threlte.xyz) | three.js for Svelte, declarative and typed. | `library` |
 | [ThreeUI](https://threeui.com) | Catalogue of three.js UI components by Design+Code. Community edition is open source. | `library` |
-| [Spline](https://spline.design) | Browser/desktop 3D design tool with exportable interactive scenes. | `needs-key` |
+| [Spline](https://spline.design) | Browser/desktop 3D design tool with exportable interactive scenes. | `live` |
 | [PlayCanvas](https://playcanvas.com) | WebGL/WebGPU game engine with a collaborative editor. | `on-demand` |
 | [Vectary](https://www.vectary.com) | No-code 3D and AR design in the browser. (Logged from 'Vectory.com': vectory.com is a sensor company.) | `tool` |
 
