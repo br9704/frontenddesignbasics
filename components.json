@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": { "config": "", "css": "app/global.css", "baseColor": "neutral", "cssVariables": true },
+  "aliases": { "components": "@/components", "utils": "@/lib/cn", "ui": "@/components/ui", "lib": "@/lib", "hooks": "@/hooks" },
+  "registries": {
+    "@react-bits": "https://reactbits.dev/r/{name}.json",
+    "@magicui": "https://magicui.design/r/{name}.json",
+    "@cult-ui": "https://cult-ui.com/r/{name}.json",
+    "@bklit": "https://ui.bklit.com/r/{name}.json"
+  }
+}
