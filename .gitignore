@@ -1,0 +1,26 @@
+# --- private: never commit ---
+MASTERPLAN.md
+CLAUDE.md
+(Flint) */
+OBSIDIANLOG.md
+.claude/settings.local.json
+
+# deps / build
+node_modules/
+.next/
+out/
+.source/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# env / secrets
+.env*
+!.env.example
+*.pem
+
+# misc
+.DS_Store
+.vercel
+coverage/
+/tmp/
