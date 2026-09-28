@@ -1,0 +1,49 @@
+---
+title: Typography
+description: Type carries the personality of the page. Choose it on purpose, size it on a scale, and set it for reading.
+---
+
+## Choose a voice, not a default
+
+The fastest way to make a site look generated is to use the font every generator uses. Pick type that
+belongs to the subject:
+
+- **Editorial, cultural, craft**: a serif with character for display (this guide uses *Newsreader*),
+  paired with a plain grotesk for text.
+- **Product and tools**: one well-drawn grotesk family doing everything, with weight and size creating
+  the hierarchy.
+- **Playful or nostalgic**: a display face with a strong period flavour, used sparingly, and never for
+  body copy.
+
+One family, or two clearly different ones. Never two that are *almost* the same.
+
+## Size on a scale
+
+<TypeScale />
+
+```css
+:root {
+  --step-0: 1rem;                         /* body */
+  --step-1: calc(var(--step-0) * 1.333);  /* h4 */
+  --step-2: calc(var(--step-1) * 1.333);  /* h3 */
+  --step-3: calc(var(--step-2) * 1.333);  /* h2 */
+  --step-4: calc(var(--step-3) * 1.333);  /* h1 */
+}
+```
+
+For a fluid version, clamp each step between a mobile and a desktop value:
+`font-size: clamp(2.5rem, 6vw, 5rem)`.
+
+## Set it for reading
+
+| Setting | Body text | Display text |
+|---|---|---|
+| Line length | 55–75 characters (`max-width: 65ch`) | Short. Break lines by meaning |
+| Line height | 1.5–1.7 | 0.9–1.1 |
+| Letter spacing | 0 | Slightly negative (−0.01 to −0.035em) |
+| Numbers in tables | `font-variant-numeric: tabular-nums` | n/a |
+
+## Why it works
+
+Readers judge quality in the first second, before they read a word, from the *texture* of the type:
+its rhythm, spacing and contrast. A scale and sensible measure give that texture for free.

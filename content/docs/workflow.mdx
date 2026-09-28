@@ -1,0 +1,58 @@
+---
+title: Workflow
+description: How to build with a coding agent and still get work that looks designed, not generated.
+---
+
+<Banner name="workflow" alt="Chapter 10: Workflow" />
+
+Agents are fast, and they drift towards the average. The workflow below keeps the speed and removes
+the average.
+
+<Steps>
+<Step>
+### Ask before designing
+
+At the start of every project, point the agent at this repo and ask what fits the brief. It reads
+`toolkit/toolkit.json` and the Principles chapter, then proposes a short list of tools and principles.
+**You choose; it doesn't assume.**
+</Step>
+<Step>
+### Decide the point of view
+
+Subject, audience, the one job of the page. Then type, one accent and the signature moment. Write it
+down in the project's plan before any code.
+</Step>
+<Step>
+### Clone from real assets, not memory
+
+When the brief is "make it feel like X", get X's real material: exported palettes, sprite sheets,
+fonts under their licences, recorded timings. A look rebuilt from memory always drifts. The Balatro
+deck case study (coming soon) shows the method end to end.
+</Step>
+<Step>
+### Build in slices
+
+Small, working slices, each one committed green before the next. Review each against
+[the rules](/docs/principles/rules).
+</Step>
+<Step>
+### Prove it
+
+- Motion: two frames about 1.5 s apart must differ. With reduced motion, they must match.
+- Mobile: 390px, no sideways scroll.
+- Deploys: confirm the URL is really yours before calling it live.
+</Step>
+</Steps>
+
+## The agent setup this guide assumes
+
+| Layer | What |
+|---|---|
+| Taste | `frontend-design`, `impeccable`, `design-taste-frontend` |
+| Rules | `web-design-guidelines`, `vercel-react-best-practices` |
+| Motion | `gsap-skills`, `motion` MCP, `scroll-world`, `scrollcraft` |
+| 3D | `threejs-*` skills, `img2threejs`, Spline MCP |
+| Components | shadcn MCP with the `@react-bits`, `@magicui`, `@cult-ui` and `@bklit` registries, plus Magic UI MCP and 21st.dev |
+| Proof | Playwright MCP and Chrome DevTools MCP |
+
+Everything is in the [Toolkit](/docs/toolkit) with install commands.

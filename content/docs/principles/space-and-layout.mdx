@@ -1,0 +1,36 @@
+---
+title: Space & layout
+description: A spacing scale, a grid, and more room than feels comfortable.
+---
+
+## Use a 4pt scale
+
+<SpacingRhythm />
+
+```css
+:root {
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-16: 64px; --space-24: 96px;
+}
+```
+
+Tailwind's default spacing is already a 4pt scale. Use it, and don't reach for arbitrary values like
+`mt-[13px]`.
+
+## Group by proximity
+
+Related things sit close; unrelated things sit far apart. The gap *between* groups should be clearly
+bigger (about 2×) than the gap *within* them. This does more for structure than any border or card.
+
+## Layout rules that hold up
+
+- **Container:** max width around 1200–1400px for pages and 65ch for text.
+- **Gutters:** at least 16px on phones. Test at **390px** and check nothing scrolls sideways.
+- **Asymmetry is allowed.** A 1:2 split (like this site's contents section) feels more designed than
+  three equal columns.
+- **Sections breathe:** 80–120px of vertical space between major sections on desktop.
+
+## Why it works
+
+Space is the cheapest luxury. Generous, consistent spacing is what makes an expensive brand look
+expensive, and it costs nothing but restraint.
