@@ -45,7 +45,7 @@ Non-negotiables from this guide:
 | [three.js](https://threejs.org) | The 3D library of the web. R3F wraps it for React. | `live` |
 | [img2threejs](https://github.com/img2threejs/img2threejs) | Skill that rebuilds an object from a reference image as a procedural, animation-ready three.js model. | `live` |
 | [Threlte](https://threlte.xyz) | three.js for Svelte, declarative and typed. | `library` |
-| [ThreeUI](https://threeui.com) | Catalogue of three.js UI components by Design+Code. Community edition is open source. | `library` |
+| [ThreeUI](https://threeui.com) | Library of three.js landing pages, hero sections, scenes, backgrounds and buttons by Design+Code. Community edition is MIT; Pro adds source, CLI and MCP. | `dormant` |
 | [Spline](https://spline.design) | Browser/desktop 3D design tool with exportable interactive scenes. | `live` |
 | [PlayCanvas](https://playcanvas.com) | WebGL/WebGPU game engine with a collaborative editor. | `on-demand` |
 | [Vectary](https://www.vectary.com) | No-code 3D and AR design in the browser. (Logged from 'Vectory.com': vectory.com is a sensor company.) | `tool` |

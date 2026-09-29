@@ -22,10 +22,11 @@ const banners = [
   { name: 'recipes', w: 1600, h: 480, q: 'section=Recipes&n=06&seed=41' },
   { name: 'ai-assets', w: 1600, h: 480, q: 'section=AI%20assets&n=07&seed=73' },
   { name: 'specimen', w: 1600, h: 480, q: 'section=Specimen&n=08&seed=83' },
-  { name: 'showcase', w: 1600, h: 480, q: 'section=Showcase&n=10&seed=23' },
-  { name: 'toolkit', w: 1600, h: 480, q: 'section=Toolkit&n=11&seed=31' },
-  { name: 'case-studies', w: 1600, h: 480, q: 'section=Case%20studies&n=09&seed=47' },
-  { name: 'workflow', w: 1600, h: 480, q: 'section=Workflow&n=12&seed=53' },
+  { name: 'conventions', w: 1600, h: 480, q: 'section=Conventions&n=09&seed=97' },
+  { name: 'showcase', w: 1600, h: 480, q: 'section=Showcase&n=11&seed=23' },
+  { name: 'toolkit', w: 1600, h: 480, q: 'section=Toolkit&n=12&seed=31' },
+  { name: 'case-studies', w: 1600, h: 480, q: 'section=Case%20studies&n=10&seed=47' },
+  { name: 'workflow', w: 1600, h: 480, q: 'section=Workflow&n=13&seed=53' },
 ];
 
 async function main() {

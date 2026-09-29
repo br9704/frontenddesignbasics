@@ -1,0 +1,176 @@
+---
+title: Accessibility
+description: WCAG 2.2 AA turned into rules you can check in five minutes with a keyboard, a contrast checker and the browser's accessibility tree.
+---
+
+Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws point to, and it is achievable without special tooling. The rules below are the AA criteria that break most often on design-led sites, each with the number to check and the success criterion (SC) it comes from.
+
+## Test in this order
+
+<Flow
+  steps={[
+    { title: 'Tab through', note: 'focus visible, order logical, nothing trapped' },
+    { title: 'Zoom to 200%', note: 'and 320px wide: no loss, no sideways scroll' },
+    { title: 'Check contrast', note: '4.5:1 text, 3:1 UI and large text' },
+    { title: 'Read the tree', note: 'landmarks, headings, names in DevTools' },
+    { title: 'Flip the settings', note: 'reduced motion, dark, more contrast', tone: 'accent' },
+  ]}
+  caption="Five passes, cheapest first. Most failures show up in the first two."
+/>
+
+## Contrast
+
+| What | Minimum ratio | WCAG SC |
+|---|---|---|
+| Body text (under 24px, or under 18.66px bold) | 4.5 : 1 | 1.4.3 |
+| Large text (24px and up, or 18.66px bold and up) | 3 : 1 | 1.4.3 |
+| Input borders, focus rings, icons that carry meaning | 3 : 1 against what is next to them | 1.4.11 |
+| Placeholder text | 4.5 : 1 if it carries information | 1.4.3 |
+| Disabled controls, logos, pure decoration | none | exempt |
+
+- **MUST** measure, not guess. Soft grey on warm paper is the most common failure. This site's `--text-soft` (#5c574c) on `--surface` (#f2eee6) measures 6.2 : 1, comfortably over 4.5 : 1.
+- **MUST** check both themes. A pair that passes in light mode often fails in dark.
+- **MUST NOT** use colour alone to carry meaning (SC 1.4.1). Pair red errors with an icon or text, and underline links in body copy.
+
+## Focus
+
+```css
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Never do this without a replacement */
+/* :focus { outline: none; } */
+```
+
+- **MUST** show a visible focus indicator on every interactive element (SC 2.4.7).
+- **MUST** keep the focused element at least partly visible, not hidden behind a sticky header or cookie banner (SC 2.4.11, new in 2.2). Add `scroll-padding-top` equal to the header height.
+- **MUST** make the focus ring meet 3 : 1 against the background around it.
+- **SHOULD** use `:focus-visible`, not `:focus`, so mouse clicks do not leave rings behind.
+- **SHOULD** use a ring at least 2px thick. This is the AAA level (SC 2.4.13), and it costs nothing.
+
+## Keyboard
+
+| Key | Must do |
+|---|---|
+| `Tab` / `Shift+Tab` | Move through every control in visual order. |
+| `Enter` | Activate links and buttons. |
+| `Space` | Activate buttons, tick checkboxes. |
+| Arrow keys | Move inside radio groups, tabs, menus, sliders. |
+| `Escape` | Close the dialog, menu or popover, and return focus to what opened it. |
+
+- **MUST** make everything that works with a mouse work with a keyboard (SC 2.1.1).
+- **MUST NOT** trap focus, except inside an open modal, which must release it on close (SC 2.1.2).
+- **MUST** use `<button>` for actions and `<a href>` for navigation. A `div` with `onClick` is not focusable.
+- **MUST** offer a single-pointer alternative to any drag, such as up and down buttons beside a sortable list (SC 2.5.7, new in 2.2).
+- **SHOULD** add a "Skip to content" link as the first focusable element (SC 2.4.1).
+- **MUST NOT** use a positive `tabindex`. Use `0` or `-1` only.
+
+## Target size
+
+<Preview caption="Drawn at real CSS pixels. 24 × 24 is the WCAG 2.2 AA minimum. 44 × 44 is what Apple's HIG asks for, and Material uses 48 × 48 dp. Aim for 44.">
+  <div style={{ display: 'flex', gap: '28px', alignItems: 'flex-end', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ width: '24px', height: '24px', border: '2px solid var(--text-soft)', borderRadius: '4px', margin: '0 auto' }} />
+      <p style={{ marginTop: '8px' }}>24 · AA minimum</p>
+    </div>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ width: '44px', height: '44px', background: 'var(--accent)', borderRadius: '6px', margin: '0 auto' }} />
+      <p style={{ marginTop: '8px' }}>44 · recommended</p>
+    </div>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ width: '48px', height: '48px', border: '2px dashed var(--text-soft)', borderRadius: '6px', margin: '0 auto' }} />
+      <p style={{ marginTop: '8px' }}>48 · Material</p>
+    </div>
+  </div>
+</Preview>
+
+- **MUST** make every pointer target at least 24 × 24 CSS px, or leave 24px of clear space around a smaller one (SC 2.5.8).
+- **SHOULD** make primary controls, icon buttons and mobile tap targets 44 × 44 px.
+- **SHOULD** grow the hit area, not the icon. A 20px icon can sit in a 44px button with padding.
+
+```css
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+```
+
+## Structure
+
+```html
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>...</header>
+  <nav aria-label="Main">...</nav>
+  <main id="main">
+    <h1>Page title</h1>
+    <h2>Section</h2>
+    <h3>Subsection</h3>
+  </main>
+  <footer>...</footer>
+</body>
+```
+
+- **MUST** set the page language: `<html lang="en-GB">` (SC 3.1.1).
+- **MUST** give every page a unique, descriptive `<title>`, most specific part first: "Media · Rules & conventions · Frontend Design Basics" (SC 2.4.2).
+- **MUST** have exactly one `<main>` and one `<h1>` per page.
+- **MUST NOT** skip heading levels going down (`h2` then `h4`). Choose the level by structure, then style it however you like (SC 1.3.1).
+- **MUST** label a landmark with `aria-label` when there is more than one of the same kind, for example two `<nav>` elements.
+- **MUST** make the page usable at 320 CSS px wide with no sideways scrolling (SC 1.4.10) and at 200% text zoom (SC 1.4.4).
+
+## Names and labels
+
+| Control | Accessible name comes from |
+|---|---|
+| Text input | A visible `<label for>` |
+| Icon-only button | `aria-label="Close dialog"` |
+| Link | Its text. "Read the media rules", not "Click here" |
+| Image link | The image's `alt` |
+| Group of radios | `<fieldset>` with a `<legend>` |
+
+- **MUST** give every input a visible label. A placeholder is not a label, because it vanishes when people type (SC 3.3.2).
+- **MUST** start the accessible name with the visible label text, so voice users can say what they see (SC 2.5.3).
+- **MUST** tie error messages to their field with `aria-describedby` and say what is wrong in text (SC 3.3.1).
+- **MUST** announce status that appears without a page load, such as "Saved" or "3 results", with `role="status"` (SC 4.1.3).
+- **SHOULD** set `autocomplete` on personal fields (`email`, `name`, `tel`) so browsers fill them (SC 1.3.5).
+- **MUST NOT** ask people to re-type something they already entered in the same flow (SC 3.3.7, new in 2.2).
+- **MUST NOT** block paste in password or code fields (SC 3.3.8, new in 2.2).
+
+## User settings
+
+Respect what people have already told their device.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-distance: 0px; }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-soft: var(--text); /* no mid-greys for text */
+    --rule: var(--text);      /* borders become solid */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) { /* dark tokens */ }
+}
+
+@media (forced-colors: active) {
+  .button { border: 1px solid ButtonText; } /* borders survive Windows High Contrast */
+}
+```
+
+| Setting | Convention |
+|---|---|
+| `prefers-reduced-motion: reduce` | Remove movement, keep fades. See [Motion tokens](/docs/conventions/motion-tokens). |
+| `prefers-contrast: more` | Promote soft text to full text colour, make borders solid. |
+| `prefers-color-scheme` | Default to it, and let a manual toggle override it. |
+| `forced-colors: active` | Use real borders, not box-shadows or background-only shapes. Test in Windows High Contrast. |
+
+## Why it works
+
+Most accessibility failures are not exotic. They are a missing label, a removed outline, a grey that is one shade too light, or a `div` pretending to be a button. Turning the AA criteria into numbers and tag names means they can be checked in review, like spacing or spelling, instead of being left to a specialist at the end.

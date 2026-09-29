@@ -194,7 +194,7 @@ ffmpeg -i in.mov -an -vf "scale=1920:-2,fps=30" -c:v libx264 -crf 26 -preset slo
 | Apple touch icon | 180 × 180 px PNG, no transparency | `app/apple-icon.png` |
 | Web app manifest icons | 192 × 192 and 512 × 512 px PNG, plus a 512 maskable | `app/manifest.ts` |
 
-- **MUST** keep the OG image's text inside the centre 1000 × 500 px. Some platforms crop the edges.
+- **SHOULD** keep the OG image's text away from the outer 60px or so. Some platforms crop or round the edges.
 - **MUST** set `og:image:alt` when the card carries information.
 - **SHOULD** check the favicon at 16px. If it does not read, simplify it to one shape or one letter.
 

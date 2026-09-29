@@ -95,6 +95,102 @@
    "by": "Pangram Pangram",
    "note": "Rounded photo cards, each named with its own typeface in huge bold white text, like 'Neue Gstaad'.",
    "image": "/examples/type-pangram.jpg"
+  },
+  {
+   "id": "type-205tf",
+   "name": "205TF",
+   "url": "https://www.205.tf",
+   "by": "",
+   "note": "One serif word, white on black, fills the slide; monospace nav keeps the interface quiet.",
+   "image": "/examples/type-205tf.jpg"
+  },
+  {
+   "id": "type-boldmonday",
+   "name": "Bold Monday",
+   "url": "https://boldmonday.com",
+   "by": "",
+   "note": "Stacked colour bands each set a typeface in weights and italics, mixing families per line.",
+   "image": "/examples/type-boldmonday.jpg"
+  },
+  {
+   "id": "type-bureauroffa",
+   "name": "Bureau Roffa",
+   "url": "https://bureauroffa.com",
+   "by": "",
+   "note": "Rotated running text behind a boxed display title shows a typeface at two scales at once.",
+   "image": "/examples/type-bureauroffa.jpg"
+  },
+  {
+   "id": "type-cotype",
+   "name": "CoType Foundry",
+   "url": "https://cotypefoundry.com",
+   "by": "",
+   "note": "Specimen tiles show weights, scripts, glyphs and numerals of Aeonik Soft in bright colour blocks.",
+   "image": "/examples/type-cotype.jpg"
+  },
+  {
+   "id": "type-fontwerk",
+   "name": "Fontwerk",
+   "url": "https://fontwerk.com",
+   "by": "",
+   "note": "Arabic display type and Latin caption share one hero, showing a bilingual family in use.",
+   "image": "/examples/type-fontwerk.jpg"
+  },
+  {
+   "id": "type-nouvellenoire",
+   "name": "Nouvelle Noire",
+   "url": "https://nouvellenoire.ch",
+   "by": "",
+   "note": "Live type tester bar with size slider above huge Arosa Extra Bold sample text.",
+   "image": "/examples/type-nouvellenoire.jpg"
+  },
+  {
+   "id": "type-optimo",
+   "name": "Optimo",
+   "url": "https://optimo.ch",
+   "by": "",
+   "note": "Huge monospaced headline in red and black on warm paper; a cropped marquee of type below.",
+   "image": "/examples/type-optimo.jpg"
+  },
+  {
+   "id": "type-productiontype",
+   "name": "Production Type",
+   "url": "https://www.productiontype.com",
+   "by": "",
+   "note": "One typeface name set enormous in its own condensed face, surrounded by generous white space.",
+   "image": "/examples/type-productiontype.jpg"
+  },
+  {
+   "id": "type-schicktoikka",
+   "name": "Schick Toikka",
+   "url": "https://www.schick-toikka.com",
+   "by": "",
+   "note": "Two-column catalogue: each family name set in itself, with monospace metadata above hairline rules.",
+   "image": "/examples/type-schicktoikka.jpg"
+  },
+  {
+   "id": "type-swisstypefaces",
+   "name": "Swiss Typefaces",
+   "url": "https://www.swisstypefaces.com",
+   "by": "",
+   "note": "Giant white serif headline over a saturated red-magenta photo makes the type the hero.",
+   "image": "/examples/type-swisstypefaces.jpg"
+  },
+  {
+   "id": "type-tightype",
+   "name": "Tightype",
+   "url": "https://tightype.com",
+   "by": "",
+   "note": "Bull-5 specimen mixes weights, widths and mono styles line by line in one centred block.",
+   "image": "/examples/type-tightype.jpg"
+  },
+  {
+   "id": "type-typemates",
+   "name": "TypeMates",
+   "url": "https://www.typemates.com",
+   "by": "",
+   "note": "Intro sentence set as large wide display text, with thick underlines doubling as links.",
+   "image": "/examples/type-typemates.jpg"
   }
  ],
  "colour": [
@@ -169,6 +265,70 @@
    "by": "Duolingo",
    "note": "Mostly white screen; bright owl green carries the logo, mascot and main button.",
    "image": "/examples/colour-duolingo.jpg"
+  },
+  {
+   "id": "colour-dropboxbrand",
+   "name": "Dropbox Brand — Color",
+   "url": "https://brand.dropbox.com/color",
+   "by": "Dropbox",
+   "note": "Paired swatches (lime/forest, pink/rose, orange/rust) on near-black grid show tone-on-tone colour pairing rules.",
+   "image": "/examples/colour-dropboxbrand.jpg"
+  },
+  {
+   "id": "colour-flybyjing",
+   "name": "Fly By Jing",
+   "url": "https://flybyjing.com",
+   "by": "",
+   "note": "Chili red, jade green and hot yellow CTA carry the brand; yellow reserved for logo and button.",
+   "image": "/examples/colour-flybyjing.jpg"
+  },
+  {
+   "id": "colour-ghia",
+   "name": "Ghia",
+   "url": "https://drinkghia.com",
+   "by": "",
+   "note": "Burgundy bars, pink accents and warm sand photo form one palette echoing the bottle itself.",
+   "image": "/examples/colour-ghia.jpg"
+  },
+  {
+   "id": "colour-olipop",
+   "name": "OLIPOP",
+   "url": "https://drinkolipop.com",
+   "by": "",
+   "note": "Deep green panel, cream type and caramel drips pull the hero palette straight from the flavour.",
+   "image": "/examples/colour-olipop.jpg"
+  },
+  {
+   "id": "colour-omsom",
+   "name": "Omsom",
+   "url": "https://omsom.com",
+   "by": "",
+   "note": "Acid-yellow starburst with red type pops against warm terracotta photo; lilac stripe adds contrast.",
+   "image": "/examples/colour-omsom.jpg"
+  },
+  {
+   "id": "colour-partiful",
+   "name": "Partiful",
+   "url": "https://partiful.com",
+   "by": "",
+   "note": "Grainy blue-to-magenta gradient washes into the party photo, giving the brand one vivid mood.",
+   "image": "/examples/colour-partiful.jpg"
+  },
+  {
+   "id": "colour-playdate",
+   "name": "Playdate",
+   "url": "https://play.date",
+   "by": "Panic",
+   "note": "Single signature yellow device on neutral grey; purple kept only for the Shop button.",
+   "image": "/examples/colour-playdate.jpg"
+  },
+  {
+   "id": "colour-poppi",
+   "name": "poppi",
+   "url": "https://drinkpoppi.com",
+   "by": "",
+   "note": "Hot magenta nav, acid-lime ticker and green product shot clash deliberately into a loud palette.",
+   "image": "/examples/colour-poppi.jpg"
   }
  ],
  "layout": [
@@ -235,6 +395,38 @@
    "by": "AnOther",
    "note": "An editorial split: a half-width photo next to a serif headline, with a four-column row of stories below.",
    "image": "/examples/layout-anothermag.jpg"
+  },
+  {
+   "id": "layout-base",
+   "name": "Base",
+   "url": "https://www.basedesign.com",
+   "by": "Base Design",
+   "note": "Dense four-column feed grid mixing image tiles and text tiles, framed by thin-ruled top and bottom bars.",
+   "image": "/examples/layout-base.jpg"
+  },
+  {
+   "id": "layout-big",
+   "name": "BIG",
+   "url": "https://big.dk",
+   "by": "Bjarke Ingels Group",
+   "note": "Project list on a strict two-column axis: logo and caption right-aligned left, photo left-aligned right.",
+   "image": "/examples/layout-big.jpg"
+  },
+  {
+   "id": "layout-readymag",
+   "name": "Readymag",
+   "url": "https://readymag.com",
+   "by": "",
+   "note": "Overlapping collage of site previews with a white card on top holding headline and one orange button.",
+   "image": "/examples/layout-readymag.jpg"
+  },
+  {
+   "id": "layout-stedelijk",
+   "name": "Stedelijk Museum",
+   "url": "https://www.stedelijk.nl/en",
+   "by": "",
+   "note": "Full-width stacked rows between heavy rules, huge uppercase type running off the edge, small thumbnails inline.",
+   "image": "/examples/layout-stedelijk.jpg"
   }
  ],
  "hierarchy": [
@@ -301,6 +493,46 @@
    "by": "Apple",
    "note": "Finnish page. Product name, then a huge bold claim, then a small subline, with price and Buy set apart.",
    "image": "/examples/hier-apple.jpg"
+  },
+  {
+   "id": "hier-arena",
+   "name": "Are.na",
+   "url": "https://www.are.na",
+   "by": "",
+   "note": "One quiet column: a lettered list, a single bolded fact, then one dark primary button beside a grey one.",
+   "image": "/examples/hier-arena.jpg"
+  },
+  {
+   "id": "hier-itsnicethat",
+   "name": "It's Nice That",
+   "url": "https://www.itsnicethat.com",
+   "by": "",
+   "note": "Centred masthead, a compact thumbnail news strip, then large image cards; a floating pill nav holds sections.",
+   "image": "/examples/hier-itsnicethat.jpg"
+  },
+  {
+   "id": "hier-monocle",
+   "name": "Monocle",
+   "url": "https://monocle.com",
+   "by": "",
+   "note": "Serif masthead, ruled section nav, then small caps label over a large serif headline: classic editorial order.",
+   "image": "/examples/hier-monocle.jpg"
+  },
+  {
+   "id": "hier-snellenberg",
+   "name": "Dennis Snellenberg",
+   "url": "https://dennissnellenberg.com",
+   "by": "Dennis Snellenberg",
+   "note": "Portrait centre, huge name running across the bottom, role in medium type, location tucked in a pill.",
+   "image": "/examples/hier-snellenberg.jpg"
+  },
+  {
+   "id": "hier-things",
+   "name": "Things",
+   "url": "https://culturedcode.com/things/",
+   "by": "Cultured Code",
+   "note": "Icon, then bold product name, then a short grey paragraph, then one blue video link: a clear top-down read.",
+   "image": "/examples/hier-things.jpg"
   }
  ],
  "footer": [
@@ -457,6 +689,46 @@
    "by": "Exo Ape",
    "note": "Full-bleed Venice dome photo with an oversized 'Digital' wordmark sliding up from the bottom edge.",
    "image": "/examples/motion-exoape.jpg"
+  },
+  {
+   "id": "motion-boc-studio",
+   "name": "Boc.Studio",
+   "url": "https://boc.studio",
+   "by": "Boc.Studio",
+   "note": "Black spheres tumble over glowing red letterforms, cut by a scrolling orange ticker band carrying the logo.",
+   "image": "/examples/motion-boc-studio.jpg"
+  },
+  {
+   "id": "motion-cuberto",
+   "name": "Cuberto",
+   "url": "https://cuberto.com",
+   "by": "Cuberto",
+   "note": "Calm centred headline over a rounded video card of a 3D screen scene; motion lives inside the media.",
+   "image": "/examples/motion-cuberto.jpg"
+  },
+  {
+   "id": "motion-pensatori",
+   "name": "Pensatori Irrazionali",
+   "url": "https://pensatori-irrazionali.com/",
+   "by": "Pensatori Irrazionali",
+   "note": "Rendered fabric ribbons with client logos sweep across the frame like a flag, beside a quiet grey statement.",
+   "image": "/examples/motion-pensatori.jpg"
+  },
+  {
+   "id": "motion-poppr",
+   "name": "poppr",
+   "url": "https://poppr.be",
+   "by": "poppr",
+   "note": "Heavy staggered headline overlaps a rounded video card, with a pill CTA and circular scroll cue.",
+   "image": "/examples/motion-poppr.jpg"
+  },
+  {
+   "id": "motion-rejouice",
+   "name": "Rejouice",
+   "url": "https://www.rejouice.com",
+   "by": "Rejouice",
+   "note": "Full-width white wordmark on black, with a video reel rising from below as the next reveal.",
+   "image": "/examples/motion-rejouice.jpg"
   }
  ],
  "scroll": [
@@ -531,6 +803,70 @@
    "by": "Apple",
    "note": "Headline fades out as a full-bleed video of floating app icons scrolls into view.",
    "image": "/examples/scroll-visionpro.jpg"
+  },
+  {
+   "id": "scroll-aardvark",
+   "name": "Aardvark Book Club",
+   "url": "https://aardvarkbookclub.com",
+   "by": "",
+   "note": "Tilted colourful book cards drift in a row above a rounded pink 'How it works' panel.",
+   "image": "/examples/scroll-aardvark.jpg"
+  },
+  {
+   "id": "scroll-cerebrium",
+   "name": "Cerebrium",
+   "url": "https://cerebrium.ai/",
+   "by": "Cerebrium",
+   "note": "Sticky feature list highlights the active item while the right panel swaps to a benchmark chart.",
+   "image": "/examples/scroll-cerebrium.jpg"
+  },
+  {
+   "id": "scroll-ciechanowski",
+   "name": "Mechanical Watch",
+   "url": "https://ciechanow.ski/mechanical-watch/",
+   "by": "Bartosz Ciechanowski",
+   "note": "Long-form article pauses for an interactive 3D spring with a slider, colour-keyed to the text.",
+   "image": "/examples/scroll-ciechanowski.jpg"
+  },
+  {
+   "id": "scroll-era-residence",
+   "name": "ERA Residence",
+   "url": "https://www.era-residence.com",
+   "by": "",
+   "note": "Full-bleed poolside render with hotspot markers, a vertical scroll cue and a 'view apartments' ring.",
+   "image": "/examples/scroll-era-residence.jpg"
+  },
+  {
+   "id": "scroll-firewatch",
+   "name": "Firewatch",
+   "url": "https://www.firewatchgame.com",
+   "by": "Campo Santo",
+   "note": "Layered painted silhouettes of cliffs and trees sit ready to parallax over an orange sunset.",
+   "image": "/examples/scroll-firewatch.jpg"
+  },
+  {
+   "id": "scroll-gta-vi",
+   "name": "Grand Theft Auto VI",
+   "url": "https://www.rockstargames.com/VI",
+   "by": "Rockstar Games",
+   "note": "Full-bleed key art of two characters at dusk, with a centred title and play button.",
+   "image": "/examples/scroll-gta-vi.jpg"
+  },
+  {
+   "id": "scroll-honda-wingmark",
+   "name": "Wing Mark History",
+   "url": "https://global.honda/jp/wingmark/",
+   "by": "Honda",
+   "note": "Red light-streak scene with a year counter (1953) and vertical progress dots tracking the timeline.",
+   "image": "/examples/scroll-honda-wingmark.jpg"
+  },
+  {
+   "id": "scroll-whiteout",
+   "name": "WHITEOUT",
+   "url": "https://whiteout.overvac.com",
+   "by": "OVERVAC",
+   "note": "3D snowy base camp with an altitude counter and camp-by-camp side index; 'scroll to climb'.",
+   "image": "/examples/scroll-whiteout.jpg"
   }
  ],
  "3d": [
@@ -621,6 +957,70 @@
    "by": "Noomo Agency",
    "note": "Frosted-glass 3D pixel shapes refract and blur the large mono headline they float across.",
    "image": "/examples/3d-noomo.jpg"
+  },
+  {
+   "id": "3d-butter",
+   "name": "Butter",
+   "url": "https://www.butter.video/",
+   "by": "",
+   "note": "Glossy 3D keychain charms dangle above a huge neutral headline, making the product feel tactile.",
+   "image": "/examples/3d-butter.jpg"
+  },
+  {
+   "id": "3d-mind-robotics",
+   "name": "Mind Robotics",
+   "url": "https://www.mindrobotics.com/",
+   "by": "",
+   "note": "Outlined, toon-shaded robot arm cuts diagonally through giant rounded wordmark on warm grey.",
+   "image": "/examples/3d-mind-robotics.jpg"
+  },
+  {
+   "id": "3d-shape-of-intelligence",
+   "name": "The Shape of Intelligence",
+   "url": "https://shapeofintelligence.com/",
+   "by": "",
+   "note": "Wireframe metallic surface weaves between huge title letters; slider reshapes it across three chapters.",
+   "image": "/examples/3d-shape-of-intelligence.jpg"
+  },
+  {
+   "id": "3d-singularity",
+   "name": "Singularität",
+   "url": "https://singularity.engl.design/",
+   "by": "engl.design",
+   "note": "Deep-blue particle tunnel with radiating lines frames a centred headline; 'scroll to dive in' cue.",
+   "image": "/examples/3d-singularity.jpg"
+  },
+  {
+   "id": "3d-sobha-privy",
+   "name": "The Privy Collection",
+   "url": "https://sobha-privy-collection.com/",
+   "by": "",
+   "note": "Monochrome satin ribbon rendered in 3D behind serif type; a 3D map thumbnail sits bottom-right.",
+   "image": "/examples/3d-sobha-privy.jpg"
+  },
+  {
+   "id": "3d-threeui-kage",
+   "name": "Kage",
+   "url": "https://threeui.com/landing-pages/kage.html",
+   "by": "ThreeUI (Design+Code)",
+   "note": "Night temple scene with blood moon, falling maple leaves and grass; giant letters layered in depth.",
+   "image": "/examples/3d-threeui-kage.jpg"
+  },
+  {
+   "id": "3d-threeui-sylva",
+   "name": "Sylva Living World",
+   "url": "https://threeui.com/three-js/sylva-living-world",
+   "by": "ThreeUI (Design+Code)",
+   "note": "Procedural mossy root arches in soft fog, a whole Three.js world shown with four variants.",
+   "image": "/examples/3d-threeui-sylva.jpg"
+  },
+  {
+   "id": "3d-whiteout",
+   "name": "WHITEOUT · An Ascent",
+   "url": "https://whiteout.overvac.com/",
+   "by": "",
+   "note": "Real-time snowy mountain base camp; altitude counter and side altitude rail drive a scroll-to-climb story.",
+   "image": "/examples/3d-whiteout.jpg"
   }
  ],
  "shaders": [
@@ -703,6 +1103,38 @@
    "by": "Shu Ding",
    "note": "Minimal white dotted WebGL globe with arcs and labelled markers, drawn by a 5KB shader.",
    "image": "/examples/shader-cobe.jpg"
+  },
+  {
+   "id": "shader-austensor",
+   "name": "Austensor",
+   "url": "https://austensor.com",
+   "by": "Ausdata Science Pty Ltd",
+   "note": "Wordmark formed from thousands of coloured particles; toggles switch tensor state between manifold and sphere.",
+   "image": "/examples/shader-austensor.jpg"
+  },
+  {
+   "id": "shader-digital-meadow",
+   "name": "Digital Meadow",
+   "url": "https://digitalmeadow.studio/",
+   "by": "Digital Meadow",
+   "note": "ASCII rain and glyph cloud rendered live inside an editor-style layout with file-tree navigation.",
+   "image": "/examples/shader-digital-meadow.jpg"
+  },
+  {
+   "id": "shader-huly",
+   "name": "Huly",
+   "url": "https://huly.io",
+   "by": "",
+   "note": "Volumetric blue light beam crashes onto the product screenshot, glowing edges lead the eye downward.",
+   "image": "/examples/shader-huly.jpg"
+  },
+  {
+   "id": "shader-junca",
+   "name": "Junca Studio",
+   "url": "https://juncastudio.com/",
+   "by": "Junca Studio",
+   "note": "Smoky red noise field washes over a 3D robot terminal, tinting the whole hero one colour.",
+   "image": "/examples/shader-junca.jpg"
   }
  ],
  "components": [
@@ -769,6 +1201,94 @@
    "by": "Motion",
    "note": "Pattern library UI: ASCII-glyph banner, filter checkboxes, platform list, featured particle-morph spotlight card.",
    "image": "/examples/comp-motion.jpg"
+  },
+  {
+   "id": "comp-carbon",
+   "name": "Carbon Design System",
+   "url": "https://carbondesignsystem.com",
+   "by": "IBM",
+   "note": "Grid canvas of floating AI components: chat panel, tags, file chip, all sharing one visual language.",
+   "image": "/examples/comp-carbon.jpg"
+  },
+  {
+   "id": "comp-chakra",
+   "name": "Chakra UI",
+   "url": "https://chakra-ui.com",
+   "by": "",
+   "note": "Hero sits above live component cards: slider, pin input and segmented tabs demoed right on the page.",
+   "image": "/examples/comp-chakra.jpg"
+  },
+  {
+   "id": "comp-cultui",
+   "name": "cult ui",
+   "url": "https://www.cult-ui.com",
+   "by": "",
+   "note": "Dot-matrix display headline, lime tags and a highlighted Shift Card component previewed in a framed stage.",
+   "image": "/examples/comp-cultui.jpg"
+  },
+  {
+   "id": "comp-daisyui",
+   "name": "daisyUI",
+   "url": "https://daisyui.com",
+   "by": "",
+   "note": "Tilted panel of real toggles, checkbox sizes and semantic colour swatches shows the component system at a glance.",
+   "image": "/examples/comp-daisyui.jpg"
+  },
+  {
+   "id": "comp-kokonut",
+   "name": "Kokonut UI",
+   "url": "https://kokonutui.com",
+   "by": "",
+   "note": "Split card: light live component previews for humans beside a dark install log for agents.",
+   "image": "/examples/comp-kokonut.jpg"
+  },
+  {
+   "id": "comp-mui",
+   "name": "MUI",
+   "url": "https://mui.com",
+   "by": "",
+   "note": "Collage of working components: task card, chips, date picker, range slider and tabs in one blue theme.",
+   "image": "/examples/comp-mui.jpg"
+  },
+  {
+   "id": "comp-nuxtui",
+   "name": "Nuxt UI",
+   "url": "https://ui.nuxt.com",
+   "by": "",
+   "note": "Theme code editor with colour presets above a strip of form cards sharing one theme.",
+   "image": "/examples/comp-nuxtui.jpg"
+  },
+  {
+   "id": "comp-reactaria",
+   "name": "React Aria",
+   "url": "https://react-spectrum.adobe.com/react-aria/",
+   "by": "Adobe",
+   "note": "App mockup with callout labels naming each part: SearchField, Popover, Tooltip, Modal.",
+   "image": "/examples/comp-reactaria.jpg"
+  },
+  {
+   "id": "comp-reactbits",
+   "name": "React Bits",
+   "url": "https://reactbits.dev",
+   "by": "",
+   "note": "Dark hero over a live ColorBends background, with an editable props panel driving the effect.",
+   "image": "/examples/comp-reactbits.jpg"
+  },
+  {
+   "id": "comp-tremor",
+   "name": "Tremor",
+   "url": "https://tremor.so",
+   "by": "",
+   "note": "Dashboard components on show: multi-line chart, stacked bar chart with tabs, legend totals, date range picker.",
+   "image": "/examples/comp-tremor.jpg"
+  },
+  {
+   "id": "comp-untitledui",
+   "name": "Untitled UI",
+   "url": "https://www.untitledui.com",
+   "by": "",
+   "note": "Isometric wall of full page templates beside the pitch shows a kit's breadth in one image.",
+   "image": "/examples/comp-untitledui.jpg"
   }
  ],
  "hero": [
@@ -843,6 +1363,54 @@
    "by": "Pentagram",
    "note": "Full-width case-study image (yellow cubes, Isomorphic Labs mark) with interactive 'We design ___ for ___' sentence.",
    "image": "/examples/hero-pentagram.jpg"
+  },
+  {
+   "id": "hero-kalkbrenner",
+   "name": "Paul Kalkbrenner",
+   "url": "https://www.paulkalkbrenner.net/",
+   "by": "",
+   "note": "Huge black name on white with a small photo set inside the wordmark; everything else stays tiny.",
+   "image": "/examples/hero-kalkbrenner.jpg"
+  },
+  {
+   "id": "hero-noho",
+   "name": "noho",
+   "url": "https://noho.ink",
+   "by": "",
+   "note": "Split hero: bold tight headline on warm cream at left, staggered grid of colourful product photos at right.",
+   "image": "/examples/hero-noho.jpg"
+  },
+  {
+   "id": "hero-seasats",
+   "name": "Seasats",
+   "url": "https://www.seasats.com/",
+   "by": "",
+   "note": "Calm full-bleed boat photo under a large serif headline, with a colour-stepped nav column on the right.",
+   "image": "/examples/hero-seasats.jpg"
+  },
+  {
+   "id": "hero-trevor-noah",
+   "name": "Trevor Noah",
+   "url": "https://www.trevornoah.com/",
+   "by": "",
+   "note": "Torn-paper portrait collage with 3D objects bursting from his head, on flat navy: personality over headline.",
+   "image": "/examples/hero-trevor-noah.jpg"
+  },
+  {
+   "id": "hero-warmnfuzzy",
+   "name": "Warm & Fuzzy",
+   "url": "https://www.warmnfuzzy.tv/",
+   "by": "",
+   "note": "Full-screen video of a running shoe, a thin bar nav on top, heavy uppercase tagline anchored bottom-left.",
+   "image": "/examples/hero-warmnfuzzy.jpg"
+  },
+  {
+   "id": "hero-white-desert",
+   "name": "White Desert",
+   "url": "https://white-desert.com/",
+   "by": "",
+   "note": "Ice-cave film behind a giant condensed ANTARCTICA; small italic serif line and Watch Film link balance it.",
+   "image": "/examples/hero-white-desert.jpg"
   }
  ],
  "bento": [
@@ -901,6 +1469,416 @@
    "by": "Cal.com",
    "note": "2x2 grid of white cards, each a benefit headline over a real settings or booking-link UI fragment.",
    "image": "/examples/bento-cal.jpg"
+  }
+ ],
+ "ai": [
+  {
+   "id": "ai-cursor",
+   "name": "Cursor",
+   "url": "https://cursor.com",
+   "by": "Anysphere",
+   "note": "Quiet warm-grey hero lets a real agent session window, laid over painted landscape art, sell the product.",
+   "image": "/examples/ai-cursor.jpg"
+  },
+  {
+   "id": "ai-dia",
+   "name": "Dia",
+   "url": "https://www.diabrowser.com",
+   "by": "The Browser Company",
+   "note": "Huge ornate serif wordmark on sunny yellow blur; the browser window shows an AI-written daily brief.",
+   "image": "/examples/ai-dia.jpg"
+  },
+  {
+   "id": "ai-elevenlabs",
+   "name": "ElevenLabs",
+   "url": "https://elevenlabs.io",
+   "by": "",
+   "note": "Grainy gradient orbs stand in for voices; tabbed product switcher keeps an AI platform calm and clear.",
+   "image": "/examples/ai-elevenlabs.jpg"
+  },
+  {
+   "id": "ai-krea",
+   "name": "Krea",
+   "url": "https://www.krea.ai",
+   "by": "",
+   "note": "Dark cinematic desk scene with a lit monitor running the app; gradient-faded wordmark in the headline.",
+   "image": "/examples/ai-krea.jpg"
+  },
+  {
+   "id": "ai-luma",
+   "name": "Luma",
+   "url": "https://lumalabs.ai",
+   "by": "Luma AI",
+   "note": "Full-bleed fashion-shoot video behind a centred promise, with a prompt box inviting you straight in.",
+   "image": "/examples/ai-luma.jpg"
+  },
+  {
+   "id": "ai-mistral",
+   "name": "Mistral AI",
+   "url": "https://mistral.ai",
+   "by": "",
+   "note": "Ruled editorial grid, giant sans headline and an orange pixel-block mosaic with a tiny pixel cat.",
+   "image": "/examples/ai-mistral.jpg"
+  },
+  {
+   "id": "ai-runway",
+   "name": "Runway",
+   "url": "https://runwayml.com",
+   "by": "",
+   "note": "Rounded cinematic video card with left-aligned statement copy, then a greyscale partner logo row beneath.",
+   "image": "/examples/ai-runway.jpg"
+  },
+  {
+   "id": "ai-sesame",
+   "name": "Sesame",
+   "url": "https://www.sesame.com",
+   "by": "",
+   "note": "No UI at all: warm lifestyle photo of a man with earbuds says voice companion better than screenshots.",
+   "image": "/examples/ai-sesame.jpg"
+  },
+  {
+   "id": "ai-suno",
+   "name": "Suno",
+   "url": "https://suno.com",
+   "by": "",
+   "note": "Headline types out a sample prompt above a chat box; tilted song cards float in warm grainy gradient.",
+   "image": "/examples/ai-suno.jpg"
+  }
+ ],
+ "saas": [
+  {
+   "id": "saas-attio",
+   "name": "Attio",
+   "url": "https://attio.com",
+   "by": "",
+   "note": "Textbook SaaS hero: pill announcement, bold centred headline, two buttons, then the real app window.",
+   "image": "/examples/saas-attio.jpg"
+  },
+  {
+   "id": "saas-clay",
+   "name": "Clay",
+   "url": "https://www.clay.com",
+   "by": "",
+   "note": "Claymation 3D funnel, magnifier and bar chart on green hills give a data tool real personality.",
+   "image": "/examples/saas-clay.jpg"
+  },
+  {
+   "id": "saas-craft",
+   "name": "Craft",
+   "url": "https://www.craft.do",
+   "by": "",
+   "note": "Torn-paper collage and sky clouds frame a colourful docs grid; serif headline and glassy floating nav.",
+   "image": "/examples/saas-craft.jpg"
+  },
+  {
+   "id": "saas-dub",
+   "name": "Dub",
+   "url": "https://dub.co",
+   "by": "",
+   "note": "Faint grid backdrop, tight headline, and tabbed product views showing a real payouts dashboard with cursor.",
+   "image": "/examples/saas-dub.jpg"
+  },
+  {
+   "id": "saas-fly",
+   "name": "Fly.io",
+   "url": "https://fly.io",
+   "by": "",
+   "note": "Hand-drawn servers with bird beaks on pastel sky make infrastructure friendly; soft serif headline on left.",
+   "image": "/examples/saas-fly.jpg"
+  },
+  {
+   "id": "saas-granola",
+   "name": "Granola",
+   "url": "https://www.granola.ai",
+   "by": "",
+   "note": "Big typewriter-serif headline beside a notes window being enhanced live, with a video-call overlay.",
+   "image": "/examples/saas-granola.jpg"
+  },
+  {
+   "id": "saas-hex",
+   "name": "Hex",
+   "url": "https://hex.tech",
+   "by": "",
+   "note": "Italic-serif plus wide-grotesk headline, monospace labels and layered notebook, agent and app windows.",
+   "image": "/examples/saas-hex.jpg"
+  },
+  {
+   "id": "saas-hey",
+   "name": "HEY",
+   "url": "https://www.hey.com",
+   "by": "37signals",
+   "note": "Loud heavy rounded type with purple-pink gradient, star quotes up top: opinionated voice as brand.",
+   "image": "/examples/saas-hey.jpg"
+  },
+  {
+   "id": "saas-liveblocks",
+   "name": "Liveblocks",
+   "url": "https://liveblocks.io",
+   "by": "",
+   "note": "Headline word wears a named collaborator's selection highlight, demonstrating realtime sync right in the copy.",
+   "image": "/examples/saas-liveblocks.jpg"
+  },
+  {
+   "id": "saas-mercury",
+   "name": "Mercury",
+   "url": "https://mercury.com",
+   "by": "",
+   "note": "Serene misty-valley desk image, inline email field and demo button make banking feel calm and premium.",
+   "image": "/examples/saas-mercury.jpg"
+  },
+  {
+   "id": "saas-mymind",
+   "name": "mymind",
+   "url": "https://mymind.com",
+   "by": "",
+   "note": "Oversized serif promise inside a glowing orange halo; coloured pill tags name everything you can save.",
+   "image": "/examples/saas-mymind.jpg"
+  },
+  {
+   "id": "saas-planetscale",
+   "name": "PlanetScale",
+   "url": "https://planetscale.com",
+   "by": "",
+   "note": "Anti-marketing: all-monospace plain text, blue links and a bordered grid of customer logos.",
+   "image": "/examples/saas-planetscale.jpg"
+  },
+  {
+   "id": "saas-posthog",
+   "name": "PostHog",
+   "url": "https://posthog.com",
+   "by": "",
+   "note": "Whole site styled as a desktop OS: icons, draggable window, highlighter-marked copy over grassy wallpaper.",
+   "image": "/examples/saas-posthog.jpg"
+  },
+  {
+   "id": "saas-sanity",
+   "name": "Sanity",
+   "url": "https://www.sanity.io",
+   "by": "",
+   "note": "Huge white headline over faded localised content entries, orange CTAs and an orange logo marquee.",
+   "image": "/examples/saas-sanity.jpg"
+  },
+  {
+   "id": "saas-warp",
+   "name": "Warp",
+   "url": "https://www.warp.dev",
+   "by": "",
+   "note": "All-monospace lowercase UI, visible column grid and a live 'fig. 1' factory diagram of squares.",
+   "image": "/examples/saas-warp.jpg"
+  },
+  {
+   "id": "saas-zed",
+   "name": "Zed",
+   "url": "https://zed.dev",
+   "by": "Zed Industries",
+   "note": "Blueprint grid lines, italic serif headline and keyboard-shortcut hints on every button, then the editor.",
+   "image": "/examples/saas-zed.jpg"
+  }
+ ],
+ "darkmode": [
+  {
+   "id": "dark-betterstack",
+   "name": "Better Stack",
+   "url": "https://betterstack.com",
+   "by": "",
+   "note": "Navy-black hero, tilted dark product screenshot fading into the background, one violet call to action.",
+   "image": "/examples/dark-betterstack.jpg"
+  },
+  {
+   "id": "dark-huly",
+   "name": "Huly",
+   "url": "https://huly.io",
+   "by": "",
+   "note": "A beam of blue-white light splits the black hero and lights the product window below.",
+   "image": "/examples/dark-huly.jpg"
+  },
+  {
+   "id": "dark-modal",
+   "name": "Modal",
+   "url": "https://modal.com",
+   "by": "",
+   "note": "Pure black with neon green accents: glowing cube, green headline words, greyed logo wall.",
+   "image": "/examples/dark-modal.jpg"
+  },
+  {
+   "id": "dark-neon",
+   "name": "Neon",
+   "url": "https://neon.com",
+   "by": "",
+   "note": "Blurred green streaks on black behind crisp white type; outline and filled buttons stay legible.",
+   "image": "/examples/dark-neon.jpg"
+  },
+  {
+   "id": "dark-obsidian",
+   "name": "Obsidian",
+   "url": "https://obsidian.md",
+   "by": "",
+   "note": "Charcoal, not pure black, with one purple accent and a real dark app screenshot below.",
+   "image": "/examples/dark-obsidian.jpg"
+  },
+  {
+   "id": "dark-phantom",
+   "name": "Phantom",
+   "url": "https://phantom.land",
+   "by": "",
+   "note": "Curved black grid of colourful project tiles; dark frame makes the work glow, tiny mono labels.",
+   "image": "/examples/dark-phantom.jpg"
+  },
+  {
+   "id": "dark-polar",
+   "name": "Polar",
+   "url": "https://polar.sh",
+   "by": "",
+   "note": "Near-black with white and grey type as the only hierarchy; ruler tickers with white pill markers.",
+   "image": "/examples/dark-polar.jpg"
+  },
+  {
+   "id": "dark-rabbit",
+   "name": "rabbit",
+   "url": "https://www.rabbit.tech",
+   "by": "rabbit inc.",
+   "note": "Black body with signal orange for nav, subhead, button and the glowing selected download card.",
+   "image": "/examples/dark-rabbit.jpg"
+  },
+  {
+   "id": "dark-reflect",
+   "name": "Reflect",
+   "url": "https://reflect.app",
+   "by": "",
+   "note": "Deep indigo-black with a purple glowing arc rising behind the app; subtle bordered pill nav.",
+   "image": "/examples/dark-reflect.jpg"
+  }
+ ],
+ "portfolio": [
+  {
+   "id": "portfolio-dennis-snellenberg",
+   "name": "Dennis Snellenberg",
+   "url": "https://dennissnellenberg.com",
+   "by": "Dennis Snellenberg",
+   "note": "Cut-out portrait with his name as a giant marquee running behind, plus a location pill and role.",
+   "image": "/examples/portfolio-dennis-snellenberg.jpg"
+  },
+  {
+   "id": "portfolio-gil-huybrecht",
+   "name": "Gil Huybrecht",
+   "url": "https://gilhuybrecht.com/",
+   "by": "Gil Huybrecht",
+   "note": "Black index page: services and awards up top, then numbered project screenshots in a strict grid.",
+   "image": "/examples/portfolio-gil-huybrecht.jpg"
+  },
+  {
+   "id": "portfolio-gionatan-nese",
+   "name": "GN.D",
+   "url": "https://www.gionatannese.com",
+   "by": "Gionatan Nese",
+   "note": "Small work thumbnails float in a loose sphere on white space, with a tiny tabbed header.",
+   "image": "/examples/portfolio-gionatan-nese.jpg"
+  },
+  {
+   "id": "portfolio-jesper-landberg",
+   "name": "Jesper Landberg",
+   "url": "https://jesperlandberg.com",
+   "by": "Jesper Landberg",
+   "note": "Project cards curve around a 3D carousel over a grid floor; minimal corner labels frame the work.",
+   "image": "/examples/portfolio-jesper-landberg.jpg"
+  },
+  {
+   "id": "portfolio-meer-mohsin",
+   "name": "Meer Mohsin",
+   "url": "https://www.meermohsin.me/",
+   "by": "Meer Mohsin",
+   "note": "Red-graded portrait with a chrome tribal mask, giant slogan type behind, and a Tension/Immersion/Impact footer bar.",
+   "image": "/examples/portfolio-meer-mohsin.jpg"
+  },
+  {
+   "id": "portfolio-olivier-larose",
+   "name": "Olivier Larose",
+   "url": "https://olivierlarose.com",
+   "by": "Olivier Larose",
+   "note": "One centred type block mixing serif, script initials and pixel glyphs to carry the whole personality.",
+   "image": "/examples/portfolio-olivier-larose.jpg"
+  },
+  {
+   "id": "portfolio-robin-noguier",
+   "name": "Robin Noguier",
+   "url": "https://www.robin-noguier.com",
+   "by": "Robin Noguier",
+   "note": "Case study slider: big serif title and blurb left, warped project images right, dot pagination.",
+   "image": "/examples/portfolio-robin-noguier.jpg"
+  }
+ ],
+ "ecommerce": [
+  {
+   "id": "shop-aarke",
+   "name": "Aarke",
+   "url": "https://aarke.com",
+   "by": "Aarke",
+   "note": "Warm lifestyle product shot fills the hero; one mono headline and an outline 'Shop now' button.",
+   "image": "/examples/shop-aarke.jpg"
+  },
+  {
+   "id": "shop-byredo",
+   "name": "Byredo",
+   "url": "https://www.byredo.com",
+   "by": "Byredo",
+   "note": "Bold red campaign portrait under a stencil wordmark, with a shoppable product card pinned bottom-right.",
+   "image": "/examples/shop-byredo.jpg"
+  },
+  {
+   "id": "shop-frama",
+   "name": "Frama",
+   "url": "https://framacph.com",
+   "by": "Frama",
+   "note": "Two equal category tiles, candles and seating, each with big caps title and an outline Discover button.",
+   "image": "/examples/shop-frama.jpg"
+  },
+  {
+   "id": "shop-graza",
+   "name": "Graza",
+   "url": "https://www.graza.co",
+   "by": "Graza",
+   "note": "Candid kitchen photo, playful serif headline and a lime Shop Now pill give the brand voice.",
+   "image": "/examples/shop-graza.jpg"
+  },
+  {
+   "id": "shop-hay",
+   "name": "HAY",
+   "url": "https://www.hay.com",
+   "by": "HAY",
+   "note": "Centred wordmark, spaced caps nav and one large inset room photo let the furniture sell itself.",
+   "image": "/examples/shop-hay.jpg"
+  },
+  {
+   "id": "shop-lemaire",
+   "name": "Lemaire",
+   "url": "https://www.lemaire.fr",
+   "by": "Lemaire",
+   "note": "Columned text menu over a split campaign spread; small caption and Discover link name the product.",
+   "image": "/examples/shop-lemaire.jpg"
+  },
+  {
+   "id": "shop-ourlegacy",
+   "name": "Our Legacy",
+   "url": "https://www.ourlegacy.com",
+   "by": "Our Legacy",
+   "note": "Half white type panel, half runway photo: bold grotesk 'MENS New Arrivals' as the whole navigation cue.",
+   "image": "/examples/shop-ourlegacy.jpg"
+  },
+  {
+   "id": "shop-tekla",
+   "name": "Tekla",
+   "url": "https://teklafabrics.com",
+   "by": "Tekla",
+   "note": "Split hero pairs a striped-bedding room with a close-up of down feathers; tiny quiet header.",
+   "image": "/examples/shop-tekla.jpg"
+  },
+  {
+   "id": "shop-toteme",
+   "name": "TOTEME",
+   "url": "https://toteme-studio.com",
+   "by": "TOTEME",
+   "note": "Two full-height editorial photos split the screen, each with a small centred category label.",
+   "image": "/examples/shop-toteme.jpg"
   }
  ]
 }

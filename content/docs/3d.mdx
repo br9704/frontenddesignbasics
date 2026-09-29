@@ -50,6 +50,27 @@ move through, data that lives in space.
 | An object from a photo | **img2threejs** skill | Rebuilds it procedurally in code, animation-ready |
 | Scroll-driven 3D world | **scroll-world** skill | Brand → scrollable 3D landing page |
 
+## ThreeUI: three.js components you can copy
+
+[ThreeUI](https://threeui.com) (by Design+Code) is a library of three.js landing pages, hero sections,
+scenes, backgrounds and buttons. The free **Community** edition is MIT and installs from npm; **Pro** adds
+the full catalogue, source code, a CLI and an MCP server so an agent can search and pull components.
+
+```bash
+# Community (free, MIT)
+npm install @designcodeio/threeui
+# import "@designcodeio/threeui/style.css"
+
+# Pro: pull a component's source into your project (OAuth sign-in, Node 20+)
+npx @designcodeio/threeui-cli add cross-beam
+
+# Pro: MCP for your agent (remote HTTP, browser sign-in)
+claude mcp add --transport http threeui https://threeui.com/api/mcp
+```
+
+The MCP exposes `search_catalog`, `get_catalog_item`, `get_item_source` and `get_item_prompt`, and it refuses
+requests from accounts without Pro.
+
 ## A minimal R3F scene
 
 ```tsx

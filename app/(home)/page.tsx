@@ -15,10 +15,11 @@ const chapters = [
   { n: '06', title: 'Recipes', href: '/docs/recipes', text: 'Hero, bento, scroll story.', img: '/showcase/linear.jpg', span: '' },
   { n: '07', title: 'AI assets', href: '/docs/ai-assets', text: 'Higgsfield, prompts, generators.', img: '/banners/ai-assets.jpg', span: 'md:row-span-2' },
   { n: '08', title: 'Specimen', href: '/docs/specimen', text: 'This site’s own system, as posters.', img: '/banners/principles.jpg', span: '' },
-  { n: '09', title: 'Case studies', href: '/docs/case-studies/br95', text: 'Decisions, not just screenshots.', img: '/showcase/br95.jpg', span: 'md:col-span-2' },
-  { n: '10', title: 'Showcase', href: '/docs/showcase', text: `${showcase.length} standout sites, with notes.`, img: '/showcase/lusion.jpg', span: '' },
-  { n: '11', title: 'Toolkit', href: '/docs/toolkit', text: `${toolkit.tools.length} tools, MCPs and skills.`, img: '/showcase/raycast.jpg', span: 'md:col-span-2' },
-  { n: '12', title: 'Workflow', href: '/docs/workflow', text: 'Ask first, prove motion.', img: '/showcase/basement.jpg', span: 'md:col-span-2' },
+  { n: '09', title: 'Conventions', href: '/docs/conventions', text: 'Tokens, scales, states, accessibility, copy.', img: '/examples/layout-pentagram.jpg', span: '' },
+  { n: '10', title: 'Case studies', href: '/docs/case-studies/br95', text: 'Decisions, not just screenshots.', img: '/showcase/br95.jpg', span: 'md:col-span-2' },
+  { n: '11', title: 'Showcase', href: '/docs/showcase', text: 'Hundreds of standout sites, by category.', img: '/showcase/lusion.jpg', span: '' },
+  { n: '12', title: 'Toolkit', href: '/docs/toolkit', text: `${toolkit.tools.length} tools, MCPs and skills.`, img: '/showcase/raycast.jpg', span: 'md:col-span-2' },
+  { n: '13', title: 'Workflow', href: '/docs/workflow', text: 'Ask first, prove motion.', img: '/showcase/basement.jpg', span: 'md:col-span-2' },
 ];
 
 export default function HomePage() {
@@ -66,7 +67,7 @@ export default function HomePage() {
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-soft)]">Contents</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">Twelve chapters, one standard.</h2>
+            <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">Thirteen chapters, one standard.</h2>
           </div>
           <p className="max-w-[40ch] text-[var(--text-soft)]">
             Every page follows the same template: see it, read the code, install it, know why.

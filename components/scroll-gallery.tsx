@@ -62,7 +62,7 @@ export function ScrollGallery() {
       <div className="flex min-h-[100svh] flex-col justify-center py-16">
         <div className="mx-auto mb-10 flex w-full max-w-[1400px] flex-wrap items-end justify-between gap-4 px-4 sm:px-6">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-60">10 · Showcase</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-60">11 · Showcase</p>
             <h2 className="mt-3 max-w-[16ch] font-display text-4xl leading-tight tracking-[-0.02em] sm:text-6xl">
               Learn from sites that already got it right.
             </h2>

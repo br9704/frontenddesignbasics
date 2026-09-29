@@ -7,7 +7,7 @@
 **The guide to complete, beautiful web design.** Principles, motion, 3D, shaders, AI assets, a
 showcase of standout sites, and a toolkit of libraries, MCP servers and agent skills you can install today.
 
-Every page follows one template: **a live demo → a diagram → the code → how to install it → why it works.**
+Every page follows one template: **a live demo → a diagram → real examples → the code → how to install it → why it works.**
 
 <table>
   <tr>
@@ -44,10 +44,14 @@ Every page follows one template: **a live demo → a diagram → the code → ho
 | 06 | [Recipes](content/docs/recipes.mdx) | Hero anatomy, bento grid, pinned scroll story, footer |
 | 07 | [AI assets](content/docs/ai-assets.mdx) | Higgsfield model routing, still → motion → ship, prompt anatomy and a prompt library |
 | 08 | [Specimen](content/docs/specimen.mdx) | This site's own system printed as type, colour and motion posters |
-| 09 | [Case studies](content/docs/case-studies) | BR95 (a Windows 95 portfolio that keeps its SEO) and the Balatro deck (cloning a look from real assets) |
-| 10 | [Showcase](content/docs/showcase.mdx) | 19 standout sites, each with what to take from it |
-| 11 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
-| 12 | [Workflow](content/docs/workflow.mdx) | Building with an agent without generic results |
+| 09 | [Rules & conventions](content/docs/conventions) | Tokens and naming, scales, breakpoints, component states, motion tokens, media, accessibility, copy, structure and performance budgets |
+| 10 | [Case studies](content/docs/case-studies) | BR95 (a Windows 95 portfolio that keeps its SEO) and the Balatro deck (cloning a look from real assets) |
+| 11 | [Showcase](content/docs/showcase.mdx) | 19 annotated sites, plus SaaS, e-commerce, portfolio and dark-mode galleries |
+| 12 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
+| 13 | [Workflow](content/docs/workflow.mdx) | Building with an agent without generic results |
+
+**231 real-site examples.** Every chapter has an "In the wild" row of big screenshots of award-level
+sites that show its idea, each captured and checked by eye ([`data/examples.json`](data/examples.json)).
 
 ## Install the skill
 
@@ -86,7 +90,7 @@ proposes tools and principles for you to choose from. The site also serves `/llm
 | [three.js](https://threejs.org) | The 3D library of the web. R3F wraps it for React. | `live` |
 | [img2threejs](https://github.com/img2threejs/img2threejs) | Skill that rebuilds an object from a reference image as a procedural, animation-ready three.js model. | `live` |
 | [Threlte](https://threlte.xyz) | three.js for Svelte, declarative and typed. | `library` |
-| [ThreeUI](https://threeui.com) | Catalogue of three.js UI components by Design+Code. Community edition is open source. | `library` |
+| [ThreeUI](https://threeui.com) | Library of three.js landing pages, hero sections, scenes, backgrounds and buttons by Design+Code. Community edition is MIT; Pro adds source, CLI and MCP. | `dormant` |
 | [Spline](https://spline.design) | Browser/desktop 3D design tool with exportable interactive scenes. | `live` |
 | [PlayCanvas](https://playcanvas.com) | WebGL/WebGPU game engine with a collaborative editor. | `on-demand` |
 | [Vectary](https://www.vectary.com) | No-code 3D and AR design in the browser. (Logged from 'Vectory.com': vectory.com is a sensor company.) | `tool` |

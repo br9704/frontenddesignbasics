@@ -146,14 +146,14 @@
       "category": "3d",
       "url": "https://threeui.com",
       "repo": "MengTo/threeui",
-      "what": "Catalogue of three.js UI components by Design+Code. Community edition is open source.",
+      "what": "Library of three.js landing pages, hero sections, scenes, backgrounds and buttons by Design+Code. Community edition is MIT; Pro adds source, CLI and MCP.",
       "when": "You need a ready 3D UI element (orbs, cards, globes) rather than a scene from scratch.",
-      "install": "npx @designcodeio/threeui-cli add <component>",
+      "install": "npm install @designcodeio/threeui (Community) · npx @designcodeio/threeui-cli add <component> (Pro)",
       "mcp": {
-        "status": "library",
-        "via": "CLI only"
+        "status": "dormant",
+        "via": "ThreeUI MCP (remote HTTP, https://threeui.com/api/mcp, OAuth; Pro only: $199/yr or $299 lifetime)"
       },
-      "cost": "free (Pro paid)"
+      "cost": "free Community · Pro $199/yr or $299 lifetime"
     },
     {
       "id": "spline",
