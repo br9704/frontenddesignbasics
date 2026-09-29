@@ -615,6 +615,70 @@
    "by": "Displaay Type Foundry",
    "note": "Fonts are grouped by style (Sans, Serif, Other), with site links, socials, the 'DD' logo mark and a legal bar.",
    "image": "/examples/footer-displaay.jpg"
+  },
+  {
+   "id": "footer-affinity",
+   "name": "Affinity",
+   "url": "https://www.affinity.studio",
+   "by": "Canva",
+   "note": "Giant cream 'affinity' wordmark on black, one letter shown as a vector outline with editing handles and a cursor label.",
+   "image": "/examples/footer-affinity.jpg"
+  },
+  {
+   "id": "footer-turion",
+   "name": "Turion Space",
+   "url": "https://www.turionspace.com",
+   "by": "",
+   "note": "Huge black TURION wordmark with 3D satellite and floating asteroids over lavender haze, mono link columns above.",
+   "image": "/examples/footer-turion.jpg"
+  },
+  {
+   "id": "footer-eclipse",
+   "name": "Eclipse Space",
+   "url": "https://www.eclipse.space",
+   "by": "OMOI",
+   "note": "Full-bleed mountain lake scene, halftone eclipse ring cut-out, link columns and satellite icons along the bottom.",
+   "image": "/examples/footer-eclipse.jpg"
+  },
+  {
+   "id": "footer-playfolly",
+   "name": "Playfolly",
+   "url": "https://playfolly.com",
+   "by": "",
+   "note": "Warm orange product photo of kids on play sculpture, giant white 'Play beautiful' slogan cropped at the bottom edge.",
+   "image": "/examples/footer-playfolly.jpg"
+  },
+  {
+   "id": "footer-etched",
+   "name": "Etched",
+   "url": "https://www.etched.com",
+   "by": "",
+   "note": "Fine-line chip circuit drawing leads into a quiet footer: big 'Etched is faster', address, black Get Access button.",
+   "image": "/examples/footer-etched.jpg"
+  },
+  {
+   "id": "footer-reality-is",
+   "name": "Reality Is__",
+   "url": "https://www.reality-is.com",
+   "by": "MOST",
+   "note": "Soft blue-violet gradient, big 'Reality is__' wordmark bottom-left, London and Milano addresses in tidy uppercase columns.",
+   "image": "/examples/footer-reality-is.jpg"
+  },
+  {
+   "id": "footer-buck",
+   "name": "BUCK",
+   "url": "https://buck.co",
+   "by": "",
+   "note": "Solid orange-red footer listing studios with large live local times, addresses, emails and B Corp badge.",
+   "image": "/examples/footer-buck.jpg"
+  },
+  {
+   "id": "footer-cronicle",
+   "name": "Cronicle",
+   "url": "https://cronicle.me",
+   "by": "",
+   "note": "Calm cream closing CTA, App Store QR code, underlined socials, faded giant CRONICLE wordmark with tiny flower.",
+   "image": "/examples/footer-cronicle.jpg"
   }
  ],
  "motion": [
@@ -1469,6 +1533,54 @@
    "by": "Cal.com",
    "note": "2x2 grid of white cards, each a benefit headline over a real settings or booking-link UI fragment.",
    "image": "/examples/bento-cal.jpg"
+  },
+  {
+   "id": "bento-sketch",
+   "name": "Sketch",
+   "url": "https://www.sketch.com",
+   "by": "",
+   "note": "Mixed-size pastel and black tiles: wide pink card with widget UI, dark vector-pen card, template collage.",
+   "image": "/examples/bento-sketch.jpg"
+  },
+  {
+   "id": "bento-cleanshot",
+   "name": "CleanShot X",
+   "url": "https://cleanshot.com",
+   "by": "",
+   "note": "'Built for everyday Mac workflows' bento: wide Capture History tile, lilac and aurora-gradient cards in uneven widths.",
+   "image": "/examples/bento-cleanshot.jpg"
+  },
+  {
+   "id": "bento-procreate",
+   "name": "Procreate",
+   "url": "https://procreate.com",
+   "by": "",
+   "note": "Dark rounded tiles of different sizes: two large iPad product cards, narrow Pocket card, wide photo resources tile.",
+   "image": "/examples/bento-procreate.jpg"
+  },
+  {
+   "id": "bento-unkey",
+   "name": "Unkey",
+   "url": "https://www.unkey.com",
+   "by": "",
+   "note": "Monochrome dev bento: ASCII-art keys tile, tall global-network map tile, dotted validation grid, terminal table.",
+   "image": "/examples/bento-unkey.jpg"
+  },
+  {
+   "id": "bento-e2b",
+   "name": "E2B",
+   "url": "https://e2b.dev",
+   "by": "",
+   "note": "Black hairline-bordered grid, mono type, red accents: terminal, ports and egress, file tree, CPU chart tiles.",
+   "image": "/examples/bento-e2b.jpg"
+  },
+  {
+   "id": "bento-upstash",
+   "name": "Upstash",
+   "url": "https://upstash.com",
+   "by": "",
+   "note": "Light rounded cards: latency bar chart, pricing stat chips, wide code tile, edge-network orbit diagram.",
+   "image": "/examples/bento-upstash.jpg"
   }
  ],
  "ai": [
@@ -1543,6 +1655,70 @@
    "by": "",
    "note": "Headline types out a sample prompt above a chat box; tilted song cards float in warm grainy gradient.",
    "image": "/examples/ai-suno.jpg"
+  },
+  {
+   "id": "ai-anthropic",
+   "name": "Anthropic",
+   "url": "https://www.anthropic.com",
+   "by": "",
+   "note": "Warm off-white page, heavy grotesk headline with underlined words beside a serif paragraph, then a macro-photo band.",
+   "image": "/examples/ai-anthropic.jpg"
+  },
+  {
+   "id": "ai-pika",
+   "name": "Pika",
+   "url": "https://pika.art",
+   "by": "",
+   "note": "Full-bleed AI portrait (a woman in a green feather collar) under a huge uppercase headline and a floating pill nav.",
+   "image": "/examples/ai-pika.jpg"
+  },
+  {
+   "id": "ai-moonvalley",
+   "name": "Moonvalley",
+   "url": "https://www.moonvalley.com",
+   "by": "",
+   "note": "Near-black page, thin wide wordmark, and a cinematic generated video of a figure on a lunar plain.",
+   "image": "/examples/ai-moonvalley.jpg"
+  },
+  {
+   "id": "ai-bfl",
+   "name": "Black Forest Labs",
+   "url": "https://bfl.ai",
+   "by": "",
+   "note": "FLUX 3 hero over a misty generated-video sky, with small mono chips for image, video and audio.",
+   "image": "/examples/ai-bfl.jpg"
+  },
+  {
+   "id": "ai-deepmind",
+   "name": "Google DeepMind",
+   "url": "https://deepmind.google",
+   "by": "",
+   "note": "Carousel of large rounded cards: a soft blue 3D mic, a line-diagram schematic, and a glowing DNA helix.",
+   "image": "/examples/ai-deepmind.jpg"
+  },
+  {
+   "id": "ai-harvey",
+   "name": "Harvey",
+   "url": "https://www.harvey.ai",
+   "by": "",
+   "note": "Editorial serif headline on cream, and a product dashboard set on a painterly textured background.",
+   "image": "/examples/ai-harvey.jpg"
+  },
+  {
+   "id": "ai-cohere",
+   "name": "Cohere",
+   "url": "https://cohere.com",
+   "by": "",
+   "note": "Centred mono-serif 'Your AI. Your rules.' above a product UI set into an organic, painterly landscape.",
+   "image": "/examples/ai-cohere.jpg"
+  },
+  {
+   "id": "ai-poolside",
+   "name": "Poolside",
+   "url": "https://poolside.ai",
+   "by": "",
+   "note": "Quiet left-rail nav, one-line headline with coloured model badges, and a live agent terminal on noise.",
+   "image": "/examples/ai-poolside.jpg"
   }
  ],
  "saas": [
@@ -1747,6 +1923,70 @@
    "by": "",
    "note": "Deep indigo-black with a purple glowing arc rising behind the app; subtle bordered pill nav.",
    "image": "/examples/dark-reflect.jpg"
+  },
+  {
+   "id": "dark-railway",
+   "name": "Railway",
+   "url": "https://railway.com",
+   "by": "Railway",
+   "note": "Illustrated starry night-cloud sky, serif headline, purple CTA, dark product canvas rising from below.",
+   "image": "/examples/dark-railway.jpg"
+  },
+  {
+   "id": "dark-graphite",
+   "name": "Graphite",
+   "url": "https://graphite.dev",
+   "by": "Graphite",
+   "note": "Near-black page with a glowing white hexagon ring, big tight headline, soft-glow buttons.",
+   "image": "/examples/dark-graphite.jpg"
+  },
+  {
+   "id": "dark-inngest",
+   "name": "Inngest",
+   "url": "https://www.inngest.com",
+   "by": "Inngest",
+   "note": "Huge solid and outlined uppercase headline on charcoal, orange particle specks, mono code fragments.",
+   "image": "/examples/dark-inngest.jpg"
+  },
+  {
+   "id": "dark-unkey",
+   "name": "Unkey",
+   "url": "https://www.unkey.com",
+   "by": "Unkey",
+   "note": "Black stage with distressed stencil words cycling past a blue arrow; stark white boxed nav.",
+   "image": "/examples/dark-unkey.jpg"
+  },
+  {
+   "id": "dark-trigger",
+   "name": "Trigger.dev",
+   "url": "https://trigger.dev",
+   "by": "Trigger.dev",
+   "note": "Tilted, blurred run-timeline UI behind a bold headline; one acid-green CTA on graphite.",
+   "image": "/examples/dark-trigger.jpg"
+  },
+  {
+   "id": "dark-letterboxd",
+   "name": "Letterboxd",
+   "url": "https://letterboxd.com",
+   "by": "Letterboxd",
+   "note": "Film still fades into slate-blue dark UI; bold serif tagline and a single green button.",
+   "image": "/examples/dark-letterboxd.jpg"
+  },
+  {
+   "id": "dark-evervault",
+   "name": "Evervault",
+   "url": "https://evervault.com",
+   "by": "Evervault",
+   "note": "Deep navy-violet hero, pill nav, grey logo strip, dark product cards with purple toggles.",
+   "image": "/examples/dark-evervault.jpg"
+  },
+  {
+   "id": "dark-spacex",
+   "name": "SpaceX",
+   "url": "https://www.spacex.com",
+   "by": "SpaceX",
+   "note": "Full-bleed Starship launch photo, heavy condensed uppercase title, thin outline button, spaced nav.",
+   "image": "/examples/dark-spacex.jpg"
   }
  ],
  "portfolio": [
@@ -1805,6 +2045,70 @@
    "by": "Robin Noguier",
    "note": "Case study slider: big serif title and blurb left, warped project images right, dot pagination.",
    "image": "/examples/portfolio-robin-noguier.jpg"
+  },
+  {
+   "id": "portfolio-brittany-chiang",
+   "name": "Brittany Chiang",
+   "url": "https://brittanychiang.com",
+   "by": "Brittany Chiang",
+   "note": "Deep navy two-column layout: sticky name and section nav left, bio and experience scrolling right.",
+   "image": "/examples/portfolio-brittany-chiang.jpg"
+  },
+  {
+   "id": "portfolio-lynn-fisher",
+   "name": "Lynn Fisher",
+   "url": "https://lynnandtonic.com",
+   "by": "Lynn Fisher",
+   "note": "Paper-textured page, ornate display serif name, table-of-contents menu with dotted leaders and roman numerals.",
+   "image": "/examples/portfolio-lynn-fisher.jpg"
+  },
+  {
+   "id": "portfolio-cyd-stumpel",
+   "name": "Cyd Stumpel",
+   "url": "https://cydstumpel.nl",
+   "by": "Cyd Stumpel",
+   "note": "Giant red condensed name marquee, playful stickers, italic serif headline and cut-out speaker photo.",
+   "image": "/examples/portfolio-cyd-stumpel.jpg"
+  },
+  {
+   "id": "portfolio-paco-coursey",
+   "name": "Paco Coursey",
+   "url": "https://paco.me",
+   "by": "Paco Coursey",
+   "note": "Quiet text-only page: short bio, then three tidy columns of Building, Projects and Writing links.",
+   "image": "/examples/portfolio-paco-coursey.jpg"
+  },
+  {
+   "id": "portfolio-niccolo-miranda",
+   "name": "The Paper Portfolio",
+   "url": "https://www.niccolomiranda.com",
+   "by": "Niccolò Miranda",
+   "note": "Newspaper-style paper texture, condensed serif headlines, draggable work strip above a huge MIRANDA masthead.",
+   "image": "/examples/portfolio-niccolo-miranda.jpg"
+  },
+  {
+   "id": "portfolio-jhey",
+   "name": "Jhey Tompkins",
+   "url": "https://jhey.dev",
+   "by": "Jhey Tompkins",
+   "note": "Bold serif headline, red inline links, hand-drawn signature and live status widgets over a faint grid.",
+   "image": "/examples/portfolio-jhey.jpg"
+  },
+  {
+   "id": "portfolio-matthieu-givelet",
+   "name": "Matthieu Givelet",
+   "url": "https://matthieugivelet.com",
+   "by": "Matthieu Givelet",
+   "note": "Huge black grotesk name with a project image set inside the word, clean white Swiss layout.",
+   "image": "/examples/portfolio-matthieu-givelet.jpg"
+  },
+  {
+   "id": "portfolio-tobias-van-schneider",
+   "name": "Tobias van Schneider",
+   "url": "https://vanschneider.com",
+   "by": "Tobias van Schneider",
+   "note": "Black page with fine gothic-arch linework, engraved cherubs, red HOVS tab and a giant 'I create' manifesto.",
+   "image": "/examples/portfolio-tobias-van-schneider.jpg"
   }
  ],
  "ecommerce": [
@@ -1879,6 +2183,202 @@
    "by": "TOTEME",
    "note": "Two full-height editorial photos split the screen, each with a small centred category label.",
    "image": "/examples/shop-toteme.jpg"
+  },
+  {
+   "id": "shop-glossier",
+   "name": "Glossier",
+   "url": "https://www.glossier.com",
+   "by": "Glossier",
+   "note": "Full-bleed glass perfume bottles on white; small editorial offer card top-left, tidy uppercase nav.",
+   "image": "/examples/shop-glossier.jpg"
+  },
+  {
+   "id": "shop-nothing",
+   "name": "Nothing",
+   "url": "https://nothing.tech",
+   "by": "Nothing",
+   "note": "Black dot-grid stage, headphone product centred, serif headline, dot-matrix labels and floating pill nav.",
+   "image": "/examples/shop-nothing.jpg"
+  },
+  {
+   "id": "shop-aesop",
+   "name": "Aesop",
+   "url": "https://www.aesop.com",
+   "by": "Aesop",
+   "note": "Moody brown video hero of bottle 'books' on a shelf; centred story headline, outline CTA.",
+   "image": "/examples/shop-aesop.jpg"
+  },
+  {
+   "id": "shop-rhode",
+   "name": "Rhode",
+   "url": "https://www.rhodeskin.com",
+   "by": "Rhode",
+   "note": "Rounded inset hero card with close-up portrait and product; soft grey palette, quiet uppercase nav.",
+   "image": "/examples/shop-rhode.jpg"
+  },
+  {
+   "id": "shop-bangolufsen",
+   "name": "Bang & Olufsen",
+   "url": "https://www.bang-olufsen.com/en/us",
+   "by": "Bang & Olufsen",
+   "note": "Cinematic lifestyle video with the speaker in a living room; restrained copy and outline pill button.",
+   "image": "/examples/shop-bangolufsen.jpg"
+  },
+  {
+   "id": "shop-acne",
+   "name": "Acne Studios",
+   "url": "https://www.acnestudios.com/us/en/home",
+   "by": "Acne Studios",
+   "note": "Full-bleed campaign photo with a giant black wordmark over it; tiny uppercase nav and labels.",
+   "image": "/examples/shop-acne.jpg"
+  },
+  {
+   "id": "shop-diptyque",
+   "name": "Diptyque",
+   "url": "https://www.diptyqueparis.com/en_us",
+   "by": "Diptyque",
+   "note": "Styled still life of candles and diffuser on a plinth; single boxed 'Discover the collection' button.",
+   "image": "/examples/shop-diptyque.jpg"
+  },
+  {
+   "id": "shop-ourplace",
+   "name": "Our Place",
+   "url": "https://fromourplace.com",
+   "by": "Our Place",
+   "note": "Warm cooking video hero, serif headline, terracotta and charcoal buttons, olive promo band below.",
+   "image": "/examples/shop-ourplace.jpg"
+  }
+ ],
+ "editorial": [
+  {
+   "id": "editorial-eye-on-design",
+   "name": "Eye on Design",
+   "url": "https://eyeondesign.aiga.org",
+   "by": "AIGA",
+   "note": "Salmon category labels, chunky rounded headlines and bold illustrated feature images in a two-then-three column grid.",
+   "image": "/examples/editorial-eye-on-design.jpg"
+  },
+  {
+   "id": "editorial-rest-of-world",
+   "name": "Rest of World",
+   "url": "https://restofworld.org",
+   "by": "Rest of World",
+   "note": "Electric blue wordmark with diacritics, mono section labels, collage illustration lead story and latest-stories rail.",
+   "image": "/examples/editorial-rest-of-world.jpg"
+  },
+  {
+   "id": "editorial-032c",
+   "name": "032c",
+   "url": "https://032c.com",
+   "by": "032c",
+   "note": "Heavy black logo, four-up grid of magazine covers and merch, then full-bleed photo with red headline.",
+   "image": "/examples/editorial-032c.jpg"
+  },
+  {
+   "id": "editorial-quanta",
+   "name": "Quanta Magazine",
+   "url": "https://www.quantamagazine.org",
+   "by": "Simons Foundation",
+   "note": "Full-width commissioned illustration under the nav, then a big high-contrast serif headline and italic dek.",
+   "image": "/examples/editorial-quanta.jpg"
+  },
+  {
+   "id": "editorial-aeon",
+   "name": "Aeon",
+   "url": "https://aeon.co",
+   "by": "Aeon",
+   "note": "Teal serif wordmark, full-bleed micrograph behind a large centred serif essay title, mono utility nav.",
+   "image": "/examples/editorial-aeon.jpg"
+  },
+  {
+   "id": "editorial-nyt-snowfall",
+   "name": "Snow Fall",
+   "url": "https://www.nytimes.com/projects/2012/snow-fall/index.html",
+   "by": "The New York Times",
+   "note": "Full-bleed moving snow footage with a quiet serif title and byline: the classic long-form opener.",
+   "image": "/examples/editorial-nyt-snowfall.jpg"
+  },
+  {
+   "id": "editorial-cereal",
+   "name": "Cereal",
+   "url": "https://readcereal.com",
+   "by": "Cereal",
+   "note": "Letterspaced wordmark, index-style filters by category, term and year, calm six-column photo archive grid.",
+   "image": "/examples/editorial-cereal.jpg"
+  },
+  {
+   "id": "editorial-gentlewoman",
+   "name": "The Gentlewoman",
+   "url": "https://thegentlewoman.co.uk",
+   "by": "The Gentlewoman",
+   "note": "Pure white page, single centred issue cover, Futura nav and a ruled caption bar with slide count.",
+   "image": "/examples/editorial-gentlewoman.jpg"
+  }
+ ],
+ "specimen": [
+  {
+   "id": "specimen-inter",
+   "name": "Inter typeface",
+   "url": "https://rsms.me/inter/",
+   "by": "",
+   "note": "Giant black 'The Inter typeface family' set in Inter on white, with three columns of specimen notes.",
+   "image": "/examples/specimen-inter.jpg"
+  },
+  {
+   "id": "specimen-futurefonts",
+   "name": "Future Fonts",
+   "url": "https://www.futurefonts.xyz",
+   "by": "",
+   "note": "Wall of huge in-progress display type (wavy 'Agent Mushy') with a small centred 'Type in progress' card.",
+   "image": "/examples/specimen-futurefonts.jpg"
+  },
+  {
+   "id": "specimen-dinamo",
+   "name": "Dinamo",
+   "url": "https://abcdinamo.com",
+   "by": "",
+   "note": "Plain text-list nav and pill filters above a 3D logistics scene showing off the ABC Schengen typeface.",
+   "image": "/examples/specimen-dinamo.jpg"
+  },
+  {
+   "id": "specimen-fontshare",
+   "name": "Fontshare",
+   "url": "https://www.fontshare.com",
+   "by": "",
+   "note": "Pale-yellow gridded tester: a size slider, sample-text controls and a large 'Satoshi' specimen row.",
+   "image": "/examples/specimen-fontshare.jpg"
+  },
+  {
+   "id": "specimen-uberbase",
+   "name": "Uber Base",
+   "url": "https://base.uber.com",
+   "by": "",
+   "note": "Black hero 'Base design system' over white line-art road network with a tiny car, plus illustrated cards.",
+   "image": "/examples/specimen-uberbase.jpg"
+  },
+  {
+   "id": "specimen-atlassian",
+   "name": "Atlassian Design",
+   "url": "https://atlassian.design",
+   "by": "",
+   "note": "Huge 'Better teamwork by design.' on a dotted grid, with coloured multiplayer cursor name tags.",
+   "image": "/examples/specimen-atlassian.jpg"
+  },
+  {
+   "id": "specimen-material",
+   "name": "Material Design 3",
+   "url": "https://m3.material.io",
+   "by": "",
+   "note": "Big 'Material Design' header card above a lavender collage of expressive phone screens and components.",
+   "image": "/examples/specimen-material.jpg"
+  },
+  {
+   "id": "specimen-govuk",
+   "name": "GOV.UK Design System",
+   "url": "https://design-system.service.gov.uk",
+   "by": "",
+   "note": "Bold blue hero in GDS Transport with a flat illustration of type, swatches and form components.",
+   "image": "/examples/specimen-govuk.jpg"
   }
  ]
 }

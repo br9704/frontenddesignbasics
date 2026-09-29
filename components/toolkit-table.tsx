@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import toolkit from '@/toolkit/toolkit.json';
 
@@ -73,6 +74,11 @@ export function ToolkitTable() {
         {rows.map((t: Tool) => (
           <li key={t.id} className="grid gap-x-6 gap-y-2 py-4 sm:grid-cols-[12rem_1fr]">
             <div className="flex flex-col items-start gap-1.5">
+              {'image' in t && t.image ? (
+                <a href={t.url} target="_blank" rel="noreferrer" className="relative mb-1 block aspect-[16/10] w-full overflow-hidden rounded-md border border-[var(--rule)]">
+                  <Image src={t.image as string} alt={`${t.name} website`} fill sizes="(min-width: 640px) 12rem, 100vw" className="object-cover object-top" />
+                </a>
+              ) : null}
               <a href={t.url} target="_blank" rel="noreferrer" className="font-medium underline-offset-4 hover:underline">
                 {t.name}
               </a>

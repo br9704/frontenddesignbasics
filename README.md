@@ -46,11 +46,11 @@ Every page follows one template: **a live demo → a diagram → real examples �
 | 08 | [Specimen](content/docs/specimen.mdx) | This site's own system printed as type, colour and motion posters |
 | 09 | [Rules & conventions](content/docs/conventions) | Tokens and naming, scales, breakpoints, component states, motion tokens, media, accessibility, copy, structure and performance budgets |
 | 10 | [Case studies](content/docs/case-studies) | BR95 (a Windows 95 portfolio that keeps its SEO) and the Balatro deck (cloning a look from real assets) |
-| 11 | [Showcase](content/docs/showcase.mdx) | 19 annotated sites, plus SaaS, e-commerce, portfolio and dark-mode galleries |
+| 11 | [Showcase](content/docs/showcase.mdx) | 19 annotated sites, plus SaaS, e-commerce, portfolio, editorial and dark-mode galleries |
 | 12 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
 | 13 | [Workflow](content/docs/workflow.mdx) | Building with an agent without generic results |
 
-**231 real-site examples.** Every chapter has an "In the wild" row of big screenshots of award-level
+**293 real-site examples.** Every chapter has an "In the wild" row of big screenshots of award-level
 sites that show its idea, each captured and checked by eye ([`data/examples.json`](data/examples.json)).
 
 ## Install the skill
