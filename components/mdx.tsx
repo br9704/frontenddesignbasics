@@ -4,6 +4,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 import type { MDXComponents } from 'mdx/types';
 import { ContrastPair, EasingPlayground, Preview, ReducedMotionDemo, SpacingRhythm, TypeScale } from './demos';
 import { BentoDemo, MarqueeDemo, ShaderPlayground, TiltCard } from './demos-2';
+import { ColourBudget, Decision, EasingCurves, Flow, HierarchyDiagram, PageTemplate, PromptAnatomy, ProximityDiagram, ScaleLadder } from './diagrams';
+import { MotionPoster, PaletteSheet, TypeSpecimen } from './specimen';
 import { Banner, ShowcaseGrid, Shot } from './showcase-grid';
 import { ToolkitTable } from './toolkit-table';
 
@@ -25,6 +27,18 @@ export function getMDXComponents(components?: MDXComponents) {
     ShaderPlayground,
     MarqueeDemo,
     BentoDemo,
+    Flow,
+    EasingCurves,
+    ColourBudget,
+    ProximityDiagram,
+    HierarchyDiagram,
+    ScaleLadder,
+    Decision,
+    PromptAnatomy,
+    PageTemplate,
+    TypeSpecimen,
+    PaletteSheet,
+    MotionPoster,
     ShowcaseGrid,
     Banner,
     Shot,

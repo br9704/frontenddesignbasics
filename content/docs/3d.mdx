@@ -27,6 +27,17 @@ move through, data that lives in space.
 
 ## Pick the tool for the job
 
+<Decision
+  question="What does the brief actually need?"
+  caption="Start from the lightest option that does the job. Each step down this list costs more to build and more for visitors to download."
+  branches={[
+    { if: 'it needs depth or tilt', then: 'CSS perspective' },
+    { if: 'it needs a moving texture', then: 'a shader (see Shaders)' },
+    { if: 'one designed 3D moment', then: 'Spline' },
+    { if: 'a custom, interactive scene', then: 'three.js + R3F' },
+  ]}
+/>
+
 | Brief | Reach for | Why |
 |---|---|---|
 | React site, custom scene | **three.js + React Three Fiber + drei** | Largest ecosystem; drei covers loaders, controls, environments |

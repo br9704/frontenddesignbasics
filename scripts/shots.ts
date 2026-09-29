@@ -20,10 +20,12 @@ const banners = [
   { name: 'shaders', w: 1600, h: 480, q: 'section=Shaders&n=04&seed=61' },
   { name: 'components', w: 1600, h: 480, q: 'section=Components&n=05&seed=29' },
   { name: 'recipes', w: 1600, h: 480, q: 'section=Recipes&n=06&seed=41' },
-  { name: 'showcase', w: 1600, h: 480, q: 'section=Showcase&n=08&seed=23' },
-  { name: 'toolkit', w: 1600, h: 480, q: 'section=Toolkit&n=09&seed=31' },
-  { name: 'case-studies', w: 1600, h: 480, q: 'section=Case%20studies&n=07&seed=47' },
-  { name: 'workflow', w: 1600, h: 480, q: 'section=Workflow&n=10&seed=53' },
+  { name: 'ai-assets', w: 1600, h: 480, q: 'section=AI%20assets&n=07&seed=73' },
+  { name: 'specimen', w: 1600, h: 480, q: 'section=Specimen&n=08&seed=83' },
+  { name: 'showcase', w: 1600, h: 480, q: 'section=Showcase&n=10&seed=23' },
+  { name: 'toolkit', w: 1600, h: 480, q: 'section=Toolkit&n=11&seed=31' },
+  { name: 'case-studies', w: 1600, h: 480, q: 'section=Case%20studies&n=09&seed=47' },
+  { name: 'workflow', w: 1600, h: 480, q: 'section=Workflow&n=12&seed=53' },
 ];
 
 async function main() {
@@ -65,6 +67,7 @@ async function main() {
             else await page.getByRole('button', { name: new RegExp(s.start, 'i') }).first().click({ timeout: 5000 }).catch(() => page.keyboard.press('Enter'));
             await page.waitForTimeout(9000);
           }
+          if (s.dismiss) await page.getByText(s.dismiss, { exact: true }).first().click({ timeout: 3000 }).catch(() => {});
           // Dismiss cookie banners so the shot shows the design, not the consent UI.
           for (const label of [/reject all/i, /decline/i, /accept all/i, /^accept$/i, /got it/i]) {
             const btn = page.getByRole('button', { name: label }).first();
@@ -74,6 +77,14 @@ async function main() {
               break;
             }
           }
+          // Last resort: remove any fixed/sticky overlay that talks about cookies.
+          await page.evaluate(() => {
+            for (const el of Array.from(document.querySelectorAll<HTMLElement>('body *'))) {
+              const pos = getComputedStyle(el).position;
+              if ((pos === 'fixed' || pos === 'sticky') && /cookie|consent/i.test(el.innerText || '')) el.remove();
+            }
+          });
+          await page.waitForTimeout(300);
           await page.screenshot({ path: `public/showcase/${s.id}${suffix}.jpg`, type: 'jpeg', quality: 82 });
           console.log('shot', s.id + suffix);
         } catch (e) {

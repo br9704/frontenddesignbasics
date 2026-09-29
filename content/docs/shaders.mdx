@@ -14,6 +14,17 @@ The home page hero is one full-screen triangle and a fragment shader, drawn with
 
 ## How it works, in four ideas
 
+<Flow
+  caption="Each pixel runs this pipeline every frame. Nothing is stored between frames except time and the pointer."
+  steps={[
+    { title: 'Noise', note: 'smooth random field' },
+    { title: 'Warp', note: 'noise bends noise', tone: 'accent' },
+    { title: 'Threshold', note: 'field → ink shapes' },
+    { title: 'Multiply', note: 'inks overprint paper' },
+    { title: 'Grain', note: 'print texture', tone: 'ink' },
+  ]}
+/>
+
 <Steps>
 <Step>
 ### Noise

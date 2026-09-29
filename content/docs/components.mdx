@@ -7,6 +7,16 @@ description: Own your components. How the registry model works, and which librar
 
 ## Own the code
 
+<Flow
+  caption="A registry is just JSON describing files. The CLI copies them into your repo, and from then on they're yours."
+  steps={[
+    { title: 'Registry', note: '@magicui, @react-bits, @cult-ui, @bklit' },
+    { title: 'shadcn CLI / MCP', note: 'npx shadcn add @ns/name', tone: 'accent' },
+    { title: 'Your repo', note: 'components/ui/*.tsx' },
+    { title: 'Restyle', note: 'your type, colour, radius', tone: 'ink' },
+  ]}
+/>
+
 The modern component libraries don't ship a package you import. They ship **source you copy into your
 repo** through a registry. You own it, you restyle it, and nothing breaks when a package updates.
 

@@ -1,23 +1,33 @@
 <p align="center">
-  <img src="public/banners/readme.jpg" alt="Frontend Design Basics: complete, beautiful web design" width="100%" />
+  <img src="public/banners/readme.gif" alt="Frontend Design Basics: complete, beautiful web design (the ink shader, live)" width="100%" />
 </p>
 
 # Frontend Design Basics
 
-**The guide to complete, beautiful web design.** Principles, motion, 3D, shaders, a showcase of
-standout sites, and a toolkit of libraries, MCP servers and agent skills you can install today.
+**The guide to complete, beautiful web design.** Principles, motion, 3D, shaders, AI assets, a
+showcase of standout sites, and a toolkit of libraries, MCP servers and agent skills you can install today.
 
-Every page follows one template: **a live demo → the code → how to install it → why it works.**
+Every page follows one template: **a live demo → a diagram → the code → how to install it → why it works.**
 
 <table>
   <tr>
     <td width="33%"><img src="public/showcase/lusion.jpg" alt="Lusion" /></td>
     <td width="33%"><img src="public/showcase/igloo.jpg" alt="Igloo Inc." /></td>
-    <td width="33%"><img src="public/showcase/br95.jpg" alt="BR95" /></td>
+    <td width="33%"><img src="public/showcase/teenage.jpg" alt="teenage engineering" /></td>
   </tr>
   <tr>
     <td><sub>Lusion: WebGL as craft</sub></td>
     <td><sub>Igloo Inc.: scroll as a camera</sub></td>
+    <td><sub>teenage engineering: type as image</sub></td>
+  </tr>
+  <tr>
+    <td width="33%"><img src="public/showcase/raycast.jpg" alt="Raycast" /></td>
+    <td width="33%"><img src="public/showcase/basement.jpg" alt="basement.studio" /></td>
+    <td width="33%"><img src="public/showcase/br95.jpg" alt="BR95" /></td>
+  </tr>
+  <tr>
+    <td><sub>Raycast: grain on gradients</sub></td>
+    <td><sub>basement.studio: dithered 3D</sub></td>
     <td><sub>BR95: the first case study</sub></td>
   </tr>
 </table>
@@ -26,16 +36,27 @@ Every page follows one template: **a live demo → the code → how to install i
 
 | | Chapter | What's in it |
 |---|---|---|
-| 01 | [Principles](content/docs/principles) | Type scale, colour, space and layout, and the MUST/SHOULD rules |
-| 02 | [Motion](content/docs/motion.mdx) | Easing playground, durations, GSAP, Lenis, reduced motion, proving motion with frames |
-| 03 | [3D](content/docs/3d.mdx) | CSS depth first, then three.js/R3F, Threlte, Spline, PlayCanvas, with performance rules |
-| 04 | [Shaders](content/docs/shaders.mdx) | The ink shader behind this README, live on sliders; noise, warping, grain |
+| 01 | [Principles](content/docs/principles) | Hierarchy, type scale, colour budget, proximity, and the MUST/SHOULD rules |
+| 02 | [Motion](content/docs/motion.mdx) | Easing curves plotted, a playground, durations, GSAP, Lenis, reduced motion, proving motion |
+| 03 | [3D](content/docs/3d.mdx) | A decision tree, CSS depth first, then three.js/R3F, Threlte, Spline, PlayCanvas |
+| 04 | [Shaders](content/docs/shaders.mdx) | The ink shader behind this README, live on sliders, as a 5-step pipeline |
 | 05 | [Components](content/docs/components.mdx) | The registry model: React Bits, Magic UI, Cult UI, Bklit, 21st.dev |
 | 06 | [Recipes](content/docs/recipes.mdx) | Hero anatomy, bento grid, pinned scroll story, footer |
-| 07 | [Case studies](content/docs/case-studies) | BR95, a Windows 95 portfolio that keeps its SEO |
-| 08 | [Showcase](content/docs/showcase.mdx) | Linear, Stripe, Lusion, Igloo, Rauno, Emil Kowalski, darkroom, Bruno Simon |
-| 09 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
-| 10 | [Workflow](content/docs/workflow.mdx) | Building with an agent without generic results |
+| 07 | [AI assets](content/docs/ai-assets.mdx) | Higgsfield model routing, still → motion → ship, prompt anatomy and a prompt library |
+| 08 | [Specimen](content/docs/specimen.mdx) | This site's own system printed as type, colour and motion posters |
+| 09 | [Case studies](content/docs/case-studies) | BR95 (a Windows 95 portfolio that keeps its SEO) and the Balatro deck (cloning a look from real assets) |
+| 10 | [Showcase](content/docs/showcase.mdx) | 19 standout sites, each with what to take from it |
+| 11 | [Toolkit](content/docs/toolkit.mdx) | Every tool below, searchable and filterable |
+| 12 | [Workflow](content/docs/workflow.mdx) | Building with an agent without generic results |
+
+## Install the skill
+
+The guide ships as an agent skill. At the start of every project it reads the toolkit and the
+principles, proposes what fits your brief, and asks you to choose before anything is designed.
+
+```bash
+npx skills add br9704/frontenddesignbasics
+```
 
 ## Use it with your agent
 
@@ -123,6 +144,12 @@ proposes tools and principles for you to choose from. The site also serves `/llm
 |---|---|---|
 | [VoiceStudio](https://github.com/debpalash/VoiceStudio) | Local, open-source voice cloning, TTS, dubbing and transcription. | `on-demand` |
 | [OpenWA](https://github.com/rmyndharis/OpenWA) | Self-hosted WhatsApp API gateway with a built-in MCP. | `on-demand` |
+
+**AI image & video**
+
+| Tool | What | Status |
+|---|---|---|
+| [Higgsfield](https://higgsfield.ai) | One MCP for many image, video, audio and 3D models: stills, image-to-video, motion transfer, upscaling, background removal, image-to-GLB. | `needs-key` |
 
 <!-- toolkit:end -->
 

@@ -8,14 +8,14 @@ import { appName, appTagline } from '@/lib/shared';
 export const metadata = { robots: { index: false } };
 
 export default async function BannerPage(props: {
-  searchParams: Promise<{ section?: string; n?: string; seed?: string }>;
+  searchParams: Promise<{ section?: string; n?: string; seed?: string; speed?: string }>;
 }) {
-  const { section, n, seed } = await props.searchParams;
+  const { section, n, seed, speed } = await props.searchParams;
   const still = 38 + Number(seed ?? 0);
 
   return (
     <main className="fixed inset-0 overflow-hidden bg-[#f2eee6] text-[#16140f]">
-      <InkField stillTime={still} density={section ? 0.03 : 0.06} clear={0.95} />
+      <InkField stillTime={still} density={section ? 0.03 : 0.06} clear={0.95} timeScale={Number(speed ?? 1)} />
       <div className="absolute inset-0 flex flex-col justify-between p-[4vw]">
         <div className="flex items-center justify-between font-mono text-[max(12px,1vw)] uppercase tracking-[0.18em]">
           <span className="flex items-center gap-3">

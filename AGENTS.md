@@ -26,7 +26,7 @@ Non-negotiables from this guide:
 - Showcase entries (`lib/showcase.ts`) credit and link the owner and never copy their code or assets. Capture with `pnpm shots --only=<id>`.
 - Before committing: `pnpm build` and `pnpm verify` (needs `pnpm start` on :3000).
 
-## Toolkit (36 tools, updated 2026-09-28)
+## Toolkit (37 tools, updated 2026-09-28)
 
 **Motion & scroll**
 
@@ -103,3 +103,9 @@ Non-negotiables from this guide:
 |---|---|---|
 | [VoiceStudio](https://github.com/debpalash/VoiceStudio) | Local, open-source voice cloning, TTS, dubbing and transcription. | `on-demand` |
 | [OpenWA](https://github.com/rmyndharis/OpenWA) | Self-hosted WhatsApp API gateway with a built-in MCP. | `on-demand` |
+
+**AI image & video**
+
+| Tool | What | Status |
+|---|---|---|
+| [Higgsfield](https://higgsfield.ai) | One MCP for many image, video, audio and 3D models: stills, image-to-video, motion transfer, upscaling, background removal, image-to-GLB. | `needs-key` |

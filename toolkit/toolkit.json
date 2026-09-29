@@ -16,7 +16,8 @@
     "research": "Reference & research",
     "skills": "Claude skills (taste & rules)",
     "infra": "Agent infrastructure",
-    "media": "Voice & messaging"
+    "media": "Voice & messaging",
+    "ai": "AI image & video"
   },
   "tools": [
     {
@@ -240,6 +241,20 @@
         "via": "https://mcp.getlayers.ai/mcp, OAuth on first use; MCP only on the $199 Full Stack plan"
       },
       "cost": "$199 lifetime (Full Stack)"
+    },
+    {
+      "id": "higgsfield",
+      "name": "Higgsfield",
+      "category": "ai",
+      "url": "https://higgsfield.ai",
+      "what": "One MCP for many image, video, audio and 3D models: stills, image-to-video, motion transfer, upscaling, background removal, image-to-GLB.",
+      "when": "Hero stills, ambient background loops, product shots, turning an object into a 3D model. Approve a still before animating it.",
+      "install": "Connected as a claude.ai connector (Higgsfield MCP)",
+      "mcp": {
+        "status": "needs-key",
+        "via": "Higgsfield MCP (claude.ai connector); runs on credits, and the balance is currently 0"
+      },
+      "cost": "credits"
     },
     {
       "id": "react-bits",

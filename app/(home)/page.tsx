@@ -1,25 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { InkField } from '@/components/ink-field';
+import { NameMarquee, ScrollGallery } from '@/components/scroll-gallery';
 import { showcase } from '@/lib/showcase';
 import toolkit from '@/toolkit/toolkit.json';
 
+/* Chapter cards: each carries a real picture, so the contents page is itself a gallery. */
 const chapters = [
-  { n: '01', title: 'Principles', href: '/docs/principles', text: 'Type, space, colour, hierarchy. The rules that make anything look considered.', ready: true },
-  { n: '02', title: 'Motion', href: '/docs/motion', text: 'Easing, duration, choreography, and respecting reduced motion.', ready: true },
-  { n: '03', title: '3D', href: '/docs/3d', text: 'three.js, R3F, Threlte, Spline: when a scene earns its weight.', ready: true },
-  { n: '04', title: 'Shaders', href: '/docs/shaders', text: 'Gradients, noise and ink. Play with the hero above, uniform by uniform.', ready: true },
-  { n: '05', title: 'Components', href: '/docs/components', text: 'React Bits, Magic UI, Cult UI, 21st.dev, through one registry.', ready: true },
-  { n: '06', title: 'Recipes', href: '/docs/recipes', text: 'Heroes, scroll stories, bento grids, footers, built end to end.', ready: true },
-  { n: '07', title: 'Case studies', href: '/docs/case-studies/br95', text: 'How real sites were designed and built, decisions included.', ready: true },
-  { n: '08', title: 'Showcase', href: '/docs/showcase', text: 'Standout sites by other people, and what to steal from each.', ready: true },
-  { n: '09', title: 'Toolkit', href: '/docs/toolkit', text: `${toolkit.tools.length} tools, MCPs and skills, with when to reach for each.`, ready: true },
-  { n: '10', title: 'Workflow', href: '/docs/workflow', text: 'Ask first, clone real assets, prove motion with frames.', ready: true },
+  { n: '01', title: 'Principles', href: '/docs/principles', text: 'Type, space, colour, hierarchy.', img: '/showcase/teenage.jpg', span: 'md:col-span-2 md:row-span-2' },
+  { n: '02', title: 'Motion', href: '/docs/motion', text: 'Easing, duration, reduced motion.', img: '/showcase/cosmos.jpg', span: '' },
+  { n: '03', title: '3D', href: '/docs/3d', text: 'When a scene earns its weight.', img: '/showcase/igloo.jpg', span: '' },
+  { n: '04', title: 'Shaders', href: '/docs/shaders', text: 'The hero shader, uniform by uniform.', img: '/banners/shaders.jpg', span: 'md:col-span-2' },
+  { n: '05', title: 'Components', href: '/docs/components', text: 'Own your components.', img: '/showcase/family.jpg', span: '' },
+  { n: '06', title: 'Recipes', href: '/docs/recipes', text: 'Hero, bento, scroll story.', img: '/showcase/linear.jpg', span: '' },
+  { n: '07', title: 'AI assets', href: '/docs/ai-assets', text: 'Higgsfield, prompts, generators.', img: '/banners/ai-assets.jpg', span: 'md:row-span-2' },
+  { n: '08', title: 'Specimen', href: '/docs/specimen', text: 'This site’s own system, as posters.', img: '/banners/principles.jpg', span: '' },
+  { n: '09', title: 'Case studies', href: '/docs/case-studies/br95', text: 'Decisions, not just screenshots.', img: '/showcase/br95.jpg', span: 'md:col-span-2' },
+  { n: '10', title: 'Showcase', href: '/docs/showcase', text: `${showcase.length} standout sites, with notes.`, img: '/showcase/lusion.jpg', span: '' },
+  { n: '11', title: 'Toolkit', href: '/docs/toolkit', text: `${toolkit.tools.length} tools, MCPs and skills.`, img: '/showcase/raycast.jpg', span: 'md:col-span-2' },
+  { n: '12', title: 'Workflow', href: '/docs/workflow', text: 'Ask first, prove motion.', img: '/showcase/basement.jpg', span: 'md:col-span-2' },
 ];
 
 export default function HomePage() {
-  const picks = showcase.filter((s) => ['linear', 'lusion', 'rauno'].includes(s.id));
-
   return (
     <main className="flex-1">
       {/* Hero: a printed plate. It stays paper-toned in dark mode on purpose. */}
@@ -34,7 +36,7 @@ export default function HomePage() {
               </h1>
               <p className="mt-6 max-w-[44ch] text-[clamp(1rem,1.4vw,1.2rem)] leading-snug">
                 The principles, motion, 3D and shaders behind sites people remember. Every idea comes with a live demo,
-                the code, and the reason it works.
+                a diagram, the code, and the reason it works.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
@@ -55,70 +57,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Contents: a book's table of contents, because this is one. */}
+      <div className="mt-10">
+        <NameMarquee />
+      </div>
+
+      {/* Contents as a bento of image cards. */}
       <section className="mx-auto w-full max-w-[1400px] px-4 py-20 sm:px-6 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-soft)]">Contents</p>
-            <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">
-              Ten chapters, one standard.
-            </h2>
-            <p className="mt-4 max-w-[38ch] text-[var(--text-soft)]">
-              Every page follows the same template: a live demo, the code, how to install it, and why it works.
-            </p>
+            <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">Twelve chapters, one standard.</h2>
           </div>
-          <ol className="border-t border-[var(--rule)]">
-            {chapters.map((c) => (
-              <li key={c.n} className="border-b border-[var(--rule)]">
-                <Link
-                  href={c.href}
-                  className="group grid grid-cols-[3rem_1fr] items-baseline gap-x-4 gap-y-1 py-5 sm:grid-cols-[3rem_12rem_1fr_auto]"
-                >
-                  <span className="font-mono text-xs text-[var(--text-soft)] tabular-nums">{c.n}</span>
-                  <span className="font-display text-2xl tracking-[-0.01em] transition-colors group-hover:text-[var(--accent)]">
-                    {c.title}
-                  </span>
-                  <span className="col-start-2 text-sm text-[var(--text-soft)] sm:col-start-auto">{c.text}</span>
-                  <span className="col-start-2 font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--text-soft)] sm:col-start-auto">
-                    {c.ready ? 'Read →' : 'Soon'}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <p className="max-w-[40ch] text-[var(--text-soft)]">
+            Every page follows the same template: see it, read the code, install it, know why.
+          </p>
+        </div>
+        <div className="grid auto-rows-[15rem] grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+          {chapters.map((c) => (
+            <Link
+              key={c.n}
+              href={c.href}
+              className={`group relative overflow-hidden rounded-xl border border-[var(--rule)] ${c.span}`}
+            >
+              <Image
+                src={c.img}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover object-top transition-transform duration-[900ms] ease-[var(--ease-out-quint)] group-hover:scale-[1.04]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f0e0b]/90 via-[#0f0e0b]/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5 text-[#f2eee6]">
+                <p className="font-mono text-[11px] opacity-70">{c.n}</p>
+                <p className="font-display text-3xl leading-tight tracking-[-0.01em]">{c.title}</p>
+                <p className="mt-1 max-w-[34ch] text-sm opacity-80">{c.text}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Showcase teaser */}
-      <section className="border-y border-[var(--rule)] bg-[var(--surface-raised)]">
-        <div className="mx-auto w-full max-w-[1400px] px-4 py-20 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="max-w-[18ch] font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">
-              Learn from sites that already got it right.
-            </h2>
-            <Link href="/docs/showcase" className="text-sm underline underline-offset-4">
-              See all {showcase.length} →
-            </Link>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {picks.map((s) => (
-              <Link key={s.id} href="/docs/showcase" className="group block">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[var(--rule)]">
-                  <Image
-                    src={`/showcase/${s.id}.jpg`}
-                    alt={`Screenshot of ${s.name}`}
-                    fill
-                    sizes="(min-width: 768px) 30vw, 100vw"
-                    className="object-cover object-top transition-transform duration-700 ease-[var(--ease-out-quint)] group-hover:scale-[1.03]"
-                  />
-                </div>
-                <p className="mt-3 font-display text-xl">{s.name}</p>
-                <p className="mt-1 text-sm text-[var(--text-soft)]">{s.why}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ScrollGallery />
 
       {/* How to use it with an agent */}
       <section className="mx-auto w-full max-w-[1400px] px-4 py-20 sm:px-6 lg:py-28">
@@ -126,12 +105,15 @@ export default function HomePage() {
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-soft)]">Use it with your agent</p>
             <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.02em] sm:text-5xl">
-              Point at the repo. Ask what fits.
+              Install the skill. Ask what fits.
             </h2>
             <p className="mt-4 max-w-[46ch] text-[var(--text-soft)]">
-              The toolkit is one JSON file, and the whole guide is available as <code>llms.txt</code>. Start a project, point
-              your agent here, and it proposes the principles and tools that fit the brief before a line is designed.
+              The guide ships as an agent skill. Install it once, and at the start of every project your agent reads the
+              toolkit and principles, proposes what fits the brief, and asks you to choose before designing.
             </p>
+            <code className="mt-6 block w-fit rounded-md bg-[var(--color-fd-muted)] px-3 py-2 font-mono text-sm">
+              npx skills add br9704/frontenddesignbasics
+            </code>
           </div>
           <pre className="overflow-x-auto rounded-lg bg-[#16140f] p-6 font-mono text-[13px] leading-relaxed text-[#ece6da]">
             <span className="text-[#a39c8d]">you ›</span> new landing page for a coffee roaster.{'\n'}

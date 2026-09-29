@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 
 const base = process.env.BASE_URL ?? 'http://localhost:3000';
-const pages = ['/', '/docs', '/docs/principles', '/docs/principles/typography', '/docs/motion', '/docs/3d', '/docs/shaders', '/docs/components', '/docs/recipes', '/docs/showcase', '/docs/toolkit', '/docs/case-studies/br95', '/docs/workflow'];
+const pages = ['/', '/docs', '/docs/principles', '/docs/principles/typography', '/docs/motion', '/docs/3d', '/docs/shaders', '/docs/components', '/docs/recipes', '/docs/ai-assets', '/docs/specimen', '/docs/case-studies/balatro-deck', '/docs/showcase', '/docs/toolkit', '/docs/case-studies/br95', '/docs/workflow'];
 const out = '.verify';
 
 async function main() {

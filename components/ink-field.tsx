@@ -33,6 +33,7 @@ uniform vec3 uInkA;
 uniform vec3 uInkB;
 uniform float uDensity;
 uniform float uClear;
+uniform float uGrainAnim;
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float noise(vec2 p) {
@@ -80,7 +81,7 @@ void main() {
   col = mix(col, col * uInkB, inkB * 0.85);
 
   // Paper tooth and print grain.
-  float grain = hash(uv * uRes + fract(uTime) * 91.0) - 0.5;
+  float grain = hash(uv * uRes + fract(uTime) * 91.0 * uGrainAnim) - 0.5;
   col += grain * 0.045;
   col *= 0.97 + 0.03 * noise(uv * uRes * 0.35);
 
@@ -101,6 +102,8 @@ export interface InkFieldProps {
   density?: number;
   /** 0 = ink everywhere, 1 = keep the left side clear for text */
   clear?: number;
+  /** Multiplier on animation speed (banners/GIF capture use >1). */
+  timeScale?: number;
   /** Seek the still frame used for reduced motion and screenshots. */
   stillTime?: number;
 }
@@ -112,6 +115,7 @@ export function InkField({
   inkB = '#2f4ec2',
   density = 0.04,
   clear = 0.9,
+  timeScale = 1,
   stillTime = 38,
 }: InkFieldProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -140,6 +144,7 @@ export function InkField({
         uInkB: { value: hexToVec3(initial.current.inkB) },
         uDensity: { value: initial.current.density },
         uClear: { value: initial.current.clear },
+        uGrainAnim: { value: new URLSearchParams(window.location.search).has('gif') ? 0 : 1 },
       },
     });
     const mesh = new Mesh(gl, { geometry: new Triangle(gl), program });
@@ -173,7 +178,7 @@ export function InkField({
       const ptr = program.uniforms.uPointer.value as number[];
       ptr[0] += (target[0] - ptr[0]) * 0.04;
       ptr[1] += (target[1] - ptr[1]) * 0.04;
-      program.uniforms.uTime.value = (now - start) / 1000;
+      program.uniforms.uTime.value = stillTime + ((now - start) / 1000 - stillTime) * timeScale;
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
     };
@@ -208,7 +213,7 @@ export function InkField({
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       gl.canvas.remove();
     };
-  }, [stillTime]);
+  }, [stillTime, timeScale]);
 
   useEffect(() => {
     initial.current = { paper, inkA, inkB, density, clear };

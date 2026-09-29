@@ -1,0 +1,138 @@
+---
+title: AI assets
+description: Generating images, motion and 3D for the web with Higgsfield, the prompts that work, and how to ship the results without breaking the rules.
+---
+
+<Banner name="ai-assets" alt="Chapter 07: AI assets" />
+
+AI generation is now a normal part of making a site: hero stills, texture, a looping background video, an
+object turned into a 3D model. The craft hasn't changed. **You still art-direct**: the prompt is a brief,
+and every output gets judged against the same principles as anything else on the page.
+
+## The pipeline
+
+<Flow
+  caption="Always approve a still before you animate it. Video costs more and takes longer, and it inherits every flaw in the frame it starts from."
+  steps={[
+    { title: 'Brief', note: 'subject, palette (hex), format, where it sits on the page' },
+    { title: 'Still', note: 'generate 2–4 variants, pick one', tone: 'accent' },
+    { title: 'Motion', note: 'image → video, 4–8 s, loopable' },
+    { title: 'Finish', note: 'upscale, remove background, reframe' },
+    { title: 'Ship', note: 'compress, poster frame, reduced-motion fallback', tone: 'ink' },
+  ]}
+/>
+
+## Higgsfield: which model for which job
+
+Higgsfield bundles many image, video and 3D models behind one MCP, so an agent can drive the whole
+pipeline above. The routing below is what its MCP recommends (September 2026):
+
+| Job | Model / tool | Notes |
+|---|---|---|
+| General image, typography, reference edits | `gpt_image_2_5` | The default for ordinary generation |
+| Product, commercial, ad imagery | `marketing_studio_image` | Product shots and ad layouts |
+| Portraits, fashion, editorial people | `soul_2` | With a trained Soul ID for a consistent person |
+| General image → video | `seedance_2_5` | The default video model |
+| Multi-shot, audio, motion transfer | `kling3_0` | Longer, directed sequences |
+| 2K keyframes, mixed references | `minimax_h3` | Higher-resolution motion |
+| Copy motion from a video onto a still | `hf_mult_motion_control` | "Genjutsu" motion transfer |
+| Image → 3D model (GLB) | `generate_3d` | Drop the GLB straight into three.js / R3F |
+| Clean-up | `upscale_image`, `upscale_video`, `remove_background`, `outpaint_image`, `reframe` | Finish assets for each placement |
+
+<Callout type="warn">Higgsfield runs on credits. Check the balance and preflight the cost (the MCP's
+`get_cost` option) before a batch, especially for video.</Callout>
+
+Other tools in the same role: **GetLayers** for ready-made WebGL scenes and animated backgrounds,
+**ShaderGradient** when a code-driven gradient beats a video, and **img2threejs** when you want an object as
+editable code rather than a mesh.
+
+## Prompts that work
+
+<PromptAnatomy />
+
+A good image prompt reads like a layout spec, not a mood. Six rules:
+
+1. **Canvas first.** Size, aspect, and what the asset is for ("hero background, text will sit on the left third").
+2. **Hex, not names.** `#0F3D2E` is a colour; "forest green" is a guess.
+3. **Zones.** Say where things go: "upper third", "right side, behind the subject".
+4. **One style lock, repeated.** The same style sentence on every prompt in a set is what makes a set look like a set.
+5. **Keep text out of the image.** Image models still garble small type. Generate the picture, then set real text on top in HTML with real fonts.
+6. **A safety line.** No real people, logos, flags or weapons unless you have the rights.
+
+### Prompt library
+
+Copy, then change the bracketed parts.
+
+<Tabs items={['Hero texture', 'Product still', 'Editorial illustration', 'Ambient loop', '3D object']}>
+<Tab value="Hero texture">
+```text
+Wide 16:9 hero background for a website. Abstract risograph ink in water: two ink colours,
+[#FF5C1F] and [#2F4EC2], overprinted on warm paper [#F2EEE6] with visible paper grain.
+Ink concentrated on the right half; the left 40% stays almost clean paper for headline text.
+Soft misregistration between the two inks. No text, no objects, no people. Flat, printed, tactile.
+```
+</Tab>
+<Tab value="Product still">
+```text
+Square product photograph of [a matte ceramic pour-over coffee dripper] on a seamless
+[#E8E2D6] backdrop. Single soft key light from the upper left, gentle shadow to the right,
+shallow depth of field. Centred with generous negative space above for a headline.
+No text, no logos, no props. Editorial, calm, premium.
+```
+</Tab>
+<Tab value="Editorial illustration">
+```text
+[4:5] editorial illustration in a flat-vector, screen-printed style.
+Background: solid [#16140F] with subtle paper-grain texture.
+Subject, lower two-thirds: [a hand holding a phone above a city at dusk], limited palette of
+[#FF5C1F] and [#ECE6DA], soft shading, no photorealism.
+Keep the upper third empty: text will be set on top in HTML.
+No text inside the illustration. No real people, flags, weapons or logos.
+```
+</Tab>
+<Tab value="Ambient loop">
+```text
+Image-to-video from the approved still. [6] seconds, seamless loop.
+Very slow drift of the ink to the right, as if in still water; camera locked, no zoom,
+no cuts, no new elements. Motion subtle enough to sit behind text.
+```
+</Tab>
+<Tab value="3D object">
+```text
+Single object on a plain background, three-quarter view, even studio light, no shadows
+on the backdrop: [a retro beige desktop computer with a CRT monitor]. Clean silhouette,
+no text or logos. (Then: generate_3d → GLB → compress with Draco before shipping.)
+```
+</Tab>
+</Tabs>
+
+## Shipping AI motion on the web
+
+```html
+<div class="hero-media">
+  <img src="/hero-poster.jpg" alt="" />          <!-- still frame: loading state + reduced motion -->
+  <video autoplay muted loop playsinline preload="metadata" poster="/hero-poster.jpg">
+    <source src="/hero.av1.mp4" type="video/mp4; codecs=av01.0.05M.08" />
+    <source src="/hero.h264.mp4" type="video/mp4" />
+  </video>
+</div>
+```
+
+```css
+.hero-media { position: relative; }
+.hero-media > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-media video { display: none; }          /* the <img> underneath stays visible */
+}
+```
+
+- **MUST** set `muted` and `playsinline`, or mobile browsers won't autoplay.
+- **MUST** ship a poster frame. It's the reduced-motion version and the loading state.
+- **SHOULD** compress hard: short loops at `crf 28–32` look fine behind text. A background video over 3 MB is a performance bug.
+- **SHOULD** check the loop point with two frames, like any other motion ([Motion → Prove it moves](/docs/motion#prove-it-moves)).
+
+## Why it works
+
+Generation removes the cost of *making* an asset, not the cost of *choosing* one. The sites that look
+designed are the ones where someone wrote a real brief, rejected most of the output, and set the text
+themselves.

@@ -46,7 +46,7 @@ export function ToolkitTable() {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search 36 tools… try “scroll” or “3d”"
+          placeholder={`Search ${toolkit.tools.length} tools… try “scroll” or “3d”`}
           aria-label="Search tools"
           className="min-w-0 flex-1 basis-56 rounded-md border border-[var(--rule)] bg-[var(--surface-raised)] px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
         />
