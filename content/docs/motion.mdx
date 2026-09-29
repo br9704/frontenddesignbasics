@@ -17,6 +17,12 @@ description: Motion should explain what changed. Short durations, ease-out curve
 - **Avoid ease-in for UI.** It starts slowly, which reads as lag.
 - **Linear** is for continuous motion only: progress bars, marquees, rotation.
 
+<SpringVsBezier />
+
+A spring has no fixed duration. Stiffness and damping decide how long it takes to settle and whether it overshoots, so drag the sliders and watch the curve and the settle time change against an ease-out given the same time.
+
+<Examples section="motion" />
+
 ## Durations
 
 | What | Duration |
@@ -51,6 +57,10 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 `gsap.matchMedia()` is the cleanest way to give reduced-motion users a different path. Everything
 inside only runs when motion is welcome, and it's reverted automatically when that changes.
 
+<StaggerPlayground />
+
+Stagger gives a group of items one direction instead of all of them appearing at once. Keep the delay small, because the last item has to land before people stop waiting for it.
+
 ## Smooth scroll with Lenis
 
 ```ts
@@ -63,6 +73,12 @@ gsap.ticker.lagSmoothing(0);
 
 Use smooth scroll on long, visual storytelling pages. Leave it off for docs, dashboards and anything
 people scan quickly.
+
+<ScrollProgressDemo />
+
+Scroll-linked effects should be driven directly by the scroll position, so they stay exact in both directions and never take over the page's scrolling. Reveal content once. Hiding it again when people scroll up feels fidgety.
+
+<Examples section="scroll" title="Scroll stories in the wild" />
 
 ## Reduced motion is not optional
 

@@ -1,0 +1,67 @@
+---
+title: Rules & conventions
+description: The names, numbers and patterns to decide once, write down, and stop arguing about.
+---
+
+Conventions are decisions you only make once. Pick a name for a colour, a size for a gap, a prop for
+a button variant, and write it down. After that, nobody chooses again. They look it up.
+
+[The rules](/docs/principles/rules) say what a finished interface must do. This chapter says how to
+build it so it stays that way: which tokens exist, what they are called, which numbers are allowed,
+and how components expose their states.
+
+## Decisions flow one way
+
+<Flow
+  caption="Values live in one place. Each layer only reads from the layer to its left, so a change to a primitive reaches every page without anyone editing a page."
+  steps={[
+    { title: 'Primitive tokens', note: '--color-orange-600: #d9431a', tone: 'plain' },
+    { title: 'Semantic tokens', note: '--color-accent: var(--color-orange-600)', tone: 'plain' },
+    { title: 'Components', note: 'Button reads --color-accent', tone: 'accent' },
+    { title: 'Patterns', note: 'form, card grid, empty state', tone: 'plain' },
+    { title: 'Pages', note: 'compose patterns, set no values', tone: 'ink' },
+  ]}
+/>
+
+The test is simple. If a page file contains a hex code, a pixel value or a `z-index` number, a
+decision has leaked out of the token layer.
+
+## What is in this chapter
+
+| Page | Decides |
+|---|---|
+| [Tokens & naming](/docs/conventions/tokens-and-naming) | Primitive vs semantic tokens, CSS variable names, Tailwind `@theme`, file and component names |
+| [Scales](/docs/conventions/scales) | Type, spacing, radius, shadow, z-index, icon sizes, line-heights |
+| [Breakpoints & layout](/docs/conventions/breakpoints-and-layout) | Breakpoint names, containers, gutters, grid columns, safe areas, the 390px rule |
+| [Components & states](/docs/conventions/components-and-states) | Every interactive state, touch targets, `size` and `variant` props, controlled vs uncontrolled |
+| [Motion tokens](/docs/conventions/motion-tokens) | Named durations and easings |
+| [Media](/docs/conventions/media) | Images, video, formats and sizes |
+| [Accessibility](/docs/conventions/accessibility) | The checkable WCAG 2.2 baseline |
+| [Copy](/docs/conventions/copy) | Labels, errors, empty states, tone |
+| [Structure & performance](/docs/conventions/structure-and-performance) | Folders, budgets and loading |
+
+## How to read MUST and SHOULD
+
+The keywords follow [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), the same way the Vercel Web
+Interface Guidelines use them.
+
+- **MUST** means no exceptions without a written reason in the pull request.
+- **SHOULD** means the default. Break it when you can say why in one sentence.
+- **SHOULD NOT** means avoid it unless you can say why in one sentence.
+
+## The six conventions that pay off first
+
+If a project adopts nothing else, adopt these.
+
+- **MUST** keep every colour, size, radius, shadow, duration and z-index in tokens. Pages use tokens only.
+- **MUST** name tokens by role (`--color-text-soft`), not by value (`--grey-600`), anywhere a component reads them.
+- **MUST** take spacing from the 4pt scale: 4, 8, 12, 16, 24, 32, 48, 64, 96.
+- **MUST** use the named z-index layers. Never write `z-index: 9999`.
+- **MUST** design and name every interactive state: default, hover, active, focus-visible, disabled, loading, error, empty.
+- **MUST** check every page at 390px wide with no horizontal scroll.
+
+## Why it works
+
+A convention turns a taste argument into a lookup. Reviews get shorter because the question changes
+from "does this look right?" to "is this the token?". New people, and AI agents, produce work that
+matches on the first try, because the answer is written down instead of held in someone's head.

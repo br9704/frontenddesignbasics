@@ -1,0 +1,202 @@
+---
+title: Motion tokens
+description: Four durations, four curves and one reduced-motion switch. Name them once in CSS and never type a raw millisecond value in a component again.
+---
+
+Motion needs tokens for the same reason colour does. If every component picks its own timing, the interface feels slightly off everywhere and nobody can say why. Define a small set of durations and curves, name them by role, and make reduced motion a single switch.
+
+The [Motion chapter](/docs/motion) explains how motion should feel. This page is the copyable part: the names, the values and the rules for using them.
+
+## The curves
+
+<EasingCurves />
+
+| Token | Value | Use for |
+|---|---|---|
+| `--ease-out` | `cubic-bezier(0.22, 1, 0.36, 1)` | Anything entering or responding: menus, toasts, hover, press. The default. |
+| `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Something already on screen moving to a new place: a drawer, a reordered card. |
+| `--ease-in` | `cubic-bezier(0.55, 0, 1, 0.45)` | Exits only, and only when the element leaves the screen entirely. |
+| `--ease-linear` | `linear` | Continuous motion: progress bars, spinners, marquees. Never for UI state changes. |
+
+- **MUST** use `--ease-out` unless you can name the reason for a different curve.
+- **MUST NOT** use `ease-in` for anything the user triggered. It starts slowly, which reads as lag.
+- **SHOULD NOT** use the browser keyword `ease`. It is a mild ease-in-out and makes responses feel soft.
+- **SHOULD** keep overshoot curves such as `cubic-bezier(0.34, 1.56, 0.64, 1)` for one playful moment per page, not every button.
+
+## The durations
+
+<Preview caption="The duration ladder, drawn to scale. Each bar is the time one token takes. Most UI lives in the first two rows.">
+  <div style={{ display: 'grid', gap: '10px', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '7.5rem 1fr', alignItems: 'center', gap: '12px' }}>
+      <span>--dur-instant 100</span>
+      <div style={{ height: '14px', width: '25%', background: 'var(--accent)', borderRadius: '3px' }} />
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '7.5rem 1fr', alignItems: 'center', gap: '12px' }}>
+      <span>--dur-fast 150</span>
+      <div style={{ height: '14px', width: '37.5%', background: 'var(--accent)', borderRadius: '3px' }} />
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '7.5rem 1fr', alignItems: 'center', gap: '12px' }}>
+      <span>--dur-base 250</span>
+      <div style={{ height: '14px', width: '62.5%', background: 'var(--accent)', borderRadius: '3px', opacity: 0.8 }} />
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '7.5rem 1fr', alignItems: 'center', gap: '12px' }}>
+      <span>--dur-slow 400</span>
+      <div style={{ height: '14px', width: '100%', background: 'var(--accent)', borderRadius: '3px', opacity: 0.6 }} />
+    </div>
+  </div>
+</Preview>
+
+| Token | Value | Use for |
+|---|---|---|
+| `--dur-instant` | `100ms` | Colour and opacity on hover, press feedback, checkbox ticks. |
+| `--dur-fast` | `150ms` | Tooltips, small popovers, focus rings, toggles. |
+| `--dur-base` | `250ms` | Menus, dropdowns, toasts, tabs, accordions. |
+| `--dur-slow` | `400ms` | Modals, drawers, sheets, full-section reveals. |
+
+- **MUST** take every UI duration from these four tokens.
+- **MUST** keep UI state changes at or under `400ms`. Longer than that and people wait for the interface.
+- **SHOULD** make exits faster than entrances. Use the next token down: a modal opens at `--dur-slow` and closes at `--dur-base`.
+- **SHOULD** scale duration with distance. A 12px nudge takes `--dur-fast`; a drawer crossing the screen takes `--dur-slow`.
+- **SHOULD** keep stagger steps between `30ms` and `60ms`, and cap the total stagger at about `300ms`, however many items there are.
+
+## Copy this
+
+```css
+:root {
+  /* Durations */
+  --dur-instant: 100ms;
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+
+  /* Curves */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-linear: linear;
+
+  /* How far things travel when they enter */
+  --motion-distance: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-distance: 0px; /* nothing slides, things still fade */
+  }
+}
+
+.menu {
+  opacity: 0;
+  transform: translateY(var(--motion-distance));
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.menu[data-open] {
+  opacity: 1;
+  transform: none;
+}
+```
+
+In Tailwind v4, put the same values in `@theme` so they become utilities. This site does exactly that with `--ease-out-quint` and `--ease-in-out-cubic` in `app/global.css`.
+
+```css
+@theme {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* gives ease-out */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* gives ease-in-out */
+}
+```
+
+```html
+<div class="transition-opacity duration-150 ease-out">...</div>
+```
+
+For JavaScript (GSAP, Motion, the Web Animations API), mirror the tokens in one TypeScript file so the numbers never drift.
+
+```ts
+// lib/motion.ts
+export const dur = { instant: 0.1, fast: 0.15, base: 0.25, slow: 0.4 } as const; // seconds
+export const ease = {
+  out: [0.22, 1, 0.36, 1],
+  inOut: [0.65, 0, 0.35, 1],
+  in: [0.55, 0, 1, 0.45],
+} as const;
+```
+
+## Naming
+
+| Do | Don't | Why |
+|---|---|---|
+| `--dur-fast` | `--dur-150` | The value can change without renaming every use. |
+| `--ease-out` | `--ease-smooth` | Name the shape, so people can predict it. |
+| `--dur-base` | `--transition` | One token holds one value, not a shorthand. |
+| `dur.fast` in JS | `0.15` inline | One source of truth for CSS and scripts. |
+
+- **MUST** prefix durations with `--dur-` and curves with `--ease-`.
+- **MUST NOT** add a fifth duration because one component "needs" `320ms`. Pick the nearest token.
+
+## Springs
+
+<Decision
+  question="Spring or curve?"
+  branches={[
+    { if: 'the user drags, flicks or throws something', then: 'spring, it keeps their velocity' },
+    { if: 'a gesture can be interrupted mid-way', then: 'spring, it retargets smoothly' },
+    { if: 'a menu, modal or toast opens', then: 'curve token, predictable timing' },
+    { if: 'it must sync with other CSS', then: 'curve token, springs have no fixed end' },
+  ]}
+  caption="Springs are for physical, interruptible motion. Everything else uses a duration and a curve."
+/>
+
+- **SHOULD** use springs for drag, swipe, sheets that follow a finger and layout animations that can be interrupted.
+- **SHOULD** set springs by perceived duration and bounce, not raw physics, so they stay comparable with the duration tokens.
+- **MUST** keep `bounce` at `0` for functional UI. Use `0.1` to `0.25` only where playfulness is the point.
+
+```tsx
+import { motion } from 'motion/react';
+
+// A sheet that follows the finger, then settles in about the time of --dur-base.
+<motion.div
+  drag="y"
+  transition={{ type: 'spring', visualDuration: 0.25, bounce: 0 }}
+/>
+```
+
+## Reduced motion
+
+<ReducedMotionDemo />
+
+`prefers-reduced-motion: reduce` does not mean "no feedback". It means "don't move things around". Keep state changes visible; remove the travel.
+
+| Normal | Reduced |
+|---|---|
+| Slide and fade in | Fade in only (`--motion-distance: 0px`) |
+| Parallax, scroll-linked movement | Static position |
+| Looping background, shader, marquee | One still frame, paused |
+| Auto-playing video | Poster image, play button |
+| Page transition that zooms | Cross-fade at `--dur-fast` |
+| Spring with bounce | Same end state, no overshoot |
+
+- **MUST** remove translation, scale, rotation and parallax under `reduce`.
+- **MUST** stop anything that loops or auto-plays. WCAG 2.2 (2.2.2 Pause, Stop, Hide) requires a way to stop any motion that starts automatically and lasts more than 5 seconds.
+- **SHOULD** keep opacity and colour transitions, because they still tell people something changed.
+- **SHOULD** read the setting in JS too, and listen for changes.
+
+```ts
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduce = mq.matches;
+mq.addEventListener('change', (e) => (reduce = e.matches));
+```
+
+```tsx
+import { useReducedMotion } from 'motion/react';
+
+const reduce = useReducedMotion();
+const enter = reduce ? { opacity: 1 } : { opacity: 1, y: 0 };
+```
+
+A global kill switch like the one at the bottom of `app/global.css` is a safety net, not the design. It stops CSS animations everywhere, but it cannot pause a canvas loop or a GSAP timeline. Those need their own check.
+
+## Why it works
+
+Four durations and four curves are few enough to remember and enough to cover every UI case. Naming them by role means a reviewer can spot `ease-in` on a button or `600ms` on a tooltip at a glance. Making reduced motion a token (`--motion-distance`) rather than a separate code path means every component gets it for free.

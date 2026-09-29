@@ -38,6 +38,8 @@ npx shadcn@latest add @bklit/line-chart
 This repo ships exactly that [`components.json`](https://github.com/br9704/frontenddesignbasics/blob/main/components.json),
 plus a `.mcp.json` for the **shadcn MCP**, so an agent can search and install from all four registries.
 
+<Examples section="components" />
+
 ## Or build the simple ones yourself
 
 The marquee is the most-copied landing-page component. It's one keyframe:
@@ -55,6 +57,16 @@ The marquee is the most-copied landing-page component. It's one keyframe:
 </div>
 /* @keyframes marquee { to { transform: translateX(-100%) } } */
 ```
+
+<SpotlightCard />
+
+The spotlight card is another one you can build yourself. JavaScript only writes the pointer position into two CSS variables, and a radial gradient does the rest, so focus can light it up for keyboard users too.
+
+## Every state a button needs
+
+<ButtonStatesLab />
+
+A button is six designs, not one: default, hover, pressed, focus, disabled and loading. Keep hover and press under 200ms, make focus instant, and lock the width while it loads so nothing jumps.
 
 ## Which library, when
 

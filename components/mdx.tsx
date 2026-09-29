@@ -8,6 +8,10 @@ import { ColourBudget, Decision, EasingCurves, Flow, HierarchyDiagram, PageTempl
 import { MotionPoster, PaletteSheet, TypeSpecimen } from './specimen';
 import { Banner, ShowcaseGrid, Shot } from './showcase-grid';
 import { ToolkitTable } from './toolkit-table';
+import { Examples } from './examples-row';
+import { GridOverlay, OklchPaletteLab, VariableFontPlayground } from './demos/principles-lab';
+import { ScrollProgressDemo, SpringVsBezier, StaggerPlayground } from './demos/motion-lab';
+import { ButtonStatesLab, MagneticButton, SpotlightCard, TextRevealDemo } from './demos/interaction-lab';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -23,6 +27,17 @@ export function getMDXComponents(components?: MDXComponents) {
     SpacingRhythm,
     ReducedMotionDemo,
     ToolkitTable,
+    Examples,
+    VariableFontPlayground,
+    OklchPaletteLab,
+    GridOverlay,
+    SpringVsBezier,
+    StaggerPlayground,
+    ScrollProgressDemo,
+    ButtonStatesLab,
+    SpotlightCard,
+    TextRevealDemo,
+    MagneticButton,
     TiltCard,
     ShaderPlayground,
     MarqueeDemo,

@@ -1,0 +1,906 @@
+{
+ "typography": [
+  {
+   "id": "type-klim",
+   "name": "Klim Type Foundry",
+   "url": "https://klim.co.nz",
+   "by": "Klim Type Foundry",
+   "note": "One huge inflated black 'A' fills an orange screen; a single letterform is the whole hero.",
+   "image": "/examples/type-klim.jpg"
+  },
+  {
+   "id": "type-instrument",
+   "name": "Instrument",
+   "url": "https://www.instrument.com",
+   "by": "Instrument",
+   "note": "Ultra-heavy wordmark set edge to edge as the masthead, with small condensed caps in pill nav.",
+   "image": "/examples/type-instrument.jpg"
+  },
+  {
+   "id": "type-commercial",
+   "name": "Commercial Type",
+   "url": "https://commercialtype.com",
+   "by": "Commercial Type",
+   "note": "Full-width bands each set one typeface huge: hairline New Doric, fat Orlando serif, Arabic.",
+   "image": "/examples/type-commercial.jpg"
+  },
+  {
+   "id": "type-futurefonts",
+   "name": "Future Fonts",
+   "url": "https://www.futurefonts.xyz",
+   "by": "Future Fonts",
+   "note": "Giant specimen lines of quirky display serifs and italics fill the page behind a tiny CTA.",
+   "image": "/examples/type-futurefonts.jpg"
+  },
+  {
+   "id": "type-velvetyne",
+   "name": "Velvetyne",
+   "url": "https://velvetyne.fr",
+   "by": "Velvetyne Type Foundry",
+   "note": "Brutalist text-only index with letterspaced labels, then full-bleed specimens like ornate 'Deede la fractura'.",
+   "image": "/examples/type-velvetyne.jpg"
+  },
+  {
+   "id": "type-sharp",
+   "name": "Sharp Type",
+   "url": "https://sharptype.co",
+   "by": "Sharp Type",
+   "note": "Sentences mix the fonts they describe inline: slab, mono, grotesque, italic, beside an outline 3D word.",
+   "image": "/examples/type-sharp.jpg"
+  },
+  {
+   "id": "type-lineto",
+   "name": "Lineto",
+   "url": "https://lineto.com",
+   "by": "Lineto",
+   "note": "A printed weight ladder, Regular to Black Italic, beside a magazine cover using the same face.",
+   "image": "/examples/type-lineto.jpg"
+  },
+  {
+   "id": "type-grilli",
+   "name": "Grilli Type",
+   "url": "https://www.grillitype.com",
+   "by": "Grilli Type",
+   "note": "Test-card hero spelling MCNK, then a clean two-column list where each name is set in itself.",
+   "image": "/examples/type-grilli.jpg"
+  },
+  {
+   "id": "type-ohno",
+   "name": "OH no Type Co",
+   "url": "https://ohnotype.co",
+   "by": "OH no Type Co",
+   "note": "Italic mono nav, then black-and-white posters and a bold CAMELION specimen that show the fonts in use.",
+   "image": "/examples/type-ohno.jpg"
+  },
+  {
+   "id": "type-typotheque",
+   "name": "Typotheque",
+   "url": "https://www.typotheque.com",
+   "by": "Typotheque",
+   "note": "Heavy 'Chairman' wordmark over a dense halftone texture, above a row of bright category cards.",
+   "image": "/examples/type-typotheque.jpg"
+  },
+  {
+   "id": "type-collins",
+   "name": "COLLINS",
+   "url": "https://www.wearecollins.com",
+   "by": "COLLINS",
+   "note": "A lone classical serif line, 'Rewrite your worth.', centred in a lot of empty space.",
+   "image": "/examples/type-collins.jpg"
+  },
+  {
+   "id": "type-pangram",
+   "name": "Pangram Pangram Foundry",
+   "url": "https://pangrampangram.com",
+   "by": "Pangram Pangram",
+   "note": "Rounded photo cards, each named with its own typeface in huge bold white text, like 'Neue Gstaad'.",
+   "image": "/examples/type-pangram.jpg"
+  }
+ ],
+ "colour": [
+  {
+   "id": "colour-gumroad",
+   "name": "Gumroad",
+   "url": "https://gumroad.com",
+   "by": "Gumroad",
+   "note": "Off-white page with black type and one loud pink on the floating outlined coins.",
+   "image": "/examples/colour-gumroad.jpg"
+  },
+  {
+   "id": "colour-arc",
+   "name": "Arc",
+   "url": "https://arc.net",
+   "by": "The Browser Company",
+   "note": "Grainy electric-blue bands with wavy edges frame a soft pastel-and-white middle.",
+   "image": "/examples/colour-arc.jpg"
+  },
+  {
+   "id": "colour-mschf",
+   "name": "MSCHF",
+   "url": "https://mschf.com",
+   "by": "MSCHF",
+   "note": "Black and grey mono list where only three lines glow yellow, blue and red.",
+   "image": "/examples/colour-mschf.jpg"
+  },
+  {
+   "id": "colour-resend",
+   "name": "Resend",
+   "url": "https://resend.com",
+   "by": "Resend",
+   "note": "All-black dark mode: grey-to-white gradient serif headline, matte black cube, and no accent hue.",
+   "image": "/examples/colour-resend.jpg"
+  },
+  {
+   "id": "colour-hellomonday",
+   "name": "Hello Monday",
+   "url": "https://www.hellomonday.com",
+   "by": "Hello Monday / DEPT",
+   "note": "Pure black-on-white line drawings and serif type, with a black curved panel as the only block.",
+   "image": "/examples/colour-hellomonday.jpg"
+  },
+  {
+   "id": "colour-wise",
+   "name": "Wise",
+   "url": "https://wise.com",
+   "by": "Wise",
+   "note": "Black heavy caps on white, with lime-green buttons as the single brand accent.",
+   "image": "/examples/colour-wise.jpg"
+  },
+  {
+   "id": "colour-pitch",
+   "name": "Pitch",
+   "url": "https://pitch.com",
+   "by": "Pitch",
+   "note": "Everything tinted one violet, from banner to background, with a lone lime 'Sign up' button.",
+   "image": "/examples/colour-pitch.jpg"
+  },
+  {
+   "id": "colour-supabase",
+   "name": "Supabase",
+   "url": "https://supabase.com",
+   "by": "Supabase",
+   "note": "Neutral white and grey UI where green only marks the second headline line and the main CTA.",
+   "image": "/examples/colour-supabase.jpg"
+  },
+  {
+   "id": "colour-duolingo",
+   "name": "Duolingo",
+   "url": "https://www.duolingo.com",
+   "by": "Duolingo",
+   "note": "Mostly white screen; bright owl green carries the logo, mascot and main button.",
+   "image": "/examples/colour-duolingo.jpg"
+  }
+ ],
+ "layout": [
+  {
+   "id": "layout-grilli",
+   "name": "Grilli Type",
+   "url": "https://www.grillitype.com",
+   "by": "Grilli Type",
+   "note": "A narrow label column on the left and a wide content column; typeface names line up on a strict grid.",
+   "image": "/examples/layout-grilli.jpg"
+  },
+  {
+   "id": "layout-14islands",
+   "name": "14islands",
+   "url": "https://www.14islands.com",
+   "by": "14islands",
+   "note": "The headline is staggered across columns, with a small label offset to the right and wide margins all round.",
+   "image": "/examples/layout-14islands.jpg"
+  },
+  {
+   "id": "layout-sharptype",
+   "name": "Sharp Type",
+   "url": "https://sharptype.co",
+   "by": "Sharp Type",
+   "note": "Asymmetric: the logo sits in a side column, the storefront image is pushed right, with open white space around it.",
+   "image": "/examples/layout-sharptype.jpg"
+  },
+  {
+   "id": "layout-obys",
+   "name": "Obys Agency",
+   "url": "https://obys.agency",
+   "by": "Obys",
+   "note": "An editorial three-zone layout: project index on the left, a centred column of images, studio info on the right.",
+   "image": "/examples/layout-obys.jpg"
+  },
+  {
+   "id": "layout-workco",
+   "name": "Work & Co",
+   "url": "https://work.co",
+   "by": "Work & Co",
+   "note": "A classic two-column grid: labels in a narrow left column, content in the wide right one, with hairline rules between sections.",
+   "image": "/examples/layout-workco.jpg"
+  },
+  {
+   "id": "layout-kinfolk",
+   "name": "Kinfolk",
+   "url": "https://www.kinfolk.com",
+   "by": "Kinfolk",
+   "note": "Generous white space: one centred cover and a serif title with lots of room around them.",
+   "image": "/examples/layout-kinfolk.jpg"
+  },
+  {
+   "id": "layout-pentagram",
+   "name": "Pentagram — Work",
+   "url": "https://www.pentagram.com/work",
+   "by": "Pentagram",
+   "note": "An uneven one-third / two-thirds project grid under a large 'Work' title, with a consistent left edge.",
+   "image": "/examples/layout-pentagram.jpg"
+  },
+  {
+   "id": "layout-anothermag",
+   "name": "AnOther Magazine",
+   "url": "https://www.anothermag.com",
+   "by": "AnOther",
+   "note": "An editorial split: a half-width photo next to a serif headline, with a four-column row of stories below.",
+   "image": "/examples/layout-anothermag.jpg"
+  }
+ ],
+ "hierarchy": [
+  {
+   "id": "hier-collins",
+   "name": "Collins",
+   "url": "https://www.wearecollins.com",
+   "by": "Collins",
+   "note": "One large serif line in empty space, then a small row of award laurels. The reading order is obvious.",
+   "image": "/examples/hier-collins.jpg"
+  },
+  {
+   "id": "hier-instrument",
+   "name": "Instrument",
+   "url": "https://www.instrument.com",
+   "by": "Instrument",
+   "note": "A full-width black INSTRUMENT wordmark dominates, and the featured case study sits clearly below it.",
+   "image": "/examples/hier-instrument.jpg"
+  },
+  {
+   "id": "hier-commercial",
+   "name": "Commercial Type",
+   "url": "https://commercialtype.com",
+   "by": "Commercial Type",
+   "note": "Each colour band has one huge typeface name first, with a tiny style count as the second read.",
+   "image": "/examples/hier-commercial.jpg"
+  },
+  {
+   "id": "hier-pangram",
+   "name": "Pangram Pangram",
+   "url": "https://pangrampangram.com",
+   "by": "Pangram Pangram Foundry",
+   "note": "Reads top to bottom: a huge 'Neue Gstaad' name, a short tagline, then two buttons.",
+   "image": "/examples/hier-pangram.jpg"
+  },
+  {
+   "id": "hier-hellomonday",
+   "name": "Hello Monday / DEPT",
+   "url": "https://www.hellomonday.com",
+   "by": "Hello Monday",
+   "note": "A line illustration leads, then a tiny eyebrow line, then the big serif word 'Branding'.",
+   "image": "/examples/hier-hellomonday.jpg"
+  },
+  {
+   "id": "hier-arc",
+   "name": "Arc",
+   "url": "https://arc.net",
+   "by": "The Browser Company",
+   "note": "A centred serif headline, a grey subline, one dark 'Try Dia' button, then the product screenshot.",
+   "image": "/examples/hier-arc.jpg"
+  },
+  {
+   "id": "hier-loewe",
+   "name": "LOEWE",
+   "url": "https://www.loewe.com",
+   "by": "LOEWE",
+   "note": "A giant white LOEWE wordmark over one full-bleed product photo. Only two things compete for attention.",
+   "image": "/examples/hier-loewe.jpg"
+  },
+  {
+   "id": "hier-apple",
+   "name": "Apple AirPods Pro 3",
+   "url": "https://www.apple.com/fi/airpods-pro/",
+   "by": "Apple",
+   "note": "Finnish page. Product name, then a huge bold claim, then a small subline, with price and Buy set apart.",
+   "image": "/examples/hier-apple.jpg"
+  }
+ ],
+ "footer": [
+  {
+   "id": "footer-14islands",
+   "name": "14islands",
+   "url": "https://www.14islands.com",
+   "by": "14islands",
+   "note": "The footer is a closing invitation: a big 'Let's make something great' line, a huge email address, and a minimal social row.",
+   "image": "/examples/footer-14islands.jpg"
+  },
+  {
+   "id": "footer-collins",
+   "name": "Collins",
+   "url": "https://www.wearecollins.com",
+   "by": "Collins",
+   "note": "A dark footer with big serif section links, a pill 'Work with us' button, a newsletter field and socials.",
+   "image": "/examples/footer-collins.jpg"
+  },
+  {
+   "id": "footer-instrument",
+   "name": "Instrument",
+   "url": "https://www.instrument.com",
+   "by": "Instrument",
+   "note": "A complete footer: newsletter pitch, three labelled link columns and a legal bar, all on a strict grid.",
+   "image": "/examples/footer-instrument.jpg"
+  },
+  {
+   "id": "footer-pangram",
+   "name": "Pangram Pangram",
+   "url": "https://pangrampangram.com",
+   "by": "Pangram Pangram Foundry",
+   "note": "A rounded card holding the full font index, grouped links, a newsletter field and payment logos, plus 'Back to top'.",
+   "image": "/examples/footer-pangram.jpg"
+  },
+  {
+   "id": "footer-arc",
+   "name": "Arc",
+   "url": "https://arc.net",
+   "by": "The Browser Company",
+   "note": "A playful footer: a wavy edge, a download CTA band, then two link columns and a serif signature on grainy blue.",
+   "image": "/examples/footer-arc.jpg"
+  },
+  {
+   "id": "footer-koto",
+   "name": "Koto",
+   "url": "https://koto.studio",
+   "by": "Koto",
+   "note": "The footer is a contact page, with labelled rows for press, recruitment and channels, and a studio video tile.",
+   "image": "/examples/footer-koto.jpg"
+  },
+  {
+   "id": "footer-sharptype",
+   "name": "Sharp Type",
+   "url": "https://sharptype.co",
+   "by": "Sharp Type",
+   "note": "Every typeface is listed with a coloured dot, in three columns, beside a newsletter sign-up and utility links.",
+   "image": "/examples/footer-sharptype.jpg"
+  },
+  {
+   "id": "footer-workco",
+   "name": "Work & Co",
+   "url": "https://work.co",
+   "by": "Work & Co",
+   "note": "A calm, complete footer: subscribe prompt, then Contact, Headquarters and Utilities columns with real addresses.",
+   "image": "/examples/footer-workco.jpg"
+  },
+  {
+   "id": "footer-rive",
+   "name": "Rive",
+   "url": "https://rive.app",
+   "by": "Rive",
+   "note": "A dark product footer: six labelled link columns (Product to Case Studies), a wordmark, legal text and a row of social icons.",
+   "image": "/examples/footer-rive.jpg"
+  },
+  {
+   "id": "footer-displaay",
+   "name": "Displaay",
+   "url": "https://displaay.net",
+   "by": "Displaay Type Foundry",
+   "note": "Fonts are grouped by style (Sans, Serif, Other), with site links, socials, the 'DD' logo mark and a legal bar.",
+   "image": "/examples/footer-displaay.jpg"
+  }
+ ],
+ "motion": [
+  {
+   "id": "motion-hellomonday",
+   "name": "Hello Monday",
+   "url": "https://www.hellomonday.com",
+   "by": "Hello Monday / DEPT",
+   "note": "Hand-drawn animated couple above a rotating serif word, with a curved black menu edge peeking in.",
+   "image": "/examples/motion-hellomonday.jpg"
+  },
+  {
+   "id": "motion-aristide",
+   "name": "Aristide Benoist",
+   "url": "https://aristidebenoist.com",
+   "by": "Aristide Benoist",
+   "note": "Caught mid-intro: thin vertical photo strips sliding into place under a tick-mark progress bar.",
+   "image": "/examples/motion-aristide.jpg"
+  },
+  {
+   "id": "motion-activetheory",
+   "name": "Active Theory",
+   "url": "https://activetheory.net",
+   "by": "Active Theory",
+   "note": "Real-time WebGL scene: glossy chrome ribbon logo floating among drifting golden particles and a jellyfish.",
+   "image": "/examples/motion-activetheory.jpg"
+  },
+  {
+   "id": "motion-monopo",
+   "name": "monopo london",
+   "url": "https://monopo.london",
+   "by": "monopo",
+   "note": "Grainy animated orange-and-blue gradient waves behind the headline, with a glass lens cursor bottom right.",
+   "image": "/examples/motion-monopo.jpg"
+  },
+  {
+   "id": "motion-makemepulse",
+   "name": "makemepulse",
+   "url": "https://makemepulse.com",
+   "by": "makemepulse",
+   "note": "Kinetic staggered headline, 'global creative studio.', whose letters morph between typeface styles.",
+   "image": "/examples/motion-makemepulse.jpg"
+  },
+  {
+   "id": "motion-gsap",
+   "name": "GSAP",
+   "url": "https://gsap.com",
+   "by": "GSAP / Webflow",
+   "note": "'Animate anything' hero with playful 3D squiggle and pinwheel shapes animating over giant type.",
+   "image": "/examples/motion-gsap.jpg"
+  },
+  {
+   "id": "motion-rive",
+   "name": "Rive",
+   "url": "https://rive.app",
+   "by": "Rive",
+   "note": "Column of live interactive animation demos (thermostat, game UI, mobile app) running beside the pitch.",
+   "image": "/examples/motion-rive.jpg"
+  },
+  {
+   "id": "motion-dogstudio",
+   "name": "Dogstudio",
+   "url": "https://dogstudio.co",
+   "by": "Dogstudio / DEPT",
+   "note": "Iridescent 3D wolf with drifting leaves behind a huge serif headline. Headline contains a swear word.",
+   "image": "/examples/motion-dogstudio.jpg"
+  },
+  {
+   "id": "motion-exoape",
+   "name": "Exo Ape",
+   "url": "https://www.exoape.com",
+   "by": "Exo Ape",
+   "note": "Full-bleed Venice dome photo with an oversized 'Digital' wordmark sliding up from the bottom edge.",
+   "image": "/examples/motion-exoape.jpg"
+  }
+ ],
+ "scroll": [
+  {
+   "id": "scroll-jesko",
+   "name": "Jesko Jets",
+   "url": "https://jeskojets.com",
+   "by": "",
+   "note": "Scroll-scrubbed paragraph: words fill from faded to solid white as you scroll over clouds.",
+   "image": "/examples/scroll-jesko.jpg"
+  },
+  {
+   "id": "scroll-oryzo",
+   "name": "Oryzo",
+   "url": "https://oryzo.ai",
+   "by": "Lusion",
+   "note": "Pinned 3D cork coaster rotating mid-scroll between the headline and copy, lit like a product film.",
+   "image": "/examples/scroll-oryzo.jpg"
+  },
+  {
+   "id": "scroll-zentry",
+   "name": "Zentry",
+   "url": "https://zentry.com",
+   "by": "",
+   "note": "Mid-scroll, a skewed 3D-tilted media card sits under heavy condensed type, transforming as the page moves.",
+   "image": "/examples/scroll-zentry.jpg"
+  },
+  {
+   "id": "scroll-shopify-editions",
+   "name": "Shopify Editions Summer '25",
+   "url": "https://www.shopify.com/editions/summer2025",
+   "by": "Shopify",
+   "note": "Storefront mockup tilted in 3D perspective with a purple glow, and a pill-shaped chapter nav on the left.",
+   "image": "/examples/scroll-shopify-editions.jpg"
+  },
+  {
+   "id": "scroll-adaline",
+   "name": "Adaline",
+   "url": "https://www.adaline.ai",
+   "by": "",
+   "note": "Product UI panel pinned over a painted fantasy landscape, zooming in as the story scrolls.",
+   "image": "/examples/scroll-adaline.jpg"
+  },
+  {
+   "id": "scroll-landonorris",
+   "name": "Lando Norris",
+   "url": "https://landonorris.com",
+   "by": "OFF+BRAND",
+   "note": "Staggered parallax photos and a signed quote drifting at different speeds over contour-line background.",
+   "image": "/examples/scroll-landonorris.jpg"
+  },
+  {
+   "id": "scroll-opal",
+   "name": "Opal",
+   "url": "https://opalcamera.com",
+   "by": "Opal",
+   "note": "Manifesto text scrolls over a pinned still life of prototypes and parts on a glass table.",
+   "image": "/examples/scroll-opal.jpg"
+  },
+  {
+   "id": "scroll-pudding",
+   "name": "The Pudding: Song Repetition",
+   "url": "https://pudding.cool/2017/05/song-repetition/",
+   "by": "Colin Morris / The Pudding",
+   "note": "Classic scrollytelling: step cards on the left update a sticky lyrics graphic on the right.",
+   "image": "/examples/scroll-pudding.jpg"
+  },
+  {
+   "id": "scroll-visionpro",
+   "name": "Apple Vision Pro",
+   "url": "https://www.apple.com/apple-vision-pro/",
+   "by": "Apple",
+   "note": "Headline fades out as a full-bleed video of floating app icons scrolls into view.",
+   "image": "/examples/scroll-visionpro.jpg"
+  }
+ ],
+ "3d": [
+  {
+   "id": "3d-threeui",
+   "name": "ThreeUI",
+   "url": "https://threeui.com",
+   "by": "Design+Code (Meng To)",
+   "note": "A library of three.js landing pages, hero sections and shaders: browse, copy, install via CLI.",
+   "image": "/examples/3d-threeui.jpg"
+  },
+  {
+   "id": "3d-messenger",
+   "name": "Messenger",
+   "url": "https://messenger.abeto.co",
+   "by": "Abeto",
+   "note": "Tiny cel-shaded 3D planet of houses and trees with blocky 3D title letters floating over it.",
+   "image": "/examples/3d-messenger.jpg"
+  },
+  {
+   "id": "3d-oryzo",
+   "name": "Oryzo",
+   "url": "https://oryzo.ai",
+   "by": "Lusion",
+   "note": "Photoreal real-time cork coaster on a cutting mat, pencils and knife lit like a product shoot.",
+   "image": "/examples/3d-oryzo.jpg"
+  },
+  {
+   "id": "3d-dogstudio",
+   "name": "Dogstudio",
+   "url": "https://dogstudio.co",
+   "by": "Dogstudio / DEPT",
+   "note": "Iridescent 3D wolf with drifting leaves behind a huge serif headline, lit in violet and teal.",
+   "image": "/examples/3d-dogstudio.jpg"
+  },
+  {
+   "id": "3d-spline",
+   "name": "Spline",
+   "url": "https://spline.design",
+   "by": "Spline",
+   "note": "Soft glossy 3D shapes and a voxel bunny float over a perspective grid around a prompt box.",
+   "image": "/examples/3d-spline.jpg"
+  },
+  {
+   "id": "3d-shopify-editions",
+   "name": "Shopify Editions Winter '24",
+   "url": "https://www.shopify.com/editions/winter2024",
+   "by": "Shopify",
+   "note": "Pale lilac 3D plinths hold product cards, chrome sparkles and a terminal, under giant FOUNDATIONS type.",
+   "image": "/examples/3d-shopify-editions.jpg"
+  },
+  {
+   "id": "3d-dala",
+   "name": "Dala",
+   "url": "https://dala.craftedbygc.com",
+   "by": "Green Chameleon",
+   "note": "A brain built from thousands of colored 3D triangle particles beside a big white sans headline.",
+   "image": "/examples/3d-dala.jpg"
+  },
+  {
+   "id": "3d-zentry",
+   "name": "Zentry",
+   "url": "https://zentry.com",
+   "by": "Zentry",
+   "note": "Glowing wireframe crystal form rendered inside a clipped, tilted black frame on electric violet.",
+   "image": "/examples/3d-zentry.jpg"
+  },
+  {
+   "id": "3d-chipsa",
+   "name": "Chipsa",
+   "url": "https://chipsa.design",
+   "by": "Chipsa",
+   "note": "Textured grey 3D rock forms rise from the bottom of a quiet light page with condensed caps headline.",
+   "image": "/examples/3d-chipsa.jpg"
+  },
+  {
+   "id": "3d-david-hckh",
+   "name": "David Heckhoff",
+   "url": "https://david-hckh.com",
+   "by": "David Heckhoff",
+   "note": "Clay-style 3D room of a developer at a desk with monitors, plant and penguin, as a portfolio hero.",
+   "image": "/examples/3d-david-hckh.jpg"
+  },
+  {
+   "id": "3d-noomo",
+   "name": "Noomo",
+   "url": "https://noomoagency.com",
+   "by": "Noomo Agency",
+   "note": "Frosted-glass 3D pixel shapes refract and blur the large mono headline they float across.",
+   "image": "/examples/3d-noomo.jpg"
+  }
+ ],
+ "shaders": [
+  {
+   "id": "shader-monopo",
+   "name": "Monopo London",
+   "url": "https://monopo.london",
+   "by": "monopo",
+   "note": "Grainy orange and blue light ribbons sweep across black behind white headline, full-bleed shader field.",
+   "image": "/examples/shader-monopo.jpg"
+  },
+  {
+   "id": "shader-shadergradient",
+   "name": "ShaderGradient",
+   "url": "https://shadergradient.co",
+   "by": "ShaderGradient",
+   "note": "Full-screen grainy orange-to-pink moving gradient with an elegant serif title laid over it.",
+   "image": "/examples/shader-shadergradient.jpg"
+  },
+  {
+   "id": "shader-paper",
+   "name": "Paper Shaders",
+   "url": "https://shaders.paper.design",
+   "by": "Paper",
+   "note": "Grid of the same flower photo run through paper texture, fluted glass, water and halftone shaders.",
+   "image": "/examples/shader-paper.jpg"
+  },
+  {
+   "id": "shader-radiant",
+   "name": "Radiant",
+   "url": "https://radiant-shaders.com",
+   "by": "Radiant",
+   "note": "A glowing black-hole accretion disk shader in a starfield, with live chromatic, intensity and speed sliders.",
+   "image": "/examples/shader-radiant.jpg"
+  },
+  {
+   "id": "shader-unicorn",
+   "name": "Unicorn Studio",
+   "url": "https://unicorn.studio",
+   "by": "Unicorn Studio",
+   "note": "Violet aurora light beams with sparkles glow up from the bottom of a dark hero card.",
+   "image": "/examples/shader-unicorn.jpg"
+  },
+  {
+   "id": "shader-ertdfgcvb",
+   "name": "ertdfgcvb",
+   "url": "https://ertdfgcvb.xyz",
+   "by": "Andreas Gysin",
+   "note": "The whole page is a generative ASCII field: characters flow in columns around plain text links.",
+   "image": "/examples/shader-ertdfgcvb.jpg"
+  },
+  {
+   "id": "shader-kenta",
+   "name": "Kenta Toshikura",
+   "url": "https://www.kentatoshikura.com",
+   "by": "Kenta Toshikura",
+   "note": "Film-grain, dust and RGB-split distortion on a circular image behind bold stencil type.",
+   "image": "/examples/shader-kenta.jpg"
+  },
+  {
+   "id": "shader-hume",
+   "name": "Hume AI",
+   "url": "https://www.hume.ai",
+   "by": "Hume AI",
+   "note": "Generative flowing line waves in pink, peach and lilac fill a rounded panel under a warm light hero.",
+   "image": "/examples/shader-hume.jpg"
+  },
+  {
+   "id": "shader-alexharri",
+   "name": "A flowing WebGL gradient",
+   "url": "https://alexharri.com/blog/webgl-gradients",
+   "by": "Alex Harri",
+   "note": "A live tilted band of flowing magenta-orange noise gradient cuts across a dark article page.",
+   "image": "/examples/shader-alexharri.jpg"
+  },
+  {
+   "id": "shader-cobe",
+   "name": "COBE",
+   "url": "https://cobe.vercel.app",
+   "by": "Shu Ding",
+   "note": "Minimal white dotted WebGL globe with arcs and labelled markers, drawn by a 5KB shader.",
+   "image": "/examples/shader-cobe.jpg"
+  }
+ ],
+ "components": [
+  {
+   "id": "comp-shadcn",
+   "name": "shadcn/ui",
+   "url": "https://ui.shadcn.com",
+   "by": "shadcn",
+   "note": "Live component wall: pill buttons, inputs, badges, checkbox and toggle row, bar-chart card, QR card.",
+   "image": "/examples/comp-shadcn.jpg"
+  },
+  {
+   "id": "comp-radixthemes",
+   "name": "Radix Themes",
+   "url": "https://www.radix-ui.com/themes",
+   "by": "WorkOS",
+   "note": "Serif headline beside real cards: team list with invite field, notification toggles in blue.",
+   "image": "/examples/comp-radixthemes.jpg"
+  },
+  {
+   "id": "comp-parkui",
+   "name": "Park UI",
+   "url": "https://park-ui.com",
+   "by": "Chakra Systems",
+   "note": "Tilted stack of working cards: sign-up form, payment method picker, black toggles, product tile.",
+   "image": "/examples/comp-parkui.jpg"
+  },
+  {
+   "id": "comp-rive",
+   "name": "Rive",
+   "url": "https://rive.app",
+   "by": "Rive",
+   "note": "Column of interactive UI demos (smart-watch face, game menu, mobile puzzle) beside tabbed CLI install card.",
+   "image": "/examples/comp-rive.jpg"
+  },
+  {
+   "id": "comp-8bitcn",
+   "name": "8bitcn",
+   "url": "https://www.8bitcn.com",
+   "by": "",
+   "note": "Playful pixel-art system: chunky 8-bit buttons, HP progress bars, dropdowns, dialogue box, command menu.",
+   "image": "/examples/comp-8bitcn.jpg"
+  },
+  {
+   "id": "comp-retroui",
+   "name": "NeoBrutalism (RetroUI)",
+   "url": "https://www.retroui.dev",
+   "by": "",
+   "note": "Brutalist buttons with hard offset shadows, yellow highlight headline, bordered chat card with inline CTA.",
+   "image": "/examples/comp-retroui.jpg"
+  },
+  {
+   "id": "comp-aceternity",
+   "name": "Aceternity UI components",
+   "url": "https://ui.aceternity.com/components",
+   "by": "Aceternity",
+   "note": "Component gallery grid: each card previews an effect (generation loader, chromatic image, cloud shader).",
+   "image": "/examples/comp-aceternity.jpg"
+  },
+  {
+   "id": "comp-motion",
+   "name": "Motion Examples",
+   "url": "https://motion.dev/examples",
+   "by": "Motion",
+   "note": "Pattern library UI: ASCII-glyph banner, filter checkboxes, platform list, featured particle-morph spotlight card.",
+   "image": "/examples/comp-motion.jpg"
+  }
+ ],
+ "hero": [
+  {
+   "id": "hero-collins",
+   "name": "Collins",
+   "url": "https://www.wearecollins.com",
+   "by": "Collins",
+   "note": "One serif line, 'Rewrite your worth.', centred in vast off-white space above small award laurels.",
+   "image": "/examples/hero-collins.jpg"
+  },
+  {
+   "id": "hero-instrument",
+   "name": "Instrument",
+   "url": "https://www.instrument.com",
+   "by": "Instrument",
+   "note": "Edge-to-edge black ultra-heavy wordmark over a rounded case-study video panel; pill nav buttons.",
+   "image": "/examples/hero-instrument.jpg"
+  },
+  {
+   "id": "hero-14islands",
+   "name": "14islands",
+   "url": "https://14islands.com",
+   "by": "14islands",
+   "note": "Huge staggered 'Design & Technology' type on grey, grey ampersand, tiny caps tagline, nothing else.",
+   "image": "/examples/hero-14islands.jpg"
+  },
+  {
+   "id": "hero-pangram",
+   "name": "Pangram Pangram",
+   "url": "https://pangrampangram.com",
+   "by": "Pangram Pangram Foundry",
+   "note": "Rounded photo card of Alps with giant 'Neue Gstaad' set in the typeface, two small CTAs.",
+   "image": "/examples/hero-pangram.jpg"
+  },
+  {
+   "id": "hero-klim",
+   "name": "Klim Type Foundry",
+   "url": "https://klim.co.nz",
+   "by": "Klim Type Foundry",
+   "note": "Single full-bleed image: orange crate stacked on black crate, grey ground, one tiny font label.",
+   "image": "/examples/hero-klim.jpg"
+  },
+  {
+   "id": "hero-activetheory",
+   "name": "Active Theory",
+   "url": "https://activetheory.net",
+   "by": "Active Theory",
+   "note": "Dark WebGL scene: iridescent 3D 'a' logo ring on a looping ribbon, bokeh particles, glass nav pill.",
+   "image": "/examples/hero-activetheory.jpg"
+  },
+  {
+   "id": "hero-hellomonday",
+   "name": "Hello Monday",
+   "url": "https://www.hellomonday.com",
+   "by": "Hello Monday / DEPT",
+   "note": "Two hand-drawn characters above rotating serif word 'Products'; black blob menu on right edge.",
+   "image": "/examples/hero-hellomonday.jpg"
+  },
+  {
+   "id": "hero-arc",
+   "name": "Arc / Dia",
+   "url": "https://arc.net",
+   "by": "The Browser Company",
+   "note": "Wavy blue frame, serif 'Meet Dia' headline, one dark app-icon CTA, browser product shot below.",
+   "image": "/examples/hero-arc.jpg"
+  },
+  {
+   "id": "hero-pentagram",
+   "name": "Pentagram",
+   "url": "https://www.pentagram.com",
+   "by": "Pentagram",
+   "note": "Full-width case-study image (yellow cubes, Isomorphic Labs mark) with interactive 'We design ___ for ___' sentence.",
+   "image": "/examples/hero-pentagram.jpg"
+  }
+ ],
+ "bento": [
+  {
+   "id": "bento-apple-macbook",
+   "name": "MacBook Pro",
+   "url": "https://www.apple.com/macbook-pro/",
+   "by": "Apple",
+   "note": "Dark rounded tiles of mixed sizes: photo tiles with big claims beside icon-only tiles for ports, gaming.",
+   "image": "/examples/bento-apple-macbook.jpg"
+  },
+  {
+   "id": "bento-supabase",
+   "name": "Supabase",
+   "url": "https://supabase.com",
+   "by": "Supabase",
+   "note": "One wide Postgres tile plus seven product tiles, each with a small line-art illustration of its feature.",
+   "image": "/examples/bento-supabase.jpg"
+  },
+  {
+   "id": "bento-clerk",
+   "name": "Clerk",
+   "url": "https://clerk.com",
+   "by": "Clerk",
+   "note": "Dark bento of auth features: tall session-management tile, OTP boxes, SSO node graph, magic-link card.",
+   "image": "/examples/bento-clerk.jpg"
+  },
+  {
+   "id": "bento-notion",
+   "name": "Notion",
+   "url": "https://www.notion.com",
+   "by": "Notion",
+   "note": "Two big grey tiles with arrow buttons holding real product UI (meetings table, deal dashboard), wide tile below.",
+   "image": "/examples/bento-notion.jpg"
+  },
+  {
+   "id": "bento-tailwind",
+   "name": "Tailwind CSS",
+   "url": "https://tailwindcss.com",
+   "by": "Tailwind Labs",
+   "note": "Feature tiles each with a live demo: sepia filter photo, draggable light/dark split on a banking card.",
+   "image": "/examples/bento-tailwind.jpg"
+  },
+  {
+   "id": "bento-mintlify",
+   "name": "Mintlify",
+   "url": "https://www.mintlify.com",
+   "by": "Mintlify",
+   "note": "Wide-plus-narrow top row, three tiles below; soft beige tiles tied together by flowing green lines.",
+   "image": "/examples/bento-mintlify.jpg"
+  },
+  {
+   "id": "bento-cal",
+   "name": "Cal.com",
+   "url": "https://cal.com",
+   "by": "Cal.com",
+   "note": "2x2 grid of white cards, each a benefit headline over a real settings or booking-link UI fragment.",
+   "image": "/examples/bento-cal.jpg"
+  }
+ ]
+}
