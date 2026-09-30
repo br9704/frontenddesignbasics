@@ -47,7 +47,7 @@ export function Poster({ id, note }: { id: string; tone?: 'mono' | 'colour'; not
     <div className="pixel relative grid h-full w-full place-items-center overflow-hidden bg-[var(--v-bg)] text-[var(--v-dim)]">
       {/* the real poster (pnpm posters), so a slot that is not live still shows the piece */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`/posters/${id}.webp`} alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      <img src={`/posters/${id}.webp`} alt="" aria-hidden decoding="async" className="absolute inset-0 h-full w-full object-cover" />
       <div className="relative self-end justify-self-start m-2 bg-[var(--v-bg)]/85 px-3 py-2 text-[16px] leading-[16px]">
         <p className="text-[var(--v-ink)]">{title}</p>
         <Link href={`/lab/${id}`} className="mt-2 inline-block underline underline-offset-4 hover:text-[var(--v-ink)]">
@@ -93,9 +93,16 @@ export function LiveSlot({
 
   return (
     <div className={`flex min-w-0 flex-col ${className}`}>
-      <div ref={ref} className="relative min-h-0 flex-1 bg-[var(--v-bg)]">
+      <div ref={ref} data-slot={id} data-live={canRender ? '1' : '0'} className="relative min-h-0 flex-1 bg-[var(--v-bg)]">
         {canRender && exp ? (
-          <ExperienceFrame experience={exp} progress={progress ? p : undefined} />
+          <>
+            {/* the still sits underneath, so the slot is never blank while the live piece starts */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={`/posters/${id}.webp`} alt="" aria-hidden decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0">
+              <ExperienceFrame experience={exp} progress={progress ? p : undefined} />
+            </div>
+          </>
         ) : (
           <Poster id={id} tone={tone} note={exp ? undefined : '[building]'} />
         )}

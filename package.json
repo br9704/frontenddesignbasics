@@ -13,7 +13,8 @@
     "verify": "tsx scripts/verify.ts",
     "export:md": "tsx scripts/export-md.ts",
     "journey:gif": "tsx scripts/journey-gif.ts",
-    "posters": "tsx scripts/posters.ts"
+    "posters": "tsx scripts/posters.ts",
+    "fling": "tsx scripts/fling.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

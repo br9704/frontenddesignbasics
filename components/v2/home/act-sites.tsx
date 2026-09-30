@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { PAD } from './acts';
 import { LiveSlot } from './live-slot';
 import { FlyTitle, useMotion, ScrollTrigger } from './motion';
-import { createProgress } from './runtime';
+import { createProgress, ready, useOnScreen } from './runtime';
 import { PixelDrain } from './transitions';
 
 /*
@@ -25,6 +25,11 @@ const WALL = createProgress(0);
 
 export function ActSites({ sections, total }: { sections: WallSection[]; total: number }) {
   const wall = useRef<HTMLDivElement>(null);
+  // The wall is ~115 screenshots. Requested at page load they queue ahead of every live piece and
+  // the preloader, so they only start once the wall is within a screen, and after the preloader.
+  const seen = useRef(false);
+  if (useOnScreen(wall, '100% 0px') && ready.get() >= 1) seen.current = true;
+  const wallNear = seen.current;
 
   useMotion(wall, (el) => {
     const track = el.querySelector<HTMLElement>('[data-wall-track]');
@@ -95,7 +100,7 @@ export function ActSites({ sections, total }: { sections: WallSection[]; total: 
                   <div className="mt-3 grid min-h-0 flex-1 grid-flow-col grid-rows-3 gap-3">
                     {s.tiles.map((t) => (
                       <div key={t.id} className="relative aspect-[16/10] h-full overflow-hidden border border-[var(--v-steel)] bg-[var(--v-surface)]">
-                        <Image src={t.image} alt={t.name} fill sizes="280px" loading="eager" className="object-cover object-top" />
+                        {wallNear ? <Image src={t.image} alt={t.name} fill sizes="280px" loading="eager" className="object-cover object-top" /> : null}
                       </div>
                     ))}
                   </div>

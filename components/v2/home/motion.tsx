@@ -60,7 +60,8 @@ export function FlyTitle({
       ease: 'expo.out',
       duration: 1.1,
       stagger: { each: 0.035, from: 'random' },
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' },
+      // once: a title that has flown in stays in. Reversing on scroll-back left titles hidden after rail jumps.
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
     return () => {
       tw.scrollTrigger?.kill();

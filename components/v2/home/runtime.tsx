@@ -75,17 +75,23 @@ export function useIsNarrow(px = 768) {
 
 /* ───────────── GL budget ───────────── */
 
-const MAX_GL = 2;
-const slots = new Map<string, { ratio: number; priority: number }>();
+/*
+ * Live WebGL contexts at once: 3 on desktop, 2 on phones. On-screen slots rank first (by visible
+ * ratio + priority); the rest of the budget goes to slots within ~0.75 screens, so the next piece
+ * already holds a live context before you reach it instead of swapping in from its still.
+ */
+const maxGl = () => (typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches ? 2 : 3);
+const slots = new Map<string, { ratio: number; near: boolean; priority: number }>();
 let allowed = new Set<string>();
 const budgetListeners = new Set<Listener>();
 
 function recompute() {
   const ranked = [...slots.entries()]
-    .filter(([, s]) => s.ratio > 0)
-    .sort((a, b) => b[1].ratio + b[1].priority - (a[1].ratio + a[1].priority))
-    .slice(0, MAX_GL)
-    .map(([id]) => id);
+    .filter(([, s]) => s.ratio > 0 || s.near)
+    .map(([id, s]) => ({ id, score: s.ratio > 0 ? 1 + s.ratio + s.priority : s.priority * 0.01 }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maxGl())
+    .map((r) => r.id);
   const next = new Set(ranked);
   const same = next.size === allowed.size && ranked.every((id) => allowed.has(id));
   if (same) return;
@@ -94,8 +100,8 @@ function recompute() {
 }
 
 /**
- * Registers a WebGL user. Returns true while it may hold a live context. The element's visible
- * ratio decides; ties favour `priority` (the signature cube gets a bonus).
+ * Registers a WebGL user. Returns true while it may hold a live context. On-screen slots win, by
+ * visible ratio; ties favour `priority` (the signature cube gets a bonus). Near slots fill what's left.
  */
 export function useGlBudget(id: string, ref: React.RefObject<HTMLElement | null>, enabled = true, priority = 0) {
   const live = useSyncExternalStore(
@@ -109,19 +115,30 @@ export function useGlBudget(id: string, ref: React.RefObject<HTMLElement | null>
   useEffect(() => {
     const el = ref.current;
     if (!el || !enabled) return;
-    slots.set(id, { ratio: 0, priority });
-    const io = new IntersectionObserver(
+    slots.set(id, { ratio: 0, near: false, priority });
+    const vis = new IntersectionObserver(
       ([e]) => {
         const s = slots.get(id);
         if (!s) return;
         s.ratio = e.isIntersecting ? Math.max(e.intersectionRatio, 0.001) : 0;
         recompute();
       },
-      { threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1], rootMargin: '10% 0px' },
+      { threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1] },
     );
-    io.observe(el);
+    const near = new IntersectionObserver(
+      ([e]) => {
+        const s = slots.get(id);
+        if (!s) return;
+        s.near = e.isIntersecting;
+        recompute();
+      },
+      { rootMargin: '75% 0px' },
+    );
+    vis.observe(el);
+    near.observe(el);
     return () => {
-      io.disconnect();
+      vis.disconnect();
+      near.disconnect();
       slots.delete(id);
       recompute();
     };
