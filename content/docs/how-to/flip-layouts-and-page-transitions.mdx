@@ -1,0 +1,104 @@
+---
+title: How to animate layouts and pages with Flip
+description: Animate any layout change, from a bento reshuffle to a route change, without measuring anything by hand.
+---
+
+<Callout title="TL;DR">
+
+- Flip: record positions, change the layout, then animate from the old positions.
+- A page wipe is cover, swap, reveal.
+- In Next.js, React's `<ViewTransition>` morphs shared elements across routes.
+
+</Callout>
+
+**Goal:** layouts that move to their new shape instead of jumping, and pages that hand over smoothly.
+
+## You need
+
+- `gsap` with the `Flip` plugin.
+- Next.js 16 app router. React's `ViewTransition` works with no config.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " First    Last       Invert           Play",
+  " ┌─┬─┐   ┌───┬─┐    measure old,     animate to",
+  " │A│B│ ► │ A │B│ ►  put it back  ►   zero offset",
+  " └─┴─┘   └───┴─┘    with transforms",
+  " getState  change classes   Flip.from(state)",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Record the state
+
+```ts
+import { Flip } from 'gsap/Flip';
+gsap.registerPlugin(Flip);
+
+const state = Flip.getState('.tile');
+```
+
+### 2. Change the layout any way you like
+
+Toggle a class, reorder the DOM, change grid spans. In React, set state and wait for the render to
+commit (a `useLayoutEffect` or `useGSAP` keyed on the change).
+
+```ts
+grid.classList.toggle('expanded');
+```
+
+### 3. Animate from the old state
+
+```ts
+Flip.from(state, { duration: 0.7, ease: 'power4.inOut', absolute: true, nested: true, stagger: 0.03 });
+```
+
+Flip works out the difference and animates with transforms only, so it stays smooth. `absolute: true`
+stops grid and flex from fighting it during the move.
+
+### 4. Build a page wipe: cover, swap, reveal
+
+```ts
+const tl = gsap.timeline();
+tl.to('.wipe', { clipPath: 'inset(0 0 0% 0)', duration: 0.45, ease: 'expo.in' })   // cover
+  .add(() => router.push(href))                                                  // swap
+  .to('.wipe', { clipPath: 'inset(100% 0 0 0)', duration: 0.6, ease: 'expo.out' }, '+=0.15'); // reveal
+```
+
+Keep the cover short. People are waiting for the new page.
+
+### 5. Or use View Transitions in Next.js
+
+Wrap the element on both pages in `<ViewTransition>` with the same `name`. Route changes are already
+transitions, so it morphs on its own.
+
+```tsx
+import { ViewTransition } from 'react';
+
+<ViewTransition name={`photo-${id}`}>
+  <Image src={src} alt={alt} width={800} height={500} />
+</ViewTransition>
+```
+
+Browsers without support simply skip the animation. Nothing breaks.
+
+### 6. Respect reduced motion
+
+For Flip, pass `duration: 0` when reduced motion is on. For View Transitions, add
+`@media (prefers-reduced-motion: reduce) { ::view-transition-group(*) { animation: none; } }`.
+
+## Why it works
+
+When an element moves instead of vanishing, people see it is the same thing in a new place. They do
+not have to find it again.
+
+## See it live
+
+- [Flip bento](/lab/flip-bento)
+- [Page transitions](/lab/page-transitions)
+
+<Examples section="bento" />
+
+## Sources
+
+- [MDN: View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API)
+- [GSAP: ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)

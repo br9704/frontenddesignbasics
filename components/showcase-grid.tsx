@@ -9,7 +9,7 @@ export function ShowcaseGrid({ mine = false }: { mine?: boolean }) {
       {items.map((s, i) => (
         <article key={s.id} className="group">
           <a href={s.url} target="_blank" rel="noreferrer" className="block">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[var(--rule)] bg-[var(--color-fd-muted)]">
+            <div className="relative aspect-[16/10] overflow-hidden border border-[var(--v-steel)] bg-[var(--v-surface)]">
               <Image
                 src={`/showcase/${s.id}.jpg`}
                 alt={`Screenshot of ${s.name}`}
@@ -21,8 +21,8 @@ export function ShowcaseGrid({ mine = false }: { mine?: boolean }) {
           </a>
           <div className="mt-4 flex items-baseline justify-between gap-3">
             <h3 data-display className="text-2xl">
-              <span className="mr-2 font-mono text-xs text-[var(--text-soft)] tabular-nums">
-                {String(i + 1).padStart(2, '0')}
+              <span className="mr-2 text-[var(--v-dim)]">
+                [{String(i + 1).padStart(2, '0')}]
               </span>
               {s.name}
             </h3>
@@ -41,7 +41,7 @@ export function ShowcaseGrid({ mine = false }: { mine?: boolean }) {
             ))}
           </ul>
           {s.mine && (
-            <Link href={`/docs/case-studies/${s.id}`} className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
+            <Link href={`/docs/cases/${s.id}`} className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
               Read the case study
             </Link>
           )}
@@ -53,8 +53,10 @@ export function ShowcaseGrid({ mine = false }: { mine?: boolean }) {
 
 export function Banner({ name, alt }: { name: string; alt: string }) {
   return (
-    <div className="not-prose relative -mt-2 mb-8 aspect-[10/3] overflow-hidden rounded-md border border-[var(--rule)]">
-      <Image src={`/banners/${name}.jpg`} alt={alt} fill priority sizes="100vw" className="object-cover" />
+    <div className="not-prose relative -mt-2 mb-8 aspect-[10/3] overflow-hidden border border-[var(--v-steel)] bg-[var(--v-bg)]">
+      {/* The banner JPEGs were printed on the v1 paper theme; invert + greyscale turns them into white ink on black.
+          Drop the filter once they are regenerated from the (now mono) /banner route. */}
+      <Image src={`/banners/${name}.jpg`} alt={alt} fill priority sizes="100vw" className="object-cover [filter:grayscale(1)_invert(1)_contrast(1.08)]" />
     </div>
   );
 }
@@ -62,7 +64,7 @@ export function Banner({ name, alt }: { name: string; alt: string }) {
 export function Shot({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
   return (
     <figure className="not-prose my-6">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[var(--rule)]">
+      <div className="relative aspect-[16/10] overflow-hidden border border-[var(--v-steel)]">
         <Image src={src} alt={alt} fill sizes="(min-width: 768px) 700px, 100vw" className="object-cover object-top" />
       </div>
       {caption && <figcaption className="mt-2 text-xs text-[var(--text-soft)]">{caption}</figcaption>}

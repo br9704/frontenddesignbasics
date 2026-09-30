@@ -1,0 +1,108 @@
+---
+title: How to draw thousands of blocks in one call
+description: Build voxel type, cities and puzzles from one InstancedMesh, and keep them scrubbable.
+---
+
+<Callout title="TL;DR">
+
+- One `InstancedMesh` draws every block in a single draw call.
+- Move a few thousand from JavaScript; move more in the vertex shader.
+- Store start and end positions as snapshots and blend between them with progress.
+
+</Callout>
+
+**Goal:** thousands of moving cubes at 60 fps on a laptop, and still smooth on a phone.
+
+## You need
+
+- three with `@react-three/fiber`. drei's `<Instances>` is an easier wrapper for small counts.
+- A 2D canvas, if you want text as the shape.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  "  1 geometry + 1 material + N matrices  ──►  1 draw call",
+  "",
+  "  mesh ■ ■ ■ ■ ■     vs     ■■■■■  one InstancedMesh",
+  "  5 draw calls               1 draw call",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Make one InstancedMesh
+
+```tsx
+<instancedMesh ref={mesh} args={[undefined, undefined, COUNT]}>
+  <boxGeometry args={[0.9, 0.9, 0.9]} />
+  <meshStandardMaterial />
+</instancedMesh>
+```
+
+### 2. Write matrices with one reused object
+
+```ts
+const o = new THREE.Object3D();
+for (let i = 0; i < COUNT; i++) {
+  o.position.set(x[i], y[i], z[i]);
+  o.updateMatrix();
+  mesh.current.setMatrixAt(i, o.matrix);
+}
+mesh.current.instanceMatrix.needsUpdate = true;
+```
+
+Never create a new `Object3D` or `Vector3` inside the loop. Garbage collection pauses show as jank.
+
+### 3. Past about 5,000 moving blocks, move them in the shader
+
+Put each block's start and end in `InstancedBufferAttribute`s and pass `uProgress` as a uniform. The
+vertex shader mixes them. JavaScript then sets one number per frame instead of thousands of matrices.
+
+```glsl
+attribute vec3 aStart;
+attribute vec3 aEnd;
+uniform float uProgress;
+// inside main():
+vec3 p = mix(aStart, aEnd, smoothstep(0.0, 1.0, uProgress));
+transformed += p;
+```
+
+### 4. Turn off frustum culling for shader-moved instances
+
+three.js culls the mesh by its bounding sphere, and it does not know the shader moved the blocks.
+Blocks vanish at the screen edge. Set `frustumCulled={false}` on the mesh.
+
+### 5. Use text as a target shape
+
+Draw the word on a small 2D canvas, read the pixels, and put a block wherever alpha is over half.
+
+```ts
+ctx.font = '64px "Web IBM VGA 8x16"';
+ctx.fillText('HELLO', 0, 56);
+const { data } = ctx.getImageData(0, 0, w, h);
+for (let y = 0; y < h; y += step) for (let x = 0; x < w; x += step)
+  if (data[(y * w + x) * 4 + 3] > 128) targets.push([x - w / 2, h / 2 - y, 0]);
+```
+
+Wait for `document.fonts.load('64px "Web IBM VGA 8x16"')` first, or you rasterise the fallback font.
+
+### 6. Scrub between snapshots
+
+For a puzzle or a city that rebuilds, store each state as an array of positions: `snapshots[0]`,
+`snapshots[1]` and so on. Progress picks two neighbours and blends them. Do not re-parent objects into
+groups mid-animation. It cannot run backwards, and scrolling up breaks it.
+
+## Why it works
+
+The GPU is fast at drawing the same thing many times. It is slow at being asked many times. Instancing
+asks once. Snapshots make every frame a pure function of progress, so scroll can go either way.
+
+## See it live
+
+- [Voxel type assembly](/lab/voxel-type-assembly)
+- [Neon block city](/lab/neon-block-city)
+- [Tool blocks](/lab/tool-blocks)
+
+<Examples section="3d" />
+
+## Sources
+
+- [three.js: InstancedMesh](https://threejs.org/docs/#api/en/objects/InstancedMesh)
+- [React Three Fiber](https://r3f.docs.pmnd.rs/getting-started/introduction)

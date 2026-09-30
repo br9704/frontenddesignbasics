@@ -1,0 +1,107 @@
+---
+title: How to make kinetic type and motion posters
+description: Split words into letters, fly them in 3D, flip them, and cut scenes together on one timeline.
+---
+
+<Callout title="TL;DR">
+
+- SplitText into chars, give the parent perspective, and stagger with `from`.
+- Flip letters on a wrapper; put filters on a different element.
+- Build scenes as labels on one timeline, cut with clip-path, lock type to a grid.
+
+</Callout>
+
+**Goal:** a headline that behaves like a motion-design poster, not a fade-in.
+
+## You need
+
+- `gsap` with `SplitText` (free, `import { SplitText } from 'gsap/SplitText'`).
+- `@gsap/react` for `useGSAP`.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " timeline  |─ intro ─|── flip ──|─ cut ─|── grid ──|",
+  " labels    0         1.2        2.4     2.9        4.2",
+  " SplitText  H E L L O    each char is its own box",
+  " stagger from 'center':    3 2 1 2 3   (delay order)",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Split the text
+
+```ts
+gsap.registerPlugin(SplitText);
+const split = SplitText.create(el, { type: 'chars,words', mask: 'chars' });
+```
+
+`mask: 'chars'` wraps each char in an overflow box, so letters can slide up from nothing. Wait for
+`document.fonts.ready` first, or the split uses fallback widths.
+
+### 2. Give the parent perspective
+
+```ts
+gsap.set(el, { perspective: 800 });
+gsap.from(split.chars, { rotateX: -90, z: -200, opacity: 0, duration: 1, ease: 'expo.out', stagger: { each: 0.03, from: 'center' } });
+```
+
+`from` can be `'start'`, `'center'`, `'end'`, `'edges'`, `'random'` or an index. Centre-out feels like
+a burst. Edges-in feels like a squeeze.
+
+### 3. Flip with two faces
+
+A card flip needs a front and a back. Put both in a wrapper with `transform-style: preserve-3d`, give
+each `backface-visibility: hidden`, and turn the back 180°. Then rotate the wrapper.
+
+### 4. Keep filters off the 3D wrapper
+
+A `filter` (blur, drop-shadow) on an element flattens its 3D children. Put the blur on an outer element
+and the rotation on an inner one.
+
+```text
+ .blur-layer      filter: blur()        ← filters here
+   .flip-wrapper  rotateY, preserve-3d  ← 3D here
+     .front / .back
+```
+
+### 5. Build scenes on one timeline
+
+```ts
+const tl = gsap.timeline({ repeat: -1 });
+tl.addLabel('intro').from(split.chars, { yPercent: 100, stagger: 0.02 })
+  .addLabel('flip', '+=0.4').to('.flip-wrapper', { rotateY: 180, duration: 0.8, ease: 'power4.inOut' })
+  .addLabel('cut').fromTo('.scene-2', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.5, ease: 'expo.inOut' });
+```
+
+Labels let you scrub or jump to a scene: `tl.seek('cut')`.
+
+### 6. Cut with clip-path
+
+`clip-path: inset()` wipes are sharp and run on the compositor in modern browsers. They read like a
+film edit. Use them instead of fading between scenes.
+
+### 7. Lock type to the grid
+
+Set sizes and moves in grid units. With the 8x16 pixel font, sizes are 16, 32, 48, 64, 96, 128 and moves
+snap to 16px: `x: gsap.utils.snap(16)`. Snapped motion looks designed. Free motion looks floaty.
+
+## Pitfalls
+
+- **Revert on unmount.** Call `split.revert()` in cleanup, or the DOM keeps hundreds of spans.
+- **Screen readers.** SplitText adds `aria-label` to the parent by default. Keep it.
+
+## Why it works
+
+Letters that move as a group, with a clear order and a hard cut, read as direction. The grid keeps the
+chaos legible.
+
+## See it live
+
+- [Flying type](/lab/flying-type)
+- [Kinetic poster](/lab/kinetic-poster)
+
+<Examples section="typography" />
+
+## Sources
+
+- [GSAP: SplitText](https://gsap.com/docs/v3/Plugins/SplitText/)
+- [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)

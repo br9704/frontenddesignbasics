@@ -1,0 +1,109 @@
+---
+title: How to start a project with the toolkit
+description: Go from a brief to one working, verified experience in six steps.
+---
+
+<Callout title="TL;DR">
+
+- Pick one stage and two or three tools. Not ten.
+- Put every colour in tokens before you write a component.
+- Build one experience, then prove it moves, stops and fits at 390px.
+
+</Callout>
+
+**Goal:** a first piece of the site that looks designed, not generated, and passes every check.
+
+## You need
+
+- The brief, and [`DESIGN.md`](https://github.com/br9704/frontenddesignbasics/blob/main/DESIGN.md) open beside it.
+- [`toolkit/toolkit.json`](https://github.com/br9704/frontenddesignbasics/blob/main/toolkit/toolkit.json) (or the [tools page](/tools)).
+- A Next.js app with Tailwind 4, and Playwright for the check at the end.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " brief ─► stage ─► tools ─► tokens ─► build ─► verify",
+  " why      look     2 or 3   values    one      frames",
+  "                                      piece    + 390px",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Read the brief, then write one line
+
+Say what the thing *is* and who it is for, in one sentence. A coffee roaster, a bank dashboard and a
+game studio should never share a template. Write the line at the top of your plan.
+
+### 2. Pick a stage
+
+This site has three looks. Choose the one the brief needs, or one per section:
+
+- **win95**: grey bevels, pixel fonts, ASCII. Nostalgic and playful.
+- **mono**: black and white with 3D and shaders. Calm and precise.
+- **colour**: loud, full-bleed colour fields. The finale.
+
+### 3. Pick two or three tools
+
+Open [/tools](/tools) or ask your agent *"what in toolkit.json fits this brief?"*. A typical site needs
+one motion library, at most one 3D or shader approach, and one component source. For example: `gsap`
+plus `lenis` for a scroll story, or `threejs` plus `gsap` for a 3D hero.
+
+### 4. Set the tokens
+
+Every colour, font and curve lives in `app/global.css`, inside Tailwind 4's `@theme`. Components use
+the names, never the hex.
+
+```css
+@theme {
+  /* mono */
+  --color-v-bg: #080808;
+  --color-v-ink: #f5f5f5;
+  --color-v-dim: #8a8a8a;
+  /* win95 */
+  --color-w-face: #c0c0c0;
+  --color-w-shadow: #808080;
+  /* colour finale */
+  --color-c-1: #ff2e00;
+  --color-c-4: #00b3ff;
+  /* type and motion */
+  --font-pixel: 'Web IBM VGA 8x16', var(--font-mono), monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+```
+
+Now `bg-v-bg`, `text-c-1` and `font-pixel` work as utilities.
+
+### 5. Build one experience
+
+Make one self-contained component that takes `active`, `reducedMotion` and an optional `progress`.
+Register it in `lib/experiences/` so it shows at `/lab/<id>`. The contract is in
+[Drive any component from progress](/docs/how-to/progress-driven-components).
+
+### 6. Verify it
+
+```bash
+npx tsx scripts/validate-exp.ts <your-id>
+```
+
+It checks that two frames 1.5 s apart differ, that reduced motion is still, and that 390px has no
+sideways scroll. Then open the screenshots in `.validate/<id>/` and look at them yourself.
+
+## Pitfalls
+
+- **Too many tools.** The site starts to look like its dependencies. Three is plenty.
+- **Raw hex in a component.** It will drift from the palette. Add a token instead.
+- **Trusting a green check.** A black canvas "moves" if one pixel flickers. Read the screenshots.
+
+## Why it works
+
+Each step removes a kind of choice. Once the stage, tools and tokens are fixed, every later decision is
+a lookup, so the result stays consistent even when an agent writes most of the code.
+
+## See it live
+
+Every experience in the [/make](/make) gallery was started this way. Open any one full screen from there.
+
+<Examples section="portfolio" title="Sites with a clear point of view" />
+
+## Sources
+
+- [Vercel Web Interface Guidelines](https://vercel.com/design/guidelines)
+- [Tailwind CSS: theme variables](https://tailwindcss.com/docs/theme)

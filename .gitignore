@@ -25,3 +25,5 @@ next-env.d.ts
 coverage/
 /tmp/
 .verify/
+.journey-frames/
+.validate/

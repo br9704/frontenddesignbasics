@@ -1,0 +1,111 @@
+---
+title: How to make colour look expensive
+description: A living gradient that never bands or goes muddy, and glass that bends it.
+---
+
+<Callout title="TL;DR">
+
+- Warp noise with more noise, then mix colours in OKLab, not RGB.
+- Add a little grain. It hides banding.
+- For glass, give it something bold to bend, and keep a cheap fallback for phones.
+
+</Callout>
+
+**Goal:** a colour field like a premium brand site, not a default CSS gradient.
+
+## You need
+
+- A fragment shader. OGL is enough; see `components/ink-field.tsx` for a full example.
+- `@react-three/drei` for `MeshTransmissionMaterial`.
+- The colour tokens `--c-1` to `--c-6`.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " RGB mix    magenta ──── grey mud ──── cyan",
+  " OKLab mix  magenta ──── violet ────── cyan",
+  "            (the middle stays bright in OKLab)",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Warp the domain
+
+Feed noise into the coordinates of more noise. Straight bands turn into slow, liquid shapes.
+
+```glsl
+vec2 q = vec2(fbm(p + t * 0.10), fbm(p + vec2(5.2, 1.3) - t * 0.08));
+float f = fbm(p + 2.5 * q);
+```
+
+### 2. Mix in OKLab
+
+Mixing sRGB values drags the middle towards grey. Convert to OKLab, mix there, and convert back. The
+halfway point keeps its brightness and saturation.
+
+```glsl
+vec3 toOklab(vec3 c) {       // c in linear sRGB
+  vec3 lms = mat3(0.4122, 0.2119, 0.0883, 0.5363, 0.6807, 0.2817, 0.0514, 0.1074, 0.6300) * c;
+  lms = pow(lms, vec3(1.0 / 3.0));
+  return mat3(0.2105, 1.9780, 0.0259, 0.7936, -2.4286, 0.7828, -0.0041, 0.4506, -0.8087) * lms;
+}
+// mix(toOklab(a), toOklab(b), f), then convert back with the inverse matrices
+```
+
+### 3. Add grain against banding
+
+Smooth gradients band on 8-bit screens. A tiny per-pixel random offset breaks the steps up.
+
+```glsl
+col += (hash(gl_FragCoord.xy + fract(uTime) * 91.0) - 0.5) / 255.0 * 2.0;
+```
+
+### 4. Pick three colours, not six
+
+Two neighbours on the wheel plus one accent. `--c-2`, `--c-3` and `--c-4` (magenta, violet, cyan) blend
+well. Put the accent in only where `f` is high, so it stays rare.
+
+### 5. Add glass with MeshTransmissionMaterial
+
+```tsx
+<mesh>
+  <sphereGeometry args={[1, 64, 64]} />
+  <MeshTransmissionMaterial
+    transmission={1} thickness={0.6} roughness={0.05} ior={1.4}
+    chromaticAberration={0.06} anisotropy={0.2} distortion={0.2}
+    samples={6} resolution={512} backside={false}
+  />
+</mesh>
+```
+
+### 6. Give the glass something bold to bend
+
+Glass over a flat grey background looks like nothing. Put the gradient, big type or stripes behind it.
+The refraction is only visible where the backdrop has contrast.
+
+### 7. Fall back cheaply on weak devices
+
+Transmission renders the scene an extra time. On phones, or when frame time goes over 20ms, swap to
+`meshPhysicalMaterial` with `iridescence={1}`, `iridescenceIOR={1.3}` and `roughness={0.1}`. It keeps
+the rainbow edge without the extra pass.
+
+## Pitfalls
+
+- **Text on the gradient.** Put copy on a solid plate, or check 4.5:1 against the darkest and lightest
+  points it can cross.
+- **Everything moving.** Keep drift slow. Premium means calm.
+
+## Why it works
+
+Cheap gradients look cheap because the middle goes grey and the steps show. OKLab fixes the middle,
+grain fixes the steps, and the warp gives it life.
+
+## See it live
+
+- [Liquid gradient](/lab/liquid-gradient)
+- [Glass lens](/lab/glass-lens)
+
+<Examples section="colour" />
+
+## Sources
+
+- [OKLCH colour picker](https://oklch.com)
+- [MDN: oklch()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch)

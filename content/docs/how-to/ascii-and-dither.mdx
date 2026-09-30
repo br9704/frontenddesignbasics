@@ -1,0 +1,110 @@
+---
+title: How to render anything as ASCII or 1-bit
+description: Turn a 3D scene, a shader or an image into characters or black-and-white dots, and keep it fast.
+---
+
+<Callout title="TL;DR">
+
+- 3D to ASCII: drei `AsciiRenderer`, with a short ramp, a column cap and a slower refresh.
+- 1-bit in a shader: compare brightness with a Bayer matrix.
+- 1-bit on an image: Floyd-Steinberg error diffusion in a 2D canvas.
+
+</Callout>
+
+**Goal:** the retro look done properly, crisp and readable, not a blurry filter.
+
+## You need
+
+- `@react-three/drei` for the ASCII renderer.
+- A fragment shader (three.js or OGL) for Bayer dither.
+- A 2D canvas for Floyd-Steinberg and glyph grids.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " brightness  0.0 ────────────────────► 1.0",
+  " ramp        ' '  .  :  -  =  +  *  #  @",
+  "",
+  " bayer 4×4   each pixel has its own threshold,",
+  "             so flat grey becomes a pattern",
+  "             ▓░▓░",
+  "             ░▓░▓",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Put `AsciiRenderer` inside the canvas
+
+```tsx
+<Canvas dpr={1}>
+  <Scene />
+  <AsciiRenderer characters=" .:-=+*#%@" fgColor="#f5f5f5" bgColor="#080808" resolution={0.16} invert={false} />
+</Canvas>
+```
+
+It replaces the canvas output with a grid of text. `resolution` is characters per pixel, so 0.16 at
+1000px wide is about 160 columns.
+
+### 2. Cap the columns and keep the ramp short
+
+Too many columns turn into grey mush and the DOM text gets slow. Aim for 80 to 160 columns. Work out
+`resolution` from the width: `Math.min(0.16, 140 / width)`. A ramp of 8 to 10 characters reads
+better than 70.
+
+### 3. Refresh less often
+
+The ASCII pass reads the whole frame back from the GPU, which is slow. Render the canvas with
+`frameloop="demand"` and call `invalidate()` about 20 times a second. At that rate the retro look
+still reads as smooth.
+
+### 4. Dither in a fragment shader with Bayer
+
+```glsl
+float bayer4(vec2 p) {
+  int x = int(mod(p.x, 4.0)), y = int(mod(p.y, 4.0));
+  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);
+  return (float(m[y * 4 + x]) + 0.5) / 16.0;
+}
+void main() {
+  float lum = dot(texture2D(uScene, vUv).rgb, vec3(0.299, 0.587, 0.114));
+  float px = floor(gl_FragCoord.xy / uDotSize);          // chunkier dots
+  gl_FragColor = vec4(vec3(step(bayer4(px), lum)), 1.0);
+}
+```
+
+Needs WebGL2 (`int[16]` arrays), which three.js uses by default.
+
+### 5. Use Floyd-Steinberg for still images
+
+Bayer gives a neat grid. Floyd-Steinberg spreads each pixel's rounding error to its neighbours, which
+looks like newsprint. It is sequential, so do it once in a 2D canvas, not every frame.
+
+```ts
+const e = old - (old < 128 ? 0 : 255);
+d[i + 4] += e * 7 / 16;             // right
+d[i + 4 * w - 4] += e * 3 / 16;     // below left
+d[i + 4 * w] += e * 5 / 16;         // below
+d[i + 4 * w + 4] += e * 1 / 16;     // below right
+```
+
+### 6. Draw glyph grids yourself for interaction
+
+For an ASCII field that reacts to the cursor, skip three.js. Measure one character of the pixel font,
+fill a 2D canvas row by row with `fillText`, and pick each glyph from the ramp by distance to the
+pointer. Wait for `document.fonts.ready` before the first draw.
+
+## Why it works
+
+ASCII and dither both map brightness to a pattern the eye blends back into tone. Fewer, bigger marks
+read as a style. Too many small ones read as noise.
+
+## See it live
+
+- [ASCII 3D](/lab/ascii-3d)
+- [Dither wave](/lab/dither-wave)
+- [ASCII cursor field](/lab/ascii-cursor-field)
+
+<Examples section="shaders" />
+
+## Sources
+
+- [drei (AsciiRenderer)](https://github.com/pmndrs/drei)
+- [The Book of Shaders](https://thebookofshaders.com)

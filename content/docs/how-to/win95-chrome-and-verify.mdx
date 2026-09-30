@@ -1,0 +1,119 @@
+---
+title: How to build Win95 chrome, and prove it all moves
+description: Real bevels and pixel fonts for the retro act, then the checks that prove every piece moves, stops and fits.
+---
+
+<Callout title="TL;DR">
+
+- Bevels are four inset shadows, stored as `--w-bevel-out` and `--w-bevel-in`.
+- Load pixel fonts before any canvas draws text.
+- Verify with frames 1.5 s apart, a reduced-motion still, and 390px with no overflow. Then look at the pictures.
+
+</Callout>
+
+**Goal:** Windows 95 chrome that looks right to people who used it, and proof that each piece works.
+
+## You need
+
+- The Win95 tokens in `app/global.css` (`--w-*`) and the fonts in `public/fonts/`.
+- Playwright, and `scripts/validate-exp.ts`.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " bevel-out (raised button)     bevel-in (pressed, sunken field)",
+  " ┌──────────────┐ white        ┌──────────────┐ black",
+  " │  OK          │              │  OK          │",
+  " └──────────────┘ black        └──────────────┘ white",
+  "   + grey inner edges            + grey inner edges, swapped",
+].join('\n')}</pre>
+
+## Win95 chrome
+
+### 1. Use the bevel tokens
+
+```css
+.w95-button {
+  background: var(--w-face);
+  box-shadow: var(--w-bevel-out);
+  font-family: var(--font-w95);
+  font-size: 16px;
+  -webkit-font-smoothing: none;
+}
+.w95-button:active { box-shadow: var(--w-bevel-in); padding: 1px 0 0 1px; }
+```
+
+Four hard inset shadows, no blur, no radius. The 1px nudge on press is what makes it feel clicked.
+
+### 2. Keep pixel fonts on their grid
+
+The VGA font is 8x16. Use 16, 32, 48 or 64px only, with `-webkit-font-smoothing: none`. Any other size
+blurs the pixels.
+
+### 3. Load fonts before canvas text
+
+A canvas draws with whatever font is ready. If the pixel font has not loaded, you get a fallback, and it
+never updates.
+
+```ts
+await document.fonts.load('16px "Web IBM VGA 8x16"');
+await document.fonts.load('16px "MS Sans Serif Pixel"');
+draw();
+```
+
+## Prove it
+
+### 4. Capture two frames 1.5 s apart
+
+A single screenshot proves nothing about motion. Two frames must differ.
+
+<div className="not-prose my-4 grid grid-cols-2 gap-3">
+  <figure><img src="/workflow/frame-a.jpg" alt="Home hero, frame A" className="w-full rounded-md border border-[var(--rule)]" /><figcaption className="mt-1 font-mono text-[11px] text-[var(--text-soft)]">frame A · t = 0 s</figcaption></figure>
+  <figure><img src="/workflow/frame-b.jpg" alt="Home hero, frame B, 1.5 seconds later" className="w-full rounded-md border border-[var(--rule)]" /><figcaption className="mt-1 font-mono text-[11px] text-[var(--text-soft)]">frame B · t = 1.5 s · the ink moved, so the shader is live</figcaption></figure>
+</div>
+
+### 5. Check the reduced-motion still
+
+Run again with `reducedMotion: 'reduce'`. The two frames must now match, and the still must look
+composed, not half-way through a move. For canvases, that still is the poster.
+
+### 6. Check 390px
+
+At 390px wide, `document.documentElement.scrollWidth - innerWidth` must be 0.
+
+### 7. Run the validator
+
+```bash
+npx tsx scripts/validate-exp.ts pixel-blast      # one experience at /lab/pixel-blast
+npx tsx scripts/validate-exp.ts /docs/how-to     # or any route
+```
+
+It prints `moves`, `reducedStill`, `mobileOverflowPx` and console errors, and saves
+`desktop-a/b`, `reduced-a/b` and `mobile-a/b` screenshots to `.validate/<id>/`. Where the repo has
+`scripts/posters.ts`, run it to refresh the reduced-motion posters.
+
+### 8. Open the screenshots and look
+
+A black canvas with one flickering pixel counts as "moving". Open every screenshot. Check the thing
+you meant is on screen, readable, and not cut off at 390px.
+
+## The GL budget
+
+- At most two live WebGL canvases on screen at once. Browsers cap contexts, and old ones get lost.
+- `dpr={[1, 1.75]}` on every canvas.
+- Pause off screen and when the tab is hidden.
+- Load 3D with `next/dynamic` and `ssr: false`, with the ASCII loader while it loads.
+
+## Why it works
+
+The bevel is four lines of light, so it stays sharp at any zoom. The checks are cheap and
+mechanical, so you run them every time, and they catch the failures that look fine in one screenshot.
+
+## See it live
+
+- [Win95 boot](/lab/win95-boot)
+- [Win95 desktop](/lab/win95-desktop)
+- The full story of a Win95 site: [BR95 case study](/docs/cases/br95)
+
+## Sources
+
+- [Playwright: screenshots](https://playwright.dev/docs/screenshots)
+- [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)

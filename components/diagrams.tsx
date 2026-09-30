@@ -1,14 +1,17 @@
 /*
  * Diagrams: plain SVG and CSS, no images. They inherit the theme through CSS variables,
- * so they work in light and dark, and they stack vertically on phones.
+ * so they follow the v2 mono theme, and they stack vertically on phones. Colour appears only where
+ * a diagram is about colour (ColourBudget, PromptAnatomy).
  */
 import type { ReactNode } from 'react';
 
 function Figure({ children, caption }: { children: ReactNode; caption?: string }) {
   return (
     <figure className="not-prose my-8">
-      <div className="overflow-hidden rounded-lg border border-[var(--rule)] bg-[var(--surface-raised)] p-5 sm:p-7">{children}</div>
-      {caption && <figcaption className="mt-2 text-xs text-[var(--text-soft)]">{caption}</figcaption>}
+      <div className="relative overflow-hidden border border-[var(--v-steel)] bg-[var(--v-surface)] p-5 sm:p-7">
+        {children}
+      </div>
+      {caption && <figcaption className="mt-2 text-xs leading-relaxed text-[var(--v-soft)]">{caption}</figcaption>}
     </figure>
   );
 }
@@ -27,20 +30,20 @@ export function Flow({
         {steps.map((s, i) => (
           <li key={s.title} className="flex flex-col items-center gap-2 sm:flex-1 sm:flex-row">
             <div
-              className={`w-full flex-1 rounded-md border px-3 py-3 ${
+              className={`w-full flex-1 border px-3 py-3 ${
                 s.tone === 'accent'
-                  ? 'border-transparent bg-[var(--accent)] text-white'
+                  ? 'border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]'
                   : s.tone === 'ink'
-                    ? 'border-transparent bg-[var(--text)] text-[var(--surface)]'
-                    : 'border-[var(--rule)] bg-[var(--surface)]'
+                    ? 'border-[var(--v-soft)] bg-[var(--v-steel)] text-[var(--v-ink)]'
+                    : 'border-[var(--v-steel)] bg-[var(--v-bg)] text-[var(--v-ink)]'
               }`}
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.15em] opacity-60">{String(i + 1).padStart(2, '0')}</p>
+              <p className="pixel text-[16px] leading-[16px] opacity-60">[{String(i + 1).padStart(2, '0')}]</p>
               <p className="mt-1 text-sm font-medium leading-snug">{s.title}</p>
               {s.note && <p className="mt-1 text-xs leading-snug opacity-75">{s.note}</p>}
             </div>
             {i < steps.length - 1 && (
-              <span aria-hidden className="shrink-0 text-[var(--text-soft)] sm:px-0.5">
+              <span aria-hidden className="pixel shrink-0 text-[16px] leading-[16px] text-[var(--v-dim)] sm:px-0.5">
                 <span className="sm:hidden">↓</span>
                 <span className="hidden sm:inline">→</span>
               </span>
@@ -91,13 +94,13 @@ export function EasingCurves() {
 /* Colour as a budget: 90 / 8 / 2. */
 export function ColourBudget() {
   const parts = [
-    { pct: 90, label: 'Neutrals', note: 'background, surfaces, text, rules', bg: 'var(--color-fd-muted)', fg: 'var(--text)' },
-    { pct: 8, label: 'Accent', note: 'actions, focus, the one number', bg: 'var(--accent)', fg: '#fff' },
+    { pct: 90, label: 'Neutrals', note: 'background, surfaces, text, rules', bg: 'var(--v-steel)', fg: 'var(--v-ink)' },
+    { pct: 8, label: 'Accent', note: 'actions, focus, the one number', bg: '#ff2e00', fg: '#080808' },
     { pct: 2, label: 'Semantic', note: 'success · warning · danger', bg: '#1f7a4d', fg: '#fff' },
   ];
   return (
     <Figure caption="Treat colour as a budget, not a palette. If the accent is spent everywhere, it stops meaning anything.">
-      <div className="flex h-16 overflow-hidden rounded-md">
+      <div className="flex h-16 overflow-hidden border border-[var(--v-steel)]">
         {parts.map((p) => (
           <div key={p.label} style={{ flexBasis: `${p.pct}%`, background: p.bg, color: p.fg }} className="flex min-w-[28px] items-end p-2">
             <span className="font-mono text-[11px]">{p.pct}%</span>
@@ -107,7 +110,7 @@ export function ColourBudget() {
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
         {parts.map((p) => (
           <div key={p.label} className="flex gap-3">
-            <span className="mt-1 size-3 shrink-0 rounded-sm" style={{ background: p.bg, outline: '1px solid var(--rule)' }} />
+            <span className="mt-1 size-3 shrink-0" style={{ background: p.bg, outline: '1px solid var(--rule)' }} />
             <div>
               <p className="text-sm font-medium">{p.label}</p>
               <p className="text-xs text-[var(--text-soft)]">{p.note}</p>
@@ -125,9 +128,9 @@ export function ProximityDiagram() {
     <div className="flex flex-col" style={{ gap: gap }}>
       {[0, 1].map((g) => (
         <div key={g} className="flex flex-col gap-1.5">
-          <div className="h-3 w-3/4 rounded-sm bg-[var(--text)]" />
-          <div className="h-2 w-full rounded-sm bg-[var(--text-soft)] opacity-50" />
-          <div className="h-2 w-5/6 rounded-sm bg-[var(--text-soft)] opacity-50" />
+          <div className="h-3 w-3/4 bg-[var(--v-ink)]" />
+          <div className="h-2 w-full bg-[var(--v-soft)] opacity-50" />
+          <div className="h-2 w-5/6 bg-[var(--v-soft)] opacity-50" />
         </div>
       ))}
     </div>
@@ -140,7 +143,7 @@ export function ProximityDiagram() {
           <Card gap={6} />
         </div>
         <div>
-          <p className="mb-3 font-mono text-[11px] text-[var(--accent)]">✓ grouped</p>
+          <p className="mb-3 font-mono text-[11px] text-[var(--v-ink)]">✓ grouped</p>
           <Card gap={32} />
         </div>
       </div>
@@ -157,24 +160,24 @@ export function HierarchyDiagram() {
           <p className="mb-3 font-mono text-[11px] text-[var(--text-soft)]">✕ everything shouts</p>
           <div className="space-y-2">
             {['w-4/5', 'w-3/4', 'w-4/5', 'w-2/3'].map((w, i) => (
-              <div key={i} className={`h-4 ${w} rounded-sm bg-[var(--text)]`} />
+              <div key={i} className={`h-4 ${w} bg-[var(--v-ink)]`} />
             ))}
             <div className="flex gap-2 pt-1">
-              <div className="h-7 w-20 rounded bg-[var(--accent)]" />
-              <div className="h-7 w-20 rounded bg-[var(--accent)]" />
-              <div className="h-7 w-20 rounded bg-[var(--accent)]" />
+              <div className="h-7 w-20 bg-[var(--accent)]" />
+              <div className="h-7 w-20 bg-[var(--accent)]" />
+              <div className="h-7 w-20 bg-[var(--accent)]" />
             </div>
           </div>
         </div>
         <div>
-          <p className="mb-3 font-mono text-[11px] text-[var(--accent)]">✓ one big thing</p>
+          <p className="mb-3 font-mono text-[11px] text-[var(--v-ink)]">✓ one big thing</p>
           <div className="space-y-2">
-            <div className="h-9 w-4/5 rounded-sm bg-[var(--text)]" />
-            <div className="h-2 w-3/4 rounded-sm bg-[var(--text-soft)] opacity-50" />
-            <div className="h-2 w-2/3 rounded-sm bg-[var(--text-soft)] opacity-50" />
+            <div className="h-9 w-4/5 bg-[var(--v-ink)]" />
+            <div className="h-2 w-3/4 bg-[var(--v-soft)] opacity-50" />
+            <div className="h-2 w-2/3 bg-[var(--v-soft)] opacity-50" />
             <div className="flex gap-2 pt-2">
-              <div className="h-7 w-24 rounded bg-[var(--accent)]" />
-              <div className="h-7 w-20 rounded border border-[var(--rule)]" />
+              <div className="h-7 w-24 bg-[var(--accent)]" />
+              <div className="h-7 w-20 border border-[var(--v-steel)]" />
             </div>
           </div>
         </div>
@@ -196,7 +199,7 @@ export function ScaleLadder({ ratio = 1.333, base = 16 }: { ratio?: number; base
             <span className="font-display leading-none" style={{ fontSize: Math.min(px, 64) }}>
               Aa
             </span>
-            <div className="w-full rounded-t-sm bg-[var(--accent)]" style={{ height: Math.round((px / max) * 96), opacity: 0.35 + i * 0.12 }} />
+            <div className="w-full bg-[var(--accent)]" style={{ height: Math.round((px / max) * 96), opacity: 0.35 + i * 0.12 }} />
             <span className="font-mono text-[10px] text-[var(--text-soft)] tabular-nums">{Math.round(px)}</span>
           </div>
         ))}
@@ -210,11 +213,11 @@ export function Decision({ question, branches, caption }: { question: string; br
   return (
     <Figure caption={caption}>
       <div className="flex flex-col items-center">
-        <div className="rounded-md bg-[var(--text)] px-4 py-2.5 text-center text-sm font-medium text-[var(--surface)]">{question}</div>
+        <div className="bg-[var(--v-ink)] px-4 py-2.5 text-center text-sm font-medium text-[var(--v-bg)]">{question}</div>
         <div className="h-5 w-px bg-[var(--rule)]" />
         <div className="grid w-full gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {branches.map((b) => (
-            <div key={b.if} className="rounded-md border border-[var(--rule)] bg-[var(--surface)] p-3">
+            <div key={b.if} className="border border-[var(--v-steel)] bg-[var(--v-bg)] p-3">
               <p className="text-xs text-[var(--text-soft)]">if {b.if}</p>
               <p className="mt-1 text-sm font-medium">→ {b.then}</p>
             </div>
@@ -228,12 +231,12 @@ export function Decision({ question, branches, caption }: { question: string; br
 /* Prompt anatomy: the parts of a production image prompt, colour-coded. */
 export function PromptAnatomy() {
   const parts = [
-    { k: 'Canvas', v: '16:9 hero background, text will sit on the left third', c: '#2f4ec2' },
-    { k: 'Ground', v: 'warm paper #F2EEE6 with visible grain', c: '#1f7a4d' },
-    { k: 'Zones', v: 'ink concentrated right; left 40% stays clean for type', c: '#b8860b' },
-    { k: 'Subject', v: 'two riso inks #FF5C1F + #2F4EC2 drifting in water', c: 'var(--accent)' },
-    { k: 'Style lock', v: 'flat, printed, tactile, soft misregistration', c: '#8a5a44' },
-    { k: 'Safety', v: 'no text, no people, no logos', c: '#6b6457' },
+    { k: 'Canvas', v: '16:9 hero background, text will sit on the left third', c: '#00b3ff' },
+    { k: 'Ground', v: 'near-black #080808 with fine film grain', c: '#00e676' },
+    { k: 'Zones', v: 'ink concentrated right; left 40% stays clean for type', c: '#ffe600' },
+    { k: 'Subject', v: 'white ink #F5F5F5 drifting in water, one thread of magenta #FF00A8', c: '#ff00a8' },
+    { k: 'Style lock', v: 'flat, printed, tactile, soft misregistration', c: '#ff2e00' },
+    { k: 'Safety', v: 'no text, no people, no logos', c: 'var(--v-soft)' },
   ];
   return (
     <Figure caption="A production prompt reads like a layout spec: canvas, ground, zones, subject, style and safety, each on its own line. Hex values beat colour names.">

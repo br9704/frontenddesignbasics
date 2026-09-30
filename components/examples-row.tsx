@@ -23,8 +23,8 @@ export function Examples({ section, title = 'In the wild' }: { section: string; 
   return (
     <section className="not-prose my-8" aria-label={`${title}: ${section}`}>
       <div className="mb-3 flex items-center justify-between gap-3">
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-soft)]">
-          {title} · {items.length} examples
+        <p className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]">
+          [ex] <span className="text-[var(--v-ink)]">{title.toLowerCase()}</span> · {items.length}
         </p>
         <div className="flex gap-1.5">
           {([-1, 1] as const).map((d) => (
@@ -33,7 +33,7 @@ export function Examples({ section, title = 'In the wild' }: { section: string; 
               type="button"
               onClick={() => nudge(d)}
               aria-label={d < 0 ? 'Previous examples' : 'Next examples'}
-              className="grid size-8 place-items-center rounded-full border border-[var(--rule)] text-sm transition-colors hover:bg-[var(--color-fd-muted)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none"
+              className="pixel grid size-8 place-items-center border border-[var(--v-steel)] text-[16px] leading-[16px] transition-colors hover:border-[var(--v-ink)] hover:bg-[var(--v-steel)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none"
             >
               {d < 0 ? '←' : '→'}
             </button>
@@ -50,9 +50,9 @@ export function Examples({ section, title = 'In the wild' }: { section: string; 
               href={e.url}
               target="_blank"
               rel="noreferrer"
-              className="group block rounded-lg focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none"
+              className="group block focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:outline-none"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-[var(--rule)] bg-[var(--color-fd-muted)]">
+              <div className="relative aspect-[16/10] overflow-hidden border border-[var(--v-steel)] bg-[var(--v-surface)]">
                 <Image
                   src={e.image}
                   alt={`${e.name} website`}

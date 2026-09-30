@@ -58,24 +58,24 @@ export function ScrollGallery() {
   }, []);
 
   return (
-    <section ref={section} className="relative overflow-hidden border-y border-[var(--rule)] bg-[#16140f] text-[#ece6da]">
+    <section ref={section} className="relative overflow-hidden border-y border-[var(--v-line)] bg-[var(--v-bg)] text-[var(--v-ink)]">
       <div className="flex min-h-[100svh] flex-col justify-center py-16">
         <div className="mx-auto mb-10 flex w-full max-w-[1400px] flex-wrap items-end justify-between gap-4 px-4 sm:px-6">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-60">11 · Showcase</p>
+            <p className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]">[11] <span className="text-[var(--v-ink)]">/showcase</span></p>
             <h2 className="mt-3 max-w-[16ch] font-display text-4xl leading-tight tracking-[-0.02em] sm:text-6xl">
               Learn from sites that already got it right.
             </h2>
           </div>
-          <Link href="/docs/showcase" className="text-sm underline underline-offset-4">
+          <Link href="/docs/cases" className="text-sm underline underline-offset-4">
             All {showcase.length} with notes →
           </Link>
         </div>
         <div className="overflow-x-auto md:overflow-visible motion-reduce:overflow-x-auto">
           <div ref={track} className="flex w-max gap-6 px-4 sm:px-6">
             {items.map((s, i) => (
-              <Link key={s.id} href="/docs/showcase" data-card className="group block w-[78vw] max-w-[520px] shrink-0 sm:w-[44vw]">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10">
+              <Link key={s.id} href="/docs/cases" data-card className="group block w-[78vw] max-w-[520px] shrink-0 sm:w-[44vw]">
+                <div className="relative aspect-[16/10] overflow-hidden border border-[var(--v-steel)]">
                   <Image
                     src={`/showcase/${s.id}.jpg`}
                     alt={`Screenshot of ${s.name}`}
@@ -85,10 +85,10 @@ export function ScrollGallery() {
                   />
                 </div>
                 <div className="mt-4 flex items-baseline gap-3">
-                  <span className="font-mono text-xs opacity-50 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]">[{String(i + 1).padStart(2, '0')}]</span>
                   <p className="font-display text-2xl">{s.name}</p>
                 </div>
-                <p className="mt-1 max-w-[46ch] text-sm opacity-70">{s.why}</p>
+                <p className="mt-1 max-w-[46ch] text-sm text-[var(--v-soft)]">{s.why}</p>
               </Link>
             ))}
           </div>
@@ -108,7 +108,7 @@ export function NameMarquee() {
           {names.map((n) => (
             <li key={n} className="flex items-center gap-12 font-display text-3xl whitespace-nowrap italic text-[var(--text-soft)]">
               {n}
-              <span className="inline-block size-2 rounded-full bg-[var(--accent)] not-italic" />
+              <span aria-hidden className="pixel text-[16px] not-italic text-[var(--v-dim)]">■</span>
             </li>
           ))}
         </ul>

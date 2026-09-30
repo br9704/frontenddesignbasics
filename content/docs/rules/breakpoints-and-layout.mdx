@@ -1,0 +1,247 @@
+---
+title: 'Breakpoints and layout'
+description: 'Five named breakpoints, three containers, gutters and grid columns, proximity, and the 390px rule.'
+---
+
+<Callout title="TL;DR">
+
+- Mobile first. Use Tailwind's breakpoint names as they are: `sm md lg xl 2xl`.
+- Three containers: prose 65ch, page 1200px, wide 1440px.
+- Gutters of 16px or more on phones. Grid columns use `minmax(0, 1fr)`.
+- Gaps between groups are about twice the gaps inside them.
+- Every page works at 390px and 320px with no sideways scroll.
+
+</Callout>
+
+Design mobile first and add layout as the screen grows. Use Tailwind's five breakpoint names and
+values unchanged, so every developer and every AI agent already knows them.
+
+## Breakpoints
+
+| Name | Min width | Typical device | Tailwind |
+|---|---|---|---|
+| (base) | 0 | Phones, portrait | no prefix |
+| `sm` | 640px | Large phones landscape, small tablets | `sm:` |
+| `md` | 768px | Tablets portrait | `md:` |
+| `lg` | 1024px | Tablets landscape, small laptops | `lg:` |
+| `xl` | 1280px | Laptops, desktops | `xl:` |
+| `2xl` | 1536px | Large desktops | `2xl:` |
+
+- **MUST** write base styles for the phone and add `min-width` overrides upwards. No `max-width` media queries except for a one-off fix.
+- **MUST** keep breakpoints in tokens (`--breakpoint-md: 48rem` in `@theme`). Never write `@media (min-width: 812px)` by hand.
+- **SHOULD** change layout at no more than 3 breakpoints per page. Most pages need only `md` and `lg`.
+- **SHOULD** use container queries for components that appear in different column widths. Tailwind v4 has them built in: `@container` on the parent, `@md:grid-cols-2` on the child.
+
+<Decision
+  question="Media query or container query?"
+  caption="Rule of thumb: pages respond to the viewport, components respond to the space they are given."
+  branches={[
+    { if: 'it changes the page shell (nav, sidebar, columns)', then: 'media query: md:, lg:' },
+    { if: 'it is a card or widget reused in sidebars and main columns', then: 'container query: @container, @md:' },
+    { if: 'it only needs to wrap', then: 'neither: flex-wrap or auto-fit grid' },
+    { if: 'it depends on hover or pointer', then: '@media (hover: hover) and (pointer: fine)' },
+  ]}
+/>
+
+## Test widths
+
+Check every page at these widths before calling it done.
+
+| Width | Why |
+|---|---|
+| 320px | The reflow width in WCAG 2.2 (1.4.10). Content must work without two-way scrolling |
+| 390px | The standard modern iPhone width. The house rule below |
+| 768px | Tablet portrait, the first layout change |
+| 1024px | Tablet landscape, where sidebars usually appear |
+| 1280px | Common laptop |
+| 1440px | Common desktop. Check the container stops growing |
+| 1920px | Full HD. Check nothing stretches edge to edge by accident |
+
+## Containers
+
+Three widths cover almost every page.
+
+| Token | Value | Use |
+|---|---|---|
+| `--container-prose` | 65ch (about 680px at 16px) | Articles, docs, long text |
+| `--container-page` | 1200px | Standard page content |
+| `--container-wide` | 1440px | Dashboards, galleries, wide tables |
+
+```css
+@theme {
+  --container-prose: 65ch;
+  --container-page: 1200px;
+  --container-wide: 1440px;
+}
+
+.container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+```
+
+- **MUST** cap reading text at 65ch, even inside a wider container.
+- **MUST** let backgrounds go full bleed and keep content inside the container. The section is wide; the text is not.
+- **SHOULD NOT** add a fourth container width. Use a grid span instead.
+
+## Gutters and grid columns
+
+The grid follows Material's responsive layout grid: 4 columns on phones, 8 on tablets, 12 on desktop.
+
+<Preview caption="The same page on three grids. Phones get 4 columns and 16px gutters, tablets 8 columns and 24px, desktops 12 columns and 32px. Content spans whole columns, never fractions.">
+  <div style={{ display: 'grid', gap: 20 }}>
+    <div>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-soft)', marginBottom: 6 }}>base · 4 cols · gap 16</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, maxWidth: 200 }}>
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.35 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.35 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.35 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.35 }} />
+      </div>
+    </div>
+    <div>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-soft)', marginBottom: 6 }}>md · 8 cols · gap 24</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 6, maxWidth: 400 }}>
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+        <div style={{ height: 28, borderRadius: 3, background: 'var(--accent)', opacity: 0.55 }} />
+      </div>
+    </div>
+    <div>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-soft)', marginBottom: 6 }}>lg · 12 cols · gap 32</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 6 }}>
+        <div style={{ gridColumn: 'span 8', height: 28, borderRadius: 3, background: 'var(--text)', color: 'var(--surface)', fontFamily: 'var(--font-mono)', fontSize: 11, padding: '6px 8px' }}>main · span 8</div>
+        <div style={{ gridColumn: 'span 4', height: 28, borderRadius: 3, background: 'var(--accent)', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 11, padding: '6px 8px' }}>aside · 4</div>
+      </div>
+    </div>
+  </div>
+</Preview>
+
+| Breakpoint | Columns | Gutter (side padding) | Column gap | Section spacing |
+|---|---|---|---|---|
+| base (0 to 639px) | 4 | 16px | 16px | 64px |
+| `sm` / `md` (640 to 1023px) | 8 | 24px | 24px | 80px |
+| `lg` and up (1024px+) | 12 | 32px | 32px | 96px |
+
+```css
+:root {
+  --gutter: 16px;
+  --grid-cols: 4;
+  --grid-gap: 16px;
+}
+@media (min-width: 40rem) { :root { --gutter: 24px; --grid-cols: 8;  --grid-gap: 24px; } }
+@media (min-width: 64rem) { :root { --gutter: 32px; --grid-cols: 12; --grid-gap: 32px; } }
+
+.grid-page {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+```
+
+- **MUST** keep side gutters at 16px or more on phones. Text touching the screen edge is the most common phone bug.
+- **MUST** use `minmax(0, 1fr)`, not `1fr`, for grid columns that hold text or code, so long content cannot force the column wider.
+- **SHOULD** use 12 columns on desktop because it divides into halves, thirds, quarters and sixths.
+- **SHOULD** span whole columns (`col-span-8`, `col-span-4`), never set widths like `width: 63%`.
+- **SHOULD** use `repeat(auto-fit, minmax(16rem, 1fr))` for card grids that should not need breakpoints at all.
+
+## Safe areas and viewport height
+
+Phones have notches, rounded corners and home indicators. Opt in to the full screen, then pad away
+from the unsafe edges.
+
+```tsx
+// app/layout.tsx (Next.js)
+import type { Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+```
+
+```css
+.site-header {
+  padding-top: env(safe-area-inset-top);
+  padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+}
+
+.bottom-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+.hero { min-height: 100svh; }   /* small viewport: never jumps when the toolbar hides */
+.app-shell { height: 100dvh; }  /* dynamic viewport: tracks the toolbar */
+```
+
+- **MUST** add `env(safe-area-inset-bottom)` to anything fixed to the bottom of the screen once `viewport-fit=cover` is set.
+- **MUST** use `max()` so the gutter is never smaller than the normal 16px when the inset is 0.
+- **MUST NOT** use `100vh` for full-height layouts on phones. It is taller than the visible area while the browser toolbar shows. Use `100svh` for heroes and `100dvh` for app shells.
+- **MUST NOT** use `100vw` for full-bleed sections. It includes the scrollbar width on desktop and causes a horizontal scroll.
+
+## The 390px rule
+
+Every page MUST work at 390px wide with no horizontal scroll. This is the house rule from
+[the rules](/docs/rules). Test it in the browser's device mode, then run this in the console:
+
+```js
+[...document.querySelectorAll('*')].filter((el) => el.getBoundingClientRect().right > innerWidth + 1);
+```
+
+An empty array passes. Anything listed is wider than the screen. The usual causes and fixes:
+
+| Cause | Fix |
+|---|---|
+| Fixed widths (`width: 480px`) | `max-width: 100%` or a grid span |
+| Long URLs, emails, IDs | `overflow-wrap: anywhere` on the text container |
+| Flex children that refuse to shrink | `min-width: 0` (`min-w-0`) on the child |
+| Wide tables and code blocks | Wrap in a container with `overflow-x: auto`; scroll the block, not the page |
+| `100vw` sections | `width: 100%` |
+| Three columns with no base style | `grid-cols-1 md:grid-cols-3` |
+| Images and embeds without limits | `max-width: 100%; height: auto` |
+| Negative margins for bleed effects | Put `overflow-x: clip` on the section wrapper |
+
+- **MUST** check at 390px and at 320px, which is the WCAG reflow width.
+- **MUST** keep inputs at 16px text so iOS does not zoom and shift the layout on focus.
+- **SHOULD** use `overflow-x: clip` rather than `hidden` on wrappers, because `clip` does not create a scroll container and does not break `position: sticky`.
+
+## Group by proximity
+
+<ProximityDiagram />
+
+Related things sit close. Unrelated things sit far apart. The gap *between* groups should be about
+twice the gap *within* them. This does more for structure than any border or card.
+
+- **SHOULD** allow asymmetry. A 1:2 split feels more designed than three equal columns.
+- **SHOULD** give major sections 80 to 120px of vertical space on desktop.
+
+<GridOverlay />
+
+Turn the overlay on. Every block lines up with a column edge and every line of text with the 8px
+baseline. Drop to 4 columns and the layout reflows by spanning whole columns.
+
+<Examples section="layout" />
+
+## Why it works
+
+Shared breakpoint names mean "it breaks at md" is a complete bug report. A small, fixed set of
+containers and a column grid make alignment automatic, so edges line up across sections without
+anyone measuring. The 390px check catches the one failure that makes a site feel broken on the device
+most people will actually use.
+
+## Sources
+
+- [Tailwind CSS: responsive design](https://tailwindcss.com/docs/responsive-design)
+- [MDN: container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries)
+- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)

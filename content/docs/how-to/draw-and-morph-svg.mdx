@@ -1,0 +1,99 @@
+---
+title: How to draw and morph SVG
+description: Draw strokes on, send things along a path, and morph one shape into another without twisting.
+---
+
+<Callout title="TL;DR">
+
+- DrawSVG animates a stroke from nothing to whole.
+- MotionPath moves any element along a path and can turn it to face the way it goes.
+- MorphSVG works best when both shapes have similar points in the same direction.
+
+</Callout>
+
+**Goal:** line art that draws itself, followers that ride it, and shapes that melt into each other.
+
+## You need
+
+- `gsap` with `DrawSVGPlugin`, `MotionPathPlugin` and `MorphSVGPlugin`. All free since GSAP 3.13.
+- SVG paths, exported from Figma or drawn by hand.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " DrawSVG     \"0% 0%\"  ─► \"0% 100%\"   stroke grows",
+  "             \"0% 10%\" ─► \"90% 100%\"  window travels",
+  " MotionPath  ●═══════════►           rides the path",
+  " MorphSVG    ■ ─► ♦ ─► ●             matched points",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Register the plugins
+
+```ts
+import gsap from 'gsap';
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
+gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin, MorphSVGPlugin);
+```
+
+### 2. Draw a stroke on
+
+```ts
+gsap.from('.trace', { drawSVG: 0, duration: 1.2, ease: 'power2.inOut', stagger: 0.08 });
+```
+
+For a moving light, animate a window: `gsap.fromTo(path, { drawSVG: '0% 10%' }, { drawSVG: '90% 100%', ease: 'none', repeat: -1 })`.
+
+### 3. Send a follower along the path
+
+```ts
+gsap.to('.dot', {
+  motionPath: { path: '#trace-1', align: '#trace-1', alignOrigin: [0.5, 0.5], autoRotate: true },
+  duration: 2, ease: 'none', repeat: -1,
+});
+```
+
+`align` puts the follower on the path even if it lives elsewhere in the SVG.
+
+### 4. Prepare shapes for a morph
+
+Turn circles and rects into paths first: `MorphSVGPlugin.convertToPath('circle, rect')`. Then draw
+both shapes starting at the same spot (top centre, say) and going the same way (clockwise). Similar
+point counts help too.
+
+### 5. Morph, and fix twisting with shapeIndex
+
+```ts
+gsap.to('#shape', { morphSVG: { shape: '#star', shapeIndex: 'auto' }, duration: 1, ease: 'power4.inOut' });
+```
+
+If it still twists, try whole numbers for `shapeIndex`. In development, `shapeIndex: 'log'` prints the
+value it picked so you can hard-code it.
+
+### 6. Glow without SVG filters
+
+`feGaussianBlur` repaints the whole filter area on every frame. Instead, draw the same path three
+times: wide and faint, medium, then thin and near-white. It looks like light, it stays sharp, and it
+costs almost nothing. [Neon light paths](/docs/how-to/neon-light-paths) has the code.
+
+### 7. Honour reduced motion
+
+Wrap it all in `gsap.matchMedia()` with `(prefers-reduced-motion: no-preference)`. Reduced motion gets
+the fully drawn, final shape with no loop.
+
+## Why it works
+
+A drawn line shows how something is made, which is why diagrams feel clearer when they draw
+themselves. Matched points keep a morph readable: the eye can follow each corner to its new place.
+
+## See it live
+
+- [Circuit board](/lab/circuit-board)
+
+<Examples section="motion" />
+
+## Sources
+
+- [MDN: SVG paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
+- [GSAP: ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)

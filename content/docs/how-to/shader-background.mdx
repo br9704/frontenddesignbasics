@@ -1,0 +1,95 @@
+---
+title: How to write a shader background
+description: One full-screen triangle and a fragment shader that drifts like ink, stays behind the text, and freezes for reduced motion.
+---
+
+<Callout title="TL;DR">
+
+- Layer noise (fbm), then warp it with more noise.
+- Turn the field into shapes with `smoothstep`, multiply the colours, add grain.
+- Keep text readable, cap DPR, pause off screen, freeze for reduced motion.
+
+</Callout>
+
+**Goal:** a living texture that sets the mood without fighting the words on top.
+
+## You need
+
+- [OGL](https://github.com/oframe/ogl), a tiny WebGL library. No three.js needed.
+- The full example: [`components/ink-field.tsx`](https://github.com/br9704/frontenddesignbasics/blob/main/components/ink-field.tsx).
+
+<ShaderPlayground />
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " noise ─► warp ─► threshold ─► multiply ─► grain",
+  " smooth   noise    field to     inks over    print",
+  " random   bends    ink shapes   paper        texture",
+  "          noise",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Draw one full-screen triangle
+
+A single triangle bigger than the screen covers every pixel with no seam. OGL's `Triangle` geometry
+does it for you. All the work happens in the fragment shader.
+
+### 2. Layer noise
+
+`noise(p)` gives smooth random values. Add several layers at doubling frequency and halving strength.
+That is fbm (fractal Brownian motion), and it looks like clouds.
+
+### 3. Warp it
+
+Feed noise into the coordinates of more noise. Straight bands turn into ink swirling in water.
+
+```glsl
+vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
+vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + t * 1.4),
+              fbm(p + 3.0 * q + vec2(8.3, 2.8) - t * 1.1));
+float f = fbm(p + 3.2 * r);
+```
+
+### 4. Threshold, multiply, grain
+
+```glsl
+float inkA = smoothstep(0.56 - uDensity, 0.66 - uDensity, f + 0.12 * r.x);
+vec3 col = mix(uPaper, uPaper * uInkA, inkA * 0.92);          // multiply, like ink
+col += (hash(uv * uRes + fract(uTime) * 91.0) - 0.5) * 0.045;  // grain hides banding
+```
+
+### 5. Keep the text readable
+
+Fade the shader towards the paper colour behind the headline (a `clear` zone uniform), or put copy on
+a solid plate. Check contrast at the darkest point the text can sit on.
+
+### 6. Pause, cap and freeze
+
+Cap DPR, because fragment cost grows with every pixel. Stop the loop off screen with an
+IntersectionObserver. Under reduced motion, render one good frame and stop.
+
+## Or use a tool
+
+| You want | Use |
+|---|---|
+| A living gradient, tuned by eye | **ShaderGradient** |
+| A premium background, fast | **GetLayers** |
+| Animated backgrounds as React components | **React Bits** |
+| Something that is yours | Write it. Start with [The Book of Shaders](https://thebookofshaders.com) |
+
+## Why it works
+
+A shader background is like paper stock in print. It sets the mood before a word is read, as long as
+it stays behind the words.
+
+## See it live
+
+- [Liquid gradient](/lab/liquid-gradient)
+- [Make colour look expensive](/docs/how-to/make-colour-look-expensive) for OKLab mixing
+
+<Examples section="shaders" />
+
+## Sources
+
+- [The Book of Shaders](https://thebookofshaders.com)
+- [OGL](https://oframe.github.io/ogl/)

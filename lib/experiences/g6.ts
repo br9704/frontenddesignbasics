@@ -1,0 +1,55 @@
+import type { Experience } from './types';
+
+/* Group g6: the colour climax and the reference hall. Each entry's component lives in components/experiences/<id>.tsx */
+export const experiences: Experience[] = [
+  {
+    id: 'event-horizon',
+    title: 'Event Horizon',
+    blurb: 'A raymarched black hole bends light from its accretion disk and our wordmark into arcs; drag to tilt, scroll from edge-on to top-down.',
+    tools: ['threejs', 'r3f', 'glsl', 'gsap'],
+    stage: 'colour',
+    kind: 'shader',
+    source: 'components/experiences/event-horizon.tsx',
+    load: () => import('@/components/experiences/event-horizon'),
+  },
+  {
+    id: 'halftone-develop',
+    title: 'Halftone Develop',
+    blurb: 'A photo develops one ink at a time as a four-screen CMYK halftone on warm paper, relit by your pointer, with riso and Game Boy presets.',
+    tools: ['ogl', 'glsl', 'gsap', 'next-image'],
+    stage: 'colour',
+    kind: 'shader',
+    source: 'components/experiences/halftone-develop.tsx',
+    load: () => import('@/components/experiences/halftone-develop'),
+  },
+  {
+    id: 'colour-riot',
+    title: 'Colour Riot',
+    blurb: 'Stir a real ink fluid while god-rays burst and neon panels smear past.',
+    tools: ['threejs', 'r3f', 'postprocessing', 'glsl', 'gsap'],
+    stage: 'colour',
+    kind: 'generative',
+    source: 'components/experiences/colour-riot.tsx',
+    load: () => import('@/components/experiences/colour-riot'),
+  },
+  {
+    id: 'site-wall-3d',
+    title: 'Reference Hall',
+    blurb: 'The sites we studied glow as rounded screens in a ring on a black mirror pool; drag to spin, or fly a curved path through them.',
+    tools: ['r3f', 'drei', 'glsl', 'gsap', 'next-image'],
+    stage: 'colour',
+    kind: '3d',
+    source: 'components/experiences/site-wall-3d.tsx',
+    load: () => import('@/components/experiences/site-wall-3d'),
+  },
+  {
+    id: 'tool-blocks',
+    title: 'Tool Blocks',
+    blurb: 'An isometric drawing of the toolkit: an octree of 37 keycaps, one per tool, grows level by level; each tool\'s mark draws itself in dashes, flashes thermal, then fills with chrome.',
+    tools: ['r3f', 'drei', 'postprocessing', 'glsl', 'gsap', 'canvas2d', 'svg'],
+    stage: 'mono',
+    kind: '3d',
+    source: 'components/experiences/tool-blocks.tsx',
+    load: () => import('@/components/experiences/tool-blocks'),
+  },
+];

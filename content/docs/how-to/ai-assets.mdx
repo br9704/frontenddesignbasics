@@ -1,0 +1,145 @@
+---
+title: How to generate AI assets for the web
+description: Brief, generate, animate and ship images, loops and 3D models without breaking the rules.
+---
+
+<Callout title="TL;DR">
+
+- The prompt is a brief. You still art-direct and reject most of the output.
+- Approve a still before you animate it.
+- Ship video muted, with a poster frame that doubles as the reduced-motion version.
+
+</Callout>
+
+**Goal:** hero stills, textures, ambient loops and 3D objects that look chosen, not generated.
+
+## You need
+
+- Higgsfield (through its MCP) or another generator. It runs on credits, so check the balance first.
+- Your palette as hex values.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " brief ──► still ──► motion ──► finish ──► ship",
+  " subject    2-4        image to    upscale,    compress, poster,",
+  " hex, zone  variants   video 4-8s  cut out     reduced-motion fallback",
+  "            pick one   loopable    reframe",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Write the brief like a layout spec
+
+1. **Canvas first.** Size, aspect, and what it is for ("hero background, text on the left third").
+2. **Hex, not names.** `#0F3D2E` is a colour. "Forest green" is a guess.
+3. **Zones.** Say where things go: "upper third", "right side, behind the subject".
+4. **One style sentence, repeated** on every prompt in a set.
+5. **No text in the image.** Set real text on top in HTML.
+6. **A safety line.** No real people, logos, flags or weapons without the rights.
+
+<PromptAnatomy />
+
+### 2. Pick the model for the job
+
+| Job | Model / tool | Notes |
+|---|---|---|
+| General image, typography, reference edits | `gpt_image_2_5` | The default for ordinary generation |
+| Product, commercial, ad imagery | `marketing_studio_image` | Product shots and ad layouts |
+| Portraits, fashion, editorial people | `soul_2` | With a trained Soul ID for a consistent person |
+| General image → video | `seedance_2_5` | The default video model |
+| Multi-shot, audio, motion transfer | `kling3_0` | Longer, directed sequences |
+| 2K keyframes, mixed references | `minimax_h3` | Higher-resolution motion |
+| Copy motion from a video onto a still | `hf_mult_motion_control` | "Genjutsu" motion transfer |
+| Image → 3D model (GLB) | `generate_3d` | Drop the GLB straight into three.js / R3F |
+| Clean-up | `upscale_image`, `upscale_video`, `remove_background`, `outpaint_image`, `reframe` | Finish assets for each placement |
+
+
+### 3. Approve a still, then animate it
+
+Generate two to four variants. Pick one. Only then turn it into a 4 to 8 second loop. Video costs more
+and inherits every flaw of the frame it starts from.
+
+### 4. Copy a prompt from the library
+
+Copy, then change the bracketed parts.
+
+<Tabs items={['Hero texture', 'Product still', 'Editorial illustration', 'Ambient loop', '3D object']}>
+<Tab value="Hero texture">
+```text
+Wide 16:9 hero background for a website. Abstract risograph ink in water: two ink colours,
+[#FF5C1F] and [#2F4EC2], overprinted on warm paper [#F2EEE6] with visible paper grain.
+Ink concentrated on the right half; the left 40% stays almost clean paper for headline text.
+Soft misregistration between the two inks. No text, no objects, no people. Flat, printed, tactile.
+```
+</Tab>
+<Tab value="Product still">
+```text
+Square product photograph of [a matte ceramic pour-over coffee dripper] on a seamless
+[#E8E2D6] backdrop. Single soft key light from the upper left, gentle shadow to the right,
+shallow depth of field. Centred with generous negative space above for a headline.
+No text, no logos, no props. Editorial, calm, premium.
+```
+</Tab>
+<Tab value="Editorial illustration">
+```text
+[4:5] editorial illustration in a flat-vector, screen-printed style.
+Background: solid [#16140F] with subtle paper-grain texture.
+Subject, lower two-thirds: [a hand holding a phone above a city at dusk], limited palette of
+[#FF5C1F] and [#ECE6DA], soft shading, no photorealism.
+Keep the upper third empty: text will be set on top in HTML.
+No text inside the illustration. No real people, flags, weapons or logos.
+```
+</Tab>
+<Tab value="Ambient loop">
+```text
+Image-to-video from the approved still. [6] seconds, seamless loop.
+Very slow drift of the ink to the right, as if in still water; camera locked, no zoom,
+no cuts, no new elements. Motion subtle enough to sit behind text.
+```
+</Tab>
+<Tab value="3D object">
+```text
+Single object on a plain background, three-quarter view, even studio light, no shadows
+on the backdrop: [a retro beige desktop computer with a CRT monitor]. Clean silhouette,
+no text or logos. (Then: generate_3d → GLB → compress with Draco before shipping.)
+```
+</Tab>
+</Tabs>
+
+
+### 5. Ship it with a poster
+
+```html
+<div class="hero-media">
+  <img src="/hero-poster.jpg" alt="" />          <!-- still frame: loading state + reduced motion -->
+  <video autoplay muted loop playsinline preload="metadata" poster="/hero-poster.jpg">
+    <source src="/hero.av1.mp4" type="video/mp4; codecs=av01.0.05M.08" />
+    <source src="/hero.h264.mp4" type="video/mp4" />
+  </video>
+</div>
+```
+
+```css
+.hero-media { position: relative; }
+.hero-media > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-media video { display: none; }          /* the <img> underneath stays visible */
+}
+```
+
+
+- Set `muted` and `playsinline`, or phones will not autoplay.
+- Compress hard: a background video over 3 MB is a performance bug.
+- Check the loop point with two frames, like any motion. See [how to verify](/docs/how-to/win95-chrome-and-verify).
+
+## Why it works
+
+Generation removes the cost of *making* an asset, not the cost of *choosing* one. Sites that look
+designed are the ones where someone wrote a real brief, rejected most of the output, and set the text
+themselves.
+
+<Examples section="ai" title="AI products with great design" />
+
+## Sources
+
+- [Higgsfield](https://higgsfield.ai)
+- [MDN: the video element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video)

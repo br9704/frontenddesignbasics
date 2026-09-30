@@ -1,0 +1,107 @@
+---
+title: How to go from pixel to HD, three ways
+description: Make an object, a whole scene or an image start as chunky pixels and resolve to full detail.
+---
+
+<Callout title="TL;DR">
+
+- For one 3D object: render it into a tiny, nearest-filtered target and step the size up.
+- For a dissolve: an instanced grid of tiles that blast away on Bayer-plus-distance delays.
+- For an image: CSS `image-rendering: pixelated` on a scaled-down copy.
+
+</Callout>
+
+**Goal:** the site's signature move. Something looks like 1995, then snaps into high definition.
+
+## You need
+
+- three, `@react-three/fiber` and `@react-three/drei` for ways one and two.
+- Nothing but CSS for way three.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " progress   0.0        0.3        0.6        1.0",
+  " target px  16×16  ──► 32×32 ──► 128×128 ──► full size",
+  "            ████       ▓▓▓▓       ▒▒▒▒       smooth",
+  "            ████       ▓▓▓▓       ▒▒▒▒       lit",
+].join('\n')}</pre>
+
+## Way one: the cube (low-res render target)
+
+### 1. Render into a small target
+
+Make a `WebGLRenderTarget` with `NearestFilter` for both min and mag filters. Nearest means each
+texel stays a hard square when stretched.
+
+```tsx
+const target = useFBO(16, 16, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter });
+```
+
+### 2. Draw the scene into it, then show it on a full-screen quad
+
+```tsx
+useFrame(({ gl, scene, camera }) => {
+  const size = stepSize(p.current);   // 16, 32, 64 … up to the canvas width
+  target.setSize(size, Math.round(size / aspect));
+  gl.setRenderTarget(target);
+  gl.render(scene, camera);
+  gl.setRenderTarget(null);
+});
+```
+
+### 3. Step the size, do not glide it
+
+Snap the size to whole steps (`16 * 2 ** Math.floor(progress * 6)`). A smooth resize shimmers. Steps
+read as "the resolution just went up", which is the joke.
+
+## Way two: the pixel blast (instanced tiles)
+
+### 4. Lay a grid of tiles over the scene
+
+One `InstancedMesh` of planes, one tile per cell. Give each tile a delay made of two parts: its Bayer
+matrix value (so neighbours leave at different times) plus its distance from a centre point (so the
+blast spreads outward).
+
+```ts
+const bayer4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+const delay = (bayer4[(y % 4) * 4 + (x % 4)] / 16) * 0.35 + (dist / maxDist) * 0.65;
+```
+
+### 5. Blast on progress
+
+For each tile, `t = clamp((progress - delay) * 4, 0, 1)`. Scale it down and push it towards the
+camera as `t` rises. Write the matrix, then set `instanceMatrix.needsUpdate = true` once per frame.
+
+## Way three: images in CSS
+
+### 6. Show a small copy at full size
+
+```css
+.pixel-img { image-rendering: pixelated; width: 100%; aspect-ratio: 16 / 10; }
+```
+
+Swap the `src` from a 32px-wide copy to a 64px one, then to the full image. With `next/image`, ask for
+small widths from `imageSizes` (32, 48, 64, 96) so the server does the downscale.
+
+## Why not the Pixelation effect?
+
+`@react-three/postprocessing` has `Pixelation`, and it is fine for a fixed look. But its granularity
+rounds to whole pixels and odd values jump unevenly, so an animated `granularity` stutters. A render
+target you size yourself gives clean, exact steps.
+
+## Why it works
+
+Pixels are a promise of more detail. Showing the low-res state first, then paying it off, turns
+loading into a moment. Nearest filtering keeps every step honest and cheap.
+
+## See it live
+
+- [Pixel to HD cube](/lab/pixel-to-hd-cube)
+- [Pixel blast](/lab/pixel-blast)
+- [Velocity gallery](/lab/velocity-gallery) (images that pixelate with scroll speed)
+
+<Examples section="3d" />
+
+## Sources
+
+- [three.js: InstancedMesh](https://threejs.org/docs/#api/en/objects/InstancedMesh)
+- [React Postprocessing](https://react-postprocessing.docs.pmnd.rs/)

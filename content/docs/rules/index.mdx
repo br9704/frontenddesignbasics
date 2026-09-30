@@ -1,0 +1,104 @@
+---
+title: 'The rules'
+description: 'Twelve rules to decide once, write down and check before anything ships. Each one links to its detail page.'
+---
+
+<Callout title="TL;DR">
+
+- Every value is a token. Every size is on a scale.
+- It works at 390px, by keyboard, and with reduced motion on.
+- Every state is designed. Every word says what it does.
+- Read the twelve lines below. Open a page only when you need the detail.
+
+</Callout>
+
+## The twelve rules
+
+1. **Every value is a token.** Pages hold no hex codes, pixel values or z-index numbers. [Tokens and colour](/docs/rules/tokens-and-colour)
+2. **Name tokens by role, not by value.** `--color-text-soft`, never `--grey-600`. [Tokens and colour](/docs/rules/tokens-and-colour)
+3. **One accent, one meaning.** Body text meets 4.5:1, large text 3:1. [Tokens and colour](/docs/rules/tokens-and-colour)
+4. **Every size comes from a scale.** Type, 4pt spacing, radius, shadow, z-index. [Scales and type](/docs/rules/scales-and-type)
+5. **Type is chosen and set for reading.** Body 16px or more, lines 65ch or fewer. [Scales and type](/docs/rules/scales-and-type)
+6. **Mobile first, and 390px never scrolls sideways.** [Breakpoints and layout](/docs/rules/breakpoints-and-layout)
+7. **Every state is designed.** Hover, focus-visible, disabled, loading, error, empty. Targets 44 × 44px. [Components and states](/docs/rules/components-and-states)
+8. **Motion uses four curves and four durations.** UI changes stay under 400ms. [Motion tokens](/docs/rules/motion-tokens)
+9. **Reduced motion gets a still, composed frame.** Loops stop. Canvases pause off screen. [Motion tokens](/docs/rules/motion-tokens)
+10. **Every image and video has a reserved box.** AVIF first, real `sizes`, a poster for video. [Media](/docs/rules/media)
+11. **It meets WCAG 2.2 AA.** Visible focus, keyboard access, labels, `lang`. [Accessibility](/docs/rules/accessibility)
+12. **Words and speed are part of the design.** Buttons say what they do. LCP 2.5 s, INP 200ms, CLS 0.1. [Copy](/docs/rules/copy) and [Structure and performance](/docs/rules/structure-and-performance)
+
+## How to read MUST and SHOULD
+
+The keywords follow [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119), as the Vercel
+[Web Interface Guidelines](https://vercel.com/design/guidelines) do.
+
+- **MUST** means no exceptions without a written reason in the pull request.
+- **SHOULD** means the default. Break it when you can say why in one sentence.
+- **SHOULD NOT** means avoid it unless you can say why in one sentence.
+
+## Decisions flow one way
+
+<Flow
+  caption="Values live in one place. Each layer reads only from the layer to its left, so a change to a primitive reaches every page without anyone editing a page."
+  steps={[
+    { title: 'Primitive tokens', note: '--v-ink: #f5f5f5', tone: 'plain' },
+    { title: 'Semantic tokens', note: '--accent: var(--v-ink)', tone: 'plain' },
+    { title: 'Components', note: 'Button reads --accent', tone: 'accent' },
+    { title: 'Patterns', note: 'form, card grid, empty state', tone: 'plain' },
+    { title: 'Pages', note: 'compose patterns, set no values', tone: 'ink' },
+  ]}
+/>
+
+The test is simple. If a page file contains a hex code, a pixel value or a `z-index` number, a
+decision has leaked out of the token layer.
+
+## Hierarchy by contrast, not quantity
+
+<HierarchyDiagram />
+
+One big thing per view. Size, weight, colour and space do the ranking. Boxes and borders are the last
+resort.
+
+<Examples section="hierarchy" />
+
+## The ship checklist
+
+Run this before anything goes live.
+
+**Layout and type**
+
+- **MUST** work at 390px wide with no horizontal scroll.
+- **MUST** keep body text at 16px or more and lines at about 65ch or fewer.
+- **SHOULD** use `tabular-nums` for numbers that change or line up.
+- **SHOULD** balance headings (`text-wrap: balance`) and avoid single-word last lines.
+
+**Colour**
+
+- **MUST** meet 4.5:1 for body text and 3:1 for large text and UI boundaries.
+- **MUST** design dark mode as its own palette, if you ship one.
+
+**Interaction**
+
+- **MUST** show a visible focus state on every interactive element.
+- **MUST** give touch targets at least 44 × 44px.
+- **MUST** keep hover-only information reachable by keyboard and touch.
+- **SHOULD** give instant feedback: pressed states, optimistic UI, skeletons over spinners.
+
+**Motion**
+
+- **MUST** honour `prefers-reduced-motion`: fade instead of move, stop loops.
+- **MUST** pause off-screen canvases and loops.
+- **SHOULD NOT** animate layout properties (`width`, `top`) when `transform` will do.
+
+**Completeness**
+
+- **MUST** design empty, loading and error states.
+- **MUST** give every page a real `<title>`, a description and an OG image.
+- **SHOULD** have a favicon that reads at 16px.
+- **MUST** prove motion with frames about 1.5 s apart, not one screenshot. See [how to verify](/docs/how-to/win95-chrome-and-verify).
+
+## Why it works
+
+A rule turns a taste argument into a lookup. Reviews get shorter because the question changes from
+"does this look right?" to "is this the token?". New people and AI agents match the system on the
+first try, because the answer is written down.

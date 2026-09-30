@@ -1,55 +1,44 @@
 ---
 title: Start here
-description: A field guide to complete, beautiful web design, with live demos, real code and the reasons behind every choice.
+description: 'The docs for Frontend Design Basics: how-tos, rules and case studies, plus the tools and galleries around them.'
 ---
 
-<Banner name="readme" alt="Frontend Design Basics: complete, beautiful web design" />
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  "┌─ /docs ──────────────────────────────────────────────┐",
+  "│ [01] /how-to   short numbered guides, one job each   │",
+  "│ [02] /rules    twelve rules, TL;DR first             │",
+  "│ [03] /cases    great sites taken apart               │",
+  "├─ around the docs ────────────────────────────────────┤",
+  "│ /tools   /make   /inspiration   /sites               │",
+  "└──────────────────────────────────────────────────────┘",
+].join('\n')}</pre>
 
-Most sites that look "clean" are really just empty. The ones people remember are **complete**: they
-have a point of view, the small details have been designed, the motion means something, and they still
-work on a phone with reduced motion switched on.
-
-This guide collects what makes that difference, in one place, in a form you can use today.
-
-## How every page works
-
-<PageTemplate />
-
-<Steps>
-<Step>
-**See it.** A live demo you can poke at, before any explanation.
-</Step>
-<Step>
-**Read the code.** Short, copyable, with no framework ceremony you don't need.
-</Step>
-<Step>
-**Install it.** The exact package, registry or MCP command.
-</Step>
-<Step>
-**Know why.** The principle underneath, so you can use it somewhere the demo never imagined.
-</Step>
-</Steps>
-
-## The chapters
+## The docs
 
 <Cards>
-  <Card title="01 · Principles" href="/docs/principles">Type, colour, space, hierarchy, and the rules that tie them together.</Card>
-  <Card title="02 · Motion" href="/docs/motion">Easing, duration and choreography, with reduced motion built in.</Card>
-  <Card title="03 · 3D" href="/docs/3d">When a scene earns its weight, and how to keep it smooth.</Card>
-  <Card title="04 · Shaders" href="/docs/shaders">The hero's ink shader, uniform by uniform.</Card>
-  <Card title="05 · Components" href="/docs/components">Own your components through one registry.</Card>
-  <Card title="06 · Recipes" href="/docs/recipes">Hero, bento, scroll story, footer.</Card>
-  <Card title="07 · AI assets" href="/docs/ai-assets">Higgsfield, motion, and a prompt library.</Card>
-  <Card title="08 · Specimen" href="/docs/specimen">This site's own system, printed as posters.</Card>
-  <Card title="09 · Rules & conventions" href="/docs/conventions">Tokens, scales, breakpoints, states, motion, media, accessibility, copy.</Card>
-  <Card title="10 · Case studies" href="/docs/case-studies/br95">BR95 and the Balatro deck, decisions included.</Card>
-  <Card title="11 · Showcase" href="/docs/showcase">Standout sites by other people, and what to take from each.</Card>
-  <Card title="12 · Toolkit" href="/docs/toolkit">Every library, MCP and agent skill, with when to reach for each.</Card>
-  <Card title="13 · Workflow" href="/docs/workflow">How to build with an agent without getting generic results.</Card>
+  <Card title="[01] How-tos" href="/docs/how-to">Pick a task: pixel to HD, neon paths, kinetic type, scroll without hijacking. Up to eight steps each.</Card>
+  <Card title="[02] Rules" href="/docs/rules">Twelve one-line rules for tokens, scales, layout, states, motion, media, accessibility and copy.</Card>
+  <Card title="[03] Case studies" href="/docs/cases">How great sites were made, from their makers' own write-ups. BR95 and Balatro too.</Card>
 </Cards>
+
+## Around the docs
+
+<Cards>
+  <Card title="/tools" href="/tools">Every library, MCP and skill, with install commands and what to make with it.</Card>
+  <Card title="/make" href="/make">Live experiences built from the tools, each with its source.</Card>
+  <Card title="/inspiration" href="/inspiration">Type, colour, layout and hierarchy from real sites.</Card>
+  <Card title="/sites" href="/sites">Every site in the collection, filterable by category.</Card>
+</Cards>
+
+## Where to start
+
+1. **Starting a project?** Read [Start a project with the toolkit](/docs/how-to/start-a-project).
+2. **Building one effect?** Find it in [How-tos](/docs/how-to).
+3. **Reviewing work?** Run down [the twelve rules](/docs/rules).
+4. **Looking for ideas?** Read a [case study](/docs/cases), then browse [/sites](/sites).
 
 ## Use it with an agent
 
-The whole guide is published as [`/llms.txt`](/llms.txt) and the toolkit is a single
+The whole guide is published as [`/llms.txt`](/llms.txt), and the tools live in one
 [`toolkit.json`](https://github.com/br9704/frontenddesignbasics/blob/main/toolkit/toolkit.json).
-Point your coding agent at the repo when you start a project and ask *"what in here fits this brief?"*
+Point your coding agent at the repo and ask *"what in here fits this brief?"*

@@ -1,0 +1,108 @@
+---
+title: How to show hundreds of images, and their palettes
+description: Put hundreds of screenshots in one 3D wall, print them as halftone, and pull a palette from each.
+---
+
+<Callout title="TL;DR">
+
+- Pack thumbnails into one 2048px atlas and give each instance its own UV rectangle.
+- Use `/_next/image` with a width and quality Next 16 allows, or the request fails.
+- Pixelate by distance as cheap level of detail. Sort palettes in OKLCH.
+
+</Callout>
+
+**Goal:** a wall of 300 sites that loads fast, plus colour you can learn from. Take the technique,
+never the asset.
+
+## You need
+
+- three with `@react-three/fiber`, and `next/image`'s optimiser at `/_next/image`.
+- `data/examples.json` (293 screenshots under `/examples/`).
+- A 2D canvas for the atlas, halftone and palettes.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " atlas 2048 × 2048: 16 × 16 cells of 128px",
+  " ┌──┬──┬──┬──┐",
+  " │00│01│02│..│   instance i",
+  " ├──┼──┼──┼──┤   uvOffset = (i % 16, floor(i / 16)) / 16",
+  " │16│17│..│  │   uvScale  = 1 / 16",
+  " └──┴──┴──┴──┘",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Fetch thumbnails from the optimiser
+
+```ts
+const url = (src: string) => `/_next/image?url=${encodeURIComponent(src)}&w=128&q=75`;
+```
+
+In Next 16, `w` must be one of `imageSizes` (32, 48, 64, 96, 128, 256, 384) or `deviceSizes` (640, 750,
+828, 1080, 1200, 1920, 2048, 3840). `q` must be in `images.qualities`, which is only `[75]` by default.
+Any other value returns a 400, not a resized image. (Checked on this site: `w=130` and `q=80` both fail.)
+
+### 2. Draw them into one atlas
+
+```ts
+const c = document.createElement('canvas'); c.width = c.height = 2048;
+const ctx = c.getContext('2d')!;
+await Promise.all(list.map(async (src, i) => {
+  const img = new Image(); img.src = url(src); await img.decode();
+  ctx.drawImage(img, (i % 16) * 128, Math.floor(i / 16) * 128, 128, 128);
+}));
+const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+```
+
+One texture means one upload and one draw call for the whole wall.
+
+### 3. Give each instance its UV rectangle
+
+Add an `InstancedBufferAttribute` called `aUvOffset` (two floats per instance). In the vertex shader:
+`vUv = uv / 16.0 + aUvOffset;`. See [instanced blocks](/docs/how-to/instanced-blocks) for the mesh.
+
+### 4. Pixelate by distance
+
+Far tiles do not need detail. Snap their UVs to a coarser grid in the fragment shader:
+
+```glsl
+float cells = mix(128.0, 8.0, smoothstep(4.0, 30.0, vDist));   // near: sharp, far: blocky
+vec2 local = floor(fract(vUv * 16.0) * cells) / cells;
+vec3 col = texture2D(uAtlas, (floor(vUv * 16.0) + local) / 16.0).rgb;
+```
+
+It is level of detail for free, and it fits the pixel look.
+
+### 5. Develop an image as halftone
+
+Draw dots on a rotated grid. Each dot's radius comes from the brightness under it. Animate the dot size
+down to zero while fading the real image in, and it looks like a print developing.
+
+### 6. Pull a palette with k-means
+
+Sample about 2,000 pixels. Start with 5 random centres. Assign each pixel to its nearest centre, move
+each centre to the average of its pixels, and repeat about 8 times. Convert the centres to OKLCH and
+sort by lightness, then hue. Sorted palettes read as a system. Unsorted ones look random.
+
+## Pitfalls
+
+- **The screenshots are not ours.** Show them for commentary with a link to the real site. Never reuse
+  them as textures in a product.
+- **Tainted canvas.** Same-origin `/_next/image` URLs are fine. Remote URLs need CORS or `getImageData` throws.
+
+## Why it works
+
+GPUs hate switching textures and love drawing one mesh many times. An atlas plus instancing turns 300
+images into one texture and one call.
+
+## See it live
+
+- [Site wall 3D](/lab/site-wall-3d)
+- [Halftone develop](/lab/halftone-develop)
+
+<Examples section="colour" />
+
+## Sources
+
+- [Next.js: Image component](https://nextjs.org/docs/app/api-reference/components/image)
+- [web.dev: serve responsive images](https://web.dev/articles/serve-responsive-images)
+- [Playwright: screenshots](https://playwright.dev/docs/screenshots)

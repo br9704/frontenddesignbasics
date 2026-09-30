@@ -1,0 +1,55 @@
+import type { Experience } from './types';
+
+/* Group g1: filled by its builder. Each entry's component lives in components/experiences/<id>.tsx */
+export const experiences: Experience[] = [
+  {
+    id: 'pixel-to-hd-cube',
+    title: 'Pixel to HD',
+    blurb: 'Our 3D banner rebuilt as instanced cubes that fly through a threshold plane into 1-bit dither, develop tile by tile into HD and end as a chrome mark.',
+    tools: ['threejs', 'r3f', 'drei', 'glsl', 'gsap'],
+    stage: 'mono',
+    kind: '3d',
+    source: 'components/experiences/pixel-to-hd-cube.tsx',
+    load: () => import('@/components/experiences/pixel-to-hd-cube'),
+  },
+  {
+    id: 'voxel-type-assembly',
+    title: 'Type Blocks',
+    blurb: 'A word built from isometric type blocks that drop in one by one, then burst into voxels and rebuild as the next word. Hover to glitch, click to re-roll.',
+    tools: ['threejs', 'r3f', 'drei', 'glsl', 'gsap', 'canvas2d'],
+    stage: 'mono',
+    kind: '3d',
+    source: 'components/experiences/voxel-type-assembly.tsx',
+    load: () => import('@/components/experiences/voxel-type-assembly'),
+  },
+  {
+    id: 'ascii-3d',
+    title: 'Shape-Aware ASCII',
+    blurb: 'A dodecahedron and a breathing sphere of points drawn only in monospace glyphs. Faces keep a tone ramp while edges pick glyphs by shape, so they follow the silhouette. Drag the split to compare with a plain ramp.',
+    tools: ['threejs', 'r3f', 'drei', 'postprocessing', 'glsl', 'canvas2d', 'gsap'],
+    stage: 'mono',
+    kind: '3d',
+    source: 'components/experiences/ascii-3d.tsx',
+    load: () => import('@/components/experiences/ascii-3d'),
+  },
+  {
+    id: 'neon-block-city',
+    title: 'Neon Block City',
+    blurb: 'An isometric night city that switches on: a lamp bar opens, light runs down every street into the glass seams, a neon sign flickers and sparks when clicked.',
+    tools: ['threejs', 'r3f', 'drei', 'postprocessing', 'glsl', 'gsap', 'canvas2d'],
+    stage: 'colour',
+    kind: '3d',
+    source: 'components/experiences/neon-block-city.tsx',
+    load: () => import('@/components/experiences/neon-block-city'),
+  },
+  {
+    id: 'crystal-type-rings',
+    title: 'Zero to One',
+    blurb: 'A faceted crystal refracts a neon scene through every facet with RGB fringes, while rings of type orbit, pulse and pass in front of and behind the gem.',
+    tools: ['threejs', 'r3f', 'glsl', 'canvas2d', 'gsap'],
+    stage: 'colour',
+    kind: '3d',
+    source: 'components/experiences/crystal-type-rings.tsx',
+    load: () => import('@/components/experiences/crystal-type-rings'),
+  },
+];

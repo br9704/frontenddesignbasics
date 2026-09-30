@@ -1,0 +1,156 @@
+---
+title: 'Structure and performance'
+description: 'Where tokens, components and content live in a Next.js project, and the budgets that keep it fast: LCP 2.5 s, INP 200 ms, CLS 0.1.'
+---
+
+<Callout title="TL;DR">
+
+- Tokens in `app/global.css`, primitives in `components/ui`, patterns in `components`, routes in `app`.
+- Dependencies point one way: pages, patterns, primitives, tokens.
+- Budgets: LCP 2.5 s, INP 200ms, CLS 0.1 on a mid-range phone.
+- Fonts: WOFF2, self-hosted with `next/font`, subset, `font-display: swap`.
+- Check first-load JS in the build output for every route you change.
+
+</Callout>
+
+A design system is only as good as the place people look for it. Put tokens, components and content in predictable folders, and write the performance budgets down next to them. Then speed becomes a rule you check in review, not a crisis you fix before launch.
+
+## Folder structure
+
+<Flow
+  steps={[
+    { title: 'Tokens', note: 'app/global.css: colour, type, space, motion', tone: 'ink' },
+    { title: 'Primitives', note: 'components/ui: Button, Input, Dialog' },
+    { title: 'Patterns', note: 'components: Hero, PricingTable, Nav' },
+    { title: 'Pages', note: 'app/: routes compose patterns', tone: 'accent' },
+  ]}
+  caption="Dependencies only point one way. Pages use patterns, patterns use primitives, primitives use tokens. Never the reverse."
+/>
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  "my-app/",
+  "├─ app/                     # routes only: layout, page, loading, error",
+  "│  ├─ global.css            # tokens (@theme + :root + dark) and base styles",
+  "│  ├─ layout.tsx            # fonts, <html lang>, metadata defaults",
+  "│  ├─ icon.svg              # favicon, picked up by file convention",
+  "│  ├─ opengraph-image.png   # 1200 × 630",
+  "│  └─ (marketing)/page.tsx  # route groups keep URLs clean",
+  "├─ components/",
+  "│  ├─ ui/                   # primitives: button.tsx, input.tsx, dialog.tsx",
+  "│  └─ hero.tsx              # patterns built from primitives",
+  "├─ content/                 # MDX and copy, no logic",
+  "├─ lib/                     # pure helpers: cn.ts, motion.ts, format.ts",
+  "├─ public/                  # static files served as-is: fonts, video, images",
+  "└─ next.config.mjs",
+].join('\n')}</pre>
+
+| Thing | Lives in | Rule |
+|---|---|---|
+| Design tokens | `app/global.css` | One file. Components read tokens; they never define colours. |
+| JS mirror of tokens | `lib/motion.ts`, `lib/tokens.ts` | Only for values scripts need, such as durations. |
+| Primitives | `components/ui/` | No data fetching, no page copy, no layout margins. |
+| Patterns | `components/` | May compose primitives and take content as props. |
+| Routes | `app/` | Thin. Fetch data, pick patterns, pass props. |
+| Copy and docs | `content/` | MDX or JSON. Editable without touching components. |
+| Static assets | `public/` | Hashed or versioned names for long caching. |
+
+- **MUST** name files in kebab-case (`pricing-table.tsx`) and components in PascalCase (`PricingTable`).
+- **MUST** keep one component per file in `components/ui/`.
+- **MUST NOT** import from `app/` into `components/`. It creates cycles and couples patterns to routes.
+- **MUST NOT** put margins on primitives. The parent sets spacing, so the same button works anywhere.
+- **SHOULD** mark client components with `'use client'` at the smallest leaf that needs it, not at the page.
+
+This site follows the same shape: tokens in `app/global.css`, diagrams in `components/diagrams.tsx`, content in `content/docs/`.
+
+## Core Web Vitals
+
+Google's "good" thresholds, measured at the 75th percentile of real page loads, on mobile and desktop separately.
+
+| Metric | Measures | Good | Poor |
+|---|---|---|---|
+| LCP, Largest Contentful Paint | When the main content appears | 2.5 s or less | over 4 s |
+| INP, Interaction to Next Paint | How fast the page responds to input | 200 ms or less | over 500 ms |
+| CLS, Cumulative Layout Shift | How much things jump | 0.1 or less | over 0.25 |
+
+<Decision
+  question="Which metric is failing?"
+  branches={[
+    { if: 'LCP is slow', then: 'preload the hero image, cut render-blocking CSS and fonts' },
+    { if: 'INP is slow', then: 'ship less JS, split long tasks, defer third parties' },
+    { if: 'CLS is high', then: 'reserve boxes for media, ads and late banners' },
+    { if: 'all three are fine in the lab', then: 'check field data, real phones are slower' },
+  ]}
+  caption="Each metric has a short list of usual causes. Fix the cause, not the score."
+/>
+
+- **MUST** meet all three "good" thresholds on a mid-range phone over a throttled 4G connection.
+- **MUST** mark the LCP image with `preload` on `next/image` (or `fetchpriority="high"` on a plain `img`).
+- **MUST NOT** lazy-load anything above the fold.
+- **MUST** reserve space for anything that arrives late: images, embeds, cookie banners, ads.
+- **SHOULD** check field data (Vercel Speed Insights, CrUX, PageSpeed Insights) before and after each release, not only Lighthouse.
+
+## Budgets
+
+These are this guide's budgets for a content or marketing page. They are not a standard. A dashboard may need a larger JS budget; write down whatever you choose and check against it.
+
+| Resource | Budget per route (compressed) |
+|---|---|
+| First-load JavaScript | 150 KB |
+| CSS | 50 KB |
+| Fonts | 2 families, 4 files, 150 KB total |
+| LCP image | 150 KB |
+| All images above the fold | 400 KB |
+| Third-party scripts | 1 analytics script, loaded after interaction or idle |
+| Total page weight on first view | 1 MB |
+
+- **MUST** check first-load JS in the `next build` output for every route that changes.
+- **SHOULD** load heavy client-only pieces (3D, shaders, editors) with `next/dynamic` and `ssr: false` (called from a client component), after the page is interactive.
+- **SHOULD** load third-party scripts with `next/script` and `strategy="lazyOnload"` unless they are needed for the first paint.
+- **SHOULD** pause canvases and animation loops when they are off-screen or the tab is hidden.
+
+## Fonts
+
+```tsx
+// app/layout.tsx
+import localFont from 'next/font/local';
+import { Schibsted_Grotesk } from 'next/font/google';
+
+const sans = Schibsted_Grotesk({ // the body face this site uses
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
+const display = localFont({
+  src: './fonts/display-var.woff2',
+  display: 'swap',
+  variable: '--font-display',
+  preload: false, // only preload the font the LCP text uses
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en-GB" className={`${sans.variable} ${display.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+- **MUST** serve fonts as WOFF2 only. Every current browser supports it.
+- **MUST** self-host through `next/font`. It inlines the `@font-face`, removes the request to Google and adds a size-matched fallback, which prevents layout shift on swap.
+- **MUST** subset to the scripts you use (`subsets: ['latin']`).
+- **MUST** use `font-display: swap` (or `optional` for non-essential display faces). Text must never be invisible while a font loads.
+- **SHOULD** use one variable font instead of several static weights when you need three weights or more.
+- **SHOULD** preload at most one or two font files: the ones used by the LCP text.
+- **SHOULD** expose fonts as CSS variables (`--font-sans`) and map them in `@theme`, as this site does in `app/global.css`.
+
+## Why it works
+
+Predictable folders make the system discoverable: anyone can guess where a button or a colour lives. One-way dependencies mean a change to a token flows down and a change to a page never breaks a primitive. Written budgets turn performance into a yes-or-no check at build time, and the Core Web Vitals thresholds tie that check to what people actually feel: content appearing, taps responding and nothing jumping.
+
+## Sources
+
+- [web.dev: Core Web Vitals](https://web.dev/articles/vitals)
+- [Next.js: project structure](https://nextjs.org/docs/app/getting-started/project-structure)
+- [web.dev: font best practices](https://web.dev/articles/font-best-practices)

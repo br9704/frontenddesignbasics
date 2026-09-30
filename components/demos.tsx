@@ -6,10 +6,10 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 export function Preview({ children, caption }: { children: ReactNode; caption?: string }) {
   return (
     <figure className="not-prose my-6">
-      <div className="relative overflow-hidden rounded-lg border border-[var(--rule)] bg-[var(--surface-raised)] p-6 sm:p-8">
+      <div className="relative overflow-hidden border border-[var(--v-steel)] bg-[var(--v-surface)] p-6 sm:p-8">
         {children}
       </div>
-      {caption && <figcaption className="mt-2 text-xs text-[var(--text-soft)]">{caption}</figcaption>}
+      {caption && <figcaption className="mt-2 text-xs leading-relaxed text-[var(--v-soft)]">{caption}</figcaption>}
     </figure>
   );
 }
@@ -32,9 +32,9 @@ export function EasingPlayground() {
         <button
           type="button"
           onClick={() => setRun((r) => r + 1)}
-          className="rounded-full bg-[var(--text)] px-4 py-1.5 text-sm text-[var(--surface)] transition-transform active:scale-95"
+          className="pixel bg-[var(--v-ink)] px-4 py-2 text-[16px] leading-[16px] text-[var(--v-bg)] transition-transform active:scale-95"
         >
-          ▶ Play
+          ▶ play
         </button>
         <label className="flex items-center gap-2 text-xs text-[var(--text-soft)]">
           Duration
@@ -87,8 +87,8 @@ export function TypeScale() {
             type="button"
             onClick={() => setRatio(r)}
             aria-pressed={ratio === r}
-            className={`rounded-full px-3 py-1 text-xs ${
-              ratio === r ? 'bg-[var(--text)] text-[var(--surface)]' : 'border border-[var(--rule)]'
+            className={`border px-3 py-1 text-xs ${
+              ratio === r ? 'border-[var(--v-ink)] bg-[var(--v-ink)] text-[var(--v-bg)]' : 'border-[var(--v-steel)] text-[var(--v-soft)] hover:text-[var(--v-ink)]'
             }`}
           >
             {label}
@@ -140,13 +140,13 @@ function luminance(hex: string) {
 
 /* Contrast checker: WCAG ratio for any text/background pair. */
 export function ContrastPair() {
-  const [fg, setFg] = useState('#5c574c');
-  const [bg, setBg] = useState('#f2eee6');
+  const [fg, setFg] = useState('#5a5a5a');
+  const [bg, setBg] = useState('#080808');
   const [l1, l2] = [luminance(fg), luminance(bg)].sort((a, b) => b - a);
   const ratio = (l1 + 0.05) / (l2 + 0.05);
   const grade = ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : ratio >= 3 ? 'AA large only' : 'Fails';
   return (
-    <Preview caption="Body text needs 4.5:1 (AA). Soft grey on warm paper is the usual trap: check it, don't eyeball it.">
+    <Preview caption="Body text needs 4.5:1 (AA). Dim grey on near-black is the usual trap: check it, don't eyeball it.">
       <div className="flex flex-wrap items-center gap-4">
         <label className="flex items-center gap-2 text-xs">
           Text <input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="h-8 w-10 cursor-pointer" />
@@ -158,7 +158,7 @@ export function ContrastPair() {
           {ratio.toFixed(2)}:1 · <strong>{grade}</strong>
         </span>
       </div>
-      <p className="mt-5 rounded-md p-5 text-base" style={{ color: fg, background: bg }}>
+      <p className="mt-5 border border-[var(--v-steel)] p-5 text-base" style={{ color: fg, background: bg }}>
         The quick brown fox reads comfortably, or it doesn't. Numbers decide, not taste.
       </p>
     </Preview>
@@ -174,14 +174,14 @@ export function SpacingRhythm() {
       <button
         type="button"
         onClick={() => setScaled((s) => !s)}
-        className="mb-5 rounded-full border border-[var(--rule)] px-3 py-1 text-xs"
+        className="mb-5 border border-[var(--v-steel)] px-3 py-1 text-xs hover:border-[var(--v-ink)]"
       >
         {scaled ? 'Using a 4pt scale' : 'Using guessed values'} (toggle)
       </button>
       <div className="flex flex-wrap items-end" style={{ gap: gaps[3] }}>
         {gaps.map((g, i) => (
           <div key={i} className="flex flex-col items-center gap-2">
-            <div className="rounded bg-[var(--accent)]" style={{ width: g * 1.4 + 8, height: g * 1.4 + 8, opacity: 0.35 + i * 0.15 }} />
+            <div className="bg-[var(--accent)]" style={{ width: g * 1.4 + 8, height: g * 1.4 + 8, opacity: 0.35 + i * 0.15 }} />
             <span className="font-mono text-[11px] text-[var(--text-soft)]">{g}</span>
           </div>
         ))}
@@ -201,7 +201,7 @@ export function ReducedMotionDemo() {
   return (
     <Preview caption="With reduced motion on, the card fades instead of flying. Same information, no vestibular cost.">
       <div className="mb-5 flex flex-wrap gap-2 text-xs">
-        <button type="button" onClick={() => setShown((s) => !s)} className="rounded-full bg-[var(--text)] px-3 py-1 text-[var(--surface)]">
+        <button type="button" onClick={() => setShown((s) => !s)} className="bg-[var(--v-ink)] px-3 py-1 text-[var(--v-bg)]">
           Toggle card
         </button>
         <label className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export function ReducedMotionDemo() {
       <div className="h-28">
         <div
           ref={ref}
-          className="rounded-lg border border-[var(--rule)] bg-[var(--surface)] p-5 text-sm"
+          className="border border-[var(--v-ink)] bg-[var(--v-bg)] p-5 text-sm"
           style={{
             transition: reduced ? 'opacity 200ms linear' : 'transform 520ms cubic-bezier(0.22,1,0.36,1), opacity 520ms',
             opacity: shown ? 1 : 0,

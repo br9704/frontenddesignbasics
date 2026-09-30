@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 
 const base = process.env.BASE_URL ?? 'http://localhost:3000';
-const pages = ['/', '/docs', '/docs/principles', '/docs/principles/typography', '/docs/motion', '/docs/3d', '/docs/shaders', '/docs/components', '/docs/recipes', '/docs/ai-assets', '/docs/specimen', '/docs/conventions', '/docs/conventions/scales', '/docs/conventions/accessibility', '/docs/case-studies/balatro-deck', '/docs/showcase', '/docs/toolkit', '/docs/case-studies/br95', '/docs/workflow'];
+const pages = ['/', '/tools', '/make', '/inspiration', '/sites', '/docs', '/docs/how-to', '/docs/how-to/pixel-to-hd', '/docs/how-to/neon-light-paths', '/docs/rules', '/docs/rules/accessibility', '/docs/rules/tokens-and-colour', '/docs/cases', '/docs/cases/igloo-inc', '/docs/cases/br95', '/lab/pixel-to-hd-cube', '/lab/neon-block-city', '/lab/win95-boot'];
 const out = '.verify';
 
 async function main() {
@@ -25,15 +25,15 @@ async function main() {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion });
     const page = await ctx.newPage();
     await page.goto(base + '/', { waitUntil: 'networkidle' });
-    await page.waitForTimeout(800);
-    const hero = page.locator('section').first();
-    const a = await hero.screenshot({ path: `${out}/hero-${reducedMotion}-a.png` });
+    // v2 hero: the boot intro autoplays on load, so two viewport frames 1.5 s apart must differ;
+    // under reduced motion the desktop renders at once and the frames must match.
+    await page.waitForTimeout(reducedMotion === 'reduce' ? 3000 : 700);
+    const a = await page.screenshot({ path: `${out}/hero-${reducedMotion}-a.png` });
     await page.waitForTimeout(1500);
-    const b = await hero.screenshot({ path: `${out}/hero-${reducedMotion}-b.png` });
+    const b = await page.screenshot({ path: `${out}/hero-${reducedMotion}-b.png` });
     const same = Buffer.compare(a, b) === 0;
-    const mode = await page.locator('[data-motion]').first().getAttribute('data-motion');
-    if (reducedMotion === 'no-preference') check(!same && mode === 'live', `hero moves (frames differ, data-motion=${mode})`);
-    else check(same && mode === 'still', `reduced motion holds still (frames identical, data-motion=${mode})`);
+    if (reducedMotion === 'no-preference') check(!same, 'hero moves (boot intro frames differ)');
+    else check(same, 'reduced motion holds still (frames identical)');
     await ctx.close();
   }
 
@@ -51,7 +51,7 @@ async function main() {
     const d = await desktop.newPage();
     await d.goto(base + path, { waitUntil: 'networkidle' });
     await d.waitForTimeout(400);
-    await d.screenshot({ path: `${out}/${slug}-desktop.png`, fullPage: path !== '/docs/showcase' && path !== '/docs/toolkit' });
+    await d.screenshot({ path: `${out}/${slug}-desktop.png`, fullPage: path.startsWith('/docs'), timeout: 120000 });
     await d.close();
   }
 

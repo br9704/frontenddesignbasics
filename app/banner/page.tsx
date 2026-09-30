@@ -1,5 +1,5 @@
 import { InkField } from '@/components/ink-field';
-import { appName, appTagline } from '@/lib/shared';
+import { appTagline } from '@/lib/shared';
 
 /*
  * Banner renderer. Not linked anywhere; `pnpm shots --banners` screenshots it at fixed sizes
@@ -14,15 +14,25 @@ export default async function BannerPage(props: {
   const still = 38 + Number(seed ?? 0);
 
   return (
-    <main className="fixed inset-0 overflow-hidden bg-[#f2eee6] text-[#16140f]">
-      <InkField stillTime={still} density={section ? 0.03 : 0.06} clear={0.95} timeScale={Number(speed ?? 1)} />
+    <main className="fixed inset-0 overflow-hidden bg-[var(--v-bg)] text-[var(--v-ink)]">
+      {/* InkField multiplies ink into paper, so it prints grey ink on white; invert turns that into white ink on black. */}
+      <div className="absolute inset-0 [filter:invert(1)]">
+        <InkField
+          paper="#f5f5f5"
+          inkA="#5a5a5a"
+          inkB="#9a9a9a"
+          stillTime={still}
+          density={section ? 0.03 : 0.06}
+          clear={0.95}
+          timeScale={Number(speed ?? 1)}
+        />
+      </div>
       <div className="absolute inset-0 flex flex-col justify-between p-[4vw]">
-        <div className="flex items-center justify-between font-mono text-[max(12px,1vw)] uppercase tracking-[0.18em]">
-          <span className="flex items-center gap-3">
-            <span className="inline-block size-[0.8em] rounded-full bg-[#16140f]" />
-            {appName}
+        <div className="pixel flex items-center justify-between text-[max(16px,1.25vw)] leading-none">
+          <span>
+            ■ fdb <span className="text-[var(--v-dim)]">/docs</span>
           </span>
-          <span>{n ? `Chapter ${n}` : 'github.com/br9704/frontenddesignbasics'}</span>
+          <span className="text-[var(--v-soft)]">{n ? `[${n}] chapter` : 'github.com/br9704/frontenddesignbasics'}</span>
         </div>
         <h1
           className="max-w-[16ch] font-display leading-[0.92] tracking-[-0.03em]"
@@ -35,7 +45,7 @@ export default async function BannerPage(props: {
           )}
         </h1>
         {!section && (
-          <p className="max-w-[46ch] text-[max(13px,1.15vw)] leading-snug">{appTagline} Principles, motion, 3D, shaders, a showcase and a toolkit you can install today.</p>
+          <p className="max-w-[46ch] text-[max(13px,1.15vw)] leading-snug text-[var(--v-soft)]">{appTagline} Principles, motion, 3D, shaders, a showcase and a toolkit you can install today.</p>
         )}
       </div>
     </main>

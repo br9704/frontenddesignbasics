@@ -1,0 +1,109 @@
+---
+title: How to own your components
+description: Install components as source from registries, restyle them, and build the simple ones yourself.
+---
+
+<Callout title="TL;DR">
+
+- Registries give you source files, not a package. You own and restyle them.
+- Add the registries to `components.json`, then `npx shadcn add @ns/name`.
+- One "wow" component per view. Design all six button states.
+
+</Callout>
+
+**Goal:** components that look like your site, not like the library's demo page.
+
+## You need
+
+- The shadcn CLI (or the shadcn MCP for your agent).
+- Your tokens, so you can restyle what you install.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " registry ─► shadcn CLI ─► components/ui ─► restyle",
+  " @magicui    npx shadcn    your repo        your type,",
+  " @react-bits add @ns/name  owns the code    colour, radius",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Add the registries
+
+```json
+"registries": {
+  "@react-bits": "https://reactbits.dev/r/{name}.json",
+  "@magicui":    "https://magicui.design/r/{name}.json",
+  "@cult-ui":    "https://cult-ui.com/r/{name}.json",
+  "@bklit":      "https://ui.bklit.com/r/{name}.json"
+}
+```
+
+This repo ships that [`components.json`](https://github.com/br9704/frontenddesignbasics/blob/main/components.json).
+
+### 2. Install from any of them
+
+```bash
+npx shadcn@latest add @magicui/marquee
+npx shadcn@latest add @react-bits/SplitText-TS-TW
+npx shadcn@latest add @bklit/line-chart
+```
+
+### 3. Pick the right library
+
+| Library | Best for | Watch out for |
+|---|---|---|
+| **shadcn/ui** | Buttons, dialogs, forms | It is a neutral start. Restyle it |
+| **React Bits** | Text effects, backgrounds, cursor toys | One or two per page, not ten |
+| **Magic UI** | Marquee, bento, number ticker, beams | Defaults are recognisable. Change colour and type |
+| **Cult UI** | Characterful interactive pieces | Check keyboard access |
+| **21st.dev** | Many authors' patterns | Quality varies |
+| **Bklit UI** | Charts and dashboards | Keep chart colours to your palette |
+
+### 4. Restyle until it matches
+
+Swap every colour, radius and font for your tokens. Check keyboard and screen-reader behaviour of
+anything animated or custom.
+
+### 5. Build the simple ones yourself
+
+The marquee is one keyframe:
+
+<MarqueeDemo />
+
+```tsx
+<div className="group flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+  {[0, 1].map((k) => (
+    <ul key={k} aria-hidden={k === 1}
+        className="flex shrink-0 gap-10 pr-10 motion-safe:animate-[marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
+      {items.map((i) => <li key={i}>{i}</li>)}
+    </ul>
+  ))}
+</div>
+```
+
+<SpotlightCard />
+
+The spotlight card writes the pointer position into two CSS variables. A radial gradient does the
+rest, and focus can light it for keyboard users too.
+
+### 6. Design every button state
+
+<ButtonStatesLab />
+
+Default, hover, pressed, focus, disabled and loading. Hover and press under 200ms, focus instant, and
+lock the width while loading so nothing jumps. The full list is in
+[Components and states](/docs/rules/components-and-states).
+
+## Why it works
+
+Owning the source is what lets a site look like itself. Libraries are starting points. The design is
+in what you change.
+
+## See it live
+
+- [Flip bento](/lab/flip-bento)
+
+<Examples section="components" />
+
+## Sources
+
+- [shadcn/ui: registry](https://ui.shadcn.com/docs/registry)

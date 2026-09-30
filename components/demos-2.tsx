@@ -19,15 +19,15 @@ export function TiltCard() {
           ref={ref}
           onPointerMove={onMove}
           onPointerLeave={() => setT({ x: 0, y: 0 })}
-          className="relative aspect-[1.6] w-full max-w-sm rounded-2xl bg-[#16140f] p-6 text-[#ece6da] shadow-2xl motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out"
+          className="relative aspect-[1.6] w-full max-w-sm border border-[var(--v-steel)] bg-[var(--v-bg)] p-6 text-[var(--v-ink)] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)] motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out"
           style={{ transform: `rotateX(${t.x}deg) rotateY(${t.y}deg)`, transformStyle: 'preserve-3d' }}
         >
           <div
-            className="pointer-events-none absolute inset-0 rounded-2xl opacity-60"
-            style={{ background: `radial-gradient(circle at ${50 + t.y * 3}% ${50 - t.x * 3}%, rgba(255,122,69,0.35), transparent 55%)` }}
+            className="pointer-events-none absolute inset-0 opacity-60"
+            style={{ background: `radial-gradient(circle at ${50 + t.y * 3}% ${50 - t.x * 3}%, rgba(245,245,245,0.22), transparent 55%)` }}
           />
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-70" style={{ transform: 'translateZ(30px)' }}>
-            Member · 2026
+          <p className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]" style={{ transform: 'translateZ(30px)' }}>
+            [member] 2026
           </p>
           <p className="mt-10 font-display text-3xl" style={{ transform: 'translateZ(60px)' }}>
             Depth without a scene
@@ -41,13 +41,13 @@ export function TiltCard() {
 /* Shader playground: the site's own InkField with its uniforms exposed. */
 export function ShaderPlayground() {
   const [density, setDensity] = useState(0.06);
-  const [inkA, setInkA] = useState('#ff5c1f');
-  const [inkB, setInkB] = useState('#2f4ec2');
+  const [inkA, setInkA] = useState('#ff00a8');
+  const [inkB, setInkB] = useState('#00b3ff');
   const [clear, setClear] = useState(0);
   return (
-    <Preview caption="The home page hero, with its uniforms on sliders. Every change is a uniform update, not a recompile.">
-      <div className="relative -m-6 mb-5 h-72 overflow-hidden rounded-t-lg sm:-m-8 sm:mb-6">
-        <InkField density={density} inkA={inkA} inkB={inkB} clear={clear} />
+    <Preview caption="An ogl ink shader with its uniforms on sliders. Deliberately in colour: two finale inks multiply where they overlap. Every change is a uniform update, not a recompile.">
+      <div className="relative -m-6 mb-5 h-72 overflow-hidden border-b border-[var(--v-steel)] sm:-m-8 sm:mb-6">
+        <InkField paper="#f5f5f5" density={density} inkA={inkA} inkB={inkB} clear={clear} />
       </div>
       <div className="grid gap-4 text-xs sm:grid-cols-2">
         <label className="flex items-center gap-3">
@@ -102,7 +102,7 @@ export function MarqueeDemo() {
 /* Bento grid: asymmetric cells from one grid definition. */
 export function BentoDemo() {
   const cells = [
-    { c: 'sm:col-span-2 sm:row-span-2', t: 'The one big idea', d: 'Largest cell, strongest image or number.', dark: true },
+    { c: 'sm:col-span-2 sm:row-span-2', t: 'The one big idea', d: 'Largest cell, strongest image or number.', big: true },
     { c: '', t: 'Proof', d: 'A metric or a logo.' },
     { c: '', t: 'Detail', d: 'A feature worth a close-up.' },
     { c: 'sm:col-span-2', t: 'Supporting story', d: 'Wide cells read as sentences.' },
@@ -114,12 +114,16 @@ export function BentoDemo() {
         {cells.map((x) => (
           <div
             key={x.t}
-            className={`flex flex-col justify-end rounded-xl border border-[var(--rule)] p-4 ${x.c} ${
-              x.dark ? 'bg-[#16140f] text-[#ece6da]' : x.accent ? 'bg-[var(--accent)] text-white' : 'bg-[var(--surface)]'
+            className={`flex flex-col justify-end border p-4 ${x.c} ${
+              x.big
+                ? 'border-[var(--v-soft)] bg-[var(--v-steel)] text-[var(--v-ink)]'
+                : x.accent
+                  ? 'border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]'
+                  : 'border-[var(--v-steel)] bg-[var(--v-bg)] text-[var(--v-ink)]'
             }`}
           >
-            <p className="font-display text-xl">{x.t}</p>
-            <p className="text-xs opacity-75">{x.d}</p>
+            <p className={`font-display ${x.big ? 'text-3xl sm:text-4xl' : 'text-xl'}`}>{x.t}</p>
+            <p className="text-xs opacity-80">{x.d}</p>
           </div>
         ))}
       </div>

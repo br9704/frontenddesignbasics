@@ -1,0 +1,116 @@
+---
+title: How to drive any component from progress 0..1
+description: Build one component that runs on its own, or scrubs to a parent's scroll, without re-rendering every frame.
+---
+
+<Callout title="TL;DR">
+
+- Every experience takes `active`, `reducedMotion` and an optional `progress` from 0 to 1.
+- Keep `progress` in a ref. Read it in `useFrame` or the GSAP ticker, not in render.
+- Stop all loops when `active` is false or the tab is hidden.
+
+</Callout>
+
+**Goal:** a component that works as a card, a full-screen page and a scroll-scrubbed act, with no changes.
+
+## You need
+
+- `lib/experiences/types.ts` (the `ExperienceProps` contract).
+- `components/v2/experience-frame.tsx` (it passes the props in).
+- GSAP, or React Three Fiber for 3D.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " parent scroll ── progress 0..1 ──┐",
+  " IntersectionObserver ── active ──┼─► experience ─► frame",
+  " media query ── reducedMotion ────┘   values live in refs",
+  "",
+  " no progress given? run on your own clock",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Accept the contract
+
+```ts
+export interface ExperienceProps {
+  active: boolean;         // on screen: run loops only while true
+  reducedMotion: boolean;  // render one composed still, no loops
+  progress?: number;       // 0..1 from a parent; undefined means "run on your own"
+}
+```
+
+`ExperienceFrame` sets `active` with an IntersectionObserver and loads your code only when it is near
+the viewport. You never observe yourself.
+
+### 2. Put progress in a ref
+
+A new `progress` arrives on every scroll event. Re-rendering a canvas tree 60 times a second is slow.
+Copy the value into a ref and let your loop read it.
+
+```tsx
+const p = useRef(progress ?? 0);
+useEffect(() => { if (progress !== undefined) p.current = progress; }, [progress]);
+```
+
+### 3. Read it in the frame loop
+
+In three.js, read it in `useFrame`. Ease towards it so jumpy scroll looks smooth.
+
+```tsx
+const smooth = useRef(0);
+useFrame((_, dt) => {
+  const target = progress === undefined ? (smooth.current + dt * 0.1) % 1 : p.current;
+  smooth.current += (target - smooth.current) * Math.min(1, dt * 8);
+  mesh.current.rotation.y = smooth.current * Math.PI * 2;
+});
+```
+
+### 4. Or scrub a GSAP timeline
+
+Build the timeline once, paused. Then set its progress. This small hook does both jobs:
+
+```ts
+function useProgressTimeline(build: (tl: gsap.core.Timeline) => void, progress?: number, active = true) {
+  const tl = useRef<gsap.core.Timeline>(null);
+  useGSAP(() => {
+    tl.current = gsap.timeline({ paused: progress !== undefined, repeat: progress === undefined ? -1 : 0 });
+    build(tl.current);
+  }, []);
+  useEffect(() => { if (progress !== undefined) tl.current?.progress(progress); }, [progress]);
+  useEffect(() => { if (progress === undefined) active ? tl.current?.play() : tl.current?.pause(); }, [active, progress]);
+  return tl;
+}
+```
+
+### 5. Pause when inactive or hidden
+
+For R3F, switch the frame loop off: `frameloop={active ? 'always' : 'never'}`. For your own
+`requestAnimationFrame`, cancel it. Also listen for `visibilitychange` and stop when
+`document.hidden` is true.
+
+### 6. Give reduced motion a still
+
+When `reducedMotion` is true, render one good frame and stop. For a 3D piece, set
+`frameloop="demand"` and call `invalidate()` once. For a timeline, jump to a composed state with
+`tl.progress(0.6)` and never play it.
+
+### 7. Show a poster while WebGL loads
+
+Load canvas code with `next/dynamic` and `ssr: false`. Show a still image or the ASCII loader until
+the first frame draws. A blank box feels broken on a slow phone.
+
+## Why it works
+
+Reading values in the loop keeps React out of the hot path. React renders once, the loop draws many
+times. Because the component only reads props, the parent decides what time means: a clock, a scroll
+bar or a fixed still.
+
+## See it live
+
+Open any piece in [/make](/make) full screen, then find it again inside the home page scroll. It is the
+same component, fed a different `progress`.
+
+## Sources
+
+- [GSAP: ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)
+- [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)

@@ -10,6 +10,7 @@ import {
 import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
+import type { MDXComponents } from 'mdx/types';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
 
@@ -23,9 +24,14 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle className="font-display text-4xl font-medium tracking-[-0.02em] sm:text-5xl">{page.data.title}</DocsTitle>
-      <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
-      <div className="flex flex-row gap-2 items-center border-b pb-6">
+      <p className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]">
+        [§] <span className="text-[var(--v-ink)]">{page.url}</span>
+      </p>
+      <DocsTitle className="pixel text-[32px] leading-[40px] font-normal [-webkit-font-smoothing:none] sm:text-[48px] sm:leading-[56px]">
+        {page.data.title}
+      </DocsTitle>
+      <DocsDescription className="mb-0 text-[17px] leading-[1.6] text-[var(--v-soft)]">{page.data.description}</DocsDescription>
+      <div className="flex flex-row items-center gap-2 border-b border-[var(--v-line)] pb-6 [&_button]:rounded-none [&_a]:rounded-none">
         <MarkdownCopyButton markdownUrl={markdownUrl} />
         <ViewOptionsPopover
           markdownUrl={markdownUrl}
@@ -34,10 +40,13 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       </div>
       <DocsBody>
         <MDX
-          components={getMDXComponents({
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
-          })}
+          components={
+            // Cast: @react-three/fiber's never-typed JSX intrinsics make MDXComponents fail to match itself.
+            getMDXComponents({
+              // this allows you to link to other pages with relative file paths
+              a: createRelativeLink(source, page),
+            }) as MDXComponents
+          }
         />
       </DocsBody>
     </DocsPage>

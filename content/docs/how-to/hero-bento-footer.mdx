@@ -1,0 +1,113 @@
+---
+title: How to build a hero, a bento grid and a footer
+description: The three sections every landing page needs, each built from type scale, one accent and space.
+---
+
+<Callout title="TL;DR">
+
+- Hero: one huge headline, one sentence, one primary action, a texture kept behind the text.
+- Bento: the biggest cell carries the idea, one gap value everywhere.
+- Footer: name, three to five links, a real sign-off, room above it.
+
+</Callout>
+
+**Goal:** a first screen that says what this is, a grid that ranks ideas, and an ending that feels like one.
+
+## You need
+
+- Your type scale and tokens. See [Scales and type](/docs/rules/scales-and-type).
+- Optional: a shader or image for the hero texture.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " HERO                     BENTO",
+  " ┌──────────────────┐     ┌──────┬───┬───┐",
+  " │ eyebrow          │     │ BIG  │ ▪ │ ▪ │",
+  " │ HEADLINE, HUGE   │     │ IDEA ├───┴───┤",
+  " │ one line, 44ch   │     │      │ story │",
+  " │ [primary] (alt)  │     ├───┬──┴───────┤",
+  " └──────────────────┘     │ ▪ │ action   │",
+  "                          └───┴──────────┘",
+  " FOOTER  name · contact · source · legal · sign-off",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Build the hero in layers
+
+| Layer | Rule |
+|---|---|
+| Texture | A background with a subject, kept behind text |
+| Headline | One huge thing per view: `clamp(3rem, 9vw, 8.5rem)`, tight leading |
+| Support | One sentence, 44ch max |
+| Actions | One solid button, one outline |
+| Eyebrow | Small, mono, uppercase, tracked |
+
+```tsx
+<section className="relative min-h-[82svh] overflow-hidden">
+  <Texture />
+  <div className="relative flex min-h-[82svh] flex-col justify-between p-10">
+    <p className="font-pixel text-[16px] uppercase">A field guide</p>
+    <div>
+      <h1 className="font-display text-[clamp(3rem,9vw,8.5rem)] leading-[0.9]">…</h1>
+      <p className="mt-6 max-w-[44ch]">…</p>
+    </div>
+  </div>
+</section>
+```
+
+### 2. Reveal the headline with a mask
+
+<TextRevealDemo />
+
+Each word sits in an overflow-hidden box and slides up into view. Use an ease-out and a short stagger.
+
+### 3. Build the bento
+
+<BentoDemo />
+
+```tsx
+<div className="grid auto-rows-[7.5rem] gap-3 sm:grid-cols-4">
+  <div className="sm:col-span-2 sm:row-span-2">The one big idea</div>
+  <div>Proof</div>
+  <div>Detail</div>
+  <div className="sm:col-span-2">Supporting story</div>
+  <div>Call to action</div>
+</div>
+```
+
+The biggest cell carries the idea. The accent cell carries the action. Keep one gap value.
+
+### 4. Finish with a real footer
+
+- The name and one line of what it is.
+- The three to five links people look for: contact, source, legal.
+- A sign-off with some personality.
+- Enough space above it to feel like an ending.
+
+## Pitfalls
+
+- **Two primary buttons.** Only one thing can be the main action.
+- **A magnetic button everywhere.** Use it once, on the hero action, never on forms or nav.
+
+<MagneticButton />
+
+## Why it works
+
+These sections are the rules under load: a type scale, one accent, space and motion applied to a
+common job. That is why they can be reused without looking reused.
+
+## See it live
+
+- [Flip bento](/lab/flip-bento)
+- [Kinetic poster](/lab/kinetic-poster)
+
+<Examples section="hero" title="Heroes in the wild" />
+
+<Examples section="bento" title="Bento grids in the wild" />
+
+<Examples section="footer" title="Footers in the wild" />
+
+## Sources
+
+- [Tailwind CSS: responsive design](https://tailwindcss.com/docs/responsive-design)
+- [Vercel Web Interface Guidelines](https://vercel.com/design/guidelines)

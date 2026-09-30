@@ -1,0 +1,55 @@
+import type { Experience } from './types';
+
+/* Group g5: the Win95 act and the ASCII field. Each entry's component lives in components/experiences/<id>.tsx */
+export const experiences: Experience[] = [
+  {
+    id: 'win95-boot',
+    title: 'Win95 Boot',
+    blurb: 'A BIOS boot where lines decode out of block glyphs, the logo resolves through a Bayer mask and a pixel ripple hands over to a live desktop that opens its own windows under CRT scanlines: GSAP ScrambleText, snap and steps() eases.',
+    tools: ['gsap', 'css', 'canvas2d'],
+    stage: 'win95',
+    kind: 'retro',
+    source: 'components/experiences/win95-boot.tsx',
+    load: () => import('@/components/experiences/win95-boot'),
+  },
+  {
+    id: 'pixel-blast',
+    title: 'Pixel Blast',
+    blurb: 'A drifting cloud of Bayer-dithered pixels that clicks send shockwaves through and the pointer smears like liquid, with a risograph misprint mode: a GLSL fragment plus a custom postprocessing Effect.',
+    tools: ['threejs', 'postprocessing', 'glsl', 'canvas2d', 'gsap'],
+    stage: 'win95',
+    kind: 'retro',
+    source: 'components/experiences/pixel-blast.tsx',
+    load: () => import('@/components/experiences/pixel-blast'),
+  },
+  {
+    id: 'pipes-screensaver',
+    title: '3D Pipes',
+    blurb: 'The classic screensaver rebuilt: pipes random-walk through a 3D grid as two instanced meshes, rendered at 640x480, upscaled nearest-neighbour and dithered to 16 colours, with a neon mode that glows through Bloom.',
+    tools: ['threejs', 'r3f', 'drei', 'postprocessing', 'glsl', 'gsap'],
+    stage: 'win95',
+    kind: 'retro',
+    source: 'components/experiences/pipes-screensaver.tsx',
+    load: () => import('@/components/experiences/pipes-screensaver'),
+  },
+  {
+    id: 'ascii-cursor-field',
+    title: 'ASCII Field',
+    blurb: 'A calm grid of mono glyphs that mutates faster and climbs a brightness ramp near the cursor, and can become an ASCII tunnel or a field of filings that turn to face you: Canvas2D, SVG and gsap.quickTo.',
+    tools: ['canvas2d', 'svg', 'css', 'gsap'],
+    stage: 'mono',
+    kind: 'interaction',
+    source: 'components/experiences/ascii-cursor-field.tsx',
+    load: () => import('@/components/experiences/ascii-cursor-field'),
+  },
+  {
+    id: 'win95-desktop',
+    title: 'Win95 Desktop',
+    blurb: 'A working Win95 desktop that hosts the retro stage: drag windows, fly them into the taskbar with GSAP Flip, watch a Canvas2D glyph matrix idle in the terminal, and walk away to wake the pipes screensaver.',
+    tools: ['css', 'gsap', 'canvas2d'],
+    stage: 'win95',
+    kind: 'interaction',
+    source: 'components/experiences/win95-desktop.tsx',
+    load: () => import('@/components/experiences/win95-desktop'),
+  },
+];

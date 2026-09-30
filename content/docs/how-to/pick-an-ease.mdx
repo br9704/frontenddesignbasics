@@ -1,0 +1,95 @@
+---
+title: How to pick the right ease (and when to use a spring)
+description: Choose a curve in seconds, with a default set that covers almost every move.
+---
+
+<Callout title="TL;DR">
+
+- Entering or responding: `expo.out`. Moving between two states: `power4.inOut`.
+- Retro and pixel pieces: `steps(n)`. Continuous loops: `none`.
+- Anything people can grab or interrupt: a spring.
+
+</Callout>
+
+**Goal:** motion that feels intentional, with no time spent guessing curves.
+
+## You need
+
+- GSAP (or CSS `cubic-bezier`). Motion (`motion/react`) for springs.
+- The [motion tokens](/docs/rules/motion-tokens), so every component uses the same names.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " expo.out      █▓▒░░···   enter, respond",
+  " power4.inOut  ·░▒██▒░·   between states",
+  " steps(6)      ··██··██   retro, pixel",
+  " none          ▒▒▒▒▒▒▒▒   loops, marquees",
+  " (speed over time: solid is fast)",
+].join('\n')}</pre>
+
+## See them side by side
+
+<EasingCurves />
+
+<EasingPlayground />
+
+## Steps
+
+### 1. Ask what the thing is doing
+
+- **Arriving or reacting** (menu opens, toast appears, hover): ease-out. It starts fast so it feels
+  instant, then settles.
+- **Already on screen and moving** (a card to a new slot, a drawer): ease-in-out. It speeds up and
+  brakes like a real object.
+- **Leaving for good**: ease-in is allowed here, and only here.
+
+### 2. Use the default set
+
+```ts
+gsap.defaults({ ease: 'expo.out', duration: 0.6 });
+gsap.to(card, { x: 240, ease: 'power4.inOut', duration: 0.8 });   // between states
+gsap.to(sprite, { x: 96, ease: 'steps(6)', duration: 0.6 });      // retro
+gsap.to(track, { xPercent: -50, ease: 'none', repeat: -1, duration: 20 }); // loop
+```
+
+In CSS, `expo.out` is close to `cubic-bezier(0.16, 1, 0.3, 1)` and `power4.inOut` to
+`cubic-bezier(0.76, 0, 0.24, 1)`.
+
+### 3. Keep durations short
+
+Hover and press 100 to 200ms. Menus 150 to 250ms. Modals and sections 250 to 400ms. If you notice the
+animation itself, it is too long.
+
+### 4. Reach for a spring when people can interrupt
+
+A curve has a fixed duration. If someone grabs a sheet halfway, a curve has to restart. A spring keeps
+its current speed and carries on from where it is.
+
+<SpringVsBezier />
+
+```tsx
+<motion.div drag="x" dragConstraints={{ left: 0, right: 0 }}
+  transition={{ type: 'spring', stiffness: 400, damping: 36 }} />
+```
+
+Keep bounce off for functional UI. Save a little overshoot for one playful moment.
+
+### 5. Never use ease-in for a response
+
+It starts slowly, so a click feels laggy. The browser keyword `ease` has the same problem in a milder
+form.
+
+## Why it works
+
+Real objects never start or stop instantly. Ease-out mimics something thrown into place, ease-in-out
+mimics something pushed and braked. People read both as physical, so the interface feels solid.
+
+## See it live
+
+- [Easing lab](/lab/easing-lab)
+
+<Examples section="motion" />
+
+## Sources
+
+- [Material 3: easing and duration](https://m3.material.io/styles/motion/easing-and-duration)
+- [GSAP: ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)

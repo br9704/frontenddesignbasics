@@ -2,21 +2,8 @@
   "title": "Frontend Design Basics",
   "pages": [
     "index",
-    "---Guide---",
-    "principles",
-    "motion",
-    "3d",
-    "shaders",
-    "components",
-    "recipes",
-    "ai-assets",
-    "specimen",
-    "conventions",
-    "---Learn from---",
-    "showcase",
-    "case-studies",
-    "---Build with---",
-    "toolkit",
-    "workflow"
+    "how-to",
+    "rules",
+    "cases"
   ]
 }

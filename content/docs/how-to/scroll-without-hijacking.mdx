@@ -1,0 +1,110 @@
+---
+title: How to add scroll effects without hijacking the page
+description: Pin, scrub, skew and zoom inside one section, while the rest of the page scrolls normally.
+---
+
+<Callout title="TL;DR">
+
+- Scope Lenis to a container, drive it from the GSAP ticker, and mark inner scrollers with `data-lenis-prevent`.
+- Tell ScrollTrigger about the scroller, use `pinType: 'transform'`, and refresh only that container.
+- Skew by velocity and zoom exponentially, both clamped.
+
+</Callout>
+
+**Goal:** one section feels like a film, and the page around it still feels like a web page.
+
+## You need
+
+- `gsap` with `ScrollTrigger`, and `lenis`.
+- A container with its own scroll (`overflow-y: auto`) and a fixed height.
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " page: native scroll",
+  "┌ section: overflow-y auto ────────────┐",
+  "│ Lenis(wrapper) ─ gsap.ticker         │",
+  "│ ScrollTrigger({ scroller })          │",
+  "│ [pin] ── scrub timeline ── [release] │",
+  "│                                      │",
+  "│ inner list: data-lenis-prevent       │",
+  "│ └ scrolls natively again             │",
+  "└──────────────────────────────────────┘",
+  " page: native scroll again",
+].join('\n')}</pre>
+
+## Steps
+
+### 1. Scope Lenis to the container
+
+```ts
+const lenis = new Lenis({ wrapper: box, content: box.firstElementChild as HTMLElement, autoRaf: false, lerp: 0.1 });
+const tick = (t: number) => lenis.raf(t * 1000);
+gsap.ticker.add(tick);
+lenis.on('scroll', ScrollTrigger.update);
+```
+
+`autoRaf: false` means GSAP drives Lenis, so both run on one clock. Remove the ticker callback and call
+`lenis.destroy()` on cleanup.
+
+### 2. Let inner scrollers scroll natively
+
+Add `data-lenis-prevent` to a code block, a list or a map inside the section. Lenis ignores wheel and
+touch events there.
+
+### 3. Point ScrollTrigger at the container
+
+```ts
+ScrollTrigger.create({
+  trigger: chapter, scroller: box, start: 'top top', end: '+=150%',
+  pin: true, pinType: 'transform', scrub: true, animation: tl,
+});
+```
+
+The default pin uses `position: fixed`, which breaks inside a transformed or scrolling container.
+`pinType: 'transform'` pins by moving the element instead.
+
+### 4. Refresh only your triggers
+
+When images load or the box resizes, refresh the triggers you made, not the whole page:
+
+```ts
+new ResizeObserver(() => triggers.forEach((t) => t.refresh())).observe(box);
+```
+
+`ScrollTrigger.refresh()` recalculates every trigger on the site, which causes a jump elsewhere.
+
+### 5. Skew by velocity
+
+```ts
+const skew = gsap.quickTo(cards, 'skewY', { duration: 0.4, ease: 'power3' });
+lenis.on('scroll', ({ velocity }) => skew(gsap.utils.clamp(-8, 8, velocity * 0.4)));
+```
+
+Clamp it. Unclamped skew on a fast trackpad flick looks broken.
+
+### 6. Zoom exponentially
+
+For a Droste or "zoom into the picture" effect, scale by a power, not a line: `scale = 2 ** (progress * 6)`.
+Linear zoom feels slow at the start and wild at the end. Exponential zoom feels steady all the way.
+
+### 7. Give reduced motion a plain scroll
+
+Inside `gsap.matchMedia()`, create Lenis and the pins only for `(prefers-reduced-motion: no-preference)`.
+Reduced motion gets normal scrolling and every chapter shown in its final state.
+
+## Why it works
+
+People trust the scroll bar. Taking over one clearly framed section keeps the effect and keeps that
+trust. The rest of the page, the back button and the keyboard all still behave.
+
+## See it live
+
+- [Pinned chapters](/lab/pinned-chapters)
+- [Velocity gallery](/lab/velocity-gallery)
+
+<Examples section="scroll" />
+
+## Sources
+
+- [Lenis](https://lenis.darkroom.engineering)
+- [GSAP: ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)
+- [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)

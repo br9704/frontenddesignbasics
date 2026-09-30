@@ -1,0 +1,32 @@
+{
+  "title": "How-tos",
+  "pages": [
+    "---Setup---",
+    "start-a-project",
+    "progress-driven-components",
+    "---3D---",
+    "pick-a-3d-tool",
+    "pixel-to-hd",
+    "instanced-blocks",
+    "post-processing-stack",
+    "---Shaders---",
+    "shader-background",
+    "ascii-and-dither",
+    "neon-light-paths",
+    "make-colour-look-expensive",
+    "---Motion---",
+    "pick-an-ease",
+    "kinetic-type-and-posters",
+    "draw-and-morph-svg",
+    "flip-layouts-and-page-transitions",
+    "---Scroll and layout---",
+    "scroll-without-hijacking",
+    "hero-bento-footer",
+    "own-your-components",
+    "---Images---",
+    "images-at-scale",
+    "ai-assets",
+    "---Verify---",
+    "win95-chrome-and-verify"
+  ]
+}

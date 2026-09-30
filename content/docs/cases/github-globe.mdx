@@ -1,0 +1,103 @@
+---
+title: 'GitHub globe: live data as a WebGL scene'
+description: How GitHub drew a globe of real pull requests from about 12,000 instanced dots, hid its own performance shortcuts inside the design, and degraded gracefully on slow devices.
+---
+
+<Callout title="TL;DR">
+
+- The globe is three.js with no textures: about 12,000 instanced circles for land, a halo shader, and arcs of real pull requests.
+- Performance shaped the look. Antialiasing was left off, and the halo and a distance fade were added to hide the jagged edge and moiré that caused.
+- It watches its own frame rate and steps down through four quality tiers, and a lightweight SVG shows first so the page never waits on WebGL.
+
+</Callout>
+
+## What it is
+
+In December 2020 GitHub launched a new homepage with a spinning globe at the top. Arcs fly across it,
+each one a real pull request opened in one place and merged in another. Hover an arc and you see the
+pull request, repository, time, language and places. Click it and you go there.
+
+GitHub's engineers wrote a five-part series about the page. The first part, by Tobias Ahlin, explains
+the globe. The team's three goals were an interconnected community, proof of real work happening now,
+and attention to detail and performance on every device.
+
+The globe has since been replaced. On 29 September 2026 the homepage at `github.com/home` had no globe
+canvas, so this case works from the write-ups and a diagram rather than screenshots.
+
+## How it's built
+
+**Stack:** three.js in a WebGL context, fed a JSON file of recent pull requests. A separate data
+service picks the pull requests and geocodes locations.
+
+**Five layers, no textures.** A halo, the globe, the Earth's regions as dots, blue spikes for open pull
+requests and pink arcs for merged ones. Four lights point at a plain sphere.
+
+```text
+  pull request JSON (opened here, merged there)
+        |
+        v
+  +------------------ scene -----------------------------+
+  | 1 halo     backside of a sphere, 1.15x scale, tilted |
+  | 2 globe    plain sphere lit by 4 lights              |
+  | 3 regions  ~12,000 circles in ONE InstancedMesh      |
+  |            land/sea from a small PNG, alpha >= 90    |
+  | 4 spikes   open pull requests (blue)                 |
+  | 5 arcs     merged pull requests (pink)               |
+  |            CubicBezierCurve3 -> TubeGeometry         |
+  |            setDrawRange() animates the line in       |
+  +------------------------------------------------------+
+
+  every 50 frames: average FPS < 55.5 ?
+     +- yes -> drop a tier (4 tiers)
+               pixel ratio 2.0 -> 1.5, fewer arcs,
+               raycast less often, dots ~12,000 -> ~8,000
+```
+
+**Dots from a loop and a map.** A nested loop walks from the south pole upwards. For each latitude it
+works out the circumference and spaces circles evenly around it. A small world map PNG is read with
+`getImageData()`, and a circle is drawn only where that pixel's alpha is at least 90 out of 255. All
+the circles share one `CircleBufferGeometry` in an `InstancedMesh`, so land costs one draw call.
+
+**Arcs from real pairs of places.** Each merged pull request has two locations. A cubic Bézier curve
+joins them, with three orbit heights: the further apart the places, the higher the arc. When an arc
+lands, a dot scales in and a ring scales up and fades. Both ease by stepping 6% closer to the target
+every frame.
+
+**You see your own side of the world.** Rather than wait on an IP look-up, the globe turns to match
+your device's time zone offset. It is not exact, but it is instant.
+
+## Design decisions
+
+- **Real data over decoration.** Arcs alone could have been a pretty animation. The team added hover
+  details and clickable arcs as "proof of life", so every line is a real pull request.
+- **A performance limit became a visual feature.** With antialiasing off, the globe's lit edge was
+  jagged against the dark background. A soft halo, tilted towards the top left, covers it for less
+  cost than antialiasing.
+- **Atmosphere that fixes moiré.** Dots bunch up near the globe's edge and cause moiré. A fragment
+  shader fades each dot by its distance from the camera, which reduces the moiré and reads as a
+  thicker atmosphere.
+- **Something is always on screen.** A bare globe made of gradients in Figma is inlined as SVG. When
+  the first WebGL frame is ready, the SVG and the canvas crossfade and scale over 600ms with the Web
+  Animations API, without touching the DOM mid-transition.
+- **Budgets, not hope.** The scene measures itself and gives up detail (pixel density, arc count,
+  raycasts, dot density) before it gives up frame rate.
+- **The rest of the page follows the same rule.** A later post in the series moved scroll animations
+  to `IntersectionObserver`, animated only `opacity` and `transform`, and only played videos while
+  they were on screen.
+
+## Steal this
+
+1. **Draw thousands of the same thing as one instanced mesh.** Dots, blocks or tiles: build the matrix
+   per instance and send one geometry. Follow [Instanced blocks](/docs/how-to/instanced-blocks), and
+   see data turned into a scene in [tool-blocks](/lab/tool-blocks).
+2. **Ship a quality ladder.** Watch the frame rate over a window of frames and step down pixel ratio,
+   counts and raycasts in tiers. Pair it with the rules in
+   [Structure and performance](/docs/rules/structure-and-performance).
+3. **Put a static stand-in first.** An inline SVG or image holds the layout, then crossfade to WebGL
+   when the first frame is ready. Nobody watches a blank canvas.
+
+## Sources
+
+- [How we built the GitHub globe](https://github.blog/engineering/engineering-principles/how-we-built-the-github-globe/), Tobias Ahlin, GitHub blog, 21 December 2020
+- [Visualizing GitHub's global community](https://github.blog/2020-12-21-visualizing-githubs-global-community/), GitHub blog, 21 December 2020
+- [Making GitHub's new homepage fast and performant](https://github.blog/2021-01-29-making-githubs-new-homepage-fast-and-performant/), GitHub blog, 29 January 2021

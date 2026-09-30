@@ -1,0 +1,108 @@
+---
+title: How to make neon light paths
+description: Draw glowing lines that travel along a path, three ways, and pick the cheapest one that does the job.
+---
+
+<Callout title="TL;DR">
+
+- Flat and crisp: SVG with a moving dash window and stacked strokes.
+- Many paths behind content: a fragment shader with distance falloff.
+- Lines in a 3D scene: a tube with a moving UV head, plus Bloom.
+
+</Callout>
+
+**Goal:** light that races along circuit traces, streets or a signature, and glows without going muddy.
+
+## You need
+
+- SVG and GSAP for way one.
+- A fragment shader (OGL or three.js) for way two.
+- three.js, React Three Fiber and `@react-three/postprocessing` for way three.
+
+| Way | Best for | Cost |
+|---|---|---|
+| SVG dash window | Up to a few dozen paths, UI, diagrams | Very low. Sharp at any size |
+| Shader falloff | Hundreds of segments as a background | One full-screen pass |
+| Tube + Bloom | Paths in 3D, seen from angles | Geometry plus a bloom pass |
+
+<pre className="pixel not-prose my-6 overflow-x-auto border border-[var(--v-line)] bg-[var(--v-surface)] p-4 text-[16px] leading-[16px] text-[var(--v-soft)] [-webkit-font-smoothing:none]">{[
+  " dash window:   ────────████▓▒░──────   slides along",
+  "",
+  " three strokes on one path = glow",
+  "   wide + faint   ░░░░░░░░░░",
+  "   mid            ▒▒▒▒▒▒▒▒▒▒",
+  "   thin + white   ──────────",
+].join('\n')}</pre>
+
+## Way one: SVG
+
+### 1. Stack three strokes on one path
+
+```tsx
+<g fill="none" strokeLinecap="round">
+  <path d={d} stroke="var(--c-4)" strokeWidth={10} opacity={0.15} />
+  <path d={d} stroke="var(--c-4)" strokeWidth={4} opacity={0.5} />
+  <path d={d} stroke="#fff" strokeWidth={1.5} />
+</g>
+```
+
+This fakes a glow without an SVG filter. Filters like `feGaussianBlur` repaint on every frame and get
+slow fast.
+
+### 2. Move a dash window along it
+
+Set `pathLength="1"` on each path. Then `stroke-dasharray: 0.12 1` gives a light 12% long, and
+animating `stroke-dashoffset` from `1` to `-0.12` sends it along.
+
+```ts
+gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: -0.12, duration: 1.6, ease: 'none', stagger: 0.1, repeat: -1 });
+```
+
+## Way two: a shader
+
+### 3. Glow by distance to each segment
+
+For every pixel, find the distance `d` to the nearest segment. Brightness is `0.002 / (d * d)`, clamped.
+That inverse-square falloff is what makes it look like light, not paint.
+
+### 4. Cull segments early
+
+Looping over 300 segments for every pixel is slow. Skip a segment if the pixel is outside its bounding
+box plus the glow radius: `if (any(greaterThan(abs(p - mid), half + r))) continue;`. Most pixels then
+test only a few segments.
+
+## Way three: a tube in 3D
+
+### 5. Build a tube and move a bright head along its UV
+
+Make a `TubeGeometry` from a `CatmullRomCurve3`. Along the tube, `uv.x` runs 0 to 1. In the fragment
+shader, brighten where `uv.x` is near `uHead`, with a fading tail behind it. Push colour values over 1
+so Bloom picks them up.
+
+```glsl
+float tail = smoothstep(uHead - 0.15, uHead, vUv.x) * step(vUv.x, uHead);
+gl_FragColor = vec4(uColor * (0.15 + tail * 4.0), 1.0);   // over 1.0 = blooms
+```
+
+### 6. Add Bloom with a high threshold
+
+`<Bloom luminanceThreshold={1} mipmapBlur />` blooms only what is brighter than white, so the head glows
+and the rest of the scene stays crisp.
+
+## Why it works
+
+Glow is contrast: a thin, near-white core inside a wide, faint halo. All three ways build that same
+shape. They only differ in how many paths they can afford.
+
+## See it live
+
+- [Circuit board](/lab/circuit-board)
+- [Light painting](/lab/light-painting)
+- [Neon block city](/lab/neon-block-city)
+
+<Examples section="shaders" />
+
+## Sources
+
+- [MDN: SVG paths](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
+- [React Postprocessing (Bloom)](https://react-postprocessing.docs.pmnd.rs/)
