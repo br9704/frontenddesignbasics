@@ -23,9 +23,10 @@ const BEATS: { id: string; field: number; caption: string }[] = [
   { id: 'flying-type', field: 2, caption: 'TYPE MOVES' },
   { id: 'crystal-type-rings', field: 3, caption: 'zero to one' },
   { id: 'circuit-board', field: 5, caption: 'the tools route into the chip' },
-  { id: 'easing-lab', field: 0, caption: 'curves, then slam' },
+  { id: 'ease-racetrack', field: 0, caption: 'same move, twelve eases' },
+  { id: 'blur-lab', field: 2, caption: 'six kinds of blur' },
   { id: 'wave-extrude-type', field: 4, caption: 'type as a surface' },
-  { id: 'page-transitions', field: 1, caption: 'the pixel wipe' },
+  { id: 'transition-deck', field: 1, caption: 'eight ways from A to B' },
 ];
 const END = 0.93;
 /** Beat 0 (the palette) gets twice the scroll. */
@@ -129,7 +130,7 @@ export function ActMotion() {
   }
 
   return (
-    <section id="motion" data-act="5" className="relative h-[520vh] bg-[#080808]">
+    <section id="motion" data-act="5" className="relative h-[580vh] bg-[#080808]">
       <div className="sticky top-12 h-[calc(100svh-3rem)] overflow-hidden">
         <Beat i={beat} reduced={false} />
         {beat === 0 && (

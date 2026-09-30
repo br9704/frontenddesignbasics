@@ -14,7 +14,7 @@ import { ready } from './runtime';
 // Pieces the home page shows, in the order you meet them. Everything else loads after.
 const HOME = [
   'tool-blocks', 'flip-bento', 'ascii-3d', 'pipes-screensaver', 'voxel-type-assembly', 'flying-type',
-  'crystal-type-rings', 'circuit-board', 'easing-lab', 'wave-extrude-type', 'page-transitions', 'glass-lens', 'kinetic-poster', 'event-horizon',
+  'crystal-type-rings', 'circuit-board', 'ease-racetrack', 'blur-lab', 'wave-extrude-type', 'transition-deck', 'glass-lens', 'kinetic-poster', 'event-horizon',
   'velocity-gallery', 'halftone-develop', 'ascii-cursor-field', 'liquid-gradient', 'neon-block-city', 'colour-riot',
 ];
 const CAP = 15000;

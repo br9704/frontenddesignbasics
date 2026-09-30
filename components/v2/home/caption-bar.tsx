@@ -21,7 +21,7 @@ function captions(total: number, sites: number): Record<string, Caption> {
     cube: { look: '296 blocks close into one smooth cube while a pixelation pass steps from 48px to 1px.', tools: ['threejs', 'r3f', 'postprocessing', 'gsap'], href: '/lab/pixel-to-hd-cube', open: 'open it' },
     tools: { look: `All ${total} tools as keys, grouped by what they're for. Hover one to read it.`, tools: ['r3f', 'drei', 'gsap'], href: '/tools', open: 'all tools' },
     make: { look: 'Things you can build with them. Each one is a single React component you can open and copy.', tools: ['gsap', 'threejs', 'r3f'], href: '/make', open: 'all 30' },
-    motion: { look: 'Motion design: type that moves, curves, and transitions between states.', tools: ['gsap', 'r3f', 'glsl'], href: '/docs/how-to', open: 'how-tos' },
+    motion: { look: 'Motion design, taught live: twelve eases racing, six kinds of blur, eight transitions and type that moves.', tools: ['gsap', 'r3f', 'glsl', 'ogl'], href: '/lab/ease-racetrack', open: 'open the racetrack' },
     inspiration: { look: 'Rules pulled from real sites: colour, type and hierarchy, each shown live.', tools: ['r3f', 'glsl', 'gsap'], href: '/inspiration', open: 'inspiration' },
     sites: { look: `${sites} real sites worth studying, sorted into sections.`, tools: ['threejs', 'next-image', 'gsap'], href: '/sites', open: 'all sites' },
     learn: { look: 'The written half: how-tos, rules and case studies.', tools: ['css'], href: '/docs', open: 'read' },
