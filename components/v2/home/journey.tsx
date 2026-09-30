@@ -16,7 +16,8 @@ import { ActTools, type ToolCategory } from './act-tools';
 import { ACTS, P } from './acts';
 import { gsap, MOTION, ScrollTrigger } from './motion';
 import { Rail } from './rail';
-import { activeAct, overall, scroller } from './runtime';
+import { Preloader } from './preloader';
+import { activeAct, overall, ready, scroller } from './runtime';
 
 /*
  * The home journey. One scroll, ten acts. Lenis + ScrollTrigger run only when motion is allowed;
@@ -58,9 +59,19 @@ export function HomeJourney({
 
     const mm = gsap.matchMedia(el);
     mm.add(MOTION, () => {
-      const lenis = new Lenis({ autoRaf: false, lerp: 0.11 });
+      const lenis = new Lenis({ autoRaf: false, lerp: 0.075, wheelMultiplier: 0.8, touchMultiplier: 1 });
       scroller.current = lenis;
       lenis.on('scroll', ScrollTrigger.update);
+      // hold the page still while the preloader runs
+      let offReady = () => {};
+      if (ready.get() < 1) {
+        lenis.stop();
+        offReady = ready.subscribe(() => {
+          if (ready.get() < 1) return;
+          lenis.start();
+          ScrollTrigger.refresh();
+        });
+      }
       const tick = (t: number) => lenis.raf(t * 1000);
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
@@ -76,6 +87,7 @@ export function HomeJourney({
       });
 
       return () => {
+        offReady();
         gsap.ticker.remove(tick);
         lenis.destroy();
         scroller.current = null;
@@ -88,12 +100,25 @@ export function HomeJourney({
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(refresh);
     window.addEventListener('load', refresh);
+    // Live pieces, posters and fonts change the page height after first layout. Re-measure every
+    // trigger when that happens, or reveals fire at stale positions and some never fire at all.
+    let raf = 0;
+    let lastH = el.offsetHeight;
+    const ro = new ResizeObserver(() => {
+      if (Math.abs(el.offsetHeight - lastH) < 2) return;
+      lastH = el.offsetHeight;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+    ro.observe(el);
     if (window.location.hash) {
       const id = window.location.hash.slice(1);
       requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
     }
     return () => {
       window.removeEventListener('load', refresh);
+      ro.disconnect();
+      cancelAnimationFrame(raf);
       mm.revert();
       always.revert();
     };
@@ -101,6 +126,7 @@ export function HomeJourney({
 
   return (
     <div ref={root} className="relative overflow-x-clip">
+      <Preloader />
       <Rail />
       <ActBoot categories={categories} />
       <ActBlast />

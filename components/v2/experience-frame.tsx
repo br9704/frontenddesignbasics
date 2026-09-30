@@ -73,7 +73,7 @@ export function ExperienceFrame({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const nearObs = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: '600px' });
+    const nearObs = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: '150% 0px' });
     const activeObs = new IntersectionObserver(([e]) => setActive(e.isIntersecting), { threshold: 0.05 });
     nearObs.observe(el);
     activeObs.observe(el);

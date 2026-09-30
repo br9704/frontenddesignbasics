@@ -45,6 +45,8 @@ export function useQuantised(store: ProgressStore | undefined, step = 0.005) {
 }
 
 export const activeAct = createProgress(0);
+/** 0 while the preloader runs, 1 once the journey may start (boot intro plays, scroll unlocks). */
+export const ready = createProgress(0);
 export const overall = createProgress(0);
 
 export function useReducedMotion() {
