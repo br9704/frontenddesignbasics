@@ -169,6 +169,8 @@ function replace(name: string, openTag: string, inner: string, block: string, ct
       return convert(inner.trim(), ctx) + '\n';
     case 'Card':
       return `- **[${attr(openTag, 'title')}](${attr(openTag, 'href')})**: ${inner.trim()}`;
+    case 'Reference':
+      return `<details><summary>${attr(openTag, 'title') ?? 'Reference'}</summary>\n\n${convert(inner.trim(), ctx)}\n\n</details>\n`;
     case 'Callout':
       return `> ${convert(inner.trim(), ctx).replace(/\n/g, '\n> ')}\n`;
     case 'pre': {

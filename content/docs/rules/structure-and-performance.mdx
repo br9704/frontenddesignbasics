@@ -44,6 +44,8 @@ A design system is only as good as the place people look for it. Put tokens, com
   "└─ next.config.mjs",
 ].join('\n')}</pre>
 
+<Reference title="Folder structure: table (7 rows)">
+
 | Thing | Lives in | Rule |
 |---|---|---|
 | Design tokens | `app/global.css` | One file. Components read tokens; they never define colours. |
@@ -53,6 +55,8 @@ A design system is only as good as the place people look for it. Put tokens, com
 | Routes | `app/` | Thin. Fetch data, pick patterns, pass props. |
 | Copy and docs | `content/` | MDX or JSON. Editable without touching components. |
 | Static assets | `public/` | Hashed or versioned names for long caching. |
+
+</Reference>
 
 - **MUST** name files in kebab-case (`pricing-table.tsx`) and components in PascalCase (`PricingTable`).
 - **MUST** keep one component per file in `components/ui/`.
@@ -66,11 +70,15 @@ This site follows the same shape: tokens in `app/global.css`, diagrams in `compo
 
 Google's "good" thresholds, measured at the 75th percentile of real page loads, on mobile and desktop separately.
 
+<Reference title="Core Web Vitals: table (3 rows)">
+
 | Metric | Measures | Good | Poor |
 |---|---|---|---|
 | LCP, Largest Contentful Paint | When the main content appears | 2.5 s or less | over 4 s |
 | INP, Interaction to Next Paint | How fast the page responds to input | 200 ms or less | over 500 ms |
 | CLS, Cumulative Layout Shift | How much things jump | 0.1 or less | over 0.25 |
+
+</Reference>
 
 <Decision
   question="Which metric is failing?"
@@ -93,6 +101,8 @@ Google's "good" thresholds, measured at the 75th percentile of real page loads, 
 
 These are this guide's budgets for a content or marketing page. They are not a standard. A dashboard may need a larger JS budget; write down whatever you choose and check against it.
 
+<Reference title="Budgets: table (7 rows)">
+
 | Resource | Budget per route (compressed) |
 |---|---|
 | First-load JavaScript | 150 KB |
@@ -103,12 +113,16 @@ These are this guide's budgets for a content or marketing page. They are not a s
 | Third-party scripts | 1 analytics script, loaded after interaction or idle |
 | Total page weight on first view | 1 MB |
 
+</Reference>
+
 - **MUST** check first-load JS in the `next build` output for every route that changes.
 - **SHOULD** load heavy client-only pieces (3D, shaders, editors) with `next/dynamic` and `ssr: false` (called from a client component), after the page is interactive.
 - **SHOULD** load third-party scripts with `next/script` and `strategy="lazyOnload"` unless they are needed for the first paint.
 - **SHOULD** pause canvases and animation loops when they are off-screen or the tab is hidden.
 
 ## Fonts
+
+<Reference title="Fonts: copy the tsx (24 lines)">
 
 ```tsx
 // app/layout.tsx
@@ -137,6 +151,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
+</Reference>
+
 - **MUST** serve fonts as WOFF2 only. Every current browser supports it.
 - **MUST** self-host through `next/font`. It inlines the `@font-face`, removes the request to Google and adds a size-matched fallback, which prevents layout shift on swap.
 - **MUST** subset to the scripts you use (`subsets: ['latin']`).
@@ -151,6 +167,10 @@ Predictable folders make the system discoverable: anyone can guess where a butto
 
 ## Sources
 
+<Reference title="3 sources">
+
 - [web.dev: Core Web Vitals](https://web.dev/articles/vitals)
 - [Next.js: project structure](https://nextjs.org/docs/app/getting-started/project-structure)
 - [web.dev: font best practices](https://web.dev/articles/font-best-practices)
+
+</Reference>

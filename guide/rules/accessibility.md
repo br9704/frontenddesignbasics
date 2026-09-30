@@ -22,6 +22,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 
 ## Contrast
 
+<details><summary>Contrast: table (5 rows)</summary>
+
 | What | Minimum ratio | WCAG SC |
 |---|---|---|
 | Body text (under 24px, or under 18.66px bold) | 4.5 : 1 | 1.4.3 |
@@ -29,6 +31,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 | Input borders, focus rings, icons that carry meaning | 3 : 1 against what is next to them | 1.4.11 |
 | Placeholder text | 4.5 : 1 if it carries information | 1.4.3 |
 | Disabled controls, logos, pure decoration | none | exempt |
+
+</details>
 
 - **MUST** measure, not guess. Soft grey on warm paper is the most common failure. This site's `--text-soft` (#5c574c) on `--surface` (#f2eee6) measures 6.2 : 1, comfortably over 4.5 : 1.
 - **MUST** check both themes. A pair that passes in light mode often fails in dark.
@@ -53,6 +57,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 
 ## Keyboard
 
+<details><summary>Keyboard: table (5 rows)</summary>
+
 | Key | Must do |
 |---|---|
 | `Tab` / `Shift+Tab` | Move through every control in visual order. |
@@ -60,6 +66,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 | `Space` | Activate buttons, tick checkboxes. |
 | Arrow keys | Move inside radio groups, tabs, menus, sliders. |
 | `Escape` | Close the dialog, menu or popover, and return focus to what opened it. |
+
+</details>
 
 - **MUST** make everything that works with a mouse work with a keyboard (SC 2.1.1).
 - **MUST NOT** trap focus, except inside an open modal, which must release it on close (SC 2.1.2).
@@ -91,6 +99,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 
 ## Structure
 
+<details><summary>Structure: copy the html (11 lines)</summary>
+
 ```html
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -105,6 +115,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 </body>
 ```
 
+</details>
+
 - **MUST** set the page language: `<html lang="en-GB">` (SC 3.1.1).
 - **MUST** give every page a unique, descriptive `<title>`, most specific part first: "Media · Rules & conventions · Frontend Design Basics" (SC 2.4.2).
 - **MUST** have exactly one `<main>` and one `<h1>` per page.
@@ -114,6 +126,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 
 ## Names and labels
 
+<details><summary>Names and labels: table (5 rows)</summary>
+
 | Control | Accessible name comes from |
 |---|---|
 | Text input | A visible `<label for>` |
@@ -121,6 +135,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 | Link | Its text. "Read the media rules", not "Click here" |
 | Image link | The image's `alt` |
 | Group of radios | `<fieldset>` with a `<legend>` |
+
+</details>
 
 - **MUST** give every input a visible label. A placeholder is not a label, because it vanishes when people type (SC 3.3.2).
 - **MUST** start the accessible name with the visible label text, so voice users can say what they see (SC 2.5.3).
@@ -133,6 +149,8 @@ Aim for WCAG 2.2 level AA on every page. It is the level most accessibility laws
 ## User settings
 
 Respect what people have already told their device.
+
+<details><summary>User settings: copy the css (18 lines)</summary>
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -155,6 +173,10 @@ Respect what people have already told their device.
 }
 ```
 
+</details>
+
+<details><summary>User settings: table (4 rows)</summary>
+
 | Setting | Convention |
 |---|---|
 | `prefers-reduced-motion: reduce` | Remove movement, keep fades. See [Motion tokens](./motion-tokens.md). |
@@ -162,13 +184,19 @@ Respect what people have already told their device.
 | `prefers-color-scheme` | Default to it, and let a manual toggle override it. |
 | `forced-colors: active` | Use real borders, not box-shadows or background-only shapes. Test in Windows High Contrast. |
 
+</details>
+
 ## Why it works
 
 Most accessibility failures are not exotic. They are a missing label, a removed outline, a grey that is one shade too light, or a `div` pretending to be a button. Turning the AA criteria into numbers and tag names means they can be checked in review, like spacing or spelling, instead of being left to a specialist at the end.
 
 ## Sources
 
+<details><summary>4 sources</summary>
+
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
 - [Understanding 1.4.3: contrast (minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
 - [Understanding 2.5.8: target size (minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
 - [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
+
+</details>

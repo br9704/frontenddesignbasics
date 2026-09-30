@@ -20,12 +20,16 @@ The how-to on [picking an ease](../how-to/pick-an-ease.md) explains how motion s
 
 <img src="../img/rules-motion-tokens/01-EasingCurves.jpg" alt="EasingCurves" />
 
+<details><summary>The curves: table (4 rows)</summary>
+
 | Token | Value | Use for |
 |---|---|---|
 | `--ease-out` | `cubic-bezier(0.22, 1, 0.36, 1)` | Anything entering or responding: menus, toasts, hover, press. The default. |
 | `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Something already on screen moving to a new place: a drawer, a reordered card. |
 | `--ease-in` | `cubic-bezier(0.55, 0, 1, 0.45)` | Exits only, and only when the element leaves the screen entirely. |
 | `--ease-linear` | `linear` | Continuous motion: progress bars, spinners, marquees. Never for UI state changes. |
+
+</details>
 
 - **MUST** use `--ease-out` unless you can name the reason for a different curve.
 - **MUST NOT** use `ease-in` for anything the user triggered. It starts slowly, which reads as lag.
@@ -40,12 +44,16 @@ The how-to on [picking an ease](../how-to/pick-an-ease.md) explains how motion s
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/motion-tokens).</sub>
 
+<details><summary>The durations: table (4 rows)</summary>
+
 | Token | Value | Use for |
 |---|---|---|
 | `--dur-instant` | `100ms` | Colour and opacity on hover, press feedback, checkbox ticks. |
 | `--dur-fast` | `150ms` | Tooltips, small popovers, focus rings, toggles. |
 | `--dur-base` | `250ms` | Menus, dropdowns, toasts, tabs, accordions. |
 | `--dur-slow` | `400ms` | Modals, drawers, sheets, full-section reveals. |
+
+</details>
 
 - **MUST** take every UI duration from these four tokens.
 - **MUST** keep UI state changes at or under `400ms`. Longer than that and people wait for the interface.
@@ -54,6 +62,8 @@ The how-to on [picking an ease](../how-to/pick-an-ease.md) explains how motion s
 - **SHOULD** keep stagger steps between `30ms` and `60ms`, and cap the total stagger at about `300ms`, however many items there are.
 
 ## Copy this
+
+<details><summary>Copy this: copy the css (34 lines)</summary>
 
 ```css
 :root {
@@ -92,6 +102,8 @@ The how-to on [picking an ease](../how-to/pick-an-ease.md) explains how motion s
 }
 ```
 
+</details>
+
 In Tailwind v4, put the same values in `@theme` so they become utilities. This site does exactly that with `--ease-out-quint` and `--ease-in-out-cubic` in `app/global.css`.
 
 ```css
@@ -119,12 +131,16 @@ export const ease = {
 
 ## Naming
 
+<details><summary>Naming: table (4 rows)</summary>
+
 | Do | Don't | Why |
 |---|---|---|
 | `--dur-fast` | `--dur-150` | The value can change without renaming every use. |
 | `--ease-out` | `--ease-smooth` | Name the shape, so people can predict it. |
 | `--dur-base` | `--transition` | One token holds one value, not a shorthand. |
 | `dur.fast` in JS | `0.15` inline | One source of truth for CSS and scripts. |
+
+</details>
 
 - **MUST** prefix durations with `--dur-` and curves with `--ease-`.
 - **MUST NOT** add a fifth duration because one component "needs" `320ms`. Pick the nearest token.
@@ -157,6 +173,8 @@ import { motion } from 'motion/react';
 
 `prefers-reduced-motion: reduce` does not mean "no feedback". It means "don't move things around". Keep state changes visible; remove the travel.
 
+<details><summary>Reduced motion: table (6 rows)</summary>
+
 | Normal | Reduced |
 |---|---|
 | Slide and fade in | Fade in only (`--motion-distance: 0px`) |
@@ -165,6 +183,8 @@ import { motion } from 'motion/react';
 | Auto-playing video | Poster image, play button |
 | Page transition that zooms | Cross-fade at `--dur-fast` |
 | Spring with bounce | Same end state, no overshoot |
+
+</details>
 
 - **MUST** remove translation, scale, rotation and parallax under `reduce`.
 - **MUST** stop anything that loops or auto-plays. WCAG 2.2 (2.2.2 Pause, Stop, Hide) requires a way to stop any motion that starts automatically and lasts more than 5 seconds.
@@ -192,5 +212,9 @@ Four durations and four curves are few enough to remember and enough to cover ev
 
 ## Sources
 
+<details><summary>2 sources</summary>
+
 - [Material 3: easing and duration](https://m3.material.io/styles/motion/easing-and-duration)
 - [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
+
+</details>

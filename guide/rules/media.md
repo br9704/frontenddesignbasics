@@ -20,6 +20,8 @@ Images and video are usually the heaviest thing on a page and the most common ca
 
 <sub>Choose by content, not habit. Most sites only ever need these four answers.</sub>
 
+<details><summary>Pick the format: table (6 rows)</summary>
+
 | Format | Use for | Quality setting | Notes |
 |---|---|---|---|
 | AVIF | Photos, gradients, hero art | 50 to 60 | Smallest files. Slower to encode. Supported by all current major browsers. |
@@ -28,6 +30,8 @@ Images and video are usually the heaviest thing on a page and the most common ca
 | PNG | Screenshots that need exact pixels | lossless | Run it through `oxipng` or similar. |
 | SVG | Logos, icons, diagrams | n/a | Optimise with SVGO. Set `viewBox`, drop fixed `width` and `height`. |
 | GIF | Nothing | n/a | Convert to MP4. It is many times larger for the same clip. |
+
+</details>
 
 - **MUST NOT** ship a photo as PNG or an animation as GIF.
 - **MUST** strip EXIF and location metadata from photos before publishing.
@@ -42,6 +46,8 @@ export default {
 
 ## Weight targets
 
+<details><summary>Weight targets: table (5 rows)</summary>
+
 | Asset | Target | Hard ceiling |
 |---|---|---|
 | Hero or LCP image | 150 KB | 250 KB |
@@ -50,11 +56,15 @@ export default {
 | Background video loop (10 s or less) | 1.5 MB | 3 MB |
 | OG image | 150 KB | 300 KB |
 
+</details>
+
 These are this guide's budgets, not a standard. Pick your own, write them down, and check them in review.
 
 ## Send the right size
 
 A 2400px photo on a 390px phone wastes most of its bytes. Give the browser a list of widths and tell it how wide the image will be drawn.
+
+<details><summary>Send the right size: copy the html (8 lines)</summary>
 
 ```html
 <img
@@ -67,6 +77,10 @@ A 2400px photo on a 390px phone wastes most of its bytes. Give the browser a lis
 />
 ```
 
+</details>
+
+<details><summary>Send the right size: copy the tsx (8 lines)</summary>
+
 ```tsx
 import Image from 'next/image';
 
@@ -77,6 +91,8 @@ import Image from 'next/image';
   preload            // only for the LCP image (was `priority` before Next 16)
 />
 ```
+
+</details>
 
 - **MUST** set `sizes` on every responsive image. Without it the browser assumes `100vw` and downloads the largest file.
 - **MUST** generate widths up to 2× the largest drawn size, and no further.
@@ -90,6 +106,8 @@ import Image from 'next/image';
 <sub>The ratios you will actually use. Give every media slot one of these before the file loads, and nothing shifts when it arrives.</sub>
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/media).</sub>
+
+<details><summary>Reserve the box: copy the css (12 lines)</summary>
 
 ```css
 .media {
@@ -106,11 +124,15 @@ import Image from 'next/image';
 }
 ```
 
+</details>
+
 - **MUST** give every `img` and `video` either `width` and `height` attributes or a CSS `aspect-ratio`.
 - **SHOULD** use a flat placeholder colour or a tiny blurred preview, never a spinner.
 - **SHOULD** crop with `object-fit: cover` and set `object-position` when the subject is off-centre.
 
 ## Video
+
+<details><summary>Video: copy the html (14 lines)</summary>
 
 ```html
 <video
@@ -129,6 +151,10 @@ import Image from 'next/image';
 </video>
 ```
 
+</details>
+
+<details><summary>Video: table (5 rows)</summary>
+
 | Attribute | Why |
 |---|---|
 | `muted` | Browsers only allow autoplay without sound. |
@@ -136,6 +162,8 @@ import Image from 'next/image';
 | `poster` | Shows at once, and is what reduced-motion users see. |
 | `preload="metadata"` | Fetches size and duration, not the whole file. |
 | `aria-hidden="true"` | Only for purely decorative loops. Remove it for content video. |
+
+</details>
 
 - **MUST** strip the audio track from any video that autoplays muted. It is dead weight.
 - **MUST** show a visible pause control on any decorative loop longer than 5 seconds (WCAG 2.2.2).
@@ -152,6 +180,8 @@ ffmpeg -i in.mov -an -vf "scale=1920:-2,fps=30" -c:v libx264 -crf 26 -preset slo
 
 ## Alt text
 
+<details><summary>Alt text: table (6 rows)</summary>
+
 | Image | Alt | Rule |
 |---|---|---|
 | Decorative texture | `alt=""` | Empty, not missing. Screen readers skip it. |
@@ -161,12 +191,16 @@ ffmpeg -i in.mov -an -vf "scale=1920:-2,fps=30" -c:v libx264 -crf 26 -preset slo
 | Screenshot of text | the text itself, or a summary | Better still, use real text. |
 | Icon button | no image alt; `aria-label="Close"` on the button | Label the control, not the drawing. |
 
+</details>
+
 - **MUST** give every `img` an `alt` attribute. Empty for decoration, meaningful for content.
 - **MUST NOT** start with "Image of" or "Picture of". Screen readers already say "image".
 - **MUST NOT** repeat the caption or the nearby text word for word.
 - **SHOULD** keep alt to one sentence. Longer descriptions go in the page or a `figcaption`.
 
 ## Social cards and icons
+
+<details><summary>Social cards and icons: table (6 rows)</summary>
 
 | File | Size | Next.js file convention |
 |---|---|---|
@@ -176,6 +210,8 @@ ffmpeg -i in.mov -an -vf "scale=1920:-2,fps=30" -c:v libx264 -crf 26 -preset slo
 | Favicon (modern) | SVG, with its own dark-mode `@media` rule | `app/icon.svg` |
 | Apple touch icon | 180 × 180 px PNG, no transparency | `app/apple-icon.png` |
 | Web app manifest icons | 192 × 192 and 512 × 512 px PNG, plus a 512 maskable | `app/manifest.ts` |
+
+</details>
 
 - **SHOULD** keep the OG image's text away from the outer 60px or so. Some platforms crop or round the edges.
 - **MUST** set `og:image:alt` when the card carries information.
@@ -187,6 +223,10 @@ Format and size rules remove most of a page's weight without anyone seeing a dif
 
 ## Sources
 
+<details><summary>3 sources</summary>
+
 - [web.dev: serve responsive images](https://web.dev/articles/serve-responsive-images)
 - [MDN: the video element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video)
 - [Next.js: Image component](https://nextjs.org/docs/app/api-reference/components/image)
+
+</details>

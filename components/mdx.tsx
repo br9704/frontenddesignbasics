@@ -10,6 +10,7 @@ import { MotionPoster, PaletteSheet, TypeSpecimen } from './specimen';
 import { Banner, ShowcaseGrid, Shot } from './showcase-grid';
 import { ToolkitTable } from './toolkit-table';
 import { Examples } from './examples-row';
+import { Reference } from './reference';
 import { GridOverlay, OklchPaletteLab, VariableFontPlayground } from './demos/principles-lab';
 import { ScrollProgressDemo, SpringVsBezier, StaggerPlayground } from './demos/motion-lab';
 import { ButtonStatesLab, MagneticButton, SpotlightCard, TextRevealDemo } from './demos/interaction-lab';
@@ -60,6 +61,7 @@ export function getMDXComponents(components?: MDXComponents) {
     ShowcaseGrid,
     Banner,
     Shot,
+    Reference,
     // Spread as `object`: @react-three/fiber adds never-typed three.js intrinsics to JSX, which would
     // otherwise leak through MDXComponents' index signature and fail the `satisfies` check.
     ...(components as object),

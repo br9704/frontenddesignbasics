@@ -17,6 +17,8 @@ values unchanged, so every developer and every AI agent already knows them.
 
 ## Breakpoints
 
+<details><summary>Breakpoints: table (6 rows)</summary>
+
 | Name | Min width | Typical device | Tailwind |
 |---|---|---|---|
 | (base) | 0 | Phones, portrait | no prefix |
@@ -25,6 +27,8 @@ values unchanged, so every developer and every AI agent already knows them.
 | `lg` | 1024px | Tablets landscape, small laptops | `lg:` |
 | `xl` | 1280px | Laptops, desktops | `xl:` |
 | `2xl` | 1536px | Large desktops | `2xl:` |
+
+</details>
 
 - **MUST** write base styles for the phone and add `min-width` overrides upwards. No `max-width` media queries except for a one-off fix.
 - **MUST** keep breakpoints in tokens (`--breakpoint-md: 48rem` in `@theme`). Never write `@media (min-width: 812px)` by hand.
@@ -39,6 +43,8 @@ values unchanged, so every developer and every AI agent already knows them.
 
 Check every page at these widths before calling it done.
 
+<details><summary>Test widths: table (7 rows)</summary>
+
 | Width | Why |
 |---|---|
 | 320px | The reflow width in WCAG 2.2 (1.4.10). Content must work without two-way scrolling |
@@ -49,15 +55,23 @@ Check every page at these widths before calling it done.
 | 1440px | Common desktop. Check the container stops growing |
 | 1920px | Full HD. Check nothing stretches edge to edge by accident |
 
+</details>
+
 ## Containers
 
 Three widths cover almost every page.
+
+<details><summary>Containers: table (3 rows)</summary>
 
 | Token | Value | Use |
 |---|---|---|
 | `--container-prose` | 65ch (about 680px at 16px) | Articles, docs, long text |
 | `--container-page` | 1200px | Standard page content |
 | `--container-wide` | 1440px | Dashboards, galleries, wide tables |
+
+</details>
+
+<details><summary>Containers: copy the css (12 lines)</summary>
 
 ```css
 @theme {
@@ -74,6 +88,8 @@ Three widths cover almost every page.
 }
 ```
 
+</details>
+
 - **MUST** cap reading text at 65ch, even inside a wider container.
 - **MUST** let backgrounds go full bleed and keep content inside the container. The section is wide; the text is not.
 - **SHOULD NOT** add a fourth container width. Use a grid span instead.
@@ -88,11 +104,17 @@ The grid follows Material's responsive layout grid: 4 columns on phones, 8 on ta
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/breakpoints-and-layout).</sub>
 
+<details><summary>Gutters and grid columns: table (3 rows)</summary>
+
 | Breakpoint | Columns | Gutter (side padding) | Column gap | Section spacing |
 |---|---|---|---|---|
 | base (0 to 639px) | 4 | 16px | 16px | 64px |
 | `sm` / `md` (640 to 1023px) | 8 | 24px | 24px | 80px |
 | `lg` and up (1024px+) | 12 | 32px | 32px | 96px |
+
+</details>
+
+<details><summary>Gutters and grid columns: copy the css (13 lines)</summary>
 
 ```css
 :root {
@@ -110,6 +132,8 @@ The grid follows Material's responsive layout grid: 4 columns on phones, 8 on ta
 }
 ```
 
+</details>
+
 - **MUST** keep side gutters at 16px or more on phones. Text touching the screen edge is the most common phone bug.
 - **MUST** use `minmax(0, 1fr)`, not `1fr`, for grid columns that hold text or code, so long content cannot force the column wider.
 - **SHOULD** use 12 columns on desktop because it divides into halves, thirds, quarters and sixths.
@@ -121,6 +145,8 @@ The grid follows Material's responsive layout grid: 4 columns on phones, 8 on ta
 Phones have notches, rounded corners and home indicators. Opt in to the full screen, then pad away
 from the unsafe edges.
 
+<details><summary>Safe areas and viewport height: copy the tsx (8 lines)</summary>
+
 ```tsx
 // app/layout.tsx (Next.js)
 import type { Viewport } from 'next';
@@ -131,6 +157,10 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 ```
+
+</details>
+
+<details><summary>Safe areas and viewport height: copy the css (14 lines)</summary>
 
 ```css
 .site-header {
@@ -149,6 +179,8 @@ export const viewport: Viewport = {
 .app-shell { height: 100dvh; }  /* dynamic viewport: tracks the toolbar */
 ```
 
+</details>
+
 - **MUST** add `env(safe-area-inset-bottom)` to anything fixed to the bottom of the screen once `viewport-fit=cover` is set.
 - **MUST** use `max()` so the gutter is never smaller than the normal 16px when the inset is 0.
 - **MUST NOT** use `100vh` for full-height layouts on phones. It is taller than the visible area while the browser toolbar shows. Use `100svh` for heroes and `100dvh` for app shells.
@@ -165,6 +197,8 @@ Every page MUST work at 390px wide with no horizontal scroll. This is the house 
 
 An empty array passes. Anything listed is wider than the screen. The usual causes and fixes:
 
+<details><summary>The 390px rule: table (8 rows)</summary>
+
 | Cause | Fix |
 |---|---|
 | Fixed widths (`width: 480px`) | `max-width: 100%` or a grid span |
@@ -175,6 +209,8 @@ An empty array passes. Anything listed is wider than the screen. The usual cause
 | Three columns with no base style | `grid-cols-1 md:grid-cols-3` |
 | Images and embeds without limits | `max-width: 100%; height: auto` |
 | Negative margins for bleed effects | Put `overflow-x: clip` on the section wrapper |
+
+</details>
 
 - **MUST** check at 390px and at 320px, which is the WCAG reflow width.
 - **MUST** keep inputs at 16px text so iOS does not zoom and shift the layout on focus.
@@ -215,6 +251,10 @@ most people will actually use.
 
 ## Sources
 
+<details><summary>3 sources</summary>
+
 - [Tailwind CSS: responsive design](https://tailwindcss.com/docs/responsive-design)
 - [MDN: container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries)
 - [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+
+</details>

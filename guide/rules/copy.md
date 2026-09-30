@@ -16,6 +16,8 @@ Microcopy is interface. The label on a button decides whether people press it, a
 
 ## Buttons and links
 
+<details><summary>Buttons and links: table (6 rows)</summary>
+
 | Do | Don't | Rule |
 |---|---|---|
 | Save changes | OK | Verb plus object. |
@@ -24,6 +26,8 @@ Microcopy is interface. The label on a button decides whether people press it, a
 | Rename… | Rename | An ellipsis (…) means "asks for more input first". |
 | Saving… | Loading | Name the action in progress. |
 | Read the media rules | Click here | Link text makes sense on its own. |
+
+</details>
 
 - **MUST** start every button label with a verb.
 - **MUST** use the same verb on the trigger, the dialog title and the confirm button: "Delete project?" then "Delete project".
@@ -36,11 +40,15 @@ Microcopy is interface. The label on a button decides whether people press it, a
 
 Use sentence case everywhere: page titles, headings, buttons, menu items, tabs. Capitalise only the first word and proper nouns. Material and Apple's HIG both use sentence case for most UI text; pick it and apply it everywhere.
 
+<details><summary>Sentence case: table (3 rows)</summary>
+
 | Do | Don't |
 |---|---|
 | Create new project | Create New Project |
 | Sign in with GitHub | Sign In With Github |
 | Rules & conventions | Rules & Conventions |
+
+</details>
 
 - **MUST** keep product names and brands in their own casing: GitHub, iPhone, Next.js.
 - **MUST NOT** set whole labels in capitals in the source text. If a label should look uppercase, use `text-transform: uppercase` so screen readers do not spell it out.
@@ -57,6 +65,8 @@ Use sentence case everywhere: page titles, headings, buttons, menu items, tabs. 
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/copy).</sub>
 
+<details><summary>Error messages: table (6 rows)</summary>
+
 | Situation | Message |
 |---|---|
 | Empty required field | Enter your email address |
@@ -65,6 +75,8 @@ Use sentence case everywhere: page titles, headings, buttons, menu items, tabs. 
 | Network failure | Could not save. Check your connection and try again. |
 | Permission | Only owners can delete projects. Ask an owner to do it. |
 | Unknown server error | Something went wrong on our side. Try again in a minute. |
+
+</details>
 
 - **MUST** show the error next to the field that caused it, and repeat a summary at the top for long forms.
 - **MUST** keep what the user typed. Never clear a form because one field failed.
@@ -76,11 +88,15 @@ Use sentence case everywhere: page titles, headings, buttons, menu items, tabs. 
 
 An empty state is the first screen many people see. Treat it as onboarding, not as an absence.
 
+<details><summary>Empty states: table (3 rows)</summary>
+
 | Part | Example |
 |---|---|
 | What this place is | No projects yet |
 | Why it is empty, or what goes here | Projects hold your pages, tokens and assets. |
 | One action | Create project |
+
+</details>
 
 - **MUST** give every list, table and search a designed empty state.
 - **MUST** offer exactly one primary action. A second one can be a text link.
@@ -98,6 +114,8 @@ new Intl.DateTimeFormat(gb, { dateStyle: 'medium' }).format(date);             /
 new Intl.RelativeTimeFormat(gb, { numeric: 'auto' }).format(-1, 'day');        // "yesterday"
 ```
 
+<details><summary>Numbers, dates and units: table (8 rows)</summary>
+
 | Thing | Convention | Example |
 |---|---|---|
 | Dates in UI | Day, short month, year, from `Intl` | 29 Sept 2026 |
@@ -109,6 +127,8 @@ new Intl.RelativeTimeFormat(gb, { numeric: 'auto' }).format(-1, 'day');        /
 | Ranges | "to", or an en dash with no spaces | 150 to 400ms |
 | Counts | Words for zero to nine in prose, digits in UI | "three steps", "3 items" |
 
+</details>
+
 - **MUST NOT** write all-number dates such as 09/10/2026. Half the world reads it as September, half as October.
 - **MUST** format numbers and dates with `Intl`, not string concatenation, so the locale does the work.
 - **MUST** handle plurals properly: "1 item", "2 items", "No items". `Intl.PluralRules` helps.
@@ -118,6 +138,8 @@ new Intl.RelativeTimeFormat(gb, { numeric: 'auto' }).format(-1, 'day');        /
 
 Choose British or US English once, write it in the README, and apply it everywhere users read. This guide uses British English.
 
+<details><summary>One spelling: table (6 rows)</summary>
+
 | British | US |
 |---|---|
 | colour | color |
@@ -126,6 +148,8 @@ Choose British or US English once, write it in the README, and apply it everywhe
 | licence (noun) | license |
 | cancelled | canceled |
 | grey | gray |
+
+</details>
 
 - **MUST** set the matching `lang` on `<html>`: `en-GB` or `en-US`.
 - **MUST** keep code in its own spelling. CSS says `color` and `center`; your prose says colour and centre. Do not "fix" either.
@@ -146,5 +170,9 @@ Specific copy removes guesswork. A button that says "Delete project" cannot be m
 
 ## Sources
 
+<details><summary>2 sources</summary>
+
 - [Material 3: UX writing best practices](https://m3.material.io/foundations/content-design/style-guide/ux-writing-best-practices)
 - [Apple HIG: writing](https://developer.apple.com/design/human-interface-guidelines/writing)
+
+</details>

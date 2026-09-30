@@ -26,6 +26,8 @@ every component in a project should share.
 
 ## Every state, named
 
+<details><summary>Every state, named: table (10 rows)</summary>
+
 | State | Trigger or selector | Visual change | ARIA or attribute |
 |---|---|---|---|
 | Default | none | The resting design | none |
@@ -38,6 +40,8 @@ every component in a project should share.
 | Loading | a prop | Spinner in place of the icon or label, width unchanged | `aria-busy="true"`, clicks ignored |
 | Error | validation | Danger border, icon and a message under the field | `aria-invalid="true"`, `aria-describedby` |
 | Empty | no data | A heading, one sentence and one action | none |
+
+</details>
 
 - **MUST** design every row that applies before a component is marked done. Missing states go in the pull request as open items.
 - **MUST** put hover styles behind `@media (hover: hover)`. Tailwind v4's `hover:` variant already does this; hand-written CSS must add it, or touch screens keep a sticky hover after a tap.
@@ -84,6 +88,8 @@ One ring for the whole product. Copy it once, reference it everywhere.
 
 ## Touch targets
 
+<details><summary>Touch targets: table (4 rows)</summary>
+
 | Standard | Minimum target | Level |
 |---|---|---|
 | WCAG 2.2, 2.5.8 Target Size (Minimum) | 24 × 24 CSS px, or 24px spacing around a smaller target | AA |
@@ -91,10 +97,14 @@ One ring for the whole product. Copy it once, reference it everywhere.
 | Apple Human Interface Guidelines | 44 × 44 pt | Platform guidance |
 | Material Design | 48 × 48 dp | Platform guidance |
 
+</details>
+
 - **MUST** give every control a hit area of at least 44 × 44px on touch screens. This is the house rule in [the rules](./README.md).
 - **MUST** never go below 24 × 24px anywhere, including dense desktop tables.
 - **SHOULD** leave at least 8px between neighbouring targets.
 - **SHOULD** grow the hit area, not the visual, when the design needs a small control:
+
+<details><summary>Touch targets: copy the css (9 lines)</summary>
 
 ```css
 .icon-button { position: relative; width: 32px; height: 32px; }
@@ -108,9 +118,13 @@ One ring for the whole product. Copy it once, reference it everywhere.
 }
 ```
 
+</details>
+
 ## One API for every component
 
 Every component takes the same prop names for the same ideas. Learn one, know them all.
+
+<details><summary>One API for every component: table (6 rows)</summary>
 
 | Prop | Type | Values | Default |
 |---|---|---|---|
@@ -121,7 +135,11 @@ Every component takes the same prop names for the same ideas. Learn one, know th
 | `asChild` | boolean | render as the child element (Radix Slot) | `false` |
 | `className` | string | merged last with `cn()` | none |
 
+</details>
+
 Sizes map to fixed heights, so buttons, inputs and selects line up in a row:
+
+<details><summary>One API for every component: table (3 rows)</summary>
 
 | `size` | Height | Padding x | Text | Icon |
 |---|---|---|---|---|
@@ -129,7 +147,11 @@ Sizes map to fixed heights, so buttons, inputs and selects line up in a row:
 | `md` | 40px | 16px | 14px or 16px | 20px |
 | `lg` | 48px | 20px | 16px | 20px |
 
+</details>
+
 `sm` is below 44px, so on touch screens it needs the hit-area pattern above.
+
+<details><summary>One API for every component: copy the tsx (40 lines)</summary>
 
 ```tsx
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -174,6 +196,8 @@ export function Button({ variant, size, loading = false, disabled, className, ch
 }
 ```
 
+</details>
+
 - **MUST** use string unions for visual options: `variant="ghost"`, never a boolean like `ghost` or `isGhost`. Booleans multiply into impossible combinations.
 - **MUST** spread remaining props onto the root element and accept `ref`, so native attributes, test IDs and `aria-*` just work. In React 19, `ref` is an ordinary prop.
 - **MUST** default `type="button"` on buttons, so a button inside a form does not submit it by accident.
@@ -191,12 +215,18 @@ controlled when the parent needs the value.
 
 <sub>Offer both modes with the same three prop names. Radix, React Aria and native inputs all use this shape.</sub>
 
+<details><summary>Controlled and uncontrolled: table (4 rows)</summary>
+
 | Value | Uncontrolled prop | Controlled prop | Change event |
 |---|---|---|---|
 | Text, select, slider | `defaultValue` | `value` | `onValueChange` |
 | Checkbox, switch | `defaultChecked` | `checked` | `onCheckedChange` |
 | Dialog, popover, accordion item | `defaultOpen` | `open` | `onOpenChange` |
 | Tabs | `defaultValue` | `value` | `onValueChange` |
+
+</details>
+
+<details><summary>Controlled and uncontrolled: copy the tsx (12 lines)</summary>
 
 ```tsx
 import { useState } from 'react';
@@ -213,6 +243,8 @@ export function useControllable<T>(value: T | undefined, defaultValue: T, onChan
 }
 ```
 
+</details>
+
 - **MUST** name the trio `value`, `defaultValue`, `onValueChange`, and the same for `open` and `checked`. Never `initialValue`, `isOpen` or `setOpen`.
 - **MUST** pass the new value as the first argument of the change event, not the DOM event.
 - **MUST NOT** switch a component between controlled and uncontrolled during its life. React warns, and state goes out of sync.
@@ -226,6 +258,10 @@ already know how `Popover` and `Accordion` do.
 
 ## Sources
 
+<details><summary>3 sources</summary>
+
 - [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [WCAG 2.2 Understanding 2.5.8: target size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
 - [Vercel Web Interface Guidelines](https://vercel.com/design/guidelines)
+
+</details>

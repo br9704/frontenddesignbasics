@@ -28,6 +28,8 @@ This guide uses 1.333.
 
 For product UI, Tailwind's default size and line-height pairs are a sound scale. Use them as they are.
 
+<details><summary>Type scale: table (11 rows)</summary>
+
 | Token | Size | Line height | Use |
 |---|---|---|---|
 | `text-xs` | 12px | 16px | Legal, badges, table meta. Never body |
@@ -42,6 +44,8 @@ For product UI, Tailwind's default size and line-height pairs are a sound scale.
 | `text-6xl` | 60px | 1 | Marketing hero |
 | `text-7xl` | 72px | 1 | Display, one per page at most |
 
+</details>
+
 - **MUST** keep body text at 16px or more. Inputs too: iOS Safari zooms the page when a focused input is under 16px.
 - **MUST** use no more than 6 sizes on a single screen. More sizes means the hierarchy is guessed.
 - **SHOULD** make fluid display sizes with `clamp()`, keeping the minimum on the scale: `font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem)`.
@@ -51,6 +55,8 @@ For product UI, Tailwind's default size and line-height pairs are a sound scale.
 
 Line-height shrinks as size grows. Big type with body line-height looks loose and falls apart.
 
+<details><summary>Line-height and tracking: table (5 rows)</summary>
+
 | Token | Value | Use |
 |---|---|---|
 | `--leading-none` | 1 | Display type 48px and up, single-line numbers |
@@ -59,12 +65,18 @@ Line-height shrinks as size grows. Big type with body line-height looks loose an
 | `--leading-normal` | 1.5 | Body text, inputs |
 | `--leading-relaxed` | 1.65 | Long-form reading at 16 to 18px |
 
+</details>
+
+<details><summary>Line-height and tracking: table (4 rows)</summary>
+
 | Token | Value | Use |
 |---|---|---|
 | `--tracking-tighter` | -0.03em | Display 48px and up |
 | `--tracking-tight` | -0.015em | Headings 24 to 48px |
 | `--tracking-normal` | 0 | Body text. Never change it |
 | `--tracking-wide` | 0.08em | All-caps labels only, 12px and under |
+
+</details>
 
 - **MUST** add positive tracking to any all-caps text. Capitals set at 0 look cramped.
 - **MUST NOT** add letter-spacing to body text.
@@ -74,6 +86,8 @@ Line-height shrinks as size grows. Big type with body line-height looks loose an
 <img src="../img/rules-scales-and-type/02-SpacingRhythm.jpg" alt="SpacingRhythm" />
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/scales-and-type).</sub>
+
+<details><summary>Spacing: the 4pt scale: table (10 rows)</summary>
 
 | Token | px | Tailwind | Typical use |
 |---|---|---|---|
@@ -88,6 +102,8 @@ Line-height shrinks as size grows. Big type with body line-height looks loose an
 | `--space-24` | 96 | `24` | Section spacing on desktop |
 | `--space-32` | 128 | `32` | Hero padding on large screens |
 
+</details>
+
 - **MUST** use only these steps. 5, 10, 13 and 18 do not exist.
 - **MUST** make the gap between groups at least twice the gap inside them: 8 inside, 16 or more between.
 - **SHOULD** use 1px and 2px only for borders, outlines and focus-ring offsets. Those are the only off-scale values.
@@ -96,6 +112,8 @@ Line-height shrinks as size grows. Big type with body line-height looks loose an
 ## Radius scale
 
 Tailwind v4 defaults. Pick two or three for a product and ban the rest.
+
+<details><summary>Radius scale: table (9 rows)</summary>
 
 | Token | px | Use |
 |---|---|---|
@@ -108,6 +126,8 @@ Tailwind v4 defaults. Pick two or three for a product and ban the rest.
 | `rounded-2xl` | 16 | Modals, feature panels |
 | `rounded-3xl` | 24 | Hero media, bottom sheets on phones |
 | `rounded-full` | 9999px | Pills, avatars, icon buttons |
+
+</details>
 
 - **MUST** make nested corners concentric: inner radius = outer radius minus the padding between them. A 16px card with 8px padding holds an 8px image.
 - **SHOULD** use no more than 3 radii in one product, plus `full`.
@@ -132,6 +152,8 @@ Shadows say how far above the page something floats. Use a few named levels, eac
 }
 ```
 
+<details><summary>Shadow and elevation: table (5 rows)</summary>
+
 | Level | Token | Use |
 |---|---|---|
 | 0 | none | Page, sections, anything in the flow |
@@ -139,6 +161,8 @@ Shadows say how far above the page something floats. Use a few named levels, eac
 | 2 | `--shadow-2` | Hovered or dragged cards, sticky header once scrolled |
 | 3 | `--shadow-3` | Dropdowns, popovers, select lists |
 | 4 | `--shadow-4` | Modals, drawers, toasts |
+
+</details>
 
 - **MUST** tie elevation to z-index: a higher shadow never sits under a lower one.
 - **MUST** show elevation in dark mode with a lighter surface, not a stronger shadow. Shadows barely read on near-black. Material's dark theme does the same.
@@ -153,6 +177,8 @@ Shadows say how far above the page something floats. Use a few named levels, eac
 
 <sub>▶ Interactive on the [live site](https://frontenddesignbasics.vercel.app/docs/rules/scales-and-type).</sub>
 
+<details><summary>Z-index: named layers: table (8 rows)</summary>
+
 | Layer | Token | Value | What lives there |
 |---|---|---|---|
 | Base | `--z-base` | 0 | Normal flow |
@@ -164,11 +190,15 @@ Shadows say how far above the page something floats. Use a few named levels, eac
 | Toast | `--z-toast` | 400 | Toasts and banners that must beat modals |
 | Tooltip | `--z-tooltip` | 500 | Tooltips, which can appear anywhere |
 
+</details>
+
 - **MUST** use only these tokens. `z-index: 9999` or `z-50` chosen by feel is a bug.
 - **MUST** add `isolation: isolate` to a component that uses z-index inside itself, so its numbers cannot leak and fight the page layers.
 - **SHOULD** use the native top layer where you can. `<dialog>` opened with `showModal()` and elements using the `popover` attribute sit above everything without any z-index.
 
 ## Icon sizes
+
+<details><summary>Icon sizes: table (6 rows)</summary>
 
 | Size | Pairs with | Use |
 |---|---|---|
@@ -178,6 +208,8 @@ Shadows say how far above the page something floats. Use a few named levels, eac
 | 24px | `text-lg` and up | Standalone icons, toolbars, tab bars. Material's default size |
 | 32px | headings | Feature lists, settings rows |
 | 48px | `text-2xl` and up | Empty states, onboarding |
+
+</details>
 
 - **MUST** size the icon to the line-height of the text beside it, or one step below. A 16px icon suits 14px text on a 20px line.
 - **MUST** give icon-only buttons a 44×44px hit area, whatever the icon size, and an `aria-label`.
@@ -212,12 +244,16 @@ One family, or two clearly different ones. Never two that are *almost* the same.
 
 ## Set it for reading
 
+<details><summary>Set it for reading: table (4 rows)</summary>
+
 | Setting | Body text | Display text |
 |---|---|---|
 | Line length | 55 to 75 characters (`max-width: 65ch`) | Short. Break lines by meaning |
 | Line height | 1.5 to 1.7 | 0.9 to 1.1 |
 | Letter spacing | 0 | Slightly negative (−0.01 to −0.035em) |
 | Numbers in tables | `font-variant-numeric: tabular-nums` | n/a |
+
+</details>
 
 <img src="../img/rules-scales-and-type/05-TypeScale.jpg" alt="TypeScale" />
 
@@ -240,6 +276,10 @@ one. It also makes reviews mechanical: a value is either on the list or it is a 
 
 ## Sources
 
+<details><summary>3 sources</summary>
+
 - [Type Scale calculator](https://type-scale.com)
 - [web.dev: font best practices](https://web.dev/articles/font-best-practices)
 - [Tailwind CSS: theme variables](https://tailwindcss.com/docs/theme)
+
+</details>

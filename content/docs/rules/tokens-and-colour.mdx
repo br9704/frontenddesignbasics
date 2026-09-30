@@ -31,6 +31,8 @@ and how to name components, files and classes.
   ]}
 />
 
+<Reference title="Two tiers, one direction: table (6 rows)">
+
 | Tier | Example | Value | Who may read it |
 |---|---|---|---|
 | Primitive | `--color-v-ink` | `#f5f5f5` | Semantic tokens only |
@@ -39,6 +41,8 @@ and how to name components, files and classes.
 | Semantic | `--accent` | `var(--color-v-ink)` | Components, patterns |
 | Semantic | `--text-soft` | `var(--color-v-dim)` | Components, patterns |
 | Component | `--button-height-md` | `40px` | That component only |
+
+</Reference>
 
 - **MUST** keep components off primitives. A button reads `--accent`, never `--color-v-ink` or a raw hex.
 - **MUST** switch themes by redefining semantic tokens only. Primitives never change between light and dark.
@@ -49,6 +53,8 @@ and how to name components, files and classes.
 ## The naming pattern
 
 Every CSS variable follows one shape, read left to right from general to specific:
+
+<Reference title="The naming pattern: copy the txt (8 lines)">
 
 ```txt
 --{category}-{role}-{variant}-{state}
@@ -61,7 +67,11 @@ Every CSS variable follows one shape, read left to right from general to specifi
 --color-danger-text          role + part
 ```
 
+</Reference>
+
 Use a fixed list of categories and roles, so names are guessable:
+
+<Reference title="The naming pattern: table (11 rows)">
 
 | Category | Roles and variants | Examples |
 |---|---|---|
@@ -77,6 +87,8 @@ Use a fixed list of categories and roles, so names are guessable:
 | `duration` | `instant`, `fast`, `base`, `slow` | `--duration-fast` |
 | `ease` | `out`, `in-out`, `in` | `--ease-out` |
 
+</Reference>
+
 Rules for the names themselves:
 
 - **MUST** use lowercase kebab-case: `--color-text-soft`, not `--colorTextSoft` or `--color_text_soft`.
@@ -90,6 +102,8 @@ Rules for the names themselves:
 Tailwind v4 reads tokens from `@theme` and turns each namespace into utilities. The namespace decides
 the utility, so the naming pattern above maps straight across.
 
+<Reference title="Tokens in Tailwind v4: table (9 rows)">
+
 | `@theme` namespace | Utilities it creates |
 |---|---|
 | `--color-*` | `bg-*`, `text-*`, `border-*`, `fill-*`, `ring-*` |
@@ -102,8 +116,12 @@ the utility, so the naming pattern above maps straight across.
 | `--breakpoint-*` | `sm:`, `md:` and so on |
 | `--spacing` | one base unit; `p-4` is `calc(var(--spacing) * 4)` |
 
+</Reference>
+
 Primitives go in `@theme`. Semantic tokens are plain variables on `:root` that change per theme, then
 exposed to Tailwind with `@theme inline`, so the utility points at the live variable:
+
+<Reference title="Tokens in Tailwind v4: copy the css (32 lines)">
 
 ```css
 @import 'tailwindcss';
@@ -140,6 +158,8 @@ exposed to Tailwind with `@theme inline`, so the utility points at the live vari
 }
 ```
 
+</Reference>
+
 This guide's own `app/global.css` is a worked example of the split. The primitives live in `@theme`:
 `--color-v-*` for the mono stage (`#080808` ground, `#f5f5f5` ink), `--color-w-*` for the Win95
 opening, and `--color-c-1` to `--color-c-6` for the colour finale. Semantic tokens such as `--surface`,
@@ -154,6 +174,8 @@ prefix on semantic names because it has only a handful. Past about 20, use the f
 ## Components and files
 
 One rule per kind of name. Match what the framework already does, so nothing needs explaining.
+
+<Reference title="Components and files: table (12 rows)">
 
 | Thing | Convention | Example |
 |---|---|---|
@@ -170,6 +192,8 @@ One rule per kind of name. Match what the framework already does, so nothing nee
 | Data attribute for state | `data-` + state name | `data-state="open"`, `data-disabled` |
 | Next.js route file | fixed names | `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `not-found.tsx` |
 
+</Reference>
+
 - **MUST** keep one exported component per file, unless the others are its parts (`Card`, `CardHeader`, `CardBody`).
 - **MUST** prefix compound parts with the parent name: `DialogTitle`, not `Title`.
 - **SHOULD** use kebab-case for every file and folder name. It avoids case-sensitivity bugs between macOS and Linux builds.
@@ -179,6 +203,8 @@ One rule per kind of name. Match what the framework already does, so nothing nee
 
 With Tailwind and components, the component is the block. You do not need `.card__title--large`,
 because the file already scopes the styles and props replace modifiers.
+
+<Reference title="Classes without BEM: copy the tsx (18 lines)">
 
 ```tsx
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -200,6 +226,8 @@ export function Badge({ tone, size, className, ...props }: React.ComponentProps<
   return <span className={cn(badge({ tone, size }), className)} {...props} />;
 }
 ```
+
+</Reference>
 
 - **MUST** let `prettier-plugin-tailwindcss` order classes. It sorts by Tailwind's own order: layout and position first, then box model, typography, visuals, and variants such as `hover:` and `md:` after the base classes. Never hand-sort.
 - **MUST** merge incoming `className` last with `cn()`, so callers can override without `!important`.
@@ -257,6 +285,10 @@ opening the token file, which is the real test of a naming system.
 
 ## Sources
 
+<Reference title="3 sources">
+
 - [Tailwind CSS: theme variables](https://tailwindcss.com/docs/theme)
 - [MDN: CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
 - [MDN: oklch()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch)
+
+</Reference>
