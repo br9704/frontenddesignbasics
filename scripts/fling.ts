@@ -30,7 +30,7 @@ async function main() {
     // tsx (esbuild keepNames) wraps nested functions in __name(); give the page a no-op one
     await page.addInitScript('window.__name = (f) => f');
     await page.goto(BASE + '/', { waitUntil: 'domcontentloaded', timeout: 90_000 });
-    await page.waitForFunction(() => !document.querySelector('[aria-label^="Loading the journey"]'), null, { timeout: 60_000 });
+    await page.waitForFunction(() => !document.querySelector('[data-preloader]'), null, { timeout: 60_000 });
     await page.waitForTimeout(1500);
     const hidden = new Set<string>();
     const blank = new Set<string>();

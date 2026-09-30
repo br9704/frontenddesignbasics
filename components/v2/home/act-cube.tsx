@@ -63,7 +63,7 @@ export function ActCube() {
 
         <div data-line className={`absolute inset-x-0 bottom-0 bg-[linear-gradient(transparent,#080808_45%)] pt-16 pb-14 lg:pb-8 motion-reduce:relative motion-reduce:bottom-0 motion-reduce:pb-10 ${PAD}`}>
           <p className="max-w-[26ch] font-display text-[clamp(1.6rem,3.4vw,2.8rem)] leading-[1.05] tracking-[-0.02em] text-[var(--v-ink)]">
-            Every section here is built with the <em>tools it teaches.</em>
+            Pixel to HD: 296 blocks close into one <em>smooth cube.</em>
           </p>
           <BuiltWith tools={['threejs', 'glsl', 'gsap']} className="mt-3" />
         </div>

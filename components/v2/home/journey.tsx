@@ -62,19 +62,11 @@ export function HomeJourney({
       const lenis = new Lenis({ autoRaf: false, lerp: 0.075, wheelMultiplier: 0.8, touchMultiplier: 1 });
       scroller.current = lenis;
       lenis.on('scroll', ScrollTrigger.update);
-      // hold the page still while the preloader runs
-      let offReady = () => {};
-      if (ready.get() < 1) {
-        lenis.stop();
-        offReady = ready.subscribe(() => {
-          if (ready.get() < 1) return;
-          lenis.start();
-          ScrollTrigger.refresh();
-        });
-      }
       const tick = (t: number) => lenis.raf(t * 1000);
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
+      // re-measure once the warm-up has mounted what it can
+      const offReady = ready.subscribe(() => ready.get() >= 1 && ScrollTrigger.refresh());
 
       ACTS.forEach((a) => {
         ScrollTrigger.create({

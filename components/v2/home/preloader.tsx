@@ -5,11 +5,10 @@ import { experiences } from '@/lib/experiences';
 import { ready } from './runtime';
 
 /*
- * Home preloader. The journey is ~20 live WebGL pieces; fetched lazily they pop in late (or not at
- * all on a slow connection). So before the Win95 boot plays, this BIOS screen fetches every
- * experience's code, the fonts and the first posters, listing each one as it lands.
- * It never blocks forever: after CAP ms it lets you in with whatever has loaded, and the rest keeps
- * loading behind the page.
+ * Home warm-up. The journey is ~20 live WebGL pieces; fetched lazily they pop in late (or not at
+ * all on a slow connection). While you read the hero, this fetches every experience's code and its
+ * still, and shows a small progress chip. It never blocks the page or the scroll; the Win95 boot
+ * intro waits for it (see act-boot). After CAP ms it reports ready with whatever has landed.
  */
 
 // Pieces the home page shows, in the order you meet them. Everything else loads after.
@@ -43,9 +42,6 @@ export function Preloader() {
 
   useEffect(() => {
     let cancelled = false;
-    const html = document.documentElement;
-    html.style.overflow = 'hidden';
-    window.scrollTo(0, 0);
     const t0 = performance.now();
     const set = (id: string, state: Row['state']) =>
       !cancelled && setRows((r) => r.map((x) => (x.id === id ? { ...x, state } : x)));
@@ -75,7 +71,6 @@ export function Preloader() {
       setTimeout(() => {
         if (cancelled) return;
         setDone(true);
-        html.style.overflow = '';
         ready.set(1);
         setTimeout(() => !cancelled && setGone(true), 450);
         // the rest of the site's pieces, quietly
@@ -90,7 +85,6 @@ export function Preloader() {
       cancelled = true;
       clearTimeout(lateTimer);
       clearTimeout(capTimer);
-      html.style.overflow = '';
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -108,46 +102,24 @@ export function Preloader() {
   if (gone) return null;
   const n = rows.filter((r) => r.state === 'ok' || r.state === 'err').length;
   const pct = Math.round((n / Math.max(1, rows.length)) * 100);
-  const W = 28;
+  const W = 12;
   const bar = '█'.repeat(Math.round((pct / 100) * W)).padEnd(W, '░');
+  const current = rows.find((r) => r.state === 'load')?.id;
 
   return (
     <div
       role="status"
       aria-live="polite"
-      aria-label={`Loading the journey, ${pct} percent`}
-      className={`pixel fixed inset-0 z-[100] flex items-center justify-center bg-black px-4 text-[16px] leading-[16px] text-[#cfcfcf] transition-opacity duration-400 motion-reduce:transition-none ${done ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+      aria-label={`Warming up live pieces, ${pct} percent`}
+      data-preloader
+      className={`pixel fixed right-3 bottom-16 z-[60] lg:bottom-3 max-w-[calc(100vw-1.5rem)] border border-[var(--v-steel)] bg-[#080808]/95 px-3 py-2 text-[16px] leading-[16px] text-[var(--v-soft)] transition-opacity duration-400 motion-reduce:transition-none ${done ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
     >
-      <div className="w-full max-w-[640px]">
-        <p className="text-white">FDB/95 BIOS v2.0 · front end design basics</p>
-        <p className="mt-2 text-[#8a8a8a]">Loading {rows.length} live pieces so nothing pops in late.</p>
-        <div ref={listRef} className="mt-6 h-[176px] overflow-hidden">
-          {rows.map((r) => (
-            <p key={r.id} className={r.state === 'wait' ? 'text-[#4a4a4a]' : ''}>
-              {`${r.id}.exe `.padEnd(30, '.')}{' '}
-              {r.state === 'ok' ? <span className="text-white">OK</span> : r.state === 'err' ? 'SKIP' : r.state === 'load' ? <span className="animate-pulse motion-reduce:animate-none">…</span> : ''}
-            </p>
-          ))}
-        </div>
-        <p className="mt-6 whitespace-pre text-white">{`[${bar}] ${String(pct).padStart(3, ' ')}%`}</p>
-        <p className="mt-2 text-[#8a8a8a]">
-          {n}/{rows.length} loaded{late && !done ? ' · slow connection, hang on' : ''}
-        </p>
-        {late && !done ? (
-          <button
-            type="button"
-            onClick={() => {
-              setDone(true);
-              document.documentElement.style.overflow = '';
-              ready.set(1);
-              setTimeout(() => setGone(true), 450);
-            }}
-            className="mt-4 border border-[#8a8a8a] px-3 py-1 text-white hover:bg-white hover:text-black focus-visible:bg-white focus-visible:text-black"
-          >
-            [enter now →]
-          </button>
-        ) : null}
-      </div>
+      <p className="whitespace-pre text-[var(--v-ink)]">{`[${bar}] ${n}/${rows.length}`}</p>
+      <p className="mt-1 truncate text-[var(--v-dim)]">
+        {current ? `warming up ${current}` : 'warming up live pieces'}
+        {late && !done ? ' · slow connection' : ''}
+      </p>
+      <div ref={listRef} hidden />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { BuiltWith } from '@/components/v2/experience-frame';
 import { P, pinSection, pinStage } from './acts';
-import { gsap, scrubTimeline, useMotion } from './motion';
+import { gsap, ScrollTrigger, scrubTimeline, useMotion } from './motion';
 import { ready, scrollToAct } from './runtime';
 
 /*
@@ -114,8 +114,12 @@ export function ActBoot({ categories }: { categories: { id: string; label: strin
 
     // INTRO (time-based, plays on load so the first screen is never empty): BIOS types out, the splash
     // bar fills in chunky steps, the desktop appears, Tools.exe opens and the Welcome dialog lands.
-    const intro = gsap.timeline({ delay: 0.15, paused: ready.get() < 1 });
-    const offReady = ready.subscribe(() => ready.get() >= 1 && intro.paused() && intro.play());
+    // The boot sits under the hero now: its intro plays once it is on screen AND the warm-up is done.
+    const intro = gsap.timeline({ delay: 0.15, paused: true });
+    let seen = false;
+    const maybePlay = () => seen && ready.get() >= 1 && intro.paused() && intro.progress() === 0 && intro.play();
+    const offReady = ready.subscribe(maybePlay);
+    const seenST = ScrollTrigger.create({ trigger: el, start: 'top 70%', onEnter: () => ((seen = true), maybePlay()) });
     gsap.set(q('[data-bios]'), { autoAlpha: 1 });
     q('[data-bios-line]').forEach((line: Element, i: number) => {
       const n = (line.textContent ?? '').length;
@@ -145,7 +149,10 @@ export function ActBoot({ categories }: { categories: { id: string; label: strin
     tl.to(screen, { scaleX: 0.004, ease: 'power4.in', duration: 0.035 }, 0.5);
     tl.to(q('[data-crt-bg]'), { backgroundColor: '#080808', duration: 0.02 }, 0.45);
     tl.to({}, { duration: 0.015 }, 0.535);
-    return () => offReady();
+    return () => {
+      offReady();
+      seenST.kill();
+    };
   });
 
   return (

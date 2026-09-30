@@ -1,3 +1,18 @@
+# Frontend Design Basics
+
+**A design guide: the tools I use, the principles I've learnt, and what I build.**
+
+- **The website**, [frontenddesignbasics.vercel.app](https://frontenddesignbasics.vercel.app), is the live guide. Every tool, example and principle runs in the browser.
+- **This repo** is the same guide in Markdown ([`guide/`](guide/)), plus [`toolkit/toolkit.json`](toolkit/toolkit.json): which tool to use for which job, in a form your AI agent can read at the start of a project.
+
+| I want to… | Go to |
+|---|---|
+| pick the right tool for a job | [/tools](https://frontenddesignbasics.vercel.app/tools) · [toolkit.json](toolkit/toolkit.json) |
+| see what you can build with them | [/make](https://frontenddesignbasics.vercel.app/make) |
+| study real sites | [/sites](https://frontenddesignbasics.vercel.app/sites) · [/inspiration](https://frontenddesignbasics.vercel.app/inspiration) |
+| learn the how-tos and rules | [/docs](https://frontenddesignbasics.vercel.app/docs) · [guide/](guide/) |
+| give my agent the toolkit | `npx skills add br9704/frontenddesignbasics` |
+
 <p align="center">
   <a href="https://frontenddesignbasics.vercel.app"><img src="public/banners/journey.gif" alt="The journey: a Win95 boot pixel-blasts into black and white 3D, then bursts into colour" width="100%" /></a>
 </p>
@@ -12,7 +27,7 @@
  █████╗  ██║  ██║██████╔╝       the guide to complete, beautiful web design.
  ██╔══╝  ██║  ██║██╔══██╗       a journey through the toolkit: win95 boot →
  ██║     ██████╔╝██████╔╝       pixel blast → black & white 3d → full colour.
- ╚═╝     ╚═════╝ ╚═════╝        every section is built with the tools it teaches.
+ ╚═╝     ╚═════╝ ╚═════╝        tools, principles and examples, all live.
 ```
 
 <!-- directory:begin -->

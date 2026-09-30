@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
+import { Hero } from '@/components/v2/home/hero';
 import { HomeJourney } from '@/components/v2/home/journey';
+import { experiences } from '@/lib/experiences';
+import { source } from '@/lib/source';
 import { examples } from '@/lib/examples';
 import toolkit from '@/toolkit/toolkit.json';
 
 export const metadata: Metadata = {
   title: { absolute: 'Front End Design Basics' },
   description:
-    'A journey through the toolkit: from a Windows 95 boot, through black and white 3D, to full colour. Every section is built with the tools it teaches.',
+    'A design guide: the tools I use, the principles I have learnt, and what I build. The site is the live guide; the GitHub repo is the same guide in Markdown plus a toolkit.json your AI agent can read.',
 };
 
 export default function HomePage() {
@@ -29,7 +32,14 @@ export default function HomePage() {
 
   return (
     <main className="flex-1">
-      <h1 className="sr-only">Front End Design Basics: a journey through the toolkit</h1>
+      <Hero
+        counts={{
+          tools: toolkit.tools.length,
+          experiences: experiences.length,
+          sites: sitesTotal,
+          guides: source.getPages().filter((pg) => /^\/docs\/(how-to|rules|cases)\/./.test(pg.url)).length,
+        }}
+      />
       <HomeJourney
         categories={categories}
         total={toolkit.tools.length}
