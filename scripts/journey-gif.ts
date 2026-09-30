@@ -21,6 +21,13 @@ async function main() {
   await page.goto(BASE + '/', { waitUntil: 'networkidle' });
   await page.waitForTimeout(3000);
   const total = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
+  // Warm-up pass: scroll the whole page once so every lazy experience has loaded before recording.
+  for (let y = 0; y <= total; y += 700) {
+    await page.evaluate((v) => window.scrollTo({ top: v, behavior: 'instant' as ScrollBehavior }), y);
+    await page.waitForTimeout(450);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(2500);
   for (let i = 0; i < FRAMES; i++) {
     // ease-in-out through the page so each act gets screen time
     const t = i / (FRAMES - 1);

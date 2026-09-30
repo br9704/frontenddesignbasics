@@ -4,11 +4,18 @@ import Link from 'next/link';
 import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ComponentType } from 'react';
 import type { Experience, ExperienceProps } from '@/lib/experiences/types';
 
-/** ASCII placeholder shown while an experience's code loads. */
-export function AsciiLoading({ label = 'loading' }: { label?: string }) {
+/**
+ * Placeholder shown while an experience's code loads. When a poster exists (pnpm posters), show it
+ * with a small ASCII progress chip, so loading never looks like an empty box.
+ */
+export function AsciiLoading({ label = 'loading', poster }: { label?: string; poster?: string }) {
   return (
-    <div className="grid h-full w-full place-items-center bg-[var(--v-bg)]">
-      <pre className="pixel text-[16px] leading-[16px] text-[var(--v-dim)]">{`[██████░░░░░░] ${label}…`}</pre>
+    <div className="relative grid h-full w-full place-items-center bg-[var(--v-bg)]">
+      {poster ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={poster} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+      ) : null}
+      <pre className={`pixel relative text-[16px] leading-[16px] text-[var(--v-dim)] ${poster ? 'self-end justify-self-start m-2 bg-[var(--v-bg)]/85 px-2 py-1' : ''}`}>{`[██████░░░░░░] ${label}…`}</pre>
     </div>
   );
 }
@@ -79,11 +86,11 @@ export function ExperienceFrame({
   return (
     <div ref={ref} data-experience={experience.id} className={`relative h-full w-full overflow-hidden ${className}`}>
       {near ? (
-        <Suspense fallback={<AsciiLoading label={experience.id} />}>
+        <Suspense fallback={<AsciiLoading label={experience.id} poster={`/posters/${experience.id}.webp`} />}>
           <Comp active={active} reducedMotion={reducedMotion} progress={progress} />
         </Suspense>
       ) : (
-        <AsciiLoading label={experience.id} />
+        <AsciiLoading label={experience.id} poster={`/posters/${experience.id}.webp`} />
       )}
     </div>
   );

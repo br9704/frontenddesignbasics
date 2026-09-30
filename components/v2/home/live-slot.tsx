@@ -45,15 +45,10 @@ export function Poster({ id, note }: { id: string; tone?: 'mono' | 'colour'; not
   const title = getExperience(id)?.title ?? m?.title ?? id;
   return (
     <div className="pixel relative grid h-full w-full place-items-center overflow-hidden bg-[var(--v-bg)] text-[var(--v-dim)]">
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 16px), repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 16px)',
-        }}
-      />
-      <div className="relative bg-[var(--v-bg)] px-3 py-2 text-center text-[16px] leading-[16px]">
+      {/* the real poster (pnpm posters), so a slot that is not live still shows the piece */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/posters/${id}.webp`} alt="" aria-hidden loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="relative self-end justify-self-start m-2 bg-[var(--v-bg)]/85 px-3 py-2 text-[16px] leading-[16px]">
         <p className="text-[var(--v-ink)]">{title}</p>
         <Link href={`/lab/${id}`} className="mt-2 inline-block underline underline-offset-4 hover:text-[var(--v-ink)]">
           [open /lab/{id}]
