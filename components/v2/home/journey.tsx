@@ -16,6 +16,8 @@ import { ActTools, type ToolCategory } from './act-tools';
 import { ACTS, P } from './acts';
 import { gsap, MOTION, ScrollTrigger } from './motion';
 import { Rail } from './rail';
+import { CaptionBar } from './caption-bar';
+import { HomeEnd } from './home-end';
 import { Preloader } from './preloader';
 import { activeAct, overall, ready, scroller } from './runtime';
 
@@ -46,14 +48,17 @@ export function HomeJourney({
 
     // Always: which act is on screen, and the overall bar (the rail needs these either way).
     const always = gsap.context(() => {
-      ACTS.forEach((a, i) => {
-        ScrollTrigger.create({
-          trigger: `#${a.id}`,
-          start: 'top 50%',
-          end: 'bottom 50%',
-          onToggle: (s) => s.isActive && activeAct.set(i),
+      // The active act is the last one whose top has reached the nav (acts overlap: each one starts
+      // pinned under the end of the previous, so per-act toggles ran one act ahead).
+      const sections = ACTS.map((a) => document.getElementById(a.id));
+      const pickAct = () => {
+        let cur = 0;
+        sections.forEach((sec, i) => {
+          if (sec && sec.getBoundingClientRect().top <= 49) cur = i;
         });
-      });
+        activeAct.set(cur);
+      };
+      ScrollTrigger.create({ start: 0, end: 'max', onUpdate: pickAct, onRefresh: pickAct });
       ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (s) => overall.set(s.progress) });
     }, el);
 
@@ -130,6 +135,8 @@ export function HomeJourney({
       <ActSites sections={wall} total={sitesTotal} />
       <ActLearn />
       <ActColour />
+      <HomeEnd />
+      <CaptionBar total={total} sites={sitesTotal} />
     </div>
   );
 }
