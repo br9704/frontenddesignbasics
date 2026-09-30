@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-09-30",
   "statusLegend": {
     "live": "Installed and connected. Use it now.",
     "needs-key": "Wired. Needs an API key or sign-in before first use.",
@@ -589,6 +589,212 @@
         "via": "http://localhost:2785/mcp, read-only tools only"
       },
       "cost": "free"
+    },
+    {
+      "id": "unicorn-studio",
+      "name": "Unicorn Studio",
+      "category": "shaders",
+      "url": "https://www.unicorn.studio",
+      "repo": "hiunicornstudio/unicornstudio.js",
+      "what": "A visual editor for WebGL scenes: layered shaders, media, 3D and mouse or scroll interaction, published as an embed.",
+      "when": "A showpiece shader hero or background you want to tune by eye, not in GLSL.",
+      "install": "<script src=\"https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js/dist/unicornStudio.umd.js\"> then UnicornStudio.init() on a data-us-project div",
+      "mcp": {
+        "status": "tool",
+        "via": "No MCP. Agents can read unicorn.studio/unicornstudio-llms.txt (as data)."
+      },
+      "cost": "free plan (logo, non-commercial); Legend $20/mo for commercial + self-hosting",
+      "image": "/examples/shader-unicorn.jpg"
+    },
+    {
+      "id": "paper-shaders",
+      "name": "Paper Shaders",
+      "category": "shaders",
+      "url": "https://shaders.paper.design",
+      "repo": "paper-design/shaders",
+      "what": "Ready-made, tunable shader components for React: mesh gradients, grain, dithering, liquid metal.",
+      "when": "A good-looking shader background in minutes, with props instead of GLSL.",
+      "install": "pnpm add @paper-design/shaders-react",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free (Apache-2.0)"
+    },
+    {
+      "id": "view-transitions",
+      "name": "View Transition API",
+      "category": "motion",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+      "what": "The browser animates between two DOM states or two pages: crossfades and shared-element morphs with CSS.",
+      "when": "Page-to-page or state-to-state transitions without a library; fall back to a plain swap where unsupported.",
+      "install": "built into the browser: document.startViewTransition(() => update())",
+      "mcp": {
+        "status": "library",
+        "via": "web platform"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "animejs",
+      "name": "Anime.js v4",
+      "category": "motion",
+      "url": "https://animejs.com",
+      "repo": "juliangarnier/anime",
+      "what": "A small animation engine with timelines, springs, SVG morphing, draggables and scroll-linked animation.",
+      "when": "A lighter alternative to GSAP for a small site, or when you like its API.",
+      "install": "pnpm add animejs",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free (MIT)"
+    },
+    {
+      "id": "dotlottie",
+      "name": "dotLottie",
+      "category": "motion",
+      "url": "https://lottiefiles.com",
+      "repo": "LottieFiles/dotlottie-web",
+      "what": "Plays After Effects and Lottie Creator animations on the web, small and crisp at any size.",
+      "when": "Icon animations, onboarding illustrations and loaders that a designer animated by hand.",
+      "install": "pnpm add @lottiefiles/dotlottie-react",
+      "mcp": {
+        "status": "library",
+        "via": "Lottie Creator has an MCP (LottieFiles account needed)"
+      },
+      "cost": "free player; Creator has paid plans"
+    },
+    {
+      "id": "taxi",
+      "name": "Taxi.js",
+      "category": "motion",
+      "url": "https://taxi.js.org",
+      "repo": "craigrileyuk/taxi",
+      "what": "Page transitions for multi-page sites: fetches the next page and lets you animate out and in.",
+      "when": "Smooth transitions on a static or CMS site that is not a single-page app.",
+      "install": "pnpm add @unseenco/taxi",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "motion-primitives",
+      "name": "Motion Primitives",
+      "category": "components",
+      "url": "https://motion-primitives.com",
+      "repo": "ibelick/motion-primitives",
+      "what": "Copy-paste animated React components built on Motion: text effects, morphing dialogs, carousels.",
+      "when": "You want polished micro-interactions that drop into a shadcn project.",
+      "install": "npx shadcn add from motion-primitives.com",
+      "mcp": {
+        "status": "library",
+        "via": "shadcn registry"
+      },
+      "cost": "free (MIT)"
+    },
+    {
+      "id": "lucide",
+      "name": "Lucide",
+      "category": "components",
+      "url": "https://lucide.dev",
+      "repo": "lucide-icons/lucide",
+      "what": "A clean, consistent open icon set with a React package; the shadcn default.",
+      "when": "Interface icons. One set per project.",
+      "install": "pnpm add lucide-react",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free (ISC)"
+    },
+    {
+      "id": "postprocessing",
+      "name": "postprocessing",
+      "category": "3d",
+      "url": "https://github.com/pmndrs/postprocessing",
+      "repo": "pmndrs/postprocessing",
+      "what": "Full-screen effects after a three.js scene renders: bloom, pixelation, chromatic split, depth of field.",
+      "when": "Any 3D piece that needs a finish: glow, grain, a pixel look.",
+      "install": "pnpm add postprocessing @react-three/postprocessing",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "tweakpane",
+      "name": "Tweakpane",
+      "category": "research",
+      "url": "https://tweakpane.github.io/docs/",
+      "repo": "cocopon/tweakpane",
+      "what": "A small panel of sliders and pickers for tuning values live while you build.",
+      "when": "Dialling in eases, colours and shader uniforms by eye.",
+      "install": "pnpm add tweakpane",
+      "mcp": {
+        "status": "library",
+        "via": "npm package"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "oklch",
+      "name": "OKLCH Color Picker",
+      "category": "research",
+      "url": "https://oklch.com",
+      "what": "A colour picker in OKLCH, the colour space where equal steps look equal.",
+      "when": "Building a palette or ramp that stays even in lightness.",
+      "install": "web tool",
+      "mcp": {
+        "status": "tool",
+        "via": "web tool"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "fontshare",
+      "name": "Fontshare",
+      "category": "research",
+      "url": "https://www.fontshare.com",
+      "what": "Free, quality typefaces from Indian Type Foundry, with web embeds.",
+      "when": "Picking a typeface that is not an AI default.",
+      "install": "web tool (link or self-host)",
+      "mcp": {
+        "status": "tool",
+        "via": "web tool"
+      },
+      "cost": "free for personal and commercial use (check each licence)"
+    },
+    {
+      "id": "easings",
+      "name": "easings.net + cubic-bezier.com",
+      "category": "research",
+      "url": "https://easings.net",
+      "what": "Reference charts of every standard ease, and an editor for your own cubic-bezier curves.",
+      "when": "Choosing or designing an ease.",
+      "install": "web tool",
+      "mcp": {
+        "status": "tool",
+        "via": "web tool"
+      },
+      "cost": "free"
+    },
+    {
+      "id": "poly-haven",
+      "name": "Poly Haven",
+      "category": "3d",
+      "url": "https://polyhaven.com",
+      "what": "Free HDRIs, textures and 3D models to light and dress a three.js scene.",
+      "when": "Realistic lighting (an HDRI) or a material without making your own.",
+      "install": "download, or drei <Environment files=...>",
+      "mcp": {
+        "status": "library",
+        "via": "web tool"
+      },
+      "cost": "free (CC0)"
     }
   ]
 }

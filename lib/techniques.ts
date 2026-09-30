@@ -6,7 +6,6 @@
 export const TECHNIQUES = [
   { id: 'r3f', name: 'React Three Fiber', with: 'threejs', url: 'https://r3f.docs.pmnd.rs', what: 'three.js as React components. Every 3D piece on this site is written with it.' },
   { id: 'drei', name: 'drei', with: 'threejs', url: 'https://github.com/pmndrs/drei', what: 'Ready-made helpers for R3F: cameras, text, environment, instancing, views.' },
-  { id: 'postprocessing', name: 'postprocessing', with: 'threejs', url: 'https://github.com/pmndrs/postprocessing', what: 'Full-screen effects after the scene renders: pixelation, bloom, chromatic split, dither.' },
   { id: 'glsl', name: 'GLSL', with: 'ogl', url: 'https://thebookofshaders.com', what: 'The shader language itself. Every custom look here (dither, fluid, glass) is a small GLSL program.' },
   { id: 'canvas2d', name: 'Canvas 2D', with: null, url: 'https://developer.mozilla.org/docs/Web/API/Canvas_API', what: 'The browser’s 2D drawing API. Used for ASCII, pixel blasts and textures fed to 3D.' },
   { id: 'svg', name: 'SVG', with: null, url: 'https://developer.mozilla.org/docs/Web/SVG', what: 'Vector drawing in the page. Curves, paths and diagrams that animate with GSAP.' },

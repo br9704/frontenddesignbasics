@@ -36,7 +36,7 @@
 ```text
 ┌─ frontenddesignbasics.vercel.app ─────────────────────────────┐
 │  /make            33  experiences built by mixing the tools   │
-│  /tools           37  libraries, MCPs and skills I use daily  │
+│  /tools           51  libraries, MCPs and skills I use daily  │
 │  /inspiration     19  design inspiration, by principle        │
 │  /sites          293  real websites, filterable               │
 │  /docs/how-to     20  short numbered task guides              │
@@ -329,6 +329,10 @@ screenshots and "make with it" links, on [/tools](https://frontenddesignbasics.v
 | [Motion (motion.dev)](https://motion.dev) | React/JS animation with springs, layout animation and gestures. Formerly Framer Motion. | `live` |
 | [Scroll World](https://github.com/oso95/scroll-world) | Agent skill that turns a brand into a scrollable 3D-world landing page. | `live` |
 | [ScrollCraft](https://github.com/nateherkai/scroll-craft) | Skill for premium scroll-driven landing pages: scrubbed video, pinned sections, one signature move. | `live` |
+| [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API) | The browser animates between two DOM states or two pages: crossfades and shared-element morphs with CSS. | `library` |
+| [Anime.js v4](https://animejs.com) | A small animation engine with timelines, springs, SVG morphing, draggables and scroll-linked animation. | `library` |
+| [dotLottie](https://lottiefiles.com) | Plays After Effects and Lottie Creator animations on the web, small and crisp at any size. | `library` |
+| [Taxi.js](https://taxi.js.org) | Page transitions for multi-page sites: fetches the next page and lets you animate out and in. | `library` |
 
 **3D & WebGL**
 
@@ -341,6 +345,8 @@ screenshots and "make with it" links, on [/tools](https://frontenddesignbasics.v
 | [Spline](https://spline.design) | Browser/desktop 3D design tool with exportable interactive scenes. | `live` |
 | [PlayCanvas](https://playcanvas.com) | WebGL/WebGPU game engine with a collaborative editor. | `on-demand` |
 | [Vectary](https://www.vectary.com) | No-code 3D and AR design in the browser. (Logged from 'Vectory.com': vectory.com is a sensor company.) | `tool` |
+| [postprocessing](https://github.com/pmndrs/postprocessing) | Full-screen effects after a three.js scene renders: bloom, pixelation, chromatic split, depth of field. | `library` |
+| [Poly Haven](https://polyhaven.com) | Free HDRIs, textures and 3D models to light and dress a three.js scene. | `library` |
 
 **Shaders & gradients**
 
@@ -349,6 +355,8 @@ screenshots and "make with it" links, on [/tools](https://frontenddesignbasics.v
 | [OGL](https://github.com/oframe/ogl) | Tiny WebGL library. This site's hero shader runs on it. | `library` |
 | [ShaderGradient](https://shadergradient.co) | Moving 3D gradients for React, Framer and Figma, tuned in a visual editor. | `library` |
 | [GetLayers](https://www.getlayers.ai) | Library of prompts plus source for templates, 3D/WebGL scenes, motion sections and animated backgrounds. | `dormant` |
+| [Unicorn Studio](https://www.unicorn.studio) | A visual editor for WebGL scenes: layered shaders, media, 3D and mouse or scroll interaction, published as an embed. | `tool` |
+| [Paper Shaders](https://shaders.paper.design) | Ready-made, tunable shader components for React: mesh gradients, grain, dithering, liquid metal. | `library` |
 
 **Component libraries**
 
@@ -360,6 +368,8 @@ screenshots and "make with it" links, on [/tools](https://frontenddesignbasics.v
 | [21st.dev](https://21st.dev) | Community component catalogue plus AI UI generation. | `needs-key` |
 | [Bklit UI](https://ui.bklit.com) | UI and chart components shipped as a shadcn registry. | `live` |
 | [shadcn/ui](https://ui.shadcn.com) | Copy-in component system and the registry protocol most libraries above ship through. | `live` |
+| [Motion Primitives](https://motion-primitives.com) | Copy-paste animated React components built on Motion: text effects, morphing dialogs, carousels. | `library` |
+| [Lucide](https://lucide.dev) | A clean, consistent open icon set with a React package; the shadcn default. | `library` |
 
 **Reference & research**
 
@@ -368,6 +378,10 @@ screenshots and "make with it" links, on [/tools](https://frontenddesignbasics.v
 | [Refero](https://refero.design) | Searchable library of real app and web screens, flows and styles. | `needs-key` |
 | [Jitter](https://jitter.video) | Web motion-design tool for animating UI and exporting video/Lottie. | `tool` |
 | [Paper](https://paper.design) | Design canvas with a local MCP. Bruno uses it to scope ideas. | `on-demand` |
+| [Tweakpane](https://tweakpane.github.io/docs/) | A small panel of sliders and pickers for tuning values live while you build. | `library` |
+| [OKLCH Color Picker](https://oklch.com) | A colour picker in OKLCH, the colour space where equal steps look equal. | `tool` |
+| [Fontshare](https://www.fontshare.com) | Free, quality typefaces from Indian Type Foundry, with web embeds. | `tool` |
+| [easings.net + cubic-bezier.com](https://easings.net) | Reference charts of every standard ease, and an editor for your own cubic-bezier curves. | `tool` |
 
 **Claude skills (taste & rules)**
 
