@@ -10,6 +10,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 import toolkit from '../toolkit/toolkit.json';
 import examplesData from '../data/examples.json';
 import { experiences as EXPS } from '../lib/experiences';
+import jobsData from '../data/jobs.json';
+import systemsData from '../data/systems.json';
+import { CHECKLIST } from '../components/v3/principles/data';
+const systemsCount = Array.isArray(systemsData) ? systemsData.length : (systemsData as { systems?: unknown[] }).systems?.length ?? 0;
 import { readFileSync } from 'node:fs';
 
 const LIVE = 'https://frontenddesignbasics.vercel.app';
@@ -28,8 +32,11 @@ function docsList(dir: string) {
 function directory() {
   const sites = Object.values(examples).reduce((n, v) => n + v.length, 0);
   const rows: [string, number, string][] = [
+    ['/tools', jobsData.jobs.length, 'jobs, each with the tool to use'],
+    ['/principles', CHECKLIST.reduce((n, c) => n + c.rules.length, 0), 'my principles, each one live'],
+    ['/examples', systemsCount, 'design systems, sites, breakdowns'],
+    ['/work', EXPS.length, 'things I make, live to open'],
     ['/make', EXPS.length, 'experiences built by mixing the tools'],
-    ['/tools', toolkit.tools.length, 'libraries, MCPs and skills I use daily'],
     ['/inspiration', Object.keys(examples).length, 'design inspiration, by principle'],
     ['/sites', sites, 'real websites, filterable'],
     ['/docs/how-to', docsList('how-to').filter((x) => 'slug' in x).length, 'short numbered task guides'],

@@ -10,14 +10,17 @@ export type NavSkin = 'win95' | 'mono' | 'colour';
 
 const PRIMARY = [
   { path: '/tools', label: 'Tools' },
+  { path: '/principles', label: 'Principles' },
+  { path: '/examples', label: 'Examples' },
+  { path: '/work', label: 'Work' },
   { path: '/make', label: 'Make' },
-  { path: '/inspiration', label: 'Inspiration' },
-  { path: '/sites', label: 'Sites' },
 ];
 const LEARN = [
   { path: '/docs/how-to', label: 'How-tos' },
   { path: '/docs/rules', label: 'The rules' },
   { path: '/docs/cases', label: 'Cases' },
+  { path: '/sites', label: 'All sites' },
+  { path: '/inspiration', label: 'Inspiration' },
 ];
 const GITHUB = 'https://github.com/br9704/frontenddesignbasics';
 
@@ -114,7 +117,7 @@ export function SiteNavBar({ skin, overlay }: { skin: NavSkin; overlay: boolean 
             <span>FDB/95</span>
           </Link>
 
-          <div className={`ml-2 hidden items-center gap-1 md:flex ${skin === 'colour' ? 'rounded-full bg-white px-2 py-1' : ''}`}>
+          <div className={`ml-2 hidden items-center gap-1 lg:flex ${skin === 'colour' ? 'rounded-full bg-white px-2 py-1' : ''}`}>
             {PRIMARY.map((n) => {
               const active = isActive(pathname, n.path);
               return (
@@ -161,7 +164,7 @@ export function SiteNavBar({ skin, overlay }: { skin: NavSkin; overlay: boolean 
             <button type="button" onClick={openSearch} aria-label="Search docs, experiences and sites" className={`hidden px-1 py-1 sm:block ${item(false)} ${ring}`}>
               [⌘K search]
             </button>
-            <a href={GITHUB} target="_blank" rel="noopener noreferrer" className={`hidden px-1 py-1 md:block ${item(false)} ${ring}`}>
+            <a href={GITHUB} target="_blank" rel="noopener noreferrer" className={`hidden px-1 py-1 lg:block ${item(false)} ${ring}`}>
               [GitHub ↗]
             </a>
             <button
@@ -169,7 +172,7 @@ export function SiteNavBar({ skin, overlay }: { skin: NavSkin; overlay: boolean 
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="start-menu"
-              className={`px-2 py-1 md:hidden ${bevelBtn} ${ring}`}
+              className={`px-2 py-1 lg:hidden ${bevelBtn} ${ring}`}
             >
               {menuOpen ? '[close]' : '[menu]'}
             </button>
@@ -178,7 +181,7 @@ export function SiteNavBar({ skin, overlay }: { skin: NavSkin; overlay: boolean 
       </header>
 
       {menuOpen ? (
-        <div id="start-menu" className="fixed inset-x-0 top-12 bottom-0 z-[59] md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+        <div id="start-menu" className="fixed inset-x-0 top-12 bottom-0 z-[59] lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <button type="button" aria-label="Close menu" className="absolute inset-0 bg-black/70" onClick={() => setMenuOpen(false)} />
           <div className="relative mx-2 mt-2 flex max-h-[calc(100%-16px)] bg-[var(--color-w-face)] p-[3px] text-black [box-shadow:var(--w-bevel-out)]">
             <div aria-hidden className="flex w-7 shrink-0 items-end justify-center bg-black pb-2">

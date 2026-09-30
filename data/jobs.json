@@ -1,0 +1,201 @@
+{
+  "jobs": [
+    {
+      "id": "scroll-story",
+      "chip": "scroll story",
+      "job": "I want a scroll story",
+      "default": ["gsap", "lenis"],
+      "why": "GSAP ScrollTrigger pins and scrubs each chapter. Lenis smooths the scroll so it feels slow and heavy.",
+      "alternatives": [
+        { "id": "scrollcraft", "when": "the story is a video that plays as you scroll" },
+        { "id": "scroll-world", "when": "the page is a 3D world you move through" },
+        { "id": "motion", "when": "I'm already in React and only need a scroll progress value" }
+      ],
+      "see": ["pinned-chapters", "velocity-gallery"],
+      "links": [{ "href": "/docs/how-to/scroll-without-hijacking", "label": "Scroll without hijacking" }]
+    },
+    {
+      "id": "3d-hero",
+      "chip": "3D hero",
+      "job": "I want a 3D hero",
+      "default": ["threejs"],
+      "why": "three.js written with React Three Fiber and drei. I own the scene, so it can react to scroll and the cursor.",
+      "alternatives": [
+        { "id": "spline", "when": "a designer builds the scene by hand and it rarely changes" },
+        { "id": "threeui", "when": "I need a ready piece, like an orb or a globe, not a whole scene" },
+        { "id": "postprocessing", "when": "the scene needs bloom, grain or a pixel pass on top" },
+        { "id": "playcanvas", "when": "it behaves like a small game and wants a visual editor" },
+        { "id": "threlte", "when": "the project is Svelte, not React" }
+      ],
+      "see": ["pixel-to-hd-cube", "neon-block-city"],
+      "links": [{ "href": "/docs/how-to/pick-a-3d-tool", "label": "Pick a 3D tool" }]
+    },
+    {
+      "id": "shader-background",
+      "chip": "shader background",
+      "job": "I want a shader background",
+      "default": ["ogl", "unicorn-studio"],
+      "why": "OGL when I write the shader in code. Unicorn Studio when I want to tune it by eye in an editor and embed it. A shader is a small program the graphics card runs for every pixel.",
+      "alternatives": [
+        { "id": "shadergradient", "when": "all I need is a soft moving gradient" },
+        { "id": "paper-shaders", "when": "I want a ready React component with props, like grain or dither" },
+        { "id": "tweakpane", "when": "I want sliders to tune a shader live while I build it" },
+        { "id": "getlayers", "when": "I've paid for it and need a premium background fast" }
+      ],
+      "see": ["dither-wave", "liquid-gradient"],
+      "links": [{ "href": "/docs/how-to/shader-background", "label": "Shader background" }]
+    },
+    {
+      "id": "page-transitions",
+      "chip": "page transitions",
+      "job": "I want page transitions",
+      "default": ["view-transitions"],
+      "why": "The browser's own View Transition API. It animates from the old page to the new one with a few lines of CSS.",
+      "alternatives": [
+        { "id": "gsap", "when": "one element should morph into its place on the next page (GSAP Flip)" },
+        { "id": "taxi", "when": "the site is plain HTML pages, not a single-page app" },
+        { "id": "motion", "when": "I'm animating layout changes inside a React page" }
+      ],
+      "see": ["page-transitions", "transition-deck"],
+      "links": [{ "href": "/docs/how-to/flip-layouts-and-page-transitions", "label": "Flip layouts and page transitions" }]
+    },
+    {
+      "id": "text-animation",
+      "chip": "text animation",
+      "job": "I want text that moves",
+      "default": ["gsap"],
+      "why": "GSAP SplitText cuts a line into words or letters, then a timeline moves them in order.",
+      "alternatives": [
+        { "id": "react-bits", "when": "I want a ready text effect to paste in and restyle" },
+        { "id": "animejs", "when": "the page has no React and I want something small" },
+        { "id": "motion", "when": "the text is part of a React component's state" }
+      ],
+      "see": ["flying-type", "type-vortex", "kinetic-poster"],
+      "links": [{ "href": "/docs/how-to/kinetic-type-and-posters", "label": "Kinetic type and posters" }]
+    },
+    {
+      "id": "micro-interactions",
+      "chip": "micro-interactions",
+      "job": "I want buttons and small things to feel alive",
+      "default": ["motion"],
+      "why": "Motion gives springs, hover and press states to React components. Micro-interactions are the small responses to a tap or a hover.",
+      "alternatives": [
+        { "id": "easings", "when": "I need to pick or draw the exact curve first" },
+        { "id": "dotlottie", "when": "a designer animated it by hand in After Effects or Lottie" },
+        { "id": "jitter", "when": "I want to try the idea visually before I code it" },
+        { "id": "animejs", "when": "the page has no React" }
+      ],
+      "see": ["easing-lab", "ease-racetrack"],
+      "links": [{ "href": "/docs/how-to/pick-an-ease", "label": "Pick an ease" }]
+    },
+    {
+      "id": "icons",
+      "chip": "icons",
+      "job": "I want icons",
+      "default": ["lucide"],
+      "why": "One consistent line set, tree-shaken so only the icons I use ship.",
+      "alternatives": [
+        { "id": "dotlottie", "when": "the icon has to animate, like a loader or a success tick" }
+      ],
+      "see": [],
+      "note": "I don't have a live piece for icons yet."
+    },
+    {
+      "id": "3d-models",
+      "chip": "3D models",
+      "job": "I want a 3D model or a hero image",
+      "default": ["higgsfield"],
+      "why": "Higgsfield makes the still first. I approve it, then turn it into a 3D model (a GLB file) or a short loop.",
+      "alternatives": [
+        { "id": "img2threejs", "when": "I want the object rebuilt in code, so every part can animate" },
+        { "id": "poly-haven", "when": "a free real model, texture or lighting file already exists" }
+      ],
+      "see": [],
+      "links": [{ "href": "/docs/how-to/ai-assets", "label": "AI assets" }]
+    },
+    {
+      "id": "components",
+      "chip": "components",
+      "job": "I want UI components",
+      "default": ["shadcn", "21st"],
+      "why": "shadcn for the base parts: buttons, dialogs, forms. The code is copied into my repo, so I own it.",
+      "feature": {
+        "id": "21st",
+        "text": "21st.dev is where I look first for anything beyond the basics. It is a big community catalogue of React components. I search it like a shop, then install the one I pick with the shadcn command, so it lands in my repo like everything else. Search is free. Its AI generator needs a key and a paid plan."
+      },
+      "alternatives": [
+        { "id": "motion-primitives", "when": "I want quiet motion built into the parts" },
+        { "id": "magic-ui", "when": "it is a landing page and wants effects, like marquees and shiny borders" },
+        { "id": "react-bits", "when": "I want loud text and background effects" },
+        { "id": "cult-ui", "when": "I want pieces with character, like a dynamic island" },
+        { "id": "bklit", "when": "it is a dashboard and needs charts" }
+      ],
+      "see": ["flip-bento"],
+      "links": [{ "href": "/docs/how-to/own-your-components", "label": "Own your components" }]
+    },
+    {
+      "id": "colour",
+      "chip": "colour",
+      "job": "I want a colour palette",
+      "default": ["impeccable", "ui-ux-pro-max"],
+      "why": "Two agent skills with colour rules built in. They stop the agent picking the usual purple gradient.",
+      "alternatives": [
+        { "id": "oklch", "when": "colours must look equally bright. OKLCH is a colour format that matches how eyes see lightness" },
+        { "id": "refero", "when": "I want to see how real products use colour first" }
+      ],
+      "see": ["colour-riot"],
+      "links": [{ "href": "/docs/how-to/make-colour-look-expensive", "label": "Make colour look expensive" }]
+    },
+    {
+      "id": "type",
+      "chip": "type",
+      "job": "I want better type",
+      "default": ["fontshare"],
+      "why": "Free fonts with real character, fine for commercial work.",
+      "alternatives": [],
+      "see": [],
+      "note": "No AI-default fonts: the few faces every AI tool reaches for. I pick one display face with character and one quiet text face.",
+      "links": [{ "href": "/docs/rules/scales-and-type", "label": "Scales and type" }]
+    },
+    {
+      "id": "references",
+      "chip": "references",
+      "job": "I want references before I design",
+      "default": ["refero"],
+      "why": "Real screens from real products, searchable by pattern.",
+      "alternatives": [
+        { "id": "paper", "when": "I want to sketch the layout on a canvas my agent can read" }
+      ],
+      "see": ["site-wall-3d"],
+      "links": [{ "href": "/sites", "label": "The sites I've collected" }]
+    },
+    {
+      "id": "agent",
+      "chip": "agent help",
+      "job": "I want an agent to design with me",
+      "default": ["frontend-design-basics", "context7"],
+      "why": "My own skill reads this toolkit and asks which tools fit. Context7 hands the agent current docs, so it doesn't guess old APIs.",
+      "alternatives": [
+        { "id": "impeccable", "when": "the interface exists and needs a critique and a polish" },
+        { "id": "taste-skill", "when": "the first draft looks like a template" },
+        { "id": "frontend-design", "when": "I want the official baseline skill" },
+        { "id": "anthropic-example-skills", "when": "I want to see how a good skill is written" }
+      ],
+      "see": [],
+      "links": [{ "href": "/docs/how-to/start-a-project", "label": "Start a project" }]
+    },
+    {
+      "id": "verification",
+      "chip": "verification",
+      "job": "I want to prove it works",
+      "default": ["playwright"],
+      "why": "I capture frames about 1.5 seconds apart and compare them. A still screenshot never proves that something moves.",
+      "alternatives": [
+        { "id": "chrome-devtools", "when": "I need the console, network or a performance trace" },
+        { "id": "web-design-guidelines", "when": "I want the page checked against a list of interface rules" }
+      ],
+      "see": [],
+      "links": [{ "href": "/docs/how-to/win95-chrome-and-verify", "label": "Win95 chrome and verify" }]
+    }
+  ]
+}

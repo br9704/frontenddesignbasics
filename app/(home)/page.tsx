@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Hero } from '@/components/v2/home/hero';
 import { HomeJourney } from '@/components/v2/home/journey';
 import { experiences } from '@/lib/experiences';
-import { source } from '@/lib/source';
+import { CHECKLIST } from '@/components/v3/principles/data';
+import jobs from '@/data/jobs.json';
 import { examples } from '@/lib/examples';
 import toolkit from '@/toolkit/toolkit.json';
 
@@ -35,9 +36,10 @@ export default function HomePage() {
       <Hero
         counts={{
           tools: toolkit.tools.length,
-          experiences: experiences.length,
+          jobs: jobs.jobs.length,
+          principles: CHECKLIST.reduce((n, c) => n + c.rules.length, 0),
           sites: sitesTotal,
-          guides: source.getPages().filter((pg) => /^\/docs\/(how-to|rules|cases)\/./.test(pg.url)).length,
+          experiences: experiences.length,
         }}
       />
       <HomeJourney

@@ -8,8 +8,9 @@
 | I want to… | Go to |
 |---|---|
 | pick the right tool for a job | [/tools](https://frontenddesignbasics.vercel.app/tools) · [toolkit.json](toolkit/toolkit.json) |
-| see what you can build with them | [/make](https://frontenddesignbasics.vercel.app/make) |
-| study real sites | [/sites](https://frontenddesignbasics.vercel.app/sites) · [/inspiration](https://frontenddesignbasics.vercel.app/inspiration) |
+| read my principles, with live demos | [/principles](https://frontenddesignbasics.vercel.app/principles) |
+| study real sites and design systems | [/examples](https://frontenddesignbasics.vercel.app/examples) |
+| see what I make | [/work](https://frontenddesignbasics.vercel.app/work) · [/make](https://frontenddesignbasics.vercel.app/make) |
 | learn the how-tos and rules | [/docs](https://frontenddesignbasics.vercel.app/docs) · [guide/](guide/) |
 | give my agent the toolkit | `npx skills add br9704/frontenddesignbasics` |
 
@@ -35,8 +36,11 @@
 
 ```text
 ┌─ frontenddesignbasics.vercel.app ─────────────────────────────┐
+│  /tools           14  jobs, each with the tool to use         │
+│  /principles      49  my principles, each one live            │
+│  /examples         9  design systems, sites, breakdowns       │
+│  /work            33  things I make, live to open             │
 │  /make            33  experiences built by mixing the tools   │
-│  /tools           51  libraries, MCPs and skills I use daily  │
 │  /inspiration     19  design inspiration, by principle        │
 │  /sites          293  real websites, filterable               │
 │  /docs/how-to     20  short numbered task guides              │

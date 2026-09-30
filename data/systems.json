@@ -1,0 +1,628 @@
+{
+  "systems": [
+    {
+      "id": "geist",
+      "name": "Vercel Geist",
+      "family": "public",
+      "url": "https://vercel.com/geist/introduction",
+      "what": "Vercel's design system. Geist Sans and Geist Mono, a grey-first palette, and colour scales where every step has one job.",
+      "font": "Geist Sans, with Geist Mono for code and labels",
+      "fontStack": "var(--font-sans)",
+      "scale": [
+        {
+          "label": "heading-72",
+          "px": 72
+        },
+        {
+          "label": "heading-48",
+          "px": 48
+        },
+        {
+          "label": "heading-32",
+          "px": 32
+        },
+        {
+          "label": "heading-20",
+          "px": 20
+        },
+        {
+          "label": "copy-16",
+          "px": 16
+        },
+        {
+          "label": "label-13",
+          "px": 13
+        }
+      ],
+      "scaleNote": "Geist names each style by its size: text-heading-72 down to text-heading-14, then label, copy and button styles.",
+      "ramp": {
+        "steps": [
+          "100",
+          "200",
+          "300",
+          "400",
+          "500",
+          "600",
+          "700",
+          "800",
+          "900",
+          "1000"
+        ],
+        "roles": [
+          "bg",
+          "bg hover",
+          "bg active",
+          "border",
+          "border hover",
+          "border active",
+          "solid",
+          "solid hover",
+          "text 2",
+          "text 1"
+        ],
+        "note": "Structure, drawn in grey. Ten scales (gray, gray-alpha, blue, red, amber, green, teal, purple, pink) share these ten steps."
+      },
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Name styles by their size and role (heading-32, copy-16, label-13). Nobody has to guess what 'h3' means."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Ten steps per colour, each with one job: 100 to 300 backgrounds, 400 to 600 borders, 700 to 800 solid fills, 900 to 1000 text."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Keep space in a small set of steps and let grey borders, not boxes of colour, separate things."
+        },
+        {
+          "topic": "Motion",
+          "text": "Quiet, short transitions on hover and open. Motion confirms an action; it never performs."
+        },
+        {
+          "topic": "States",
+          "text": "Default, hover and active are neighbouring steps on the same scale, so every state is one step away."
+        }
+      ],
+      "toolkit": "I set my greys as ten role-named steps with the oklch picker, then wire them into shadcn's CSS variables.",
+      "toolkitIds": [
+        "oklch",
+        "shadcn"
+      ]
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "family": "public",
+      "url": "https://linear.app/now/how-we-redesigned-the-linear-ui",
+      "what": "Linear's dark, dense app UI. Its 2024 redesign turned 98 hand-set theme variables into three inputs, generated in the LCH colour space.",
+      "font": "Inter Display for headings, Inter for everything else",
+      "fontStack": "var(--font-sans)",
+      "scale": [],
+      "scaleNote": "I haven't checked Linear's exact sizes, so I don't draw them. What Linear documents is the pairing: Inter Display for headings, Inter for the dense UI.",
+      "inputs": [
+        "base colour",
+        "accent colour",
+        "contrast"
+      ],
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Use two cuts of one family: a tighter display cut for headings and the plain one for dense UI."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Generate a theme from three inputs (base, accent, contrast) instead of hand-picking every surface."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Density is a feature. Tight rows, aligned edges and less chrome let more content fit without noise."
+        },
+        {
+          "topic": "Motion",
+          "text": "Fast and small. Panels and menus arrive quickly and never block the next keypress."
+        },
+        {
+          "topic": "States",
+          "text": "Elevation and hover come from opacities of black and white, so they work on any generated theme."
+        }
+      ],
+      "toolkit": "I pick base and accent with the oklch picker (LCH's close cousin), then set hover and elevation as white at low opacity.",
+      "toolkitIds": [
+        "oklch"
+      ]
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "family": "public",
+      "url": "https://docs.stripe.com/stripe-apps/design",
+      "what": "Stripe's marketing site and its UI toolkit for apps. A strict column grid, calm type, and colour that only moves where it means something.",
+      "font": "A clean grotesk for text; described, not measured",
+      "fontStack": "var(--font-sans)",
+      "scale": [],
+      "scaleNote": "I have not verified Stripe's exact sizes, so I don't draw them. The lesson is the grid: every section sits on the same column lines.",
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Few sizes, used strictly. Headlines carry the energy, body text stays quiet and readable."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "A living gradient carries the brand, while the UI around it stays white, grey and one accent."
+        },
+        {
+          "topic": "Spacing",
+          "text": "A visible column grid (the Connect page even draws its stripes with CSS Grid) keeps dense pages calm."
+        },
+        {
+          "topic": "Motion",
+          "text": "Only transform and opacity, mostly under 500ms, started when it scrolls into view."
+        },
+        {
+          "topic": "States",
+          "text": "Pick the lightest tool that works: CSS first, the Web Animations API next, a library last."
+        }
+      ],
+      "toolkit": "I build the gradient with ShaderGradient or Paper Shaders and keep the rest of the page on GSAP with transform and opacity only.",
+      "toolkitIds": [
+        "shadergradient",
+        "paper-shaders",
+        "gsap"
+      ]
+    },
+    {
+      "id": "apple-hig",
+      "name": "Apple HIG",
+      "family": "public",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "what": "Apple's Human Interface Guidelines. Rules for every Apple platform, built on San Francisco and Dynamic Type, where text sizes follow the reader's settings.",
+      "font": "San Francisco (SF Pro), sized by Dynamic Type",
+      "fontStack": "var(--font-sans)",
+      "scale": [
+        {
+          "label": "Large Title",
+          "px": 34
+        },
+        {
+          "label": "Title 1",
+          "px": 28
+        },
+        {
+          "label": "Title 2",
+          "px": 22
+        },
+        {
+          "label": "Title 3",
+          "px": 20
+        },
+        {
+          "label": "Body",
+          "px": 17
+        },
+        {
+          "label": "Subheadline",
+          "px": 15
+        },
+        {
+          "label": "Footnote",
+          "px": 13
+        },
+        {
+          "label": "Caption 2",
+          "px": 11
+        }
+      ],
+      "scaleNote": "iOS text styles at the default Large setting, in points. Headline is also 17, set semibold.",
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Name styles by purpose (Title, Body, Footnote), not by size, so they can all grow together."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "System colours adapt to light, dark and high contrast. Ask for 'label' or 'secondary label', not a hex."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Hit targets at least 44 by 44 points, even when the icon is smaller."
+        },
+        {
+          "topic": "Motion",
+          "text": "Motion should explain where things came from, and it respects the Reduce Motion setting."
+        },
+        {
+          "topic": "States",
+          "text": "Every control has clear pressed, disabled and focused looks that don't rely on colour alone."
+        }
+      ],
+      "toolkit": "I set type in rem so it follows the reader's settings, and run the Web Interface Guidelines skill to check hit sizes and reduced motion.",
+      "toolkitIds": [
+        "web-design-guidelines"
+      ]
+    },
+    {
+      "id": "material-3",
+      "name": "Material 3",
+      "family": "public",
+      "url": "https://m3.material.io/",
+      "what": "Google's design system. Fifteen named text styles, colour roles made from one source colour, and state layers for every interaction.",
+      "font": "Roboto by default; any family can fill the roles",
+      "fontStack": "var(--font-sans)",
+      "scale": [
+        {
+          "label": "Display L",
+          "px": 57
+        },
+        {
+          "label": "Display S",
+          "px": 36
+        },
+        {
+          "label": "Headline L",
+          "px": 32
+        },
+        {
+          "label": "Title L",
+          "px": 22
+        },
+        {
+          "label": "Body L",
+          "px": 16
+        },
+        {
+          "label": "Label L",
+          "px": 14
+        },
+        {
+          "label": "Label S",
+          "px": 11
+        }
+      ],
+      "scaleNote": "Seven of the fifteen styles (display, headline, title, body, label, each large, medium and small), from the material-web tokens.",
+      "roles": [
+        "primary",
+        "on-primary",
+        "primary-container",
+        "on-primary-container",
+        "surface",
+        "on-surface",
+        "outline",
+        "error"
+      ],
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Five roles times three sizes. Fifteen styles is enough for any app, and each has a clear job."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Roles come in pairs: every 'primary' has an 'on-primary' for the text on top, so contrast is designed in."
+        },
+        {
+          "topic": "Spacing",
+          "text": "A 4dp grid with shape tokens for corner radius, from none to full."
+        },
+        {
+          "topic": "Motion",
+          "text": "Easing and duration are tokens too, so every transition in the app feels related."
+        },
+        {
+          "topic": "States",
+          "text": "A state layer: the content colour laid over the surface at 8% on hover, 12% on focus and press, 16% on drag."
+        }
+      ],
+      "toolkit": "I copy the state-layer idea into Tailwind: one hover overlay at 8%, one pressed at 12%, and ease tokens picked on easings.net.",
+      "toolkitIds": [
+        "easings"
+      ]
+    },
+    {
+      "id": "radix-shadcn",
+      "name": "Radix + shadcn",
+      "family": "public",
+      "url": "https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale",
+      "what": "Radix gives accessible primitives and 12-step colour scales. shadcn/ui gives you the component code itself, styled with a short list of CSS variables.",
+      "font": "Whatever you choose; shadcn doesn't set a type scale",
+      "fontStack": "var(--font-sans)",
+      "scale": [],
+      "scaleNote": "No type scale here on purpose. Radix and shadcn own colour, behaviour and states, and leave type to you.",
+      "ramp": {
+        "steps": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        ],
+        "roles": [
+          "app bg",
+          "subtle bg",
+          "ui bg",
+          "ui hover",
+          "ui active",
+          "border",
+          "border ui",
+          "border hover",
+          "solid",
+          "solid hover",
+          "low text",
+          "high text"
+        ],
+        "note": "Radix Colors: twelve steps per scale, each step with a job. Drawn in grey."
+      },
+      "vars": [
+        "--background",
+        "--foreground",
+        "--primary",
+        "--primary-foreground",
+        "--muted",
+        "--accent",
+        "--destructive",
+        "--border",
+        "--input",
+        "--ring",
+        "--radius"
+      ],
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Keep type out of the component library, so one kit fits many brands."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Pair every surface with a '-foreground' variable. Swap the variables and the whole kit re-themes."
+        },
+        {
+          "topic": "Spacing",
+          "text": "One --radius variable sets every corner, so the whole kit changes shape at once."
+        },
+        {
+          "topic": "Motion",
+          "text": "Primitives expose open and closed states as data attributes, so you animate them with plain CSS."
+        },
+        {
+          "topic": "States",
+          "text": "Focus is a --ring variable and keyboard behaviour comes from Radix, so accessible states come free."
+        }
+      ],
+      "toolkit": "I add components with the shadcn CLI, then set the variables from my own token sheet instead of the default zinc.",
+      "toolkitIds": [
+        "shadcn"
+      ]
+    },
+    {
+      "id": "br95",
+      "name": "Win95 / BR95",
+      "family": "mine",
+      "url": "/docs/cases/br95",
+      "what": "My Windows 95 token sheet. Grey bevels, pixel fonts and a black title bar, used in the opening act of this site.",
+      "font": "MS Sans Serif pixel, with IBM VGA 8x16 for labels",
+      "fontStack": "var(--font-w95)",
+      "scale": [
+        {
+          "label": "pixel 32",
+          "px": 32
+        },
+        {
+          "label": "pixel 16",
+          "px": 16
+        },
+        {
+          "label": "ui 11",
+          "px": 11
+        }
+      ],
+      "scaleNote": "Pixel sizes stay on the 8x16 grid: 16, 32, 48, 64.",
+      "swatches": [
+        {
+          "name": "--w-desk",
+          "hex": "#2c2c2c"
+        },
+        {
+          "name": "--w-face",
+          "hex": "#c0c0c0"
+        },
+        {
+          "name": "--w-hi",
+          "hex": "#ffffff"
+        },
+        {
+          "name": "--w-shadow",
+          "hex": "#808080"
+        },
+        {
+          "name": "--w-dark",
+          "hex": "#000000"
+        },
+        {
+          "name": "--w-title",
+          "hex": "#000000"
+        }
+      ],
+      "bevel": true,
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Pixel fonts only at multiples of 16px, with font smoothing off, so every pixel stays sharp."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Six greys do everything. The classic teal and navy are swapped for grey and black."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Measured numbers from the real thing: an 18px title bar and a 28px taskbar."
+        },
+        {
+          "topic": "Motion",
+          "text": "Stepped, not eased. Windows jump like it's 1995."
+        },
+        {
+          "topic": "States",
+          "text": "Pressed is the bevel flipped: the four inset shadows swap light and dark."
+        }
+      ],
+      "toolkit": "I build the chrome by hand in CSS and check it frame by frame with the Playwright MCP.",
+      "toolkitIds": [
+        "playwright"
+      ]
+    },
+    {
+      "id": "mono",
+      "name": "Black and white",
+      "family": "mine",
+      "url": "/tools",
+      "what": "The default look of this site. Near-black ground, seven greys, a pixel font for labels and a serif for big headings.",
+      "font": "Newsreader for display, Schibsted Grotesk for reading, IBM VGA 8x16 for labels",
+      "fontStack": "var(--font-display)",
+      "scale": [
+        {
+          "label": "display 64",
+          "px": 64
+        },
+        {
+          "label": "pixel 32",
+          "px": 32
+        },
+        {
+          "label": "reading 17",
+          "px": 17
+        },
+        {
+          "label": "pixel 16",
+          "px": 16
+        }
+      ],
+      "scaleNote": "Reading text is 17px at 1.6 line height, at most 68 characters wide.",
+      "swatches": [
+        {
+          "name": "--v-bg",
+          "hex": "#080808"
+        },
+        {
+          "name": "--v-surface",
+          "hex": "#0e0e0e"
+        },
+        {
+          "name": "--v-line",
+          "hex": "#1a1a1a"
+        },
+        {
+          "name": "--v-steel",
+          "hex": "#2c2c2c"
+        },
+        {
+          "name": "--v-dim",
+          "hex": "#8a8a8a"
+        },
+        {
+          "name": "--v-soft",
+          "hex": "#b0b0b0"
+        },
+        {
+          "name": "--v-ink",
+          "hex": "#f5f5f5"
+        }
+      ],
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Three voices with three jobs: pixel for labels, serif for big moments, sans for reading."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Seven greys, never raw hex in a component. Even the dimmest label passes AA on the ground."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Hairline borders and 1px gaps between tiles do the separating, not shadows."
+        },
+        {
+          "topic": "Motion",
+          "text": "Every scroll animation sits inside a reduced-motion check. Reduced motion gets the final state at once."
+        },
+        {
+          "topic": "States",
+          "text": "Hover lifts a surface one grey step (line to steel). Focus is a visible outline, always."
+        }
+      ],
+      "toolkit": "I keep these as CSS variables in one file, and let GSAP and Lenis move things on top of them.",
+      "toolkitIds": [
+        "gsap",
+        "lenis"
+      ]
+    },
+    {
+      "id": "colour",
+      "name": "Colour",
+      "family": "mine",
+      "url": "/",
+      "what": "The finale sheet. Six loud hues that arrive one at a time, then all at once.",
+      "font": "Same families as black and white; the colour does the shouting",
+      "fontStack": "var(--font-display)",
+      "scale": [],
+      "scaleNote": "Text on colour is always #080808 or #ffffff, whichever passes 4.5:1.",
+      "swatches": [
+        {
+          "name": "--c-1",
+          "hex": "#ff2e00"
+        },
+        {
+          "name": "--c-2",
+          "hex": "#ff00a8"
+        },
+        {
+          "name": "--c-3",
+          "hex": "#7b2cff"
+        },
+        {
+          "name": "--c-4",
+          "hex": "#00b3ff"
+        },
+        {
+          "name": "--c-5",
+          "hex": "#00e676"
+        },
+        {
+          "name": "--c-6",
+          "hex": "#ffe600"
+        }
+      ],
+      "steal": [
+        {
+          "topic": "Type scale",
+          "text": "Don't add sizes for the colour act. Colour is already loud; the type stays the same."
+        },
+        {
+          "topic": "Colour tokens",
+          "text": "Six hues, each saturated to the edge, and nothing in between."
+        },
+        {
+          "topic": "Spacing",
+          "text": "Colour goes full bleed. A small swatch of a loud colour looks like a mistake; a whole field looks like a choice."
+        },
+        {
+          "topic": "Motion",
+          "text": "Introduce colour gradually: one hue in one piece, then fields, then everything."
+        },
+        {
+          "topic": "States",
+          "text": "On colour, text is only black or white, picked by contrast, never a tint."
+        }
+      ],
+      "toolkit": "I test each pair for 4.5:1 with the oklch picker and paint the fields with Paper Shaders.",
+      "toolkitIds": [
+        "oklch",
+        "paper-shaders"
+      ]
+    }
+  ]
+}

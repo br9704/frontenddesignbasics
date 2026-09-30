@@ -5,10 +5,11 @@ const COLS = [
   {
     title: 'use',
     links: [
-      { href: '/tools', label: 'The tools' },
-      { href: '/make', label: 'What you can make' },
-      { href: '/inspiration', label: 'Inspiration' },
-      { href: '/sites', label: 'Sites' },
+      { href: '/tools', label: 'What to use for what' },
+      { href: '/principles', label: 'My principles' },
+      { href: '/examples', label: 'Examples + design systems' },
+      { href: '/work', label: 'Things I make' },
+      { href: '/make', label: 'All live pieces' },
     ],
   },
   {

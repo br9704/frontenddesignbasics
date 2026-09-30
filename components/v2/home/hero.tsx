@@ -8,9 +8,10 @@ import Link from 'next/link';
 
 export interface HeroCounts {
   tools: number;
-  experiences: number;
+  jobs: number;
+  principles: number;
   sites: number;
-  guides: number;
+  experiences: number;
 }
 
 // same gutter as the acts (PAD in acts.tsx, a client module this server component can't import)
@@ -19,10 +20,10 @@ const REPO = 'https://github.com/br9704/frontenddesignbasics';
 
 export function Hero({ counts }: { counts: HeroCounts }) {
   const cards = [
-    { href: '/tools', label: 'Tools', n: counts.tools, unit: 'tools', line: 'Which tool to use for which job.', img: '/posters/tool-blocks.webp' },
-    { href: '/make', label: 'Make', n: counts.experiences, unit: 'live pieces', line: 'What you can build with them.', img: '/posters/pixel-to-hd-cube.webp' },
-    { href: '/sites', label: 'Sites', n: counts.sites, unit: 'real sites', line: 'Screenshots of sites worth studying.', img: '/posters/velocity-gallery.webp' },
-    { href: '/docs', label: 'Learn', n: counts.guides, unit: 'guides', line: 'How-tos, rules and case studies.', img: '/posters/easing-lab.webp' },
+    { href: '/tools', label: 'Tools', n: counts.jobs, unit: 'jobs', line: `What to use for what, across ${counts.tools} tools.`, img: '/posters/tool-blocks.webp' },
+    { href: '/principles', label: 'Principles', n: counts.principles, unit: 'rules', line: 'Things I have learnt, each with a live demo.', img: '/posters/ease-racetrack.webp' },
+    { href: '/examples', label: 'Examples', n: counts.sites, unit: 'sites', line: 'Real sites, design systems and breakdowns.', img: '/posters/velocity-gallery.webp' },
+    { href: '/work', label: 'Work', n: counts.experiences, unit: 'live pieces', line: 'Things I make, and what I could make for you.', img: '/posters/pixel-to-hd-cube.webp' },
   ];
   return (
     <section id="top" aria-labelledby="hero-title" className={`relative overflow-hidden bg-[var(--v-bg)] pt-14 pb-12 md:pt-20 ${PAD}`}>

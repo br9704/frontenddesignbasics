@@ -8,8 +8,10 @@ import { SiteNavBar, type NavSkin } from './site-nav-bar';
  */
 export const NAV = [
   { path: '/tools', label: 'tools' },
+  { path: '/principles', label: 'principles' },
+  { path: '/examples', label: 'examples' },
+  { path: '/work', label: 'work' },
   { path: '/make', label: 'make' },
-  { path: '/inspiration', label: 'inspiration' },
   { path: '/sites', label: 'sites' },
   { path: '/docs/how-to', label: 'how-to' },
   { path: '/docs/rules', label: 'rules' },

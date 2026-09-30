@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 
 const base = process.env.BASE_URL ?? 'http://localhost:3000';
-const pages = ['/', '/tools', '/make', '/inspiration', '/sites', '/docs', '/docs/how-to', '/docs/how-to/pixel-to-hd', '/docs/how-to/neon-light-paths', '/docs/rules', '/docs/rules/accessibility', '/docs/rules/tokens-and-colour', '/docs/cases', '/docs/cases/igloo-inc', '/docs/cases/br95', '/lab/pixel-to-hd-cube', '/lab/neon-block-city', '/lab/win95-boot'];
+const pages = ['/', '/tools', '/principles', '/examples', '/examples?view=systems', '/examples?view=breakdowns', '/examples?view=think', '/work', '/make', '/lab/ease-racetrack', '/lab/blur-lab', '/lab/transition-deck', '/inspiration', '/sites', '/docs', '/docs/how-to', '/docs/how-to/pixel-to-hd', '/docs/how-to/neon-light-paths', '/docs/rules', '/docs/rules/accessibility', '/docs/rules/tokens-and-colour', '/docs/cases', '/docs/cases/igloo-inc', '/docs/cases/br95', '/lab/pixel-to-hd-cube', '/lab/neon-block-city', '/lab/win95-boot'];
 const out = '.verify';
 
 async function main() {
