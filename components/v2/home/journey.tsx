@@ -17,6 +17,8 @@ import { ACTS, P } from './acts';
 import { gsap, MOTION, ScrollTrigger } from './motion';
 import { Rail } from './rail';
 import { CaptionBar } from './caption-bar';
+import { StageCursor } from './cursor';
+import { SpeedWipe } from './speed-wipe';
 import { HomeEnd } from './home-end';
 import { Preloader } from './preloader';
 import { activeAct, overall, ready, scroller } from './runtime';
@@ -137,6 +139,8 @@ export function HomeJourney({
       <ActColour />
       <HomeEnd />
       <CaptionBar total={total} sites={sitesTotal} />
+      <SpeedWipe />
+      <StageCursor />
     </div>
   );
 }

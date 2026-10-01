@@ -18,14 +18,14 @@ function captions(total: number, sites: number): Record<string, Caption> {
   return {
     boot: { look: 'A Windows 95 desktop rebuilt in CSS and GSAP. Where my style starts.', tools: ['css', 'gsap'], href: '/lab/win95-desktop', open: 'open it' },
     blast: { look: 'The old desktop dissolves into dithered pixels, drawn on a 2D canvas.', tools: ['canvas2d', 'gsap'], href: '/lab/pixel-blast', open: 'open it' },
-    cube: { look: '296 blocks close into one smooth cube while a pixelation pass steps from 48px to 1px.', tools: ['threejs', 'r3f', 'postprocessing', 'gsap'], href: '/lab/pixel-to-hd-cube', open: 'open it' },
+    cube: { look: 'One cube, seven beats: pixel to HD, unfold into six jobs, six render styles, a block morph, then it explodes into every live piece.', tools: ['threejs', 'r3f', 'postprocessing', 'gsap'], href: '/lab/pixel-to-hd-cube', open: 'open it' },
     tools: { look: `All ${total} tools as keys, grouped by what they're for. Hover one to read it.`, tools: ['r3f', 'drei', 'gsap'], href: '/tools', open: 'all tools' },
     make: { look: 'Things you can build with them. Each one is a single React component you can open and copy.', tools: ['gsap', 'threejs', 'r3f'], href: '/make', open: 'all 30' },
     motion: { look: 'Motion design, taught live: twelve eases racing, six kinds of blur, eight transitions and type that moves.', tools: ['gsap', 'r3f', 'glsl', 'ogl'], href: '/lab/ease-racetrack', open: 'open the racetrack' },
     inspiration: { look: 'Rules pulled from real sites: colour, type and hierarchy, each shown live.', tools: ['r3f', 'glsl', 'gsap'], href: '/inspiration', open: 'inspiration' },
     sites: { look: `${sites} real sites worth studying, sorted into sections.`, tools: ['threejs', 'next-image', 'gsap'], href: '/sites', open: 'all sites' },
     learn: { look: 'The written half: how-tos, rules and case studies.', tools: ['css'], href: '/docs', open: 'read' },
-    colour: { look: 'Colour arrives last, on purpose. Fluid, city lights, a colour riot.', tools: ['r3f', 'glsl', 'postprocessing'], href: '/make', open: 'make one' },
+    colour: { look: 'Colour arrives last, on purpose. Fluid, city lights, a colour riot, then a reel of everything you just saw.', tools: ['r3f', 'glsl', 'postprocessing'], href: '/work', open: 'things I make' },
   };
 }
 

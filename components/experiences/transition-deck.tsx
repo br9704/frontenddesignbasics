@@ -302,9 +302,10 @@ function Device({
             </div>
           </div>
           <div data-bp className="shrink-0">
-            <h3 className="font-display leading-none text-[var(--v-ink)]" style={{ fontSize: title }}>
+            {/* mock app screen inside the demo, not a page heading */}
+            <p className="font-display leading-none text-[var(--v-ink)]" style={{ fontSize: title }}>
               {ITEMS[SHARED].t}
-            </h3>
+            </p>
           </div>
           <div data-bp className="shrink-0 text-[12px] text-[var(--v-dim)]">
             {ITEMS[SHARED].m} · shot in March

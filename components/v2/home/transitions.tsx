@@ -1,8 +1,9 @@
 'use client';
 
-import { type ReactNode, useEffect, useMemo, useRef } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
+import { ACTS, type ActStage } from './acts';
 import { gsap, useMotion } from './motion';
-import { type ProgressStore, span, useOnScreen, useReducedMotion } from './runtime';
+import { activeAct, type ProgressStore, span, useOnScreen, useReducedMotion } from './runtime';
 
 /* ───────── Bayer tiles as data URIs: 17 threshold levels of a 4x4 matrix ───────── */
 const B4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
@@ -163,4 +164,18 @@ export function slice(store: ProgressStore, a: number, b: number): ProgressStore
       return () => ls.delete(fn);
     },
   };
+}
+
+/* ───────── stage of the active act, for page-wide layers (speed wipe, cursor) ───────── */
+
+/** Stage of the act at index `i` of ACTS, clamped. */
+export const stageOf = (i: number): ActStage => ACTS[Math.max(0, Math.min(ACTS.length - 1, Math.round(i)))]?.stage ?? 'win95';
+
+/** The stage of the act on screen. Re-renders only when the stage (not the act) changes. */
+export function useActiveStage(): ActStage {
+  return useSyncExternalStore(
+    (fn) => activeAct.subscribe(fn),
+    () => stageOf(activeAct.get()),
+    () => 'win95' as ActStage,
+  );
 }
